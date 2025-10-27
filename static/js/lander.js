@@ -1,4 +1,3 @@
-<script>
 document.addEventListener('DOMContentLoaded', function () {
   function playRandomVideoOrImage(videoContainer, videoFiles, imageFiles) {
     // If you really want images on mobile, keep this block and provide image URLs.
@@ -63,4 +62,3 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
-</script>
