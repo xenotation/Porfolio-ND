@@ -1,0 +1,38 @@
+[Exhibitions]
+    other = 'exhibitions ↓'
+[Collaborations]
+    other = 'collaborations ↓'
+[PubLect]
+    other = 'lectures and talks ↓'
+[Curator]
+    other = 'curator ↓'
+[Collaborators]
+    other = 'collaborators ↓'
+[Sound]
+    other = 'sound design ↓'
+[Photo]
+    other = 'photography ↓'
+[404]          
+    other = "go home"
+[press]        
+    other = "Press"
+[about]        
+    other = "About"
+[exhibitions]  
+    other = "Exhibitions"
+[writing]      
+    other = "Writing"
+[translation]  
+    other = "Translations"
+[critique]     
+    other = "Critique"
+[talks]        
+    other = "Lectures & Talks"
+[blog]         
+    other = "Blog"
+[misc]         
+    other = "Misc"
+[legend_work]  
+    other = "solo (s) / collab (c)"
+[portfolio]
+    other = "Portfolio (PDF)"

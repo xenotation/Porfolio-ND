@@ -1,0 +1,22 @@
+<lang-switcher class="lang">
+  {{- if .Site.IsMultiLingual -}}
+    {{- $cur := . -}}
+    {{- range $i, $lang := .Site.Languages -}}
+      {{- $tr := where $cur.AllTranslations "Lang" $lang.Lang -}}
+      {{- $url := "" -}}
+      {{- if gt (len $tr) 0 -}}
+        {{- $url = (index $tr 0).RelPermalink -}}
+      {{- else -}}
+        {{- range $.Sites -}}
+          {{- if eq .Language.Lang $lang.Lang -}}
+            {{- $url = .Home.RelPermalink -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- if gt $i 0 -}}<span class="sep"> / </span>{{- end -}}
+      <a href="{{ $url }}"
+         class="lang-link {{ if eq $.Site.Language.Lang $lang.Lang }}is-active{{ else }}is-inactive{{ end }}">{{- $lang.Lang -}}</a>
+    {{- end -}}
+  {{- end -}}
+</lang-switcher>

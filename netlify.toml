@@ -1,0 +1,154 @@
+[build]
+  command = "hugo"
+  functions = "netlify/functions"
+  publish = "public"
+
+[build.environment]
+  HUGO_VERSION = "0.119.0"
+
+[context.deploy-preview]
+  command = "hugo --gc --minify -b https://newdegeneration.xyz"
+
+[[redirects]]
+  from = "/unsound-hikikomori/"
+  to = "https://blog.newdegeneration.xyz/unsound-hikikomori"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/templeton-episode/"
+  to = "https://blog.newdegeneration.xyz/templeton-episode"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/hyperstition/"
+  to = "https://blog.newdegeneration.xyz/hyperstition"
+  status = 301
+  force = true
+
+# Combine all /tag/ redirects into one using a wildcard
+[[redirects]]
+  from = "/tag/*"
+  to = "https://blog.newdegeneration.xyz/tag/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/praxis/"
+  to = "https://blog.newdegeneration.xyz/praxis/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/latent-space"
+  to = "https://blog.newdegeneration.xyz/latent-space"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/geotrauma"
+  to = "https://blog.newdegeneration.xyz/geotrauma"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/inside-AOE/"
+  to = "https://blog.newdegeneration.xyz/inside-the-aoe"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/objects-all-the-way-down/"
+  to = "https://blog.newdegeneration.xyz/objects-all-the-way-down"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ballard-vacation/"
+  to = "https://blog.newdegeneration.xyz/ballard-vacation"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/the-coils-of-the-serpent/"
+  to = "https://blog.newdegeneration.xyz/the-coils-of-the-serpent"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/neatest-trick/"
+  to = "https://blog.newdegeneration.xyz/neatest-trick"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cyberpositive-nick-land/"
+  to = "https://blog.newdegeneration.xyz/cyberpositive-nick-land"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/herzog-minessota-declaration/"
+  to = "https://blog.newdegeneration.xyz/herzog-minessota-declaration"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/corona-demonology/"
+  to = "https://blog.newdegeneration.xyz/corona-demonology"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/term-vs-avatar/"
+  to = "https://blog.newdegeneration.xyz/term-vs-avatar"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fisher-tva/"
+  to = "https://blog.newdegeneration.xyz/fisher-tva"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fisher-TvA/"
+  to = "https://blog.newdegeneration.xyz/fisher-TvA"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/music-for-a-new-nightlife/"
+  to = "https://newdegeneration.xyz/work/music-for-a-new-nighlife/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about"
+  to = "https://blog.newdegeneration.xyz/about"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/xenofeminism/"
+  to = "https://blog.newdegeneration.xyz/xenofeminism"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://blog.newdegeneration.xyz/grey-zone"
+  to = "https://newdegeneration.xyz/work/grey-zone/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/404"
+  to = "https://newdegeneration.xyz/404"
+  status = 404
+
+[[redirects]]
+  from = "https://newdegeneration.xyz/work/grey-zone-dispositive/"
+  to = "https://newdegeneration.xyz/work/grey-zone/"
+  status = 301
+  force = true

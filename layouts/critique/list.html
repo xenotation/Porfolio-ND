@@ -1,0 +1,89 @@
+{{ define "main" }}
+
+<link rel="stylesheet" href="/css/bio-pages.css">
+<link rel="stylesheet" href="/css/press.css">
+<link rel="stylesheet" href="/css/writing.css"> {{/* one-column overrides that mimic press visuals */}}
+
+{{/* language */}}
+{{ $isBG := eq .Site.Language.Lang "bg" }}
+
+{{/* load + filter (hide noshow true/"true") */}}
+{{ $all := site.Data.critique | default (slice) }}
+{{ $all = where $all "noshow" "ne" true }}
+{{ $all = where $all "noshow" "ne" "true" }}
+
+{{/* split + sort like Press */}}
+{{ $withYear := where $all "year" "!=" "" | default (slice) }}
+{{ $withYear = where $withYear "year" "ne" nil }}
+{{ $sorted := sort $withYear "year" "desc" }}
+{{ $older := append (where $all "year" "") (where $all "year" nil) }}
+
+{{/* ---------- ItemList JSON-LD (only visible items) ---------- */}}
+{{ $elems := slice }}
+{{ range $i, $it := $all }}
+  {{ $title := cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg) }}
+  {{ $desc  := cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg) }}
+  {{ $auth  := cond $isBG (or $it.authorbg $it.authoren) (or $it.authoren $it.authorbg) }}
+  {{ $art := dict "@type" "Article" "position" (add $i 1) "headline" $title "url" $it.url }}
+  {{ if $desc }} {{ $art = merge $art (dict "description" $desc) }} {{ end }}
+  {{ if $it.year }} {{ $art = merge $art (dict "datePublished" (printf "%v" $it.year)) }} {{ end }}
+  {{ if $auth }} {{ $art = merge $art (dict "author" (dict "@type" "Person" "name" $auth)) }} {{ end }}
+  {{ if $it.exhibition }} {{ $art = merge $art (dict "isPartOf" $it.exhibition) }} {{ end }}
+  {{ $elems = $elems | append $art }}
+{{ end }}
+<script type="application/ld+json">{{ dict
+  "@context" "https://schema.org"
+  "@type" "ItemList"
+  "name" (cond $isBG "Критика" "Critique")
+  "itemListElement" $elems
+| jsonify }}</script>
+
+<div class="biolist">
+  <h2 class="page-heading">{{ .Title }}</h2>
+
+  <div class="about-wrap container--writing">
+    <section class="about-body">
+      <ul class="writing-list" role="list">
+        {{/* Year-grouped visible items (single column, press look) */}}
+        {{ $current := 0 }}
+        {{ range $sorted }}
+          {{ if ne $current .year }}
+            {{ $current = .year }}
+            <li class="press-year">{{ $current }}</li>
+          {{ end }}
+
+          {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
+          {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
+          {{ $auth  := cond $isBG (or .authorbg .authoren) (or .authoren .authorbg) }}
+
+          <li class="press-item">
+            <h3 class="press-titleline">
+              <a class="press-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
+            </h3>
+            {{ with $auth }}<div class="press-author">{{ . }}</div>{{ end }}
+            {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
+          </li>
+        {{ end }}
+
+        {{ if gt (len $older) 0 }}
+          <li class="press-year press-year-older">{{ if $isBG }}По-рано{{ else }}Earlier{{ end }}</li>
+          {{ range $older }}
+            {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
+            {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
+            {{ $auth  := cond $isBG (or .authorbg .authoren) (or .authoren .authorbg) }}
+
+            <li class="press-item">
+              <h3 class="press-titleline">
+                <a class="press-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
+              </h3>
+              {{ with $auth }}<div class="press-author">{{ . }}</div>{{ end }}
+              {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </section>
+  </div>
+</div>
+
+{{ end }}

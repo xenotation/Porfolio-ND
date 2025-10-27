@@ -1,0 +1,370 @@
+[
+    {
+      "exhibition": "latent-space",
+      "namebg": "Програмата",
+      "nameen": "Programata",
+      "descriptionbg": "Интервю със Стефани Стоева за списание „Програмата“ брой III: We may be paranoid, but not androids.",
+      "descriptionen": "Interview with Stefani Stoeva for „Programata“ magazine, issue III: We may be paranoid, but not androids.",
+      "year": "2025",
+      "url": "https://programata.bg/gradat/programata-vol-iii-we-may-be-paranoid-but-not-androids/"
+    },    
+    {
+      "exhibition": "you-ll-understand-when-the-time-comes",
+      "namebg": "Българска национална телевизия",
+      "nameen": "Bulgarian National Television",
+      "year": "2025",
+      "url": "https://bnt.bg/news/vtoro-izdanie-na-festivala-za-savremenno-vizualno-izkustvo-buna-vav-varna-v362667-326670news.html",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "you-ll-understand-when-the-time-comes",
+      "namebg": "Българско национално радио",
+      "nameen": "Bulgarian National Radio",
+      "year": "2025",
+      "url": "https://bnr.bg/varna/post/101975750/buna-2-da-razbunim-duhovete-s-izkustvo",
+      "dontshowbio": "true"      
+    },
+    {
+      "exhibition": "you-ll-understand-when-the-time-comes",
+      "namebg": "Българска телеграфна агенция",
+      "nameen": "Bulgarian Telegraph Agency",
+      "year": "2024",
+      "url": "https://www.bta.bg/bg/news/bulgaria/regional-news/oblast-varna/669944-vtoroto-izdanie-na-foruma-za-savremenno-izkustvo-buna-vav-varna-shte-bade-ot-2",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "you-ll-understand-when-the-time-comes",
+      "namebg": "24 Часа",
+      "nameen": "24 Hours",
+      "year": "2024",
+      "url": "https://www.24chasa.bg/bulgaria/article/18004134",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "you-ll-understand-when-the-time-comes",
+      "namebg": "Варна Утре",
+      "nameen": "Varna Tommorow",
+      "year": "2024",
+      "url": "https://varnautre.bg/2024/05/24/629748-unikalen_festival_zapochva_dnes_vuv_varna",
+      "dontshowbio": "true"      
+    },
+    {
+      "exhibition": "you-ll-understand-when-the-time-comes",
+      "namebg": "Културни новини",
+      "nameen": "Cultural News",
+      "year": "2023",
+      "url": "https://kulturni-novini.info/sections/11/news/39169-vtoroto-izdanie-na-foruma-za-savremenno-izkustvo-buna-shte-se-sluchi-ot-24-may-do-2-yuni-vav-varna",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "you-ll-understand-when-the-time-comes",
+      "namebg": "Дневник",
+      "nameen": "Dnevnik",
+      "year": "2023",
+      "url": "https://www.dnevnik.bg/burzi-novini/2024/05/20/4627213_burzi_novini_20_mai/#4628150",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "you-ll-understand-when-the-time-comes",
+      "namebg": "Виж",
+      "nameen": "Vij",
+      "year": "2023",
+      "url": "https://vijmag.bg/bg/article/vtora-buna",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "you-ll-understand-when-the-time-comes",
+      "namebg": "БНТ",
+      "nameen": "BNT",
+      "year": "2023",
+      "url": "https://bnt.bg/news/kakvo-da-ochakvame-na-festivala-buna-vav-varna-v368087-329168news.html",
+      "dontshowbio": "true"
+    },
+  
+    {
+      "exhibition": "the-first-ten",
+      "namebg": "Art Viewer",
+      "nameen": "Art Viewer",
+      "descriptionen": "Feature on Roth & Stoyanov at Posta/Charta; reconstructs the story behind “Cards and Contraband.”",
+      "descriptionbg": "Материал за Рот и Стоянов в Posta/Charta; реконструира разказа зад „Картички и контрабанда“.",
+      "year": "2024",
+      "url": "https://artviewer.org/aaron-roth-and-nikola-stoyanov-at-posta-space-and-charta-gallery/"
+    },
+    {
+      "exhibition": "the-first-ten",
+      "namebg": "Българска национална телевизия",
+      "nameen": "Bulgarian National Television",
+      "descriptionen": "TV segment on “Cards and Contraband” from the Customs archive (1975–85).",
+      "descriptionbg": "ТВ репортаж за „Картички и контрабанда“ от архива на Агенция „Митници“ (1975–85).",
+      "year": "2024",
+      "url": "https://bnt.bg/news/kartichki-i-kontrabanda-izlozhba-predstavya-arhiv-na-agenciya-mitnici-v366192-328300news.html"
+    },
+    {
+      "exhibition": "the-first-ten",
+      "namebg": "EuroNews TV",
+      "nameen": "EuroNews TV",
+      "descriptionen": "News piece presenting the Customs archives and context of the project.",
+      "descriptionbg": "Новинарско отразяване с представяне на архивите на „Митници“ и контекста на проекта.",
+      "year": "2024",
+      "url": "https://euronewsbulgaria.com/news/26635/kartichki-i-kontrabanda-izlozhba-predstavya-arhivi-ot-agentsiya-mitnitsi"
+    },
+    {
+      "exhibition": "the-first-ten",
+      "namebg": "Българско национално радио",
+      "nameen": "Bulgarian National Radio",
+      "descriptionen": "Radio discussion on concept, the archive and public memory behind the show.",
+      "descriptionbg": "Радио разговор за концепцията, архива и публичната памет зад изложбата.",
+      "year": "2024",
+      "url": "https://bnr.bg/hristobotev/post/101982948/kaloanov"
+    },
+    {
+      "exhibition": "the-first-ten",
+      "namebg": "Вестник България Днес",
+      "nameen": "Bulgaria Today",
+      "descriptionen": "Article on bringing the smuggling archive into the gallery space.",
+      "descriptionbg": "Статия за влизането на архива за контрабанда в изложбеното пространство.",
+      "year": "2024",
+      "url": "https://betatest.bgdnes.bg/bulgaria/article/17639897"
+    },
+    {
+      "exhibition": "the-first-ten",
+      "namebg": "Програмата",
+      "nameen": "Programata",
+      "year": "2024",
+      "url": "https://programata.bg/izlozhbi/izlozhba/kartichki-i-kontrabanda/",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "the-first-ten",
+      "namebg": "Радиопрограма Хоризонт",
+      "nameen": "Radio Program Horizont",
+      "descriptionen": "On-air call highlighting the archival base and social reading.",
+      "descriptionbg": "Ефирно включване с акцент върху архивната база и социалния прочит.",
+      "year": "2024",
+      "url": "https://bnr.bg/horizont/post/101976077"
+    },
+  
+    {
+      "exhibition": "re-process",
+      "namebg": "Българско Национално Радио",
+      "nameen": "Bulgarian National Radio",
+      "descriptionen": "Feature on “Re-Process”: street photography blending traditional and abstract.",
+      "descriptionbg": "Материал за „Re-Process“: улична фотография между традиционното и абстрактното.",
+      "year": "2022",
+      "url": "https://bnr.bg/varna/post/101649068/izlojbata-reproces-preplita-tradicionnoto-i-abstraktnoto-v-nevijdani-ulichni-fotografii"
+    },
+  
+    {
+      "exhibition": "nature-morte",
+      "namebg": "Българска национална телевизия",
+      "nameen": "Bulgarian National Television",
+      "descriptionen": "Report from Goethe-Institut; coal industry landscapes and altered terrains.",
+      "descriptionbg": "Репортаж от Гьоте-институт; пейзажи на въгледобива и променени терени.",
+      "year": "2023",
+      "url": "https://bnt.bg/news/izlozhbata-nature-morte-v-gyote-institut-v347709-319285news.html"
+    },
+    {
+      "exhibition": "nature-morte",
+      "namebg": "Българско национално радио",
+      "nameen": "Bulgarian National Radio",
+      "descriptionen": "Interview on ecology, industrial memory and visual ethics in “Nature Morte.”",
+      "descriptionbg": "Интервю за екологията, индустриалната памет и визуалната етика в „Nature Morte“.",
+      "year": "2023",
+      "url": "https://bnr.bg/horizont/post/101854514/nature-morte-tvorcheski-pogled-kam-vagledobivnata-industria"
+    },
+    {
+      "exhibition": "nature-morte",
+      "namebg": "Bloomberg TV",
+      "nameen": "Bloomberg TV",
+      "year": "2023",
+      "url": "https://www.bloomberg.com/europe"
+    },
+    {
+      "exhibition": "nature-morte",
+      "namebg": "Дарик Радио",
+      "nameen": "Darik Radio",
+      "descriptionen": "Article offering a different gaze at the Maritsa East power complex.",
+      "descriptionbg": "Текст с различен поглед към комплекса „Марица-изток“.",
+      "year": "2023",
+      "url": "https://darik.bg/nature-morte-edin-po-razlichen-pogled-kam-tec-marica-iztok"
+    },
+    {
+      "exhibition": "nature-morte",
+      "namebg": "Българска телеграфна агенция",
+      "nameen": "Bulgarian Telegraph Agency",
+      "descriptionen": "Announcement for the “Coal Tropics” discussion linked to the project.",
+      "descriptionbg": "Анонс за дискусията „Въглищна тропика“, свързана с проекта.",
+      "year": "2023",
+      "url": "https://www.bta.bg/bg/news/lik/491946-diskusiya-na-tema-vaglishtna-tropika-razglezhda-dobiva-na-ruda-i-kak-vdahnovya"
+    },
+    {
+      "exhibition": "nature-morte",
+      "namebg": "Impressio",
+      "nameen": "Impressio",
+      "year": "2023",
+      "url": "https://impressio.dir.bg/photography/vaglishtna-tropika-v-gyote-institut-i-ko-op",
+      "dontshowbio": "true"      
+    },
+    {
+      "exhibition": "nature-morte",
+      "namebg": "Списание Boyscout",
+      "nameen": "Boy Scout Magazine",
+      "descriptionen": "Guide pick — documentary eye on industrial transformation.",
+      "descriptionbg": "Гид селекция — документален поглед към индустриалната трансформация.",
+      "year": "2023",
+      "url": "https://boyscoutmag.com/2023/07/kakvo-da-pravim-v-sofia-prez-july-2/"
+    },
+    {
+      "exhibition": "nature-morte",
+      "namebg": "Artnews Cafe",
+      "nameen": "Artnews Cafe",
+      "descriptionen": "Bulletin mention noting the focus on coal and landscape.",
+      "descriptionbg": "Бюлетин с акцент върху въгледобива и ландшафта.",
+      "year": "2023",
+      "url": "https://openartfiles.bg/openartfiles.bg/public/bg/artnewscafebulletin"
+    },
+  
+    {
+      "exhibition": "in-process",
+      "namebg": "Българска Национална Телевизия",
+      "nameen": "Bulgarian National Television",
+      "descriptionen": "Kultura.BG presents “In Process” at KO-OP — urban matter and everyday wear.",
+      "descriptionbg": "Култура.БГ представя „В процес“ в КО-ОП — градска материя и всекидневно износване.",
+      "year": "2021",
+      "url": "https://bnt.bg/news/fotografska-izlozhba-v-proces-na-nikola-stoyanov-v286612-290248news.html"
+    },
+    {
+      "exhibition": "in-process",
+      "namebg": "Списание BoyScout",
+      "nameen": "Boyscout Magazine",
+      "descriptionen": "Short review of “In Process” at KO-OP — stylized urban detritus on black; curated by Hristo Kaloyanov.",
+      "descriptionbg": "Кратко ревю за „В процес“ в КО-ОП — стилизирани градски остатъци на черен фон; куратор Христо Калоянов.",
+      "year": "2021",
+      "url": "https://boyscoutmag.com/2021/01/izlojba-nikola-stoyanov-stilizira-gradskata-svinshtina-koqto-ni-zaobikalq/"
+    },
+    {
+      "exhibition": "in-process",
+      "namebg": "Дневник",
+      "nameen": "Dnevnik",
+      "descriptionen": "Review for “In Process” at KO-OP — urban matter, everyday wear, photographic observation.",
+      "descriptionbg": "Pевю за „В процес“ в КО-ОП — градска материя, всекидневно износване, фотографско наблюдение.",
+      "year": "2021",
+      "url": "https://www.dnevnik.bg/sled5/izlojbi/2021/01/05/4160628_v_proces/amp/"
+    },
+    {
+      "exhibition": "in-process",
+      "namebg": "Българско Национално Радио",
+      "nameen": "Bulgarian National Radio",
+      "descriptionen": "Feature on “In Process”: photography as observation — accumulations and micro-events.",
+      "descriptionbg": "Материал за „В процес“: фотография като наблюдение — натрупвания и микро-събития.",
+      "year": "2021",
+      "url": "https://mikamagazine.com/%D0%BA%D0%BE-%D0%BE%D0%BF-%D0%BF%D1%80%D0%B5%D0%B4%D1%81%D1%82%D0%B0%D0%B2%D1%8F-%D0%B2-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81-%D1%84%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0/"
+    },
+    {
+      "exhibition": "in-process",
+      "namebg": "Mika Magazine",
+      "nameen": "Mika Magazine",
+      "descriptionen": "Announcement for “In Process” at KO-OP.",
+      "descriptionbg": "Анонс за „В процес“ в КО-ОП.",
+      "year": "2021",
+      "url": "https://mikamagazine.com/%D0%BA%D0%BE-%D0%BE%D0%BF-%D0%BF%D1%80%D0%B5%D0%B4%D1%81%D1%82%D0%B0%D0%B2%D1%8F-%D0%B2-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81-%D1%84%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0/"
+    },
+  
+    {
+      "exhibition": "i-ixa",
+      "namebg": "Impressio",
+      "nameen": "Impressio",
+      "year": "2021",
+      "url": "https://impressio.dir.bg/palitra/sledi-ot-brodesht-duh-i-iksa-ot-nikola-stoyanov",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "i-ixa",
+      "namebg": "Българско Национално Радио",
+      "nameen": "Bulgarian National Radio",
+      "descriptionen": "Radio piece on “I-IXA”: roaming spirit and hidden city routes.",
+      "descriptionbg": "Радио материал за „I-IXA“: бродещ дух и скрити градски маршрути.",
+      "year": "2021",
+      "url": ""
+    },
+  
+    {
+      "exhibition": "cards",
+      "namebg": "Българска Телеграфна Агенция",
+      "nameen": "Bulgarian Telegraph Agency",
+      "descriptionen": "Announcement for ReBonkers show tracing socialist-era smuggling.",
+      "descriptionbg": "Анонс за изложба в ReBonkers, проследяваща контрабандата през социализма.",
+      "year": "2023",
+      "url": "https://www.bta.bg/bg/news/lik/519175-kontrabandata-prez-sotsializma-izsledva-ekspozitsiya-podredena-vav-varnenskiya-"
+    },
+    {
+      "exhibition": "cards",
+      "namebg": "Българско Национално Радио",
+      "nameen": "Bulgarian National Radio",
+      "descriptionbg": "Радио отразяване на „Картички и контрабанда“ във Варна — изложба, която разгръща документалните пластове на нелегалните потоци.",
+      "descriptionen": "Radio coverage of “Cards and Contraband” in Varna — an exhibition unfolding documentary layers of illicit flows.",
+      "year": "2023",
+      "url": "https://bnr.bg/varna/post/101874963/izlobn-razkriva-tainite-na-kontrabandata-ot-vremeto-na-socializma"
+    },
+    {
+      "exhibition": "cards",
+      "namebg": "Културни Новини",
+      "nameen": "Culture News",
+      "year": "2023",
+      "url": "https://kulturni-novini.info/sections/2/news/37584-kartichki-i-kontrabanda-izlozhba-na-aaron-rot-i-nikola-stoyanov",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "cards",
+      "namebg": "Паралел 43",
+      "nameen": "Parallel43",
+      "year": "2023",
+      "url": "https://parallel43.bg/patyat-na-skritiya-tranzit-v-izlozhbata-kartichki-i-kontrabanda",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "cards",
+      "namebg": "Утро Русе",
+      "nameen": "News Paper Utro",
+      "year": "2023",
+      "url": "https://utroruse.com/article/970557/",
+      "dontshowbio": "true"
+    },
+  
+    {
+      "exhibition": "black-fax",
+      "namebg": "Go Guide",
+      "nameen": "Go Guide",
+      "year": "2023",
+      "url": "https://goguide.bg/53955-na-sofiya-i-predstoi-parviyat-porno-festival-sporno-sofia-porn-fest/",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "black-fax",
+      "namebg": "Seen",
+      "nameen": "Seen",
+      "descriptionen": "Overview of SPORNO 2024 — program context and cultural framing of the festival.",
+      "descriptionbg": "Преглед на SPORNO 2024 — контекст на програмата и културната рамка на фестивала.",
+      "year": "2024",
+      "url": "https://seen.bg/article/5-kakvo/2508-sofia-porn-fest-sporno-2024"
+    },
+    {
+      "exhibition": "black-fax",
+      "namebg": "Proud BG",
+      "nameen": "Proud BG",
+      "descriptionen": "Announcement of SPORNO’s first edition at WÆ ÆTHER Sofia — art & pornography, queer emancipatory lens.",
+      "descriptionbg": "Анонс за първото издание на SPORNO в WÆ ÆTHER Sofia — изкуство и порнография, куиър еманципаторен фокус.",
+      "year": "2024",
+      "url": "https://proud.bg/wae-aether-sofia-obyavyava-parvo-izdanie-na-festivala-sporno/"
+    },
+    {
+      "exhibition": "black-fax",
+      "namebg": "Списание BoyScout",
+      "nameen": "Boyscout Magazine",
+      "descriptionen": "Guide feature: Sofia gives ground to SPORNO — what the festival sets out to do.",
+      "descriptionbg": "Гид материал: София дава терен за SPORNO — какво цели фестивалът.",
+      "year": "2024",
+      "url": "https://boyscoutmag.com/2024/06/sporno-festival-sofia/"
+    }
+  ]
+  

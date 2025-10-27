@@ -1,0 +1,81 @@
+{{- $cur := . -}}
+
+<!-- Compact mobile bar: initials (stacked) with burger underneath -->
+<label class="mobile-nav" for="nav-toggle" aria-label="Open menu">
+  <span class="initials"><span>N</span><span>S</span></span>
+  <span class="burger"><span></span></span>
+</label>
+
+<input id="nav-toggle" type="checkbox" hidden>
+<!-- Backdrop when menu is open -->
+<label class="backdrop" for="nav-toggle" aria-hidden="true"></label>
+
+<aside class="sidebar" aria-label="Site navigation">
+  <div class="brandlang">  <a class="brand" href="{{ "/" | relLangURL }}">{{ .Site.Title }}</a>
+    {{ partial "lang-switcher.html" . }}</div>  
+
+
+  <nav class="menu">
+    {{/* menu items; each "key" must exist in i18n/*.toml */}}
+    {{ $items := slice
+        (dict "href" "/about/"       "key" "about")
+        (dict "href" "/work/"        "key" "exhibitions" "isWork" true)
+        (dict "href" "/writing/"     "key" "writing")
+        (dict "href" "/translation/" "key" "translation")
+        (dict "href" "/lectures/"       "key" "talks")
+        (dict "href" "https://blog.newdegeneration.xyz/" "key" "blog" "external" true)
+        (dict "href" "/critique/"    "key" "critique")
+        (dict "href" "/press/"       "key" "press")
+        (dict "href" "/misc/"        "key" "misc")
+    }}
+
+    <ul class="top">
+      {{ range $it := $items }}
+        {{ $isWork := and (isset $it "isWork") (index $it "isWork") }}
+        {{ $isExternal := and (isset $it "external") (index $it "external") }}
+        {{ $href := $it.href }}
+        {{ $link := cond $isExternal $href (relLangURL $href) }}
+
+        {{/* label ONLY from i18n */}}
+        {{ $label := T $it.key }}
+
+        {{ $active := "" }}
+        {{ if or (and $isWork (eq $cur.Section "work"))
+                 (and (not $isExternal) (hasPrefix $cur.RelPermalink (relLangURL $href))) }}
+          {{ $active = " is-active" }}
+        {{ end }}
+
+        <li>
+          <a class="top-link{{ $active }}"
+             href="{{ $link }}"
+             {{ if $isExternal }}target="_blank" rel="noopener noreferrer"{{ else }}rel="noopener"{{ end }}>
+            {{ $label }}
+          </a>
+
+          {{ if $isWork }}
+            <div class="legend">{{ T "legend_work" }}</div>
+            {{ $works := where site.RegularPages "Section" "work" }}
+            {{ $works = $works.ByDate.Reverse }}
+            {{ range ($works.GroupByDate "2006") }}
+              <div class="year">
+                <span class="year-label">{{ .Key }}</span>
+                <ul class="work">
+                  {{ range .Pages }}
+                    {{ $cats := .Params.categories | default (slice) }}
+                    {{ $catstr := lower (delimit $cats " ") }}
+                    {{ $m := "(s)" }}{{ if in $catstr "collab" }}{{ $m = "(c)" }}{{ end }}
+                    <li>
+                      <span class="m">{{ $m }}</span>
+                      <a class="{{ if eq .Permalink $cur.Permalink }}is-active{{ end }}"
+                         href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    </li>
+                  {{ end }}
+                </ul>
+              </div>
+            {{ end }}
+          {{ end }}
+        </li>
+      {{ end }}
+    </ul>
+  </nav>
+</aside>

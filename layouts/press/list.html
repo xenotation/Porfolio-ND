@@ -1,0 +1,133 @@
+{{ define "main" }}
+
+<link rel="stylesheet" href="/css/bio-pages.css">
+<link rel="stylesheet" href="/css/press.css">
+
+{{/* language */}}
+{{ $isBG := eq .Site.Language.Lang "bg" }}
+
+{{/* data (filter out items with dontshowbio true/"true") */}}
+{{ $all := site.Data.press | default (slice) }}
+{{ $all = where $all "dontshowbio" "ne" true }}
+{{ $all = where $all "dontshowbio" "ne" "true" }}
+
+{{/* split + sort */}}
+{{ $withYear := where $all "year" "!=" "" | default (slice) }}
+{{ $withYear = where $withYear "year" "ne" nil }}
+{{ $sorted := sort $withYear "year" "desc" }}
+{{ $older := append (where $all "year" "") (where $all "year" nil) }}
+
+{{/* JSON-LD (only for visible items) */}}
+{{ $elems := slice }}
+{{ range $i, $it := $all }}
+  {{ $title := cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg) }}
+  {{ $desc  := cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg) }}
+  {{ $art := dict "@type" "Article" "position" (add $i 1) "headline" $title "url" $it.url }}
+  {{ if $desc }}          {{ $art = merge $art (dict "description" $desc) }} {{ end }}
+  {{ if $it.year }}       {{ $art = merge $art (dict "datePublished" (printf "%v" $it.year)) }} {{ end }}
+  {{ if $it.exhibition }} {{ $art = merge $art (dict "isPartOf" $it.exhibition) }} {{ end }}
+  {{ $elems = $elems | append $art }}
+{{ end }}
+
+
+{{/* ===========================
+     Minimal JSON-LD (Press)
+     - Person from site params
+     - ItemList of Articles with:
+       url/@id, about, year-only date
+   =========================== */}}
+
+   {{- $all := site.Data.press | default (slice) -}}
+   {{- $all = where $all "dontshowbio" "ne" true -}}
+   {{- $all = where $all "dontshowbio" "ne" "true" -}}
+   
+   {{- $withYear := where $all "year" "!=" "" | default (slice) -}}
+   {{- $withYear = where $withYear "year" "ne" nil -}}
+   {{- $sorted := sort $withYear "year" "desc" -}}
+   {{- $older  := append (where $all "year" "") (where $all "year" nil) -}}
+   
+   {{/* Person from params; allow optional custom @id via params.personId */}}
+   {{- $personID := or .Site.Params.personId (print .Site.BaseURL "#nikola-stoyanov") -}}
+   {{- $person := dict "@type" "Person" "@id" $personID "name" .Site.Params.name -}}
+   {{- with .Site.Params.alternateName }}{{ $person = merge $person (dict "alternateName" .) }}{{ end -}}
+   {{- with .Site.Params.jobTitle      }}{{ $person = merge $person (dict "jobTitle" .)      }}{{ end -}}
+   {{- with .Site.Params.sameAs        }}{{ $person = merge $person (dict "sameAs" .)        }}{{ end -}}
+   
+   {{/* Build Article list with minimal fields */}}
+   {{- $items := slice -}}
+   
+   {{- range $sorted }}
+     {{- $a := dict
+           "@type" "Article"
+           "@id"   .url
+           "url"   .url
+           "about" (dict "@id" $personID)
+       -}}
+     {{- if .year }}{{ $a = merge $a (dict "datePublished" (printf "%v" .year)) }}{{ end -}}
+     {{- $items = $items | append $a -}}
+   {{- end -}}
+   
+   {{- range $older }}
+     {{- $a := dict
+           "@type" "Article"
+           "@id"   .url
+           "url"   .url
+           "about" (dict "@id" $personID)
+       -}}
+     {{- /* no year -> no datePublished */ -}}
+     {{- $items = $items | append $a -}}
+   {{- end -}}
+   
+   {{- $itemList := dict
+     "@type" "ItemList"
+     "@id"   (print .Permalink "#press")
+     "itemListElement" $items
+   -}}
+   
+   <script type="application/ld+json">
+   {{ dict "@context" "https://schema.org" "@graph" (slice $person $itemList) | jsonify }}
+   </script>
+   
+
+
+<div class="biolist biolist--press">
+  <h2 class="page-heading">{{ .Title }}</h2>
+
+  <div class="about-wrap container--press">
+    <section class="about-body">
+      <ul class="press-list" role="list">
+        {{ $current := 0 }}
+        {{ range $sorted }}
+          {{ if ne $current .year }}
+            {{ $current = .year }}
+            <li class="press-year">{{ $current }}</li>
+          {{ end }}
+          {{ $label := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
+          {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
+          <li class="press-item">
+            <h3 class="press-titleline">
+              <a class="press-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ $label }}</a>
+            </h3>
+            {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
+          </li>
+        {{ end }}
+
+        {{ if gt (len $older) 0 }}
+          <li class="press-year press-year--older">{{ if $isBG }}По-рано{{ else }}Earlier{{ end }}</li>
+          {{ range $older }}
+            {{ $label := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
+            {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
+            <li class="press-item">
+              <h3 class="press-titleline">
+                <a class="press-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ $label }}</a>
+              </h3>
+              {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </section>
+  </div>
+</div>
+
+{{ end }}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+
+  {{ partial "meta.html" . }}
+  {{ partial "head.html" . }}
+  <link rel="stylesheet" href="{{ "/css/nav.css" | relURL }}">
+
+  <body>
+
+    <div class="layout">
+      
+      {{ partial "nav-sidebar.html" . }}
+
+      <main class="stage">
+        {{ block "main" . }}{{ end }}
+      </main>
+
+    </div>
+
+    <div class="bg"></div>
+    <div class="frame-overlay" aria-hidden="true"></div>
+
+    <script src="{{ "/js/text-scramble.js" | relURL }}" defer></script>
+    <script>
+      let timeout;
+      function resetTimer(){
+        clearTimeout(timeout);
+        document.body.classList.remove('inactive');
+        timeout = setTimeout(() => document.body.classList.add('inactive'), 120000);
+      }
+      ['mousemove','keydown','scroll','click'].forEach(e => document.addEventListener(e, resetTimer));
+      resetTimer();
+    </script>
+  
+
+  </body>
+</html>

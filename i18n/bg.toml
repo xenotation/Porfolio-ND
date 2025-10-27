@@ -1,0 +1,38 @@
+[Exhibitions]
+  other = 'изложби ↓'
+[Collaborations]
+  other = 'колаборации  ↓'
+[PubLect]
+  other = 'текстове и лекции ↓'
+[Curator]
+  other = 'куратор ↓'
+[Collaborators]
+  other = 'съучастници ↓'
+[Sound]
+  other = 'звуков дизайн ↓'
+[Photo]
+  other = 'фотография ↓'
+[404] 
+  other = "прибери се у дома"
+[press]
+  other = "Медийно покритие"
+[about]        
+  other = "Биография"
+[exhibitions]  
+  other = "Изложби ↓"
+[writing]      
+  other = "Текстове"
+[translation]  
+  other = "Преводи"
+[critique]     
+  other = "Критика"
+[talks]        
+  other = "Лекции и разговори"
+[blog]         
+  other = "Блог"
+[misc]         
+  other = "Разни"
+[legend_work]  
+  other = "самостоятелни (s) / колаб. (c)"
+[portfolio]
+    other = "Портфолио (PDF)"

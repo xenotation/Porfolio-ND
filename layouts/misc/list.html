@@ -1,0 +1,19 @@
+{{ define "main" }}
+
+<link rel="stylesheet" href="/css/bio-pages.css">
+<link rel="stylesheet" href="/css/press.css">  {{/* for .page-heading consistency */}}
+
+<div class="biolist">
+  <h2 class="page-heading">{{ .Title }}</h2>
+
+  <div class="about-body">
+    <div class="about-text">
+        <a href="https://github.com/xenotation/">
+            <img src="/images/under-construction.gif" class="incostruction" alt="Technical Specs">
+        </a>
+      {{ .Content }}
+    </div> 
+  </div>
+</div>
+
+{{ end }}

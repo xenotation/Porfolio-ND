@@ -1,0 +1,4 @@
+---
+title: "критика"
+type: "critique"
+---

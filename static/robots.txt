@@ -1,0 +1,3 @@
+User-agent: *
+Sitemap: https://newdegeneration.xyz/sitemap.xml
+Disallow: 

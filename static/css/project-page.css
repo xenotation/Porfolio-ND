@@ -1,0 +1,230 @@
+/* Grid Layout */
+.container {
+  display: grid;
+  grid-template-columns: 0.4fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 1.2em 1.2em;
+  grid-auto-flow: row;
+  grid-template-areas:
+      "exhb-hero exhb-hero"
+      "exhb-title exhb-medium"
+      "exhb-people exhb-body";
+}
+
+/* Hero Section */
+.exhb-hero {
+  grid-area: exhb-hero;
+  overflow: hidden;
+  width: 100%;
+  max-height: 50vh;   
+  aspect-ratio: 16 / 9;
+}
+.hero-content { 
+  max-height: 50vh;   
+  position: absolute;
+  inset: 0;
+}
+.featured-image,
+.featured-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Title Section */
+.exhb-title {
+  grid-area: exhb-title;
+  justify-self: end;
+  text-align: right;
+  max-width: 16vw;
+}
+.exhb-title h1 {
+  margin: 0;
+  white-space: wrap;
+  hyphens: auto;
+  line-height: 2rem;
+}
+
+/* Medium Section */
+.exhb-medium {
+  grid-area: exhb-medium;
+  justify-self: start;
+  text-align: left;
+}
+
+/* People Section */
+.exhb-people {
+  grid-area: exhb-people;
+  justify-self: end;
+  text-align: right;
+}
+
+.collaborators p {
+  margin-bottom: 1,2rem;
+}
+
+
+/* Body Section */
+.exhb-body {
+  grid-area: exhb-body;
+  max-width: 45rem;
+}
+
+.exhb-text {
+  grid-area: exhb-body;
+  justify-self: start;
+  column-count: 1;
+
+  gap: 1.2em;
+  margin-bottom: 1.2em;
+
+  text-align: justify;
+
+  word-spacing: 0.23em;
+}
+
+.medium-text {
+  margin: 0.24rem 0 0 0;
+}
+
+/* Gallery Grid */
+.masonry-grid { column-count: 3; margin-bottom: 2.3em; }
+.gallery-image { width: 100%; height: auto; break-inside: avoid; margin-bottom: 0.55em; }
+
+/* Date and Place */
+.placedate p { 
+  margin: 0; 
+}
+
+
+/* =======================
+   Mobile (≤ 860px)
+   ======================= */
+@media (max-width: 53.75rem){ /* 860px */
+  /* One-column layout & left alignment */
+  .container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "exhb-hero"
+      "exhb-title"
+      "exhb-medium"
+      "exhb-body";
+    gap: 1rem;
+    width: 100%;
+    max-width: none;
+    margin: 0;                /* prevent auto-centering */
+    justify-items: start;     /* left-align children */
+  }
+
+  /* Full-bleed hero on phones */
+  .exhb-hero{
+    grid-area: exhb-hero;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    max-height: none;
+    aspect-ratio: auto;
+    overflow: hidden;
+  }
+  .exhb-hero .featured-image,
+  .exhb-hero .featured-video{
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Title / Medium / Body: left, with inner padding */
+  .exhb-title,
+  .exhb-medium,
+  .exhb-body{
+    justify-self: start;
+    text-align: left;
+  }
+
+  .exhb-title {
+    max-width: none;
+  }
+
+  .exhb-title h1{
+    margin: 0 0 0.5rem 0;
+    hyphens: auto;
+  }
+
+  /* Hide collaborators/people section on phones */
+  .exhb-people{ display: none; }
+
+  /* Body text */
+  .exhb-text{
+    column-count: 1;
+    gap: 1.2em;
+    text-align: justify;
+    margin-bottom: 1.2em;
+  }
+
+  /* Gallery grid: single column */
+  .masonry-grid{ column-count: 1; column-gap: 0; }
+  .gallery-image{ width: 100%; height: auto; break-inside: avoid; }
+
+  /* Small niceties */
+  .placedate p{ margin: 0; }
+}
+
+/* ============================================================
+   PhotoSwipe caption card (centered rectangle, black/white)
+   uses your tokens: --outer-m, --size-*, --font-ui, --font-body
+   ============================================================ */
+.pswp__ndg-caption{
+  position: absolute;
+  left: 50%;
+  bottom: var(--outer-m);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;                 /* allow PS UI clicks */
+  width: auto;
+  max-width: min(92vw, 72ch);
+  z-index: 2;
+}
+
+.pswp__ndg-caption__inner{
+  background: #000;                     /* black bg */
+  color: #fff;                          /* white text */
+  padding: var(--outer-m);
+  border-radius: 0;
+  pointer-events: auto;
+  text-align: left;            
+}
+
+.pswp__ndg-caption__title{
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: var(--size-5);
+  line-height: 1.25;
+  margin: 0 0 calc(var(--outer-m) * 0.25) 0;
+  color: #fff;
+}
+
+.pswp__ndg-caption__desc{
+  font-family: var(--font-body);
+  font-size: var(--size-5);
+  line-height: 1.35;
+  margin: 0;
+  color: #fff;
+}
+
+@media (max-width: 53.75rem){
+  .pswp__ndg-caption{
+    bottom: calc(var(--outer-m) * 0.8);
+    max-width: 94vw;
+  }
+  .pswp__ndg-caption__inner{
+    padding: calc(var(--outer-m) * 0.9) calc(var(--outer-m) * 1.2);
+  }
+  .pswp__ndg-caption__title{
+    font-size: var(--size-0);
+    margin-bottom: calc(var(--outer-m) * 0.2);
+  }
+}

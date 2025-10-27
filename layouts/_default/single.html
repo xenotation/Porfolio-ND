@@ -1,0 +1,249 @@
+{{ define "main" }}
+
+<link rel="stylesheet" href="/css/project-page.css">
+<link rel="stylesheet" href="/css/photoswipe.css">
+<link rel="stylesheet" href="/css/pswp-caption.css">
+
+{{/* shared vars */}}
+{{ $exhKey := ( .Params.exhibition_key | default (path.Base .File.Dir) ) | urlize }}
+{{ $lang  := .Site.Language.Lang }}
+{{ $isBG  := eq $lang "bg" }}
+
+{{ $pressAll := site.Data.press | default (slice) }}
+{{ $critAll  := site.Data.critique | default (slice) }}
+{{ $pressFor := where $pressAll "exhibition" $exhKey }}
+{{ $critFor  := where $critAll  "exhibition" $exhKey }}
+
+{{/* Event JSON-LD with @id so images can reference it */}}
+{{ $loc := dict "@type" "Place" "name" .Params.place "address" (dict "@type" "PostalAddress" "addressLocality" .Params.location) }}
+{{ $org := dict "@type" "Person" "name" .Site.Params.name "alternateName" .Site.Params.alternateName "jobTitle" .Site.Params.jobTitle "description" .Site.Params.description "url" .Site.Params.organizerUrl }}
+{{ $per := dict "@type" "Person" "name" .Site.Params.name "alternateName" .Site.Params.alternateName }}
+{{ $event := dict
+  "@context" "https://schema.org"
+  "@type" "ExhibitionEvent"
+  "@id" "#exhibition"
+  "name" .Title
+  "description" .Params.description
+  "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
+  "location" $loc
+  "organizer" $org
+  "performer" $per
+}}
+{{ if .Params.datestart }}{{ $event = merge $event (dict "startDate" (dateFormat "2006-01-02T15:04:05Z" .Params.datestart)) }}{{ end }}
+{{ if .Params.dateend   }}{{ $event = merge $event (dict "endDate"   (dateFormat "2006-01-02T15:04:05Z" .Params.dateend))   }}{{ end }}
+<script type="application/ld+json">{{ $event | jsonify }}</script>
+
+<div class="container">
+  <div class="exhb-hero" id="hero-content"></div>
+
+  <script>
+    function isMobileDevice(){ return /Mobi|Android/i.test(navigator.userAgent); }
+    function isVideoSupported(){ var v=document.createElement('video'); return !!v.canPlayType; }
+    function insertHeroContent(){
+      var el=document.getElementById('hero-content');
+      var baseURL="{{ .Page.RelPermalink }}";
+      function normalizeURL(u){ var p=u.split('/'); if(p[1]==='bg'){ p.splice(1,1);} return p.join('/'); }
+      baseURL=normalizeURL(baseURL);
+      if(isMobileDevice()){
+        el.innerHTML='<img src="'+baseURL+'/hero.webp" alt="Hero Image" class="featured-image">';
+      }else if(isVideoSupported()){
+        el.innerHTML='<video autoplay muted loop class="featured-video" poster="'+baseURL+'/hero.webp"><source src="'+baseURL+'/hero.webm" type="video/webm"></video>';
+      }else{
+        el.innerHTML='<img src="'+baseURL+'/hero.webp" alt="Hero Image" class="featured-image">';
+      }
+    }
+    window.addEventListener('DOMContentLoaded', insertHeroContent);
+  </script>
+
+  <div class="exhb-title">
+    <h1>{{ .Title }}</h1>
+    <div class="placedate">
+      {{- $place := .Params.place -}}
+      {{- $location := .Params.location -}}
+      {{- if and $place $location -}}<p>{{ $place }}, {{ $location }}</p>
+      {{- else if $place -}}<p>{{ $place }}</p>
+      {{- else if $location -}}<p>{{ $location }}</p>{{- end -}}
+      {{ $startDate := .Params.datestart | default "1970-01-01T00:00:00+00:00" | time.AsTime }}
+      {{ $endDate   := .Params.dateend   | default "1970-01-01T00:00:00+00:00" | time.AsTime }}
+      {{ printf "%s-%s" ($startDate | time.Format "02.01") ($endDate | time.Format "02.01.2006") }}
+    </div>
+  </div>
+
+  <div class="exhb-medium">
+    {{ with .Params.medium }}
+      <p class="medium-text">{{ range . }}{{ . }}<br>{{ end }}</p>
+    {{ end }}
+  </div>
+
+  <div class="exhb-people">
+    <div class="people">
+      <div class="collaborators">
+        {{ with .Params.collaborators }}
+          <p>{{ i18n "Collaborators" }}<br>{{ range . }}{{ . }}<br>{{ end }}</p>
+        {{ end }}
+      </div>
+      {{ with .Params.curator }}
+        <p>{{ i18n "Curator" }}<br>{{ range . }}{{ . }}<br>{{ end }}</p>
+      {{ end }}
+      {{ with .Params.sound }}
+        <p>{{ i18n "Sound" }}<br>{{ range . }}{{ . }}<br>{{ end }}</p>
+      {{ end }}
+      {{ with .Params.photo }}
+        <p>{{ i18n "Photo" }}<br>{{ range . }}{{ . }}<br>{{ end }}</p>
+      {{ end }}
+    </div>
+  </div>
+
+  <div class="exhb-body">
+    <div class="exhb-text">{{ .Content }}</div>
+
+    {{ if gt (len $pressFor) 0 }}
+    <section>
+      <h2>{{ T "press" | default (cond $isBG "Медийно покритие" "Press") }}</h2>
+      <p>
+        {{ $links := slice }}
+        {{ range $p := $pressFor }}
+          {{ $label := cond $isBG (or $p.namebg $p.nameen) (or $p.nameen $p.namebg) }}
+          {{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">%s</a>` $p.url $label) }}
+        {{ end }}
+        {{ delimit $links ", " | safeHTML }}
+      </p>
+    </section>
+    {{ end }}
+
+    {{ if gt (len $critFor) 0 }}
+    <section>
+      <h2>{{ T "critique" | default (cond $isBG "Критика" "Critique") }}</h2>
+      <ul>
+        {{ range $c := $critFor }}
+          {{ $title := cond $isBG (or $c.namebg $c.nameen) (or $c.nameen $c.namebg) }}
+          {{ $desc  := cond $isBG (or $c.descriptionbg $c.descriptionen) (or $c.descriptionen $c.descriptionbg) }}
+          {{ $auth  := cond $isBG (or $c.authorbg $c.authoren) (or $c.authoren $c.authorbg) }}
+          <li>
+            <a href="{{ $c.url }}" target="_blank" rel="noopener">{{ $title }}</a>{{ with $auth }} - {{ . }}{{ end }}
+            {{ with $desc }}<div class="m">{{ . }}</div>{{ end }}
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+
+    {{/* --- Gallery (captions only in lightbox) --- */}}
+    <div id="my-gallery" class="masonry-grid">
+      {{ $resources := .Resources.Match "*.*" }}
+      {{ range $index, $resource := $resources }}
+        {{ $title := index $.Params.imgNames $index | default "" }}
+        {{ $description := index $.Params.imgDescrps $index | default "" }}
+        {{ if in $resource.MediaType.Type "image" }}
+          {{ if ne $resource.Name "hero.webp" }}
+            {{ $thumb := $resource.Resize "420x" }}
+            {{ $large := $resource.Resize "1600x" }}
+
+            <a
+              class="spotlight"
+              href="{{ $large.RelPermalink }}"
+              data-pswp-width="{{ $large.Width }}"
+              data-pswp-height="{{ $large.Height }}"
+              data-pswp-title="{{ $title }}"
+              data-pswp-desc="{{ $description }}"
+              aria-label="{{ $title }}"
+            >
+              <img
+                src="{{ $thumb.RelPermalink }}"
+                alt="{{ $title }}"
+                title="{{ $description }}"
+                class="gallery-image"
+                loading="lazy"
+              />
+            </a>
+
+            {{/* JSON-LD: image is about this exhibition */}}
+            <script type="application/ld+json">{{ dict
+              "@context" "https://schema.org"
+              "@type" "ImageObject"
+              "url"        $large.Permalink
+              "contentUrl" $large.Permalink
+              "name"       $title
+              "description" $description
+              "about"      (dict "@id" "#exhibition")
+            | jsonify }}</script>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+<a href="#" class="scroll-to-top">↑</a>
+
+<script type="module">
+  import PhotoSwipeLightbox from "/js/photoswipe-lightbox.esm.js";
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: "#my-gallery",
+    children: "a.spotlight",
+    pswpModule: () => import("/js/photoswipe.esm.js"),
+
+    /* gestures & zoom */
+    wheelToZoom: true,
+    pinchToClose: true,
+    closeOnVerticalDrag: true,
+    allowPanToNext: true,
+
+    /* click/tap */
+    imageClickAction: 'zoom-or-close',
+    doubleTapAction: 'zoom',
+    tapAction: 'toggle-controls',
+    bgClickAction: 'close',
+
+    /* zoom levels */
+    initialZoomLevel: 'fit',
+    secondaryZoomLevel: 1.5,
+    maxZoomLevel: 3,
+
+    /* padding around image */
+    paddingFn: (vp) => {
+      const pad = vp.x < 860 ? 12 : 24;
+      return { top: pad, right: pad, bottom: pad, left: pad };
+    }
+  });
+
+  // Register centered caption (title above description)
+  lightbox.on('uiRegister', function() {
+    lightbox.pswp.ui.registerElement({
+      name: 'caption',
+      order: 9,
+      isButton: false,
+      className: 'pswp__ndg-caption',
+      appendTo: 'root',
+      html: `
+        <div class="pswp__ndg-caption__inner">
+          <div class="pswp__ndg-caption__title"></div>
+          <div class="pswp__ndg-caption__desc"></div>
+        </div>
+      `,
+      onInit: (el, pswp) => {
+        const $title = el.querySelector('.pswp__ndg-caption__title');
+        const $desc  = el.querySelector('.pswp__ndg-caption__desc');
+        const update = () => {
+          const slide = pswp.currSlide;
+          let t = '', d = '';
+          if (slide && slide.data && slide.data.element) {
+            const a = slide.data.element;
+            t = a.getAttribute('data-pswp-title') || '';
+            d = a.getAttribute('data-pswp-desc')  || '';
+          }
+          $title.textContent = t;
+          $desc.textContent  = d;
+          el.style.display = (t || d) ? 'flex' : 'none';
+        };
+        pswp.on('afterInit', update);
+        pswp.on('change', update);
+      }
+    });
+  });
+
+  lightbox.init();
+</script>
+
+{{ end }}

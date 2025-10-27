@@ -1,0 +1,4 @@
+---
+title: "Лекции"
+type: "lectures"
+---

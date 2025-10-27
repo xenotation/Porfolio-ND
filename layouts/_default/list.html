@@ -1,0 +1,93 @@
+{{ define "main" }}
+
+<link rel="stylesheet" type="text/css" href="/css/works.css">
+
+{{- $all := where .Pages "Params.categories" "intersect" (slice "solo" "collab") -}}
+{{- $pages := where $all "Params.noshow" "ne" true -}}
+
+<!-- Lightweight ItemList JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "mainEntity":{
+    "@type":"ItemList",
+    "name":"Exhibition Gallery",
+    "itemListElement":[
+      {{- range $i, $p := $pages -}}{{ if gt $i 0 }},{{ end }}
+      {
+        "@type":"Event",
+        "url":"{{ $p.Permalink }}",
+        "name":{{ printf "%q" $p.Title }},
+        {{ with $p.Params.description }}"description":{{ printf "%q" . }},{{ end }}
+        {{ with $p.Params.datestart }}"startDate":"{{ (time .) | time.Format "2006-01-02T15:04:05Z" }}",{{ end }}
+        {{ with $p.Params.dateend }}"endDate":"{{ (time .) | time.Format "2006-01-02T15:04:05Z" }}",{{ end }}
+        "image":{{ with $p.Resources.GetMatch "hero.*" -}}
+                  {{ printf "%q" .RelPermalink }}
+                {{- else -}}
+                  {{ printf "%q" (print $.Site.BaseURL "images/default-hero.jpg") }}
+                {{- end }},
+        "location":{
+          "@type":"Place",
+          "name":{{ printf "%q" (or $p.Params.place "") }},
+          "address":{
+            "@type":"PostalAddress",
+            "addressLocality":{{ printf "%q" (or $p.Params.addressLocality $p.Params.location "") }},
+            "addressCountry":{{ printf "%q" (or $p.Params.addressCountry "Bulgaria") }}
+          }
+        }
+      }
+      {{- end -}}
+    ]
+  }
+}
+</script>
+
+<div class="gallery">
+  <h2 class="gallery-heading">selected exhibitions</h2>
+
+  {{ range $pages }}
+  <article class="exhibit">
+    <!-- LEFT: fixed-width image (any height) -->
+    <div class="exhibit-media">
+      <a href="{{ .Permalink }}">
+        {{ with .Resources.GetMatch "hero.*" }}
+          {{ $img := .Resize "1000x" }}
+          <img src="{{ $img.RelPermalink }}" alt="{{ $.Title }}">
+        {{ end }}
+      </a>
+    </div>
+
+    <!-- MIDDLE: title / venue / address / dates -->
+    <div class="exhibit-meta">
+      <h3 class="exhibit-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+
+      <div class="exhibit-address">
+        {{ with .Params.place }}{{ . }}<br>{{ end }}
+        {{ with .Params.address }}{{ . }}<br>{{ end }}
+        {{ $city := or .Params.addressLocality .Params.location }}
+        {{- with $city -}}{{ . }}{{ end }}
+        {{- with .Params.addressCountry -}}{{ if $city }}, {{ end }}{{ . }}{{ end }}
+      </div>
+
+      <div class="exhibit-date">
+        {{- $s := .Params.datestart | time.AsTime -}}
+        {{- $e := .Params.dateend   | time.AsTime -}}
+        {{- if and $s $e -}}
+          {{ time.Format "January 2" $s }} — {{ time.Format "January 2, 2006" $e }}
+        {{- else if $s -}}
+          {{ time.Format "January 2, 2006" $s }}
+        {{- else if .Date -}}
+          {{ time.Format "January 2, 2006" .Date }}
+        {{- end -}}
+      </div>
+    </div>
+
+    <!-- RIGHT: ABOUT THE SHOW (description) -->
+    <div class="exhibit-desc">
+      {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+    </div>
+  </article>
+  {{ end }}
+</div>
+{{ end }}
