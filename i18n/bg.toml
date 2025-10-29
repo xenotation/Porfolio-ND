@@ -35,6 +35,8 @@
 [legend_work]  
   other = "самостоятелни (s) / колаб. (c)"
 [portfolio]
-    other = "Портфолио (PDF)"
+  other = "Портфолио (PDF)"
 [earlier]
-    other = "По-рано"
+  other = "По-рано"
+[artistPortfolio]
+  other = "Артистично портфолио"
