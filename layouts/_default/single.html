@@ -19,11 +19,14 @@
 <!-- JSON-LD: WebPage + Event + Person + Images + Breadcrumbs -->
 <!-- EXHIBITION JSON-LD (minimal but complete) -->
 <script type="application/ld+json">
-  {{- /* Build a simple ExhibitionEvent with images + works */ -}}
-  {{- $mediums := .Params.medium | default (slice) -}}
-  {{- $keywords := cond (gt (len $mediums) 0) (delimit $mediums ", ") "" -}}
+  {{- /* ===== Simple ExhibitionEvent JSON-LD (no @graph/@id) ===== */ -}}
   
-  {{- /* Collect image URLs: hero + all non-hero gallery images (1600px) */ -}}
+  {{- /* Mediums / keywords */ -}}
+  {{- $mediums := .Params.medium | default (slice) -}}
+  {{- $keywords := "" -}}
+  {{- if gt (len $mediums) 0 }}{{ $keywords = delimit $mediums ", " }}{{ end -}}
+  
+  {{- /* Collect image URLs: hero + gallery (1600px) */ -}}
   {{- $imgURLs := slice -}}
   {{- with .Resources.GetMatch "hero.*" }}{{ $imgURLs = $imgURLs | append .Permalink }}{{ end -}}
   {{- range $i, $res := .Resources.Match "*.*" -}}
@@ -51,23 +54,35 @@
     {{- end -}}
   {{- end -}}
   
-  {{- /* Location (simple) */ -}}
-  {{- $location := dict "@type" "Place" "name" (.Params.place | default "") -}}
-  
-  {{- dict
-    "@context" "https://schema.org"
-    "@type"    "ExhibitionEvent"
-    "name"     .Title
-    "url"      (.Params.canonical | default .Permalink)
+  {{- /* Base event dict */ -}}
+  {{- $event := dict
+    "@context"   "https://schema.org"
+    "@type"      "ExhibitionEvent"
+    "name"       .Title
+    "url"        (.Params.canonical | default .Permalink)
     "description" (.Params.description | default .Summary)
-    "startDate" (with .Params.datestart (time . | time.Format "2006-01-02T15:04:05Z07:00"))
-    "endDate"   (with .Params.dateend   (time . | time.Format "2006-01-02T15:04:05Z07:00"))
-    "location"  $location
-    "keywords"  $keywords
-    "image"     $imgURLs
+    "keywords"   $keywords
+    "image"      $imgURLs
     "workFeatured" $works
-  | jsonify }}
+  -}}
+  
+  {{- /* Optional dates */ -}}
+  {{- with .Params.datestart -}}
+    {{- $event = merge $event (dict "startDate" (time . | time.Format "2006-01-02T15:04:05Z07:00")) -}}
+  {{- end -}}
+  {{- with .Params.dateend -}}
+    {{- $event = merge $event (dict "endDate" (time . | time.Format "2006-01-02T15:04:05Z07:00")) -}}
+  {{- end -}}
+  
+  {{- /* Optional location (simple) */ -}}
+  {{- with .Params.place -}}
+    {{- $loc := dict "@type" "Place" "name" . -}}
+    {{- $event = merge $event (dict "location" $loc) -}}
+  {{- end -}}
+  
+  {{- $event | jsonify -}}
   </script>
+  
   
   
   
