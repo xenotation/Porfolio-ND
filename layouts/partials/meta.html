@@ -1,4 +1,4 @@
-    <!-- META TAGS -->
+<!-- META TAGS -->
     <meta property="og:type" content="website" />
 <!-- Lang -->
     <meta name="language" content="{{ .Site.Language.Lang | default "en" }}">
@@ -24,7 +24,6 @@
 
   <meta content="{{ delimit .Keywords ", " }}" name="keywords">
 
-
 <!-- Alternative Links for lang and self refrenccing? -->
     {{ if .IsTranslated }}
     {{ range .Translations }}
@@ -46,8 +45,6 @@
     <meta name="twitter:image" content="/images/alt-hero.webp" />
     <meta name="twitter:image:src" content="/images/alt-hero.webp" />
 {{ end }}
-
-
 
 <!-- Crawler Validations -->
     <meta name="facebook-domain-verification" content="e32nq2r1prpftlqhvybiq5z9k3upia" />

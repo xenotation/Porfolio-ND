@@ -22,16 +22,7 @@ keywordsBg = [
   "видео инсталация",
   "дигитална топография"
 ]
-press = [
-  { name = "Bulgarian National Television", url = "https://bnt.bg/news/izlozhbata-nature-morte-v-gyote-institut-v347709-319285news.html" },
-  { name = "Bulgarian National Radio", url = "https://bnr.bg/horizont/post/101854514/nature-morte-tvorcheski-pogled-kam-vagledobivnata-industria" },
-  { name = "Bloomberg TV", url = "https://www.bloomberg.com/europe" },
-  { name = "Darik Radio", url = "https://darik.bg/nature-morte-edin-po-razlichen-pogled-kam-tec-marica-iztok" },
-  { name = "Bulgarian Telegraph Agency", url = "https://www.bta.bg/bg/news/lik/491946-diskusiya-na-tema-vaglishtna-tropika-razglezhda-dobiva-na-ruda-i-kak-vdahnovya" },
-  { name = "Impressio", url = "https://impressio.dir.bg/photography/vaglishtna-tropika-v-gyote-institut-i-ko-op" },
-  { name = "Boy Scout Magazine", url = "https://boyscoutmag.com/2023/07/kakvo-da-pravim-v-sofia-prez-july-2/" },
-  { name = "Artnews Cafe", url = "https://openartfiles.bg/openartfiles.bg/public/bg/artnewscafebulletin" }
-]
+
 +++
 
 Nature Morte е мултимедиен проект, който поставя геофилософския въпрос на терен - върху част от критичната инфраструктура на страната, където достъпът е силно ограничен. В опит да се намерят различни подходи за достигане до земния изкоп и неговото визуализиране са използвани отворени данни от сателитни и геоложки изследвания и измервания, чрез които е изградена дигиталната топографията на мините.
@@ -40,22 +31,9 @@ Nature Morte е мултимедиен проект, който поставя �
 
 Копия от съпътстващото издание може да намерите в [The Kopy Shop](https://www.thekopy.shop/product/nature-morte)
 
+Изложбата беше осъществена с подкрепата на [Гьоте Институт България](https://www.goethe.de/ins/bg/en/ver.cfm?event_id=24801982) and и допъллнителна подкрепа от [Фондация "Singer-Zahariev"](https://singer-zahariev.eu/projects/nature-morte-opening-at-goethe-institute/).
+
 ## Съпътсващи събития
 [Като част от изложбата "to slip, to slide, to glitch"](https://www.galeriefutura.de/en/larisa-crunteanu-sonja-hornung-to-slip-to-slide-to-glitch/), 03.06-12.07.24 | Галерия Futura, Берлин, Германия
 
 [Прожекция на NATURE MORTE като част от VideoArt Garden](https://timisoara2023.eu/ro/evenimente/coatings-videoart-garden/), 14-17.09.23 | Timisoara, Romania
-
-## Критика
-[“Към една геософия на бедствието”](https://culturecenter-su.org/philip-stoilov-nature-morte/)<br>
-Филип Стоилов | Културен Център към Университет  “Св. Климент Охридски”
-
-[“Kintsugi. Dealing with trauma in the summer of 2023”](https://culturecenter-su.org/kritika-x-3-june2023-boyana-dzhikova/)<br>
-Бояна Джикова | Културен Център към Университет  “Св. Климент Охридски”
-
-[“Observing the Geotraumatic Lines of Flight On Terrain”](https://culturecenter-su.org/wp-content/uploads/2023/10/programme-2023.pdf)”
-<br>
-Hristo Kaloyanov | доклад за конференция “CULTURE, INFRASTRUCTURE, MOBILITY” организирана от Лайбниц Институт и Културен Център Софийски Университет
-
-&nbsp;
-
-Изложбата беше осъществена с подкрепата на [Гьоте Институт България](https://www.goethe.de/ins/bg/en/ver.cfm?event_id=24801982) and и допъллнителна подкрепа от [Фондация "Singer-Zahariev"](https://singer-zahariev.eu/projects/nature-morte-opening-at-goethe-institute/).

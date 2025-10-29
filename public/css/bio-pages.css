@@ -1,0 +1,245 @@
+/* /////////////////////////////////////////////////////////
+//  about, writing, critique, translation, press. misc    //
+///////////////////////////////////////////////////////// */
+
+/* ================= BIO: hero “eye” + body text ================ */
+
+.eye{
+  position: relative;
+  width: 23rem;
+  margin: 0 0 -2.6rem 0;
+  justify-self: start;
+  pointer-events: none;
+}
+.eye img{ display:block; width:100%; height:auto; }
+.eye-base{ position: relative; z-index: 1; }
+.eye-pupil{
+  position: absolute; inset: 0; z-index: 2;
+  pointer-events: none;
+  transform: translate3d(0,0,0);
+  will-change: transform;
+}
+
+.about-meta{ margin: 0 0 2.3rem 0; }
+
+.about-body .about-text{
+  max-width: 32rem;
+  text-align: justify;
+  hyphens: auto;
+  line-height: 1.5;
+  font-family: var(--font-body);
+  font-size: var(--size-0);
+  letter-spacing: 0.02rem;
+  text-wrap: pretty;
+}
+.about-body .about-text p{
+  margin: 0 0 1.2em 0;
+  break-inside: avoid;
+  orphans: 2;
+  widows: 2;
+}
+
+/* ================= Writing (single-column list) ================ */
+
+.container--writing.about-wrap{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: 1.2em 1.2em;
+  grid-template-areas: "about-body";
+  align-items: start;
+  overflow: visible;
+}
+.container--writing .about-body{
+  grid-area: about-body;
+  grid-column: 1 / -1 !important;
+  justify-self: start;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+.container--writing .writing-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: .8rem;
+}
+
+/* Year headers (use UI font + scale) */
+.container--writing .press-year,
+.container--writing .press-year-older{
+  grid-column: 1 / -1;
+  margin: 1.2rem 0 .2rem;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  font-size: var(--size-1);
+  color: var(--muted);
+  letter-spacing: .02em;
+}
+.container--writing .press-year-older{ margin-top: 2rem; opacity: .85; }
+.container--writing .writing-list > .press-year:first-child{ margin-top: 0; }
+
+.container--writing .press-item{ margin: 0; }
+.container--writing .press-titleline{
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.25;
+  font-family: var(--font-ui);
+  font-size: var(--size-1);
+}
+.container--writing .press-link{
+  color: var(--text);
+  text-decoration: none;
+}
+.container--writing .press-link:hover{
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.container--writing .press-author{
+  margin: .1rem 0 .2rem 0;
+  font-family: var(--font-ui);
+  font-size: var(--size-5);
+}
+.container--writing .press-desc{
+  margin-top: .2rem;
+  color: var(--muted);
+  line-height: 1.4;
+  max-width: 42rem;
+}
+
+/* ===================== Press page (two-column) ================= */
+
+.page-heading{
+  margin: 0 0 3.6em 0;
+  font-family: var(--font-ui);
+  font-size: var(--size-1);
+  letter-spacing: .02em;
+  position: sticky;
+  top: 1rem;
+  z-index: 2;
+  background: var(--bg);
+}
+
+.container--press.about-wrap{
+  display: grid;
+  grid-template-columns: 0.4fr 1fr;
+  grid-template-rows: auto;
+  gap: 1.2em 1.2em;
+  grid-template-areas: "about-body about-body";
+  align-items: start;
+  overflow: visible;
+}
+.container--press .about-body{
+  grid-area: about-body;
+  grid-column: 1 / -1 !important;
+  justify-self: start;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* Two-column list measured in characters for tidy wrap */
+.container--press .press-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 30ch 30ch;
+  column-gap: 1.25rem;
+  row-gap: .8rem;
+}
+
+.container--press .press-year{
+  grid-column: 1 / -1;
+  margin: 1.2rem 0 .2rem;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  font-size: var(--size-1);
+  color: var(--muted);
+  letter-spacing: .02em;
+}
+.container--press .press-year--older{ margin-top: 2rem; opacity: .85; }
+
+.container--press .press-item{ margin: 0; }
+.container--press .press-titleline{
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.25;
+  font-family: var(--font-ui);
+  font-size: var(--size-1);
+}
+.container--press .press-link{
+  color: var(--text);
+  text-decoration: none;
+}
+.container--press .press-link:hover{
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.container--press .press-desc{
+  margin-top: .2rem;
+  color: var(--muted);
+  max-width: 34ch;
+  line-height: 1.4;
+}
+.container--press .press-list > .press-year:first-child{ margin-top: 0; }
+
+.container--writing .press-in{
+  margin-top: .15rem;
+  color: var(--text);
+  font-family: var(--font-ui);
+  line-height: 1.35;
+}
+
+/* ============================ Misc ============================ */
+
+.incostruction{
+  display: block;
+  width: 6rem;
+  height: auto;
+  margin: 0 0 3rem 0;
+}
+
+/* ========================== Mobile =========================== */
+
+@media (max-width: 860px){
+  .about-body .about-text{ max-width: 100%; }
+
+  .eye{
+    width: 100%;
+    margin: 0 0 -1.4rem 0;
+  }
+
+  .page-heading{
+    margin: 0 0 1.8em 0;
+    top: 1rem;
+    background: var(--bg);
+    z-index: 2;
+  }
+
+  .about-meta{ margin: 0 0 1.6rem 0; }
+
+  /* Make the meta list behave like two thin columns on phones */
+  .about-meta.container--press .press-list{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: .6rem;
+    column-gap: 0rem;
+  }
+  .about-meta.container--press .press-item{ margin: 0; }
+  .about-meta.container--press .press-titleline{
+    font-size: var(--size-0);
+    line-height: 1.25;
+    margin: 0;
+  }
+  .press-item{ max-width: 80vw; }
+}
+
+/* Ultra-narrow phones */
+@media (max-width: 420px){
+  .about-meta.container--press .press-list{
+    grid-template-columns: 1fr;
+  }
+}

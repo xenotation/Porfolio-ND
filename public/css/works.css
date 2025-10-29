@@ -1,0 +1,124 @@
+.gallery{
+  padding: 0 12rem var(--outer-m) var(--outer-m);
+}
+
+.gallery-heading{
+  margin: 0 0 3.6em 0;
+  font-family: var(--font-ui);
+  font-size: var(--size-1);
+  letter-spacing: .02em;
+  position: sticky;
+  top: 0.6rem;
+  z-index: 2;
+  background: var(--bg, #fff);
+}
+
+/* one exhibition row */
+.exhibit{
+  display: grid;
+  grid-template-columns: 23rem 18rem 1fr;
+  gap: 2rem 2.6rem;
+  align-items: start;
+  margin: 0 0 2.3rem 0;
+}
+
+.exhibit-meta {
+  max-width: 18rem;
+}
+
+.exhibit-media img{
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.exhibit-title{
+  margin: 0 0 .6rem 0;
+  font-family: var(--font-ui);
+  font-size: var(--size-1);
+  font-weight: 700;
+}
+
+.exhibit-title a{
+  color: var(--text);
+  text-decoration: none;
+}
+
+.exhibit-address{
+  font-family: var(--font-ui);
+  line-height: 1.35;
+}
+
+.exhibit-date{
+  margin-top: .8rem;
+  font-family: var(--font-ui);
+  color: var(--text);
+}
+
+.exhibit-about{
+  margin: 0 0 .35rem 0;
+  font-family: var(--font-ui);
+  font-size: var(--size-5);
+  letter-spacing: .03em;
+}
+
+.exhibit-desc p{
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.45;
+  max-width: auto;
+  text-align: justify;
+  hyphens: auto;              /* standard */
+  -webkit-hyphens: auto;      /* Safari/iOS */
+  -ms-hyphens: auto;          /* old Edge */
+
+  /* safe wrapping fallback */
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+
+/* responsive: stack columns on small screens */
+@media (max-width: 860px){
+  .mobile-nav{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .35rem;
+  }
+
+  /* align the toggle with the content column (same as .gallery left padding) */
+  .mobile-nav{
+    position: fixed;                      /* keep it pinned */
+    inset-inline-start: var(--outer-m);   /* flush with first image */
+  }
+  .exhibit{
+    grid-template-columns: 1fr;
+  }
+
+  .gallery{
+    padding: 0 1.2rem var(--outer-m) var(--outer-m);
+  }
+  .exhibit { 
+    gap: 1rem 0; 
+  } /* row-gap 2rem, column-gap 2.6rem */
+
+  /* NEW BY ME */
+  .gallery-heading {
+    margin: 0 0 1.8em 0;
+  }
+
+.exhibit-meta {
+  max-width: 21rem;
+}
+
+  .exhibit-date {
+    margin-top: 0;
+  }
+
+  .exhibit-desc {
+    margin-top: 0;
+  }
+}

@@ -152,11 +152,6 @@
     gap: .5rem;
     align-items: baseline;
   }
-  .m{
-    font-family: var(--font-ui);
-    color: var(--text);
-    font-size: .85rem;
-  }
   .work li a{
     justify-self: start;
     width: fit-content;

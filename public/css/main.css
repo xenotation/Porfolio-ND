@@ -1,0 +1,321 @@
+/* ================================
+  Tokens & Fonts
+================================ */
+:root{
+  /* layout */
+  --menu-w: 30rem;
+  --brand-h: 4rem;
+  --outer-m: 1rem;
+
+  /* type scale (from your old setup) */
+  --size-0: 1.20rem;   /* base paragraph size */
+  --size-1: 1.248rem;  /* h3 */
+  --size-2: 1.296rem;  /* spare step */
+  --size-3: 1.23rem;   /* h2 */
+  --size-4: 1.344rem;  /* h1 */
+  --size-5: 1.08rem;   /* small text, captions */
+
+  /* colors */
+  --text: #111;
+  --muted: #666;
+  --bg: #fff;
+  --primary-color: #cec7f5;
+
+  /* nav indents */
+  --indent-1: 1.2rem;
+  --indent-2: 1.6rem;
+
+  /* fonts + fallbacks */
+  --ff-fallback-serif: Georgia, "Times New Roman", Times, serif;
+  --ff-fallback-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: "STIX Two Text", var(--ff-fallback-serif);
+  --font-ui: "Comfortaa", var(--ff-fallback-sans);
+}
+
+/* STIX Two Text (regular) */
+@font-face{
+  font-family: "STIX Two Text";
+  src: url("/fonts/stix-two-text-v12-cyrillic_latin-regular.woff2") format("woff2"),
+       url("/fonts/stix-two-text-v12-cyrillic_latin-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Comfortaa (regular) */
+@font-face{
+  font-family: "Comfortaa";
+  src: url("/fonts/comfortaa-v45-cyrillic_latin-regular.woff2") format("woff2"),
+       url("/fonts/comfortaa-v45-cyrillic_latin-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Comfortaa (bold) */
+@font-face{
+  font-family: "Comfortaa";
+  src: url("/fonts/comfortaa-v45-cyrillic_latin-700.woff2") format("woff2"),
+       url("/fonts/comfortaa-v45-cyrillic_latin-700.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ================================
+  Base / Typography (site-wide)
+================================ */
+
+/* Reset */
+html, body{ margin: 0; padding: 0; }
+
+/* Baseline sizing & smooth scroll */
+html{ 
+  font-size: 16px;              /* your baseline */
+  scroll-behavior: smooth; 
+}
+
+body{
+  background: var(--bg);
+  color: var(--text);
+  padding: var(--outer-m);
+  font-family: var(--font-body);
+  font-size: var(--size-0);     /* 1.20rem */
+  line-height: 1.4rem;          /* from old p rule */
+  hyphens: auto;
+  letter-spacing: 0.05rem;
+
+  /* Hide vertical scrollbar track, keep scroll */
+  overflow-y: scroll;
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE/Edge legacy */
+}
+body::-webkit-scrollbar{ width: 0; height: 0; } /* WebKit */
+
+/* Headings — from your old sizes */
+h1{
+  font-family: var(--font-ui);
+  font-size: var(--size-4);     /* 1.344rem */
+  margin: 0;
+}
+h2{
+  font-family: var(--font-ui);
+  font-size: var(--size-3);     /* 1.23rem */
+  margin: 0 0 .5rem 0;
+}
+h3{
+  font-family: var(--font-ui);
+  font-size: var(--size-1);     /* 1.248rem */
+  margin: 0 0 .5rem 0;
+}
+h4{ font-size: 1rem; margin: 0 0 .5rem 0; }
+
+/* Paragraphs */
+p{
+  font-family: var(--font-body);
+  font-weight: 530;             /* as you had it */
+  font-size: var(--size-0);
+  hyphens: auto;
+  margin: 0 0 .5rem 0;
+  line-height: 1.4rem;
+}
+
+/* Links */
+a{
+  color: var(--text);
+  /* text-decoration: none;  (kept commented like your old CSS) */
+}
+main a{
+  background-image: linear-gradient(transparent, var(--primary-color), transparent);
+}
+
+/* Selection */
+::selection{
+  color: var(--text);
+  background: var(--primary-color);
+}
+
+/* Page load animation (from old CSS) */
+body{ animation: pageloadIn .80s cubic-bezier(0.25, 0.1, 0.25, 1); }
+@keyframes pageloadIn{
+  0%{ filter: blur(23px) contrast(20); }
+  100%{ filter: blur(0) contrast(1); }
+}
+
+/* ================================
+  Two–column layout
+================================ */
+.layout{
+  display: grid;
+  grid-template-columns: var(--menu-w) 1fr;
+  column-gap: var(--outer-m);
+}
+
+/* ================================
+  Lander / video background
+================================ */
+.stage{ position: relative; height: auto; }
+.video-container,
+.bgvid{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.video-container {
+  overflow: hidden;
+}
+
+.video-container video,
+.video-container img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* fill without letterboxing */
+}
+/* ================================
+  Effects (incl. your blurAnimation)
+================================ */
+a:hover{ animation: blurAnimation 2s ease-in-out; }
+@keyframes blurAnimation{
+  0%{ filter: blur(0) contrast(1); opacity: 100%; }
+  36%{ filter: blur(5px) contrast(150); opacity: 13%; }
+  40%{ filter: blur(20px) contrast(80); opacity: 100%; }
+  70%{ filter: blur(0) contrast(1); }
+}
+
+/* film grain overlay */
+.bg{
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200vh;
+  background: transparent url('/noise-transparent.png') repeat 0 0;
+  animation: bg-animation .2s infinite;
+  opacity: .55;
+  pointer-events: none;
+  z-index: 100;
+  will-change: transform;
+}
+@keyframes bg-animation{
+  0%{ transform: translate(0,0) }
+  10%{ transform: translate(-5%,-5%) }
+  20%{ transform: translate(-10%,5%) }
+  30%{ transform: translate(5%,-10%) }
+  40%{ transform: translate(-5%,15%) }
+  50%{ transform: translate(-10%,5%) }
+  60%{ transform: translate(15%,0) }
+  70%{ transform: translate(0,10%) }
+  80%{ transform: translate(-15%,0) }
+  90%{ transform: translate(10%,5%) }
+  100%{ transform: translate(5%,0) }
+}
+
+/* brand text animation support */
+.brand .dud{ color: var(--muted); }
+
+/* ================================
+  Misc / 404
+================================ */
+.FourOhFourCentered{
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.ascii-art{
+  white-space: pre;
+  font-family: monospace;
+  font-size: 1.2rem;
+  line-height: 1;
+  margin: 0 6rem 0 0;
+  padding: 0;
+  text-align: center;
+  color: var(--text);
+}
+.ascii-art a{
+  background-image: none;
+  text-decoration: none;
+  animation: blurAnimation 5s infinite;
+}
+@media screen and (max-width: 768px){
+  .ascii-art{
+  display:block;
+  position: fixed;
+  font-size: 0.4rem; 
+  margin: 12rem 2rem 0 0;
+}
+}
+
+/* ================================
+  About / Bio (unchanged)
+================================ */
+.exhb-medium{
+  grid-area: exhb-medium;
+  display: grid;
+  grid-template-columns: auto auto; /* socials | pdfs */
+  column-gap: 2rem;
+  align-content: start;
+  justify-items: start;
+}
+.contact-col, .docs-col{ display: flex; flex-direction: column; gap: .4rem; }
+.exhb-medium a{
+  color: var(--text);
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-size: var(--size-0);
+}
+.exhb-medium a:hover{ text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 860px){
+  .exhb-medium{ grid-template-columns: 1fr; row-gap: .6rem; }
+}
+
+/* ================================
+  MOBILE (keep your current tweaks)
+================================ */
+@media (max-width: 860px){
+  .layout{
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+  body{ padding: 0 2rem 2rem 3.3rem; }
+  .stage{ min-height: 100dvh; }
+  .video-container{
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  .video-container video,
+  .video-container img,
+  .video-container.bgvid,
+  .bgvid{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .frame-overlay{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    box-shadow: 0 0 0 0.7rem rgba(255,255,255,1) inset;
+  }
+}
+
+/* ================================
+  Frame overlay (desktop)
+================================ */
+.frame-overlay{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  box-shadow: 0 0 0 var(--outer-m) rgba(255,255,255,1) inset;
+}

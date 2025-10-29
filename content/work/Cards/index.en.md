@@ -55,17 +55,9 @@ Archaeography is the technique through which the negative image of history is to
 The contraband that should remain hidden by design, and the organization behind it, remain only partially captured to this day. Could these testimonies, then, as the postcard is a well-known and well-researched artifact of ephemeral intimately personal memory, reveal what has become of state memory? Hence, "Postcards and Contraband" traces various scars of both the border, its customs and passing goods, and the memory that the archival image transits, as active agency in the present.
 <!-- add other header and the talk and after that the showing at sofia, say who the talk was with -->
 
-&nbsp;
-
 Copies of the accompanying book, designed by [Zahary Dimitrov](https://zahari.xyz/postcards/) can be purchased at: [The Kopy Shop](https://www.thekopy.shop/product/%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D1%87%D0%BA%D0%B8-%D0%B8-%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%B0%D0%B1%D0%B0%D0%BD%D0%B4%D0%B0)
 
-&nbsp;
+The project was supported by Varna’s Municipal Culture Fund and ReBonkers, Varna.
 
 ## Supporting events
 Talk with the head of drug smuggling prevention in the Bulgarian Customs Agency 
-
-## Coverage
-
-&nbsp;
-
-The project was supported by Varna’s Municipal Culture Fund and ReBonkers, Varna.

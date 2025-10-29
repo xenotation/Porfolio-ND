@@ -97,6 +97,23 @@
   <div class="exhb-body">
     <div class="exhb-text">{{ .Content }}</div>
 
+    {{ if gt (len $critFor) 0 }}
+    <section>
+      <h2>{{ T "critique" | default (cond $isBG "Критика" "Critique") }}</h2>
+
+        {{ range $c := $critFor }}
+          {{ $title := cond $isBG (or $c.namebg $c.nameen) (or $c.nameen $c.namebg) }}
+          {{ $desc  := cond $isBG (or $c.descriptionbg $c.descriptionen) (or $c.descriptionen $c.descriptionbg) }}
+          {{ $auth  := cond $isBG (or $c.authorbg $c.authoren) (or $c.authoren $c.authorbg) }}
+
+            <a href="{{ $c.url }}" target="_blank" rel="noopener">{{ $title }}</a>{{ with $auth }} - {{ . }}{{ end }}
+            {{ with $desc }}<div>{{ . }}</div>{{ end }}
+
+        {{ end }}
+
+    </section>
+    {{ end }}
+
     {{ if gt (len $pressFor) 0 }}
     <section>
       <h2>{{ T "press" | default (cond $isBG "Медийно покритие" "Press") }}</h2>
@@ -108,23 +125,6 @@
         {{ end }}
         {{ delimit $links ", " | safeHTML }}
       </p>
-    </section>
-    {{ end }}
-
-    {{ if gt (len $critFor) 0 }}
-    <section>
-      <h2>{{ T "critique" | default (cond $isBG "Критика" "Critique") }}</h2>
-      <ul>
-        {{ range $c := $critFor }}
-          {{ $title := cond $isBG (or $c.namebg $c.nameen) (or $c.nameen $c.namebg) }}
-          {{ $desc  := cond $isBG (or $c.descriptionbg $c.descriptionen) (or $c.descriptionen $c.descriptionbg) }}
-          {{ $auth  := cond $isBG (or $c.authorbg $c.authoren) (or $c.authoren $c.authorbg) }}
-          <li>
-            <a href="{{ $c.url }}" target="_blank" rel="noopener">{{ $title }}</a>{{ with $auth }} - {{ . }}{{ end }}
-            {{ with $desc }}<div class="m">{{ . }}</div>{{ end }}
-          </li>
-        {{ end }}
-      </ul>
     </section>
     {{ end }}
 
@@ -173,8 +173,6 @@
     </div>
   </div>
 </div>
-
-<a href="#" class="scroll-to-top">↑</a>
 
 <script type="module">
   import PhotoSwipeLightbox from "/js/photoswipe-lightbox.esm.js";
