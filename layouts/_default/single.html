@@ -14,24 +14,121 @@
 {{ $pressFor := where $pressAll "exhibition" $exhKey }}
 {{ $critFor  := where $critAll  "exhibition" $exhKey }}
 
-{{/* Event JSON-LD with @id so images can reference it */}}
-{{ $loc := dict "@type" "Place" "name" .Params.place "address" (dict "@type" "PostalAddress" "addressLocality" .Params.location) }}
-{{ $org := dict "@type" "Person" "name" .Site.Params.name "alternateName" .Site.Params.alternateName "jobTitle" .Site.Params.jobTitle "description" .Site.Params.description "url" .Site.Params.organizerUrl }}
-{{ $per := dict "@type" "Person" "name" .Site.Params.name "alternateName" .Site.Params.alternateName }}
+{{/* Build sameAs from socials + params_sameas_other (no mailto) */}}
+{{- $sameAs := slice -}}
+{{- with .Site.Params.social.instagram }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with .Site.Params.social.facebook  }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with .Site.Params.social.youtube   }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with .Site.Params.params_sameas_other -}}
+  {{- range . }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- end -}}
+
+{{/* Dates (ISO 8601 with TZ) */}}
+{{ $start := cond (isset .Params "datestart") (.Params.datestart | time.AsTime) nil }}
+{{ $end   := cond (isset .Params "dateend")   (.Params.dateend   | time.AsTime) nil }}
+
+{{/* Location */}}
+{{ $placeName := .Params.place }}
+{{ $locality  := .Params.location }}
+{{ $loc := dict
+  "@type" "Place"
+  "name"  $placeName
+  "address" (dict "@type" "PostalAddress" "addressLocality" $locality)
+}}
+
+{{/* Organizer (Person: Nikola Stoyanov from language params) */}}
+{{ $personName   := or .Site.Language.Params.name .Site.Params.name }}
+{{ $altName      := or .Site.Language.Params.alternateName .Site.Params.alternateName }}
+{{ $jobTitle     := or .Site.Language.Params.jobTitle .Site.Params.jobTitle }}
+{{ $profileImage := or .Site.Language.Params.profileImage .Site.Params.profileImage }}
+{{ if $profileImage }}{{ $profileImage = $profileImage | absURL }}{{ end }}
+
+{{ $organizer := dict
+  "@type" "Person"
+  "name"  $personName
+  "alternateName" $altName
+  "jobTitle" $jobTitle
+  "url"   .Site.BaseURL
+  "nationality" "Bulgarian"
+  "knowsLanguage" (slice "bg-BG" "en")
+}}
+{{ if $profileImage }}{{ $organizer = merge $organizer (dict "image" $profileImage) }}{{ end }}
+{{ if gt (len $sameAs) 0 }}{{ $organizer = merge $organizer (dict "sameAs" $sameAs) }}{{ end }}
+
+{{/* Keywords from medium list */}}
+{{ $keywords := "" }}
+{{ with .Params.medium }}{{ $keywords = delimit . ", " }}{{ end }}
+
+{{/* Gather images + build per-work CreativeWorks */}}
+{{ $images := slice }}
+{{ $works  := slice }}
+{{ $resources := .Resources.Match "*.*" }}
+{{ range $index, $resource := $resources }}
+  {{ if and (in $resource.MediaType.Type "image") (ne $resource.Name "hero.webp") }}
+    {{ $title := index $.Params.imgNames $index | default "" }}
+    {{ $desc  := index $.Params.imgDescrps $index | default "" }}
+    {{ $large := $resource.Resize "1600x" }}
+    {{ $fmt   := printf "%s/%s" $resource.MediaType.Type $resource.MediaType.SubType }}
+
+    {{ $images = $images | append $large.Permalink }}
+
+    {{ $imgObj := dict
+      "@type"         "ImageObject"
+      "url"           $large.Permalink
+      "contentUrl"    $large.Permalink
+      "caption"       $desc
+      "encodingFormat" $fmt
+    }}
+
+    {{ $work := dict
+      "@type"       "CreativeWork"
+      "name"        $title
+      "description" $desc
+      "creator"     $organizer
+      "image"       $imgObj
+    }}
+
+    {{ $works = $works | append $work }}
+  {{ end }}
+{{ end }}
+
+{{/* Hero image (optional) */}}
+{{ $hero := .Resources.GetMatch "hero.webp" }}
+{{ if $hero }}{{ $images = $images | append $hero.Permalink }}{{ end }}
+
+{{/* EVENT: Use schema.org/Event (Google rich results) and include images + works */}}
 {{ $event := dict
   "@context" "https://schema.org"
-  "@type" "ExhibitionEvent"
-  "@id" "#exhibition"
+  "@type" "Event"
+  "@id" (print .Permalink "#event")
   "name" .Title
-  "description" .Params.description
+  "description" (default .Summary .Params.description)
+  "eventStatus" "https://schema.org/EventScheduled"
   "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
+  "url" .Permalink
   "location" $loc
-  "organizer" $org
-  "performer" $per
+  "organizer" $organizer
+  "keywords" $keywords
 }}
-{{ if .Params.datestart }}{{ $event = merge $event (dict "startDate" (dateFormat "2006-01-02T15:04:05Z" .Params.datestart)) }}{{ end }}
-{{ if .Params.dateend   }}{{ $event = merge $event (dict "endDate"   (dateFormat "2006-01-02T15:04:05Z" .Params.dateend))   }}{{ end }}
-<script type="application/ld+json">{{ $event | jsonify }}</script>
+{{ if $start }}{{ $event = merge $event (dict "startDate" ($start | time.Format "2006-01-02T15:04:05Z07:00")) }}{{ end }}
+{{ if $end   }}{{ $event = merge $event (dict "endDate"   ($end   | time.Format "2006-01-02T15:04:05Z07:00")) }}{{ end }}
+{{ if gt (len $images) 0 }}{{ $event = merge $event (dict "image" $images) }}{{ end }}
+{{ if gt (len $works) 0  }}{{ $event = merge $event (dict "workFeatured" $works) }}{{ end }}
+
+<script type="application/ld+json">{{ $event | jsonify | safeHTML }}</script>
+
+{{/* BreadcrumbList (Home → Exhibitions → This page) */}}
+<script type="application/ld+json">
+{{ dict
+  "@context" "https://schema.org"
+  "@type" "BreadcrumbList"
+  "itemListElement" (slice
+    (dict "@type" "ListItem" "position" 1 "name" "Home"        "item" .Site.BaseURL)
+    (dict "@type" "ListItem" "position" 2 "name" "Exhibitions" "item" (absURL "work/"))
+    (dict "@type" "ListItem" "position" 3 "name" .Title        "item" .Permalink)
+  )
+| jsonify | safeHTML }}
+</script>
 
 <div class="container">
   <div class="exhb-hero" id="hero-content"></div>
@@ -100,17 +197,13 @@
     {{ if gt (len $critFor) 0 }}
     <section>
       <h2>{{ T "critique" | default (cond $isBG "Критика" "Critique") }}</h2>
-
-        {{ range $c := $critFor }}
-          {{ $title := cond $isBG (or $c.namebg $c.nameen) (or $c.nameen $c.namebg) }}
-          {{ $desc  := cond $isBG (or $c.descriptionbg $c.descriptionen) (or $c.descriptionen $c.descriptionbg) }}
-          {{ $auth  := cond $isBG (or $c.authorbg $c.authoren) (or $c.authoren $c.authorbg) }}
-
-            <a href="{{ $c.url }}" target="_blank" rel="noopener">{{ $title }}</a>{{ with $auth }} - {{ . }}{{ end }}
-            {{ with $desc }}<div>{{ . }}</div>{{ end }}
-
-        {{ end }}
-
+      {{ range $c := $critFor }}
+        {{ $title := cond $isBG (or $c.namebg $c.nameen) (or $c.nameen $c.namebg) }}
+        {{ $desc  := cond $isBG (or $c.descriptionbg $c.descriptionen) (or $c.descriptionen $c.descriptionbg) }}
+        {{ $auth  := cond $isBG (or $c.authorbg $c.authoren) (or $c.authoren $c.authorbg) }}
+        <a href="{{ $c.url }}" target="_blank" rel="noopener">{{ $title }}</a>{{ with $auth }} - {{ . }}{{ end }}
+        {{ with $desc }}<div>{{ . }}</div>{{ end }}
+      {{ end }}
     </section>
     {{ end }}
 
@@ -130,44 +223,30 @@
 
     {{/* --- Gallery (captions only in lightbox) --- */}}
     <div id="my-gallery" class="masonry-grid">
-      {{ $resources := .Resources.Match "*.*" }}
       {{ range $index, $resource := $resources }}
         {{ $title := index $.Params.imgNames $index | default "" }}
         {{ $description := index $.Params.imgDescrps $index | default "" }}
-        {{ if in $resource.MediaType.Type "image" }}
-          {{ if ne $resource.Name "hero.webp" }}
-            {{ $thumb := $resource.Resize "420x" }}
-            {{ $large := $resource.Resize "1600x" }}
+        {{ if and (in $resource.MediaType.Type "image") (ne $resource.Name "hero.webp") }}
+          {{ $thumb := $resource.Resize "420x" }}
+          {{ $large := $resource.Resize "1600x" }}
 
-            <a
-              class="spotlight"
-              href="{{ $large.RelPermalink }}"
-              data-pswp-width="{{ $large.Width }}"
-              data-pswp-height="{{ $large.Height }}"
-              data-pswp-title="{{ $title }}"
-              data-pswp-desc="{{ $description }}"
-              aria-label="{{ $title }}"
-            >
-              <img
-                src="{{ $thumb.RelPermalink }}"
-                alt="{{ $title }}"
-                title="{{ $description }}"
-                class="gallery-image"
-                loading="lazy"
-              />
-            </a>
-
-            {{/* JSON-LD: image is about this exhibition */}}
-            <script type="application/ld+json">{{ dict
-              "@context" "https://schema.org"
-              "@type" "ImageObject"
-              "url"        $large.Permalink
-              "contentUrl" $large.Permalink
-              "name"       $title
-              "description" $description
-              "about"      (dict "@id" "#exhibition")
-            | jsonify }}</script>
-          {{ end }}
+          <a
+            class="spotlight"
+            href="{{ $large.RelPermalink }}"
+            data-pswp-width="{{ $large.Width }}"
+            data-pswp-height="{{ $large.Height }}"
+            data-pswp-title="{{ $title }}"
+            data-pswp-desc="{{ $description }}"
+            aria-label="{{ $title }}"
+          >
+            <img
+              src="{{ $thumb.RelPermalink }}"
+              alt="{{ $title }}"
+              title="{{ $description }}"
+              class="gallery-image"
+              loading="lazy"
+            />
+          </a>
         {{ end }}
       {{ end }}
     </div>
@@ -176,71 +255,32 @@
 
 <script type="module">
   import PhotoSwipeLightbox from "/js/photoswipe-lightbox.esm.js";
-
   const lightbox = new PhotoSwipeLightbox({
     gallery: "#my-gallery",
     children: "a.spotlight",
     pswpModule: () => import("/js/photoswipe.esm.js"),
-
-    /* gestures & zoom */
-    wheelToZoom: true,
-    pinchToClose: true,
-    closeOnVerticalDrag: true,
-    allowPanToNext: true,
-
-    /* click/tap */
-    imageClickAction: 'zoom-or-close',
-    doubleTapAction: 'zoom',
-    tapAction: 'toggle-controls',
-    bgClickAction: 'close',
-
-    /* zoom levels */
-    initialZoomLevel: 'fit',
-    secondaryZoomLevel: 1.5,
-    maxZoomLevel: 3,
-
-    /* padding around image */
-    paddingFn: (vp) => {
-      const pad = vp.x < 860 ? 12 : 24;
-      return { top: pad, right: pad, bottom: pad, left: pad };
-    }
+    wheelToZoom: true, pinchToClose: true, closeOnVerticalDrag: true, allowPanToNext: true,
+    imageClickAction: 'zoom-or-close', doubleTapAction: 'zoom', tapAction: 'toggle-controls', bgClickAction: 'close',
+    initialZoomLevel: 'fit', secondaryZoomLevel: 1.5, maxZoomLevel: 3,
+    paddingFn: (vp) => { const pad = vp.x < 860 ? 12 : 24; return { top: pad, right: pad, bottom: pad, left: pad }; }
   });
-
-  // Register centered caption (title above description)
   lightbox.on('uiRegister', function() {
     lightbox.pswp.ui.registerElement({
-      name: 'caption',
-      order: 9,
-      isButton: false,
-      className: 'pswp__ndg-caption',
-      appendTo: 'root',
-      html: `
-        <div class="pswp__ndg-caption__inner">
-          <div class="pswp__ndg-caption__title"></div>
-          <div class="pswp__ndg-caption__desc"></div>
-        </div>
-      `,
+      name: 'caption', order: 9, isButton: false, className: 'pswp__ndg-caption', appendTo: 'root',
+      html: `<div class="pswp__ndg-caption__inner"><div class="pswp__ndg-caption__title"></div><div class="pswp__ndg-caption__desc"></div></div>`,
       onInit: (el, pswp) => {
         const $title = el.querySelector('.pswp__ndg-caption__title');
         const $desc  = el.querySelector('.pswp__ndg-caption__desc');
         const update = () => {
-          const slide = pswp.currSlide;
-          let t = '', d = '';
-          if (slide && slide.data && slide.data.element) {
-            const a = slide.data.element;
-            t = a.getAttribute('data-pswp-title') || '';
-            d = a.getAttribute('data-pswp-desc')  || '';
-          }
-          $title.textContent = t;
-          $desc.textContent  = d;
-          el.style.display = (t || d) ? 'flex' : 'none';
+          const s = pswp.currSlide; let t='', d='';
+          if (s && s.data && s.data.element) { const a = s.data.element;
+            t = a.getAttribute('data-pswp-title') || ''; d = a.getAttribute('data-pswp-desc') || ''; }
+          $title.textContent = t; $desc.textContent = d; el.style.display = (t || d) ? 'flex' : 'none';
         };
-        pswp.on('afterInit', update);
-        pswp.on('change', update);
+        pswp.on('afterInit', update); pswp.on('change', update);
       }
     });
   });
-
   lightbox.init();
 </script>
 
