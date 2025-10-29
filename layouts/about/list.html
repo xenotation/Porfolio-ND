@@ -14,27 +14,30 @@
 {{ $sameAs := .Site.Params.params_sameas_other | default (slice) }}
 
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AboutPage",
-  "url": "{{ .Permalink }}",
-  "name": "{{ .Title }}",
-  "description": "{{ $descr }}",
-  "inLanguage": "{{ .Site.Language.Lang }}",
-  "mainEntity": {
-    "@type": "Person",
-    "name": "{{ $personName }}",
-    "alternateName": "{{ .Site.Language.Params.alternateName }}",
-    "jobTitle": "{{ $jobTitle }}",
-    "nationality": "Bulgarian",
-    "url": "{{ .Permalink }}",
-    {{ with $profileImage }}"image": "{{ . }}",{{ end }}
-    {{ if gt (len $sameAs) 0 }}
-    "sameAs": {{ $sameAs | jsonify }},
-    {{ end }}
-    "knowsLanguage": ["bg","en"]
-  }
-}
+{{ dict
+  "@context" "https://schema.org"
+  "@type" "AboutPage"
+  "url" .Permalink
+  "name" (printf "About — %s" .Site.Title)
+  "description" $descr
+  "inLanguage" .Site.Language.Lang
+  "isPartOf" (dict
+    "@type" "WebSite"
+    "name" .Site.Title
+    "url"  .Site.BaseURL
+  )
+  "mainEntity" (dict
+    "@type" "Person"
+    "name" $personName
+    "alternateName" .Site.Language.Params.alternateName
+    "url"  .Site.BaseURL
+    "jobTitle" $jobTitle
+    "nationality" "Bulgarian"
+    "image" (cond (ne $profileImage "") $profileImage nil)
+    "knowsLanguage" (slice "bg-BG" "en")
+    "sameAs" (cond (gt (len $sameAs) 0) $sameAs nil)
+  )
+| jsonify | safeHTML }}
 </script>
 
 <div class="biolist">
