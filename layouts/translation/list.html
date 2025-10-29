@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="/css/bio-pages.css">
 
-{{/* language */}}
+{{/* language (for item-level field fallbacks only) */}}
 {{ $isBG := eq .Site.Language.Lang "bg" }}
 
 {{/* load + filter translations from data/publist.* */}}
@@ -35,13 +35,13 @@
 {{ dict
   "@context" "https://schema.org"
   "@type" "ItemList"
-  "name" (cond $isBG "Преводи" "Translations")
+  "name" (i18n "translation")
   "itemListElement" $elems
 | jsonify }}
 </script>
 
 <div class="biolist">
-  <h2 class="page-heading">{{ if $isBG }}Преводи{{ else }}Translations{{ end }}</h2>
+  <h2 class="page-heading">{{ i18n "translation" }}</h2>
 
   <div class="about-wrap container--writing">
     <section class="about-body">
@@ -68,7 +68,7 @@
         {{ end }}
 
         {{ if gt (len $older) 0 }}
-          <li class="press-year press-year-older">{{ if $isBG }}По-рано{{ else }}Earlier{{ end }}</li>
+          <li class="press-year press-year-older">{{ i18n "earlier" }}</li>
           {{ range $older }}
             {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
             {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}

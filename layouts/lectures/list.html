@@ -4,10 +4,10 @@
 <link rel="stylesheet" href="/css/press.css">      {{/* press visuals: sticky h2, type, spacing */}}
 <link rel="stylesheet" href="/css/writing.css">    {{/* one-column overrides (same used for Critique) */}}
 
-{{/* language */}}
+{{/* language only for item-level BG/EN fallbacks */}}
 {{ $isBG := eq .Site.Language.Lang "bg" }}
 
-{{/* load + filter source: data/publist.json (rename if different) */}}
+{{/* load + filter source: data/publist.* */}}
 {{ $src := site.Data.publist | default (slice) }}
 
 {{/* keep only lectures/talks */}}
@@ -28,22 +28,24 @@
 {{ range $i, $it := $lectures }}
   {{ $title := cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg) }}
   {{ $desc  := cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg) }}
-  {{ $auth  := or $it.authoren $it.authorbg }} {{/* optional; shown if present */}}
+  {{ $auth  := or $it.authoren $it.authorbg }}
   {{ $art := dict "@type" "Article" "position" (add $i 1) "headline" $title "url" (or $it.link $it.url) }}
   {{ if $desc }}    {{ $art = merge $art (dict "description" $desc) }} {{ end }}
   {{ if $it.year }} {{ $art = merge $art (dict "datePublished" (printf "%v" $it.year)) }} {{ end }}
   {{ if $auth }}    {{ $art = merge $art (dict "author" (dict "@type" "Person" "name" $auth)) }} {{ end }}
   {{ $elems = $elems | append $art }}
 {{ end }}
-<script type="application/ld+json">{{ dict
+<script type="application/ld+json">
+{{ dict
   "@context" "https://schema.org"
   "@type" "ItemList"
-  "name" (cond $isBG "Лекции и разговори" "Talks & Lectures")
+  "name" (i18n "talks")
   "itemListElement" $elems
-| jsonify }}</script>
+| jsonify }}
+</script>
 
 <div class="biolist">
-  <h1 class="page-heading">{{ if $isBG }}Лекции и разговори{{ else }}Talks & Lectures{{ end }}</h1>
+  <h1 class="page-heading">{{ i18n "talks" }}</h1>
 
   <div class="about-wrap container--writing">
     <section class="about-body">
@@ -67,14 +69,13 @@
             </h2>
 
             {{ with $auth }}<div class="press-author">{{ . }}</div>{{ end }}
-
             {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
             {{ with $inTxt }}<div class="press-desc">{{ . }}</div>{{ end }}
           </li>
         {{ end }}
 
         {{ if gt (len $older) 0 }}
-          <li class="press-year press-year-older">{{ if $isBG }}По-рано{{ else }}Earlier{{ end }}</li>
+          <li class="press-year press-year-older">{{ i18n "earlier" }}</li>
           {{ range $older }}
             {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
             {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
@@ -87,7 +88,6 @@
               </h2>
 
               {{ with $auth }}<div class="press-author">{{ . }}</div>{{ end }}
-
               {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
               {{ with $inTxt }}<div class="press-desc">{{ . }}</div>{{ end }}
             </li>

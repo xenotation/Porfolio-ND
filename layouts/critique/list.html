@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/css/press.css">
 <link rel="stylesheet" href="/css/writing.css"> {{/* one-column overrides that mimic press visuals */}}
 
-{{/* language */}}
+{{/* language only for item-level BG/EN fallbacks */}}
 {{ $isBG := eq .Site.Language.Lang "bg" }}
 
 {{/* load + filter (hide noshow true/"true") */}}
@@ -16,7 +16,7 @@
 {{ $withYear := where $all "year" "!=" "" | default (slice) }}
 {{ $withYear = where $withYear "year" "ne" nil }}
 {{ $sorted := sort $withYear "year" "desc" }}
-{{ $older := append (where $all "year" "") (where $all "year" nil) }}
+{{ $older  := append (where $all "year" "") (where $all "year" nil) }}
 
 {{/* ---------- ItemList JSON-LD (only visible items) ---------- */}}
 {{ $elems := slice }}
@@ -25,21 +25,23 @@
   {{ $desc  := cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg) }}
   {{ $auth  := cond $isBG (or $it.authorbg $it.authoren) (or $it.authoren $it.authorbg) }}
   {{ $art := dict "@type" "Article" "position" (add $i 1) "headline" $title "url" $it.url }}
-  {{ if $desc }} {{ $art = merge $art (dict "description" $desc) }} {{ end }}
-  {{ if $it.year }} {{ $art = merge $art (dict "datePublished" (printf "%v" $it.year)) }} {{ end }}
-  {{ if $auth }} {{ $art = merge $art (dict "author" (dict "@type" "Person" "name" $auth)) }} {{ end }}
+  {{ if $desc }}       {{ $art = merge $art (dict "description" $desc) }} {{ end }}
+  {{ if $it.year }}    {{ $art = merge $art (dict "datePublished" (printf "%v" $it.year)) }} {{ end }}
+  {{ if $auth }}       {{ $art = merge $art (dict "author" (dict "@type" "Person" "name" $auth)) }} {{ end }}
   {{ if $it.exhibition }} {{ $art = merge $art (dict "isPartOf" $it.exhibition) }} {{ end }}
   {{ $elems = $elems | append $art }}
 {{ end }}
-<script type="application/ld+json">{{ dict
+<script type="application/ld+json">
+{{ dict
   "@context" "https://schema.org"
   "@type" "ItemList"
-  "name" (cond $isBG "Критика" "Critique")
+  "name" (i18n "critique")
   "itemListElement" $elems
-| jsonify }}</script>
+| jsonify }}
+</script>
 
 <div class="biolist">
-  <h1 class="page-heading">{{ .Title }}</h1>
+  <h1 class="page-heading">{{ i18n "critique" }}</h1>
 
   <div class="about-wrap container--writing">
     <section class="about-body">
@@ -66,7 +68,7 @@
         {{ end }}
 
         {{ if gt (len $older) 0 }}
-          <li class="press-year press-year-older">{{ if $isBG }}По-рано{{ else }}Earlier{{ end }}</li>
+          <li class="press-year press-year-older">{{ i18n "earlier" }}</li>
           {{ range $older }}
             {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
             {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
@@ -85,5 +87,4 @@
     </section>
   </div>
 </div>
-
 {{ end }}
