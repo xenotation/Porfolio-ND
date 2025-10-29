@@ -10,8 +10,14 @@
 {{ $profileImage := or .Params.profile_image .Site.Language.Params.profileImage }}
 {{ if $profileImage }}{{ $profileImage = $profileImage | absURL }}{{ end }}
 
-{{/* SAMEAS from global params (no mailto) */}}
-{{ $sameAs := .Site.Params.params_sameas_other | default (slice) }}
+{{/* Build sameAs from socials + params_sameas_other (no mailto) */}}
+{{- $sameAs := slice -}}
+{{- with .Site.Params.social.instagram }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with .Site.Params.social.facebook  }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with .Site.Params.social.youtube   }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with .Site.Params.params_sameas_other -}}
+  {{- range . }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- end -}}
 
 <script type="application/ld+json">
 {
