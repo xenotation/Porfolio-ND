@@ -23,25 +23,54 @@
 {{ $sorted := sort $withYear "year" "desc" }}
 {{ $older  := append (where $lectures "year" "") (where $lectures "year" nil) }}
 
-{{/* ---------- Minimal ItemList JSON-LD (visible items only) ---------- */}}
-{{ $elems := slice }}
-{{ range $i, $it := $lectures }}
-  {{ $title := cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg) }}
-  {{ $desc  := cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg) }}
-  {{ $auth  := or $it.authoren $it.authorbg }}
-  {{ $art := dict "@type" "Article" "position" (add $i 1) "headline" $title "url" (or $it.link $it.url) }}
-  {{ if $desc }}    {{ $art = merge $art (dict "description" $desc) }} {{ end }}
-  {{ if $it.year }} {{ $art = merge $art (dict "datePublished" (printf "%v" $it.year)) }} {{ end }}
-  {{ if $auth }}    {{ $art = merge $art (dict "author" (dict "@type" "Person" "name" $auth)) }} {{ end }}
-  {{ $elems = $elems | append $art }}
-{{ end }}
+{{/* Person bits for JSON-LD */}}
+{{ $personName := or .Site.Language.Params.name .Site.Params.name }}
+{{ $personImg  := or .Site.Language.Params.profileImage .Site.Params.profileImage }}
+
+<!-- JSON-LD: Minimal WebPage + ItemList of Events (Nikola as speaker) -->
 <script type="application/ld+json">
-{{ dict
-  "@context" "https://schema.org"
-  "@type" "ItemList"
-  "name" (i18n "talks")
-  "itemListElement" $elems
-| jsonify }}
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "url": "{{ .Permalink }}",
+  "name": {{ printf "%q" (i18n "talks" | default "Talks & Lectures") }},
+  "inLanguage": "{{ .Site.Language.Lang }}",
+  "about": {
+    "@type": "Person",
+    "name": {{ printf "%q" $personName }},
+    {{- with $personImg }}"image": "{{ . | absURL }}",{{ end -}}
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {{- range $i, $it := $lectures -}}
+        {{- if gt $i 0 }},{{ end -}}
+        {
+          "@type": "ListItem",
+          "position": {{ add $i 1 }},
+          "item": {
+            "@type": "Event",
+            "name": {{ printf "%q" (cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg)) }},
+            "url": {{ printf "%q" (or $it.link $it.url) }},
+            "speaker": {
+              "@type": "Person",
+              "name": {{ printf "%q" $personName }},
+              "url": "{{ .Site.BaseURL }}"
+              {{- with $personImg }}, "image": "{{ . | absURL }}"{{ end -}}
+            }
+            {{- with (cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg)) -}},
+            "description": {{ printf "%q" . }}{{- end -}}
+            {{- with $it.year -}},
+            "startDate": "{{ . }}"{{- end -}}
+            {{- with (cond $isBG (or $it.inbg $it.inen) (or $it.inen $it.inbg)) -}},
+            ,"location": { "@type": "Place", "name": {{ printf "%q" . }} }{{- end -}}
+          }
+        }
+      {{- end -}}
+    ]
+  }
+}
 </script>
 
 <div class="biolist">

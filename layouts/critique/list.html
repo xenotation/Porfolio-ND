@@ -18,26 +18,51 @@
 {{ $sorted := sort $withYear "year" "desc" }}
 {{ $older  := append (where $all "year" "") (where $all "year" nil) }}
 
-{{/* ---------- ItemList JSON-LD (only visible items) ---------- */}}
-{{ $elems := slice }}
-{{ range $i, $it := $all }}
-  {{ $title := cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg) }}
-  {{ $desc  := cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg) }}
-  {{ $auth  := cond $isBG (or $it.authorbg $it.authoren) (or $it.authoren $it.authorbg) }}
-  {{ $art := dict "@type" "Article" "position" (add $i 1) "headline" $title "url" $it.url }}
-  {{ if $desc }}       {{ $art = merge $art (dict "description" $desc) }} {{ end }}
-  {{ if $it.year }}    {{ $art = merge $art (dict "datePublished" (printf "%v" $it.year)) }} {{ end }}
-  {{ if $auth }}       {{ $art = merge $art (dict "author" (dict "@type" "Person" "name" $auth)) }} {{ end }}
-  {{ if $it.exhibition }} {{ $art = merge $art (dict "isPartOf" $it.exhibition) }} {{ end }}
-  {{ $elems = $elems | append $art }}
-{{ end }}
+{{/* Person bits for JSON-LD */}}
+{{ $personName := or .Site.Language.Params.name .Site.Params.name }}
+{{ $personImg  := or .Site.Language.Params.profileImage .Site.Params.profileImage }}
+
+<!-- JSON-LD: minimal WebPage with ItemList of Articles (critiques about Nikola's work) -->
 <script type="application/ld+json">
-{{ dict
-  "@context" "https://schema.org"
-  "@type" "ItemList"
-  "name" (i18n "critique")
-  "itemListElement" $elems
-| jsonify }}
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "url": "{{ .Permalink }}",
+  "name": {{ printf "%q" (i18n "critique" | default "Critique") }},
+  "inLanguage": "{{ .Site.Language.Lang }}",
+  "about": {
+    "@type": "Person",
+    "name": {{ printf "%q" $personName }},
+    {{- with $personImg }}"image": "{{ . | absURL }}",{{ end -}}
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {{- $visible := $all -}}
+      {{- range $i, $it := $visible -}}
+        {{- if gt $i 0 }},{{ end -}}
+        {
+          "@type": "ListItem",
+          "position": {{ add $i 1 }},
+          "item": {
+            "@type": "Article",
+            "headline": {{ printf "%q" (cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg)) }},
+            "url": {{ printf "%q" $it.url }}
+            {{- with (cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg)) -}},
+            "description": {{ printf "%q" . }}{{- end -}}
+            {{- with (cond $isBG (or $it.authorbg $it.authoren) (or $it.authoren $it.authorbg)) -}},
+            ,"author": { "@type": "Person", "name": {{ printf "%q" . }} }{{- end -}}
+            {{- with $it.year -}},
+            ,"datePublished": "{{ . }}"{{- end -}}
+            {{- with $it.exhibition -}},
+            ,"isPartOf": {{ printf "%q" . }}{{- end -}}
+          }
+        }
+      {{- end -}}
+    ]
+  }
+}
 </script>
 
 <div class="biolist">
