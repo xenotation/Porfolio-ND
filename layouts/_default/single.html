@@ -17,112 +17,66 @@
 {{ $resources := .Resources.Match "*.*" }}
 
 <!-- JSON-LD: WebPage + Event + Person + Images + Breadcrumbs -->
+<!-- EXHIBITION JSON-LD (minimal but complete) -->
 <script type="application/ld+json">
-  {{- /* Person (Nikola) */ -}}
-  {{- $personName   := or .Site.Language.Params.name .Site.Params.name -}}
-  {{- $altName      := or .Site.Language.Params.alternateName .Site.Params.alternateName -}}
-  {{- $jobTitle     := or .Site.Language.Params.jobTitle .Site.Params.jobTitle -}}
-  {{- $profileImage := or .Site.Language.Params.profileImage .Site.Params.profileImage -}}
-  {{- if $profileImage }}{{ $profileImage = $profileImage | absURL }}{{ end -}}
-  
-  {{- $sameAs := slice -}}
-  {{- with .Site.Params.social.instagram }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-  {{- with .Site.Params.social.facebook  }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-  {{- with .Site.Params.social.youtube   }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-  {{- with .Site.Params.params_sameas_other -}}
-    {{- range . }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-  {{- end -}}
-  
-  {{- $person := dict
-    "@type" "Person"
-    "@id"   (print .Site.BaseURL "#person")
-    "name"  $personName
-    "alternateName" $altName
-    "jobTitle" $jobTitle
-    "url"   .Site.BaseURL
-    "nationality" "Bulgarian"
-    "knowsLanguage" (slice "bg-BG" "en")
-  -}}
-  {{- if $profileImage }}{{ $person = merge $person (dict "image" $profileImage) }}{{ end -}}
-  {{- if gt (len $sameAs) 0 }}{{ $person = merge $person (dict "sameAs" $sameAs) }}{{ end -}}
-  
-  {{- $start := cond (isset .Params "datestart") (.Params.datestart | time.AsTime) nil -}}
-  {{- $end   := cond (isset .Params "dateend")   (.Params.dateend   | time.AsTime) nil -}}
-  
-  {{- $addr := dict "@type" "PostalAddress" "addressCountry" "Bulgaria" -}}
-  {{- with (or .Params.addressLocality .Params.location) -}}
-    {{- $addr = merge $addr (dict "addressLocality" .) -}}
-  {{- end -}}
-  {{- $loc := dict "@type" "Place" "name" .Params.place "address" $addr -}}
-  
-  {{- $keywords := "" -}}
-  {{- with .Params.medium }}{{ $keywords = delimit . ", " }}{{ end -}}
-  
-  {{- $imgNodes := slice -}}
-  {{- $imgIDs   := slice -}}
-  {{- range $i, $res := .Resources.Match "*.*" -}}
-    {{- if and (in $res.MediaType.Type "image") (ne $res.Name "hero.webp") -}}
-      {{- $title := index $.Params.imgNames   $i | default "" -}}
-      {{- $desc  := index $.Params.imgDescrps $i | default "" -}}
-      {{- $large := $res.Resize "1600x" -}}
-      {{- $id    := print $large.Permalink "#img" -}}
-      {{- $img   := dict
-            "@type" "ImageObject"
-            "@id"   $id
-            "url"   $large.Permalink
-            "contentUrl" $large.Permalink
-            "name"  $title
-            "caption" $desc
-            "encodingFormat" $res.MediaType.String
-         -}}
-      {{- $imgNodes = $imgNodes | append $img -}}
-      {{- $imgIDs   = $imgIDs   | append $id -}}
-    {{- end -}}
-  {{- end -}}
-  {{- with .Resources.GetMatch "hero.webp" -}}
-    {{- $imgNodes = $imgNodes | append (dict "@type" "ImageObject" "@id" (print .Permalink "#img") "url" .Permalink "contentUrl" .Permalink "name" "Hero" "encodingFormat" .MediaType.String) -}}
-    {{- $imgIDs   = $imgIDs   | append (print .Permalink "#img") -}}
-  {{- end -}}
-  
-  {{- $event := dict
-    "@type" "Event"
-    "@id"   (print .Permalink "#event")
-    "name"  .Title
-    "description" (default .Summary .Params.description)
-    "eventStatus" "https://schema.org/EventScheduled"
-    "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
-    "url" .Permalink
-    "location" $loc
-    "organizer" (dict "@id" (print .Site.BaseURL "#person"))
-    "creator"   (dict "@id" (print .Site.BaseURL "#person"))
-    "keywords"  $keywords
-  -}}
-  {{- if $start }}{{ $event = merge $event (dict "startDate" ($start | time.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
-  {{- if $end   }}{{ $event = merge $event (dict "endDate"   ($end   | time.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
-  {{- if gt (len $imgIDs) 0 }}{{ $event = merge $event (dict "image" $imgIDs) }}{{ end -}}
-  
-  {{- $page := dict
-    "@type" "WebPage"
-    "@id"   (print .Permalink "#webpage")
-    "url"   .Permalink
-    "name"  .Title
-    "inLanguage" .Site.Language.Lang
-    "mainEntity" (dict "@id" (print .Permalink "#event"))
-  -}}
-  
-  {{- $breadcrumbs := dict
-    "@type" "BreadcrumbList"
-    "@id"   (print .Permalink "#breadcrumbs")
-    "itemListElement" (slice
-      (dict "@type" "ListItem" "position" 1 "name" "Home"        "item" .Site.BaseURL)
-      (dict "@type" "ListItem" "position" 2 "name" "Exhibitions" "item" (absURL "work/"))
-      (dict "@type" "ListItem" "position" 3 "name" .Title        "item" .Permalink)
-    )
-  -}}
-  
-  {{- $graph := (slice $page $event $person) | append $imgNodes | append $breadcrumbs -}}
-  {{- dict "@context" "https://schema.org" "@graph" $graph | jsonify -}}
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "{{ .Site.BaseURL }}#website",
+        "url": "{{ .Site.BaseURL }}",
+        "name": "{{ .Site.Title }}",
+        "inLanguage": "{{ .Site.Language.Lang }}"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "{{ .Permalink }}#webpage",
+        "url": "{{ .Permalink }}",
+        "name": "{{ .Title }}",
+        "isPartOf": { "@id": "{{ .Site.BaseURL }}#website" }{{ with .Resources.GetMatch "hero.*" }},
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "@id": "{{ .Permalink }}#primary",
+          "url": "{{ .Permalink }}"
+        }{{ end }},
+        "inLanguage": "{{ $.Site.Language.Lang }}"
+      },
+      {
+        "@type": "Person",
+        "@id": "{{ .Site.BaseURL }}#person",
+        "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
+        {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
+        "image": "{{ . | absURL }}",
+        {{- end -}}
+        "url": "{{ .Site.BaseURL }}"
+      }
+      {{- with .Params.datestart -}}
+      ,{
+        "@type": "ExhibitionEvent",
+        "@id": "{{ $.Permalink }}#event",
+        "name": "{{ $.Title }}",
+        "url": "{{ $.Permalink }}",
+        "startDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ with $.Params.dateend }},
+        "endDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ end }},
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "organizer": { "@id": "{{ $.Site.BaseURL }}#person" }{{ with $.Params.place }},
+        "location": {
+          "@type": "Place",
+          "name": "{{ . }}"{{ with $.Params.location }},
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "{{ . }}",
+            "addressCountry": "Bulgaria"
+          }{{ end }}
+        }{{ end }}
+      }
+      {{- end }}
+    ]
+  }
   </script>
+  
   
 
 <div class="container">
