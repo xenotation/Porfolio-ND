@@ -125,12 +125,6 @@
   force = true
 
 [[redirects]]
-  from = "/about"
-  to = "https://blog.newdegeneration.xyz/about"
-  status = 301
-  force = true
-
-[[redirects]]
   from = "/xenofeminism/"
   to = "https://blog.newdegeneration.xyz/xenofeminism"
   status = 301
