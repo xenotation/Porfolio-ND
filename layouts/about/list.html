@@ -3,33 +3,38 @@
 <link rel="stylesheet" href="/css/bio-pages.css">
 <script src="{{ "/js/spinner.js" | relURL }}" defer></script>
 
-{{/* ---------------------------
-     Minimal data (simple & explicit)
----------------------------- */}}
-{{ $personName   := or .Params.name .Site.Params.name }}
-{{ $descr        := or .Params.description .Site.Params.description }}
-{{ $jobTitle     := or .Params.jobTitle .Site.Params.jobTitle }}
-{{ $profileImage := or .Params.profile_image .Site.Params.profileImage }}
+{{/* Pull data from the current language */}}
+{{ $personName   := or .Params.name .Site.Language.Params.name }}
+{{ $descr        := or .Params.description .Site.Language.Params.Description }}
+{{ $jobTitle     := or .Params.jobTitle .Site.Language.Params.jobTitle }}
+{{ $profileImage := or .Params.profile_image .Site.Language.Params.profileImage }}
 {{ if $profileImage }}{{ $profileImage = $profileImage | absURL }}{{ end }}
 
-{{/* SAMEAS: use ONLY params_sameas_other (array of absolute URLs) */}}
+{{/* SAMEAS from global params (no mailto) */}}
 {{ $sameAs := .Site.Params.params_sameas_other | default (slice) }}
 
 <script type="application/ld+json">
-{{ dict
-  "@context" "https://schema.org"
-  "@type" "ProfilePage"
-  "mainEntity" (dict
-    "@type" "Person"
-    "name" $personName
-    "url" .Permalink
-    "description" $descr
-    "image" (cond (ne $profileImage "") $profileImage nil)
-    "jobTitle" $jobTitle
-    "sameAs" $sameAs
-    "knowsLanguage" (slice "en" "bg")
-  )
- | jsonify | safeHTML }}
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "url": "{{ .Permalink }}",
+  "name": "{{ .Title }}",
+  "description": "{{ $descr }}",
+  "inLanguage": "{{ .Site.Language.Lang }}",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "{{ $personName }}",
+    "alternateName": "{{ .Site.Language.Params.alternateName }}",
+    "jobTitle": "{{ $jobTitle }}",
+    "nationality": "Bulgarian",
+    "url": "{{ .Permalink }}",
+    {{ with $profileImage }}"image": "{{ . }}",{{ end }}
+    {{ if gt (len $sameAs) 0 }}
+    "sameAs": {{ $sameAs | jsonify }},
+    {{ end }}
+    "knowsLanguage": ["bg","en"]
+  }
+}
 </script>
 
 <div class="biolist">
@@ -41,55 +46,43 @@
     <img class="eye-pupil" src="/images/i_see_you_I.png" alt="">
   </div>
 
-  <!-- Two-column links (press grid styles) -->
+  <!-- Links -->
   <section class="about-meta container--press">
     <ul class="press-list" role="list">
       {{ with .Site.Params.social.instagram }}
-        <li class="press-item">
-          <h3 class="press-titleline">
-            <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="me noopener">Instagram</a>
-          </h3>
-        </li>
+        <li class="press-item"><h3 class="press-titleline">
+          <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="me noopener nofollow">Instagram</a>
+        </h3></li>
       {{ end }}
 
       {{ with .Site.Params.social.email }}
-        <li class="press-item">
-          <h3 class="press-titleline">
-            <a class="press-link" href="mailto:{{ . }}">Email</a>
-          </h3>
-        </li>
+        <li class="press-item"><h3 class="press-titleline">
+          <a class="press-link" href="{{ . | safeURL }}">Email</a>
+        </h3></li>
       {{ end }}
 
       {{ with .Site.Params.social.facebook }}
-        <li class="press-item">
-          <h3 class="press-titleline">
-            <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="me noopener">Facebook</a>
-          </h3>
-        </li>
+        <li class="press-item"><h3 class="press-titleline">
+          <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="me noopener nofollow">Facebook</a>
+        </h3></li>
       {{ end }}
 
       {{ with .Site.Params.social.youtube }}
-        <li class="press-item">
-          <h3 class="press-titleline">
-            <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="noopener">YouTube</a>
-          </h3>
-        </li>
+        <li class="press-item"><h3 class="press-titleline">
+          <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="noopener nofollow">YouTube</a>
+        </h3></li>
       {{ end }}
 
-      {{ with .Params.cv_pdf }}
-        <li class="press-item">
-          <h3 class="press-titleline">
-            <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="noopener">CV (PDF)</a>
-          </h3>
-        </li>
+      {{ with (index .Site.Params.documents.cv_pdf .Site.Language.Lang) }}
+        <li class="press-item"><h3 class="press-titleline">
+          <a class="press-link" href="{{ . | absURL | safeURL }}" target="_blank" rel="noopener nofollow">CV (PDF)</a>
+        </h3></li>
       {{ end }}
 
-      {{ with .Params.portfolio_pdf }}
-        <li class="press-item">
-          <h3 class="press-titleline">
-            <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="noopener">{{ T "portfolio" | default "Portfolio" }}</a>
-          </h3>
-        </li>
+      {{ with (index .Site.Params.documents.portfolio_pdf .Site.Language.Lang) }}
+        <li class="press-item"><h3 class="press-titleline">
+          <a class="press-link" href="{{ . | absURL | safeURL }}" target="_blank" rel="noopener nofollow">{{ T "portfolio" | default "Portfolio" }}</a>
+        </h3></li>
       {{ end }}
     </ul>
   </section>
