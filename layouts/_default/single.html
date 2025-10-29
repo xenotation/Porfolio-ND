@@ -24,8 +24,7 @@
   {{- $jobTitle     := or .Site.Language.Params.jobTitle .Site.Params.jobTitle -}}
   {{- $profileImage := or .Site.Language.Params.profileImage .Site.Params.profileImage -}}
   {{- if $profileImage }}{{ $profileImage = $profileImage | absURL }}{{ end -}}
-
-  {{- /* sameAs from socials + other */ -}}
+  
   {{- $sameAs := slice -}}
   {{- with .Site.Params.social.instagram }}{{ $sameAs = $sameAs | append . }}{{ end -}}
   {{- with .Site.Params.social.facebook  }}{{ $sameAs = $sameAs | append . }}{{ end -}}
@@ -33,7 +32,7 @@
   {{- with .Site.Params.params_sameas_other -}}
     {{- range . }}{{ $sameAs = $sameAs | append . }}{{ end -}}
   {{- end -}}
-
+  
   {{- $person := dict
     "@type" "Person"
     "@id"   (print .Site.BaseURL "#person")
@@ -46,26 +45,22 @@
   -}}
   {{- if $profileImage }}{{ $person = merge $person (dict "image" $profileImage) }}{{ end -}}
   {{- if gt (len $sameAs) 0 }}{{ $person = merge $person (dict "sameAs" $sameAs) }}{{ end -}}
-
-  {{- /* Dates */ -}}
+  
   {{- $start := cond (isset .Params "datestart") (.Params.datestart | time.AsTime) nil -}}
   {{- $end   := cond (isset .Params "dateend")   (.Params.dateend   | time.AsTime) nil -}}
-
-  {{- /* Location */ -}}
+  
   {{- $addr := dict "@type" "PostalAddress" "addressCountry" "Bulgaria" -}}
   {{- with (or .Params.addressLocality .Params.location) -}}
     {{- $addr = merge $addr (dict "addressLocality" .) -}}
   {{- end -}}
   {{- $loc := dict "@type" "Place" "name" .Params.place "address" $addr -}}
-
-  {{- /* Keywords from medium */ -}}
+  
   {{- $keywords := "" -}}
   {{- with .Params.medium }}{{ $keywords = delimit . ", " }}{{ end -}}
-
-  {{- /* ImageObjects + IDs */ -}}
+  
   {{- $imgNodes := slice -}}
   {{- $imgIDs   := slice -}}
-  {{- range $i, $res := $resources -}}
+  {{- range $i, $res := .Resources.Match "*.*" -}}
     {{- if and (in $res.MediaType.Type "image") (ne $res.Name "hero.webp") -}}
       {{- $title := index $.Params.imgNames   $i | default "" -}}
       {{- $desc  := index $.Params.imgDescrps $i | default "" -}}
@@ -88,8 +83,7 @@
     {{- $imgNodes = $imgNodes | append (dict "@type" "ImageObject" "@id" (print .Permalink "#img") "url" .Permalink "contentUrl" .Permalink "name" "Hero" "encodingFormat" .MediaType.String) -}}
     {{- $imgIDs   = $imgIDs   | append (print .Permalink "#img") -}}
   {{- end -}}
-
-  {{- /* Event */ -}}
+  
   {{- $event := dict
     "@type" "Event"
     "@id"   (print .Permalink "#event")
@@ -106,8 +100,7 @@
   {{- if $start }}{{ $event = merge $event (dict "startDate" ($start | time.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
   {{- if $end   }}{{ $event = merge $event (dict "endDate"   ($end   | time.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
   {{- if gt (len $imgIDs) 0 }}{{ $event = merge $event (dict "image" $imgIDs) }}{{ end -}}
-
-  {{- /* WebPage */ -}}
+  
   {{- $page := dict
     "@type" "WebPage"
     "@id"   (print .Permalink "#webpage")
@@ -116,8 +109,7 @@
     "inLanguage" .Site.Language.Lang
     "mainEntity" (dict "@id" (print .Permalink "#event"))
   -}}
-
-  {{- /* Breadcrumbs */ -}}
+  
   {{- $breadcrumbs := dict
     "@type" "BreadcrumbList"
     "@id"   (print .Permalink "#breadcrumbs")
@@ -127,12 +119,11 @@
       (dict "@type" "ListItem" "position" 3 "name" .Title        "item" .Permalink)
     )
   -}}
-
-  {{- dict
-    "@context" "https://schema.org"
-    "@graph"   (slice $page $event $person | append $imgNodes | append $breadcrumbs)
-    | jsonify | safeHTML -}}
-</script>
+  
+  {{- $graph := (slice $page $event $person) | append $imgNodes | append $breadcrumbs -}}
+  {{- dict "@context" "https://schema.org" "@graph" $graph | jsonify -}}
+  </script>
+  
 
 <div class="container">
   <div class="exhb-hero" id="hero-content"></div>
