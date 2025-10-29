@@ -1,30 +1,48 @@
-  
 {{ define "main" }}
-<script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Nikola Stoyanov - Artist Portfolio",
-      "url": "{{ .Permalink }}",
-      "description": "Portfolio website of contemporary artist Nikola Stoyanov, showcasing exhibitions and projects.",
-      "isPartOf": {
-        "@type": "WebSite",
-        "name": "Nikola Stoyanov | Portfolio",
-        "url": "{{ .Site.BaseURL }}",
-        "publisher": {
-          "@type": "Person",
-          "name": "Nikola Stoyanov",
-          "url": "{{ .Permalink }}",
-          "sameAs": [
-            {{ range $index, $url := .Site.Language.Params.sameAs }}
-              {{ if $index }},{{ end }}"{{ $url }}"
-            {{ end }}
-          ]
-        }
-      }
-    }
-    </script>
-    <div class="video-container"></div>
-    <script src="{{ "/js/lander.js" | relURL }}"></script>
-{{ end }}
 
+{{/* Build sameAs once from global params (no mailto) */}}
+{{- $sameAs := slice -}}
+{{- with .Site.Params.social.instagram }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with .Site.Params.social.facebook  }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with .Site.Params.social.youtube   }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- with .Site.Params.params_sameas_other -}}
+  {{- range . }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+{{- end -}}
+{{- $sameAsJSON := printf "[%s]" (delimit (apply $sameAs "printf" "\"%s\"" ".") ",") -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "url": "{{ .Permalink }}",
+  "name": "{{ .Site.Title }} — Artist & Theorist",
+  "description": "{{ .Site.Language.Params.Description }}",
+  "inLanguage": "{{ .Site.Language.Lang }}",
+  {{ with .Site.Language.Params.profileImage -}}
+  "primaryImageOfPage": { "@type": "ImageObject", "url": "{{ . | absURL }}" },
+  {{- end }}
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "{{ .Site.Title }}",
+    "url": "{{ .Site.BaseURL }}",
+    "publisher": {
+      "@type": "Person",
+      "name": "{{ .Site.Language.Params.name }}"
+    }
+  },
+  "about": {
+    "@type": "Person",
+    "name": "{{ .Site.Language.Params.name }}",
+    "alternateName": "{{ .Site.Language.Params.alternateName }}",
+    "jobTitle": "{{ .Site.Language.Params.jobTitle }}",
+    "nationality": "Bulgarian",
+    "url": "{{ .Site.BaseURL }}",
+    {{ with .Site.Language.Params.profileImage }}"image": "{{ . | absURL }}",{{ end }}
+    "sameAs": {{ $sameAsJSON }}
+  }
+}
+</script>
+
+<div class="video-container"></div>
+<script src="{{ "/js/lander.js" | relURL }}"></script>
+{{ end }}
