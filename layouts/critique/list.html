@@ -18,51 +18,43 @@
 {{ $sorted := sort $withYear "year" "desc" }}
 {{ $older  := append (where $all "year" "") (where $all "year" nil) }}
 
-{{/* Person bits for JSON-LD */}}
+{{/* -------- JSON-LD data (built safely, no trailing commas) -------- */}}
 {{ $personName := or .Site.Language.Params.name .Site.Params.name }}
 {{ $personImg  := or .Site.Language.Params.profileImage .Site.Params.profileImage }}
 
-<!-- JSON-LD: minimal WebPage with ItemList of Articles (critiques about Nikola's work) -->
+{{/* Build Person/about */}}
+{{ $about := dict "@type" "Person" "name" $personName "url" .Site.BaseURL }}
+{{ with $personImg }}
+  {{ $about = merge $about (dict "image" (. | absURL)) }}
+{{ end }}
+
+{{/* Build ItemList.itemListElement */}}
+{{ $elems := slice }}
+{{ range $i, $it := $all }}
+  {{ $title := cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg) }}
+  {{ $desc  := cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg) }}
+  {{ $auth  := cond $isBG (or $it.authorbg $it.authoren) (or $it.authoren $it.authorbg) }}
+
+  {{ $article := dict "@type" "Article" "headline" $title "url" $it.url }}
+  {{ with $desc  }} {{ $article = merge $article (dict "description" .) }} {{ end }}
+  {{ with $auth  }} {{ $article = merge $article (dict "author" (dict "@type" "Person" "name" .)) }} {{ end }}
+  {{ with $it.year }} {{ $article = merge $article (dict "datePublished" (printf "%v" .)) }} {{ end }}
+  {{ with $it.exhibition }} {{ $article = merge $article (dict "isPartOf" .) }} {{ end }}
+
+  {{ $li := dict "@type" "ListItem" "position" (add $i 1) "item" $article }}
+  {{ $elems = $elems | append $li }}
+{{ end }}
+
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "url": "{{ .Permalink }}",
-  "name": {{ printf "%q" (i18n "critique" | default "Critique") }},
-  "inLanguage": "{{ .Site.Language.Lang }}",
-  "about": {
-    "@type": "Person",
-    "name": {{ printf "%q" $personName }},
-    {{- with $personImg }}"image": "{{ . | absURL }}",{{ end -}}
-    "url": "{{ .Site.BaseURL }}"
-  },
-  "mainEntity": {
-    "@type": "ItemList",
-    "itemListElement": [
-      {{- $visible := $all -}}
-      {{- range $i, $it := $visible -}}
-        {{- if gt $i 0 }},{{ end -}}
-        {
-          "@type": "ListItem",
-          "position": {{ add $i 1 }},
-          "item": {
-            "@type": "Article",
-            "headline": {{ printf "%q" (cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg)) }},
-            "url": {{ printf "%q" $it.url }}
-            {{- with (cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg)) -}},
-            "description": {{ printf "%q" . }}{{- end -}}
-            {{- with (cond $isBG (or $it.authorbg $it.authoren) (or $it.authoren $it.authorbg)) -}},
-            ,"author": { "@type": "Person", "name": {{ printf "%q" . }} }{{- end -}}
-            {{- with $it.year -}},
-            ,"datePublished": "{{ . }}"{{- end -}}
-            {{- with $it.exhibition -}},
-            ,"isPartOf": {{ printf "%q" . }}{{- end -}}
-          }
-        }
-      {{- end -}}
-    ]
-  }
-}
+{{ dict
+  "@context" "https://schema.org"
+  "@type" "WebPage"
+  "url" .Permalink
+  "name" (i18n "critique" | default "Critique")
+  "inLanguage" .Site.Language.Lang
+  "about" $about
+  "mainEntity" (dict "@type" "ItemList" "itemListElement" $elems)
+| jsonify }}
 </script>
 
 <div class="biolist">
@@ -112,4 +104,5 @@
     </section>
   </div>
 </div>
+
 {{ end }}
