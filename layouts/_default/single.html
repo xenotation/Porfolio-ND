@@ -79,8 +79,34 @@
   
 
 <div class="container">
-  <div class="exhb-hero" id="hero-content"></div>
-  <!-- … the rest of your page stays the same … -->
+{{/* ---- HERO (video if available, else image) ---- */}}
+{{ $heroVideo := .Resources.GetMatch "hero.webm" }}
+{{ $heroImg   := or (.Resources.GetMatch "hero.webp") (.Resources.GetMatch "hero.jpg") (.Resources.GetMatch "hero.jpeg") (.Resources.GetMatch "hero.png") }}
+
+<div class="exhb-hero">
+  {{ if $heroVideo }}
+    <video
+      class="featured-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      {{ with $heroImg }}poster="{{ .RelPermalink }}"{{ end }}>
+      <source src="{{ $heroVideo.RelPermalink }}" type="video/webm">
+    </video>
+    {{/* noscript + fallback image */}}
+    {{ with $heroImg }}
+      <noscript>
+        <img class="featured-image" src="{{ .RelPermalink }}" alt="{{ $.Title }} hero">
+      </noscript>
+    {{ end }}
+  {{ else if $heroImg }}
+    <img class="featured-image" src="{{ $heroImg.RelPermalink }}" alt="{{ .Title }} hero">
+  {{ else }}
+    {{/* optional: nothing found */}}
+  {{ end }}
+</div>
+
 
   <div class="exhb-title">
     <h1>{{ .Title }}</h1>
