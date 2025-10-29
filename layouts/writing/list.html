@@ -19,26 +19,48 @@
 {{ $sorted := sort $withYear "year" "desc" }}
 {{ $older  := append (where $writing "year" "") (where $writing "year" nil) }}
 
-{{/* ---------- ItemList JSON-LD (only visible items) ---------- */}}
-{{ $elems := slice }}
-{{ range $i, $it := $writing }}
-  {{ $title := cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg) }}
-  {{ $desc  := cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg) }}
-  {{ $inTxt := cond $isBG (or $it.inbg $it.inen) (or $it.inen $it.inbg) }}
-  {{ $art := dict "@type" "Article" "position" (add $i 1) "headline" $title "url" (or $it.link $it.url) }}
-  {{ if $desc }}    {{ $art = merge $art (dict "description" $desc) }} {{ end }}
-  {{ if $it.year }} {{ $art = merge $art (dict "datePublished" (printf "%v" $it.year)) }} {{ end }}
-  {{ if $inTxt }}   {{ $art = merge $art (dict "isPartOf" $inTxt) }} {{ end }}
-  {{ $elems = $elems | append $art }}
-{{ end }}
+/* -------------------------- JSON-LD (minimal) -------------------------- */
 <script type="application/ld+json">
-{{ dict
-  "@context" "https://schema.org"
-  "@type" "ItemList"
-  "name" (i18n "writing")
-  "itemListElement" $elems
-| jsonify }}
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "url": "{{ .Permalink }}",
+  "name": {{ printf "%q" (i18n "writing" | default "Writing") }},
+  "inLanguage": "{{ .Site.Language.Lang }}",
+  "about": {
+    "@type": "Person",
+    "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
+    {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
+    "image": "{{ . | absURL }}",
+    {{- end -}}
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {{- range $i, $it := $writing -}}
+        {{- if gt $i 0 }},{{ end -}}
+        {
+          "@type": "ListItem",
+          "position": {{ add $i 1 }},
+          "item": {
+            "@type": "Article",
+            "headline": {{ printf "%q" (cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg)) }},
+            "url": {{ printf "%q" (or $it.link $it.url) }}
+            {{- with (cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg)) -}},
+            "description": {{ printf "%q" . }}{{- end -}}
+            {{- with $it.year -}},
+            "datePublished": "{{ . }}"{{- end -}}
+            {{- with (cond $isBG (or $it.inbg $it.inen) (or $it.inen $it.inbg)) -}},
+            "isPartOf": { "@type": "CreativeWork", "name": {{ printf "%q" . }} }{{- end -}}
+          }
+        }
+      {{- end -}}
+    ]
+  }
+}
 </script>
+/* ------------------------ /JSON-LD (minimal) --------------------------- */
 
 <div class="biolist">
   <h1 class="page-heading">{{ i18n "writing" }}</h1>
@@ -46,7 +68,7 @@
   <div class="about-wrap container--writing">
     <section class="about-body">
       <ul class="writing-list" role="list">
-        {{/* Year-grouped items (single column, press look) */}}
+        {{/* Year-grouped items */}}
         {{ $current := 0 }}
         {{ range $sorted }}
           {{ if ne $current .year }}
