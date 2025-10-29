@@ -8,7 +8,6 @@
 {{- with .Site.Params.params_sameas_other -}}
   {{- range . }}{{ $sameAs = $sameAs | append . }}{{ end -}}
 {{- end -}}
-{{- $sameAsJSON := printf "[%s]" (delimit (apply $sameAs "printf" "\"%s\"" ".") ",") -}}
 
 <script type="application/ld+json">
 {
@@ -38,7 +37,9 @@
     "nationality": "Bulgarian",
     "url": "{{ .Site.BaseURL }}",
     {{ with .Site.Language.Params.profileImage }}"image": "{{ . | absURL }}",{{ end }}
-    "sameAs": {{ $sameAsJSON }}
+    {{ if gt (len $sameAs) 0 }}
+    "sameAs": {{ $sameAs | jsonify }}
+    {{ end }}
   }
 }
 </script>
