@@ -5,7 +5,7 @@ description = "Инсталация с хакнат факс, който неп�
 canonical = "https://newdegeneration.xyz/bg/work/black-fax/"
 
 medium = ["hacked fax machine", "intallation", "ai generated gothic fiction"]
-place = "галерия ДОЗА, София. Част от фестивала SPORNO 'THE DEVIANTS'"
+place = "галерия Доза, София. Част от фестивала СПортно 'THE DEVIANTS'"
 datestart = "2024-05-28T00:00:00+03:00"
 dateend = "2024-06-01T00:00:00+03:00"
 

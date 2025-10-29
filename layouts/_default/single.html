@@ -14,7 +14,7 @@
 {{ $pressFor := where $pressAll "exhibition" $exhKey }}
 {{ $critFor  := where $critAll  "exhibition" $exhKey }}
 
-{{/* Build sameAs from socials + params_sameas_other (no mailto) */}}
+{{/* --- Build sameAs from socials + params_sameas_other (skip mailto) --- */}}
 {{- $sameAs := slice -}}
 {{- with .Site.Params.social.instagram }}{{ $sameAs = $sameAs | append . }}{{ end -}}
 {{- with .Site.Params.social.facebook  }}{{ $sameAs = $sameAs | append . }}{{ end -}}
@@ -23,28 +23,29 @@
   {{- range . }}{{ $sameAs = $sameAs | append . }}{{ end -}}
 {{- end -}}
 
-{{/* Dates (ISO 8601 with TZ) */}}
+{{/* Dates (ISO 8601 with timezone) */}}
 {{ $start := cond (isset .Params "datestart") (.Params.datestart | time.AsTime) nil }}
 {{ $end   := cond (isset .Params "dateend")   (.Params.dateend   | time.AsTime) nil }}
 
 {{/* Location */}}
 {{ $placeName := .Params.place }}
-{{ $locality  := .Params.location }}
+{{ $locality  := or .Params.addressLocality .Params.location }}
 {{ $loc := dict
   "@type" "Place"
   "name"  $placeName
-  "address" (dict "@type" "PostalAddress" "addressLocality" $locality)
+  "address" (dict "@type" "PostalAddress" "addressLocality" $locality "addressCountry" "Bulgaria")
 }}
 
-{{/* Organizer (Person: Nikola Stoyanov from language params) */}}
+{{/* Person (Nikola) from language params */}}
 {{ $personName   := or .Site.Language.Params.name .Site.Params.name }}
 {{ $altName      := or .Site.Language.Params.alternateName .Site.Params.alternateName }}
 {{ $jobTitle     := or .Site.Language.Params.jobTitle .Site.Params.jobTitle }}
 {{ $profileImage := or .Site.Language.Params.profileImage .Site.Params.profileImage }}
 {{ if $profileImage }}{{ $profileImage = $profileImage | absURL }}{{ end }}
 
-{{ $organizer := dict
+{{ $person := dict
   "@type" "Person"
+  "@id"   (print .Site.BaseURL "#person")
   "name"  $personName
   "alternateName" $altName
   "jobTitle" $jobTitle
@@ -52,81 +53,87 @@
   "nationality" "Bulgarian"
   "knowsLanguage" (slice "bg-BG" "en")
 }}
-{{ if $profileImage }}{{ $organizer = merge $organizer (dict "image" $profileImage) }}{{ end }}
-{{ if gt (len $sameAs) 0 }}{{ $organizer = merge $organizer (dict "sameAs" $sameAs) }}{{ end }}
+{{ if $profileImage }}{{ $person = merge $person (dict "image" $profileImage) }}{{ end }}
+{{ if gt (len $sameAs) 0 }}{{ $person = merge $person (dict "sameAs" $sameAs) }}{{ end }}
 
 {{/* Keywords from medium list */}}
 {{ $keywords := "" }}
 {{ with .Params.medium }}{{ $keywords = delimit . ", " }}{{ end }}
 
-{{/* Gather images + build per-work CreativeWorks */}}
+{{/* Collect work images as ImageObjects with IDs */}}
 {{ $images := slice }}
-{{ $works  := slice }}
+{{ $imageIDs := slice }}
 {{ $resources := .Resources.Match "*.*" }}
-{{ range $index, $resource := $resources }}
-  {{ if and (in $resource.MediaType.Type "image") (ne $resource.Name "hero.webp") }}
-    {{ $title := index $.Params.imgNames $index | default "" }}
+{{ range $index, $res := $resources }}
+  {{ if and (in $res.MediaType.Type "image") (ne $res.Name "hero.webp") }}
+    {{ $title := index $.Params.imgNames   $index | default "" }}
     {{ $desc  := index $.Params.imgDescrps $index | default "" }}
-    {{ $large := $resource.Resize "1600x" }}
-    {{ $fmt   := printf "%s/%s" $resource.MediaType.Type $resource.MediaType.SubType }}
-
-    {{ $images = $images | append $large.Permalink }}
-
-    {{ $imgObj := dict
-      "@type"         "ImageObject"
-      "url"           $large.Permalink
-      "contentUrl"    $large.Permalink
-      "caption"       $desc
-      "encodingFormat" $fmt
+    {{ $large := $res.Resize "1600x" }}
+    {{ $imgId := print $large.Permalink "#img" }}
+    {{ $img := dict
+      "@type" "ImageObject"
+      "@id"   $imgId
+      "url"   $large.Permalink
+      "contentUrl" $large.Permalink
+      "name"  $title
+      "caption" $desc
+      "encodingFormat" (printf "%s/%s" $res.MediaType.Type $res.MediaType.SubType)
     }}
-
-    {{ $work := dict
-      "@type"       "CreativeWork"
-      "name"        $title
-      "description" $desc
-      "creator"     $organizer
-      "image"       $imgObj
-    }}
-
-    {{ $works = $works | append $work }}
+    {{ $images = $images | append $img }}
+    {{ $imageIDs = $imageIDs | append $imgId }}
   {{ end }}
 {{ end }}
 
-{{/* Hero image (optional) */}}
-{{ $hero := .Resources.GetMatch "hero.webp" }}
-{{ if $hero }}{{ $images = $images | append $hero.Permalink }}{{ end }}
+{{/* Optional hero image */}}
+{{ with .Resources.GetMatch "hero.webp" }}
+  {{ $imgId := print .Permalink "#img" }}
+  {{ $images = $images | append (dict "@type" "ImageObject" "@id" $imgId "url" .Permalink "contentUrl" .Permalink "name" "Hero") }}
+  {{ $imageIDs = $imageIDs | append $imgId }}
+{{ end }}
 
-{{/* EVENT: Use schema.org/Event (Google rich results) and include images + works */}}
+{{/* Build Event */}}
 {{ $event := dict
-  "@context" "https://schema.org"
   "@type" "Event"
-  "@id" (print .Permalink "#event")
-  "name" .Title
+  "@id"   (print .Permalink "#event")
+  "name"  .Title
   "description" (default .Summary .Params.description)
   "eventStatus" "https://schema.org/EventScheduled"
   "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
-  "url" .Permalink
+  "url"   .Permalink
   "location" $loc
-  "organizer" $organizer
-  "keywords" $keywords
+  "organizer" (dict "@id" (print .Site.BaseURL "#person"))
+  "creator"   (dict "@id" (print .Site.BaseURL "#person"))
+  "keywords"  $keywords
 }}
 {{ if $start }}{{ $event = merge $event (dict "startDate" ($start | time.Format "2006-01-02T15:04:05Z07:00")) }}{{ end }}
 {{ if $end   }}{{ $event = merge $event (dict "endDate"   ($end   | time.Format "2006-01-02T15:04:05Z07:00")) }}{{ end }}
-{{ if gt (len $images) 0 }}{{ $event = merge $event (dict "image" $images) }}{{ end }}
-{{ if gt (len $works) 0  }}{{ $event = merge $event (dict "workFeatured" $works) }}{{ end }}
+{{ if gt (len $imageIDs) 0 }}{{ $event = merge $event (dict "image" $imageIDs) }}{{ end }}
 
-<script type="application/ld+json">{{ $event | jsonify | safeHTML }}</script>
+{{/* WebPage to anchor mainEntity */}}
+{{ $page := dict
+  "@type" "WebPage"
+  "@id"   (print .Permalink "#webpage")
+  "url"   .Permalink
+  "name"  .Title
+  "inLanguage" .Site.Language.Lang
+  "mainEntity" (dict "@id" (print .Permalink "#event"))
+}}
 
-{{/* BreadcrumbList (Home → Exhibitions → This page) */}}
-<script type="application/ld+json">
-{{ dict
-  "@context" "https://schema.org"
+{{/* Breadcrumbs (Home → Exhibitions → This) */}}
+{{ $breadcrumbs := dict
   "@type" "BreadcrumbList"
+  "@id"   (print .Permalink "#breadcrumbs")
   "itemListElement" (slice
     (dict "@type" "ListItem" "position" 1 "name" "Home"        "item" .Site.BaseURL)
     (dict "@type" "ListItem" "position" 2 "name" "Exhibitions" "item" (absURL "work/"))
     (dict "@type" "ListItem" "position" 3 "name" .Title        "item" .Permalink)
   )
+}}
+
+<script type="application/ld+json">
+{{ dict
+  "@context" "https://schema.org"
+  "@graph" (slice $page $event $person | append $images | append $breadcrumbs)
 | jsonify | safeHTML }}
 </script>
 
