@@ -24,7 +24,6 @@
 
   /* nav indents */
   --indent-1: 1.2rem;
-  --indent-2: 1.6rem;
 
   /* fonts + fallbacks */
   --ff-fallback-serif: Georgia, "Times New Roman", Times, serif;
@@ -48,7 +47,6 @@
   font-family: "Comfortaa";
   src: url("/fonts/comfortaa-v45-cyrillic_latin-700.woff2") format("woff2"),
        url("/fonts/comfortaa-v45-cyrillic_latin-700.ttf") format("truetype");
-  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }

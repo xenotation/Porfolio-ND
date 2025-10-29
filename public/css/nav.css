@@ -31,6 +31,27 @@
     background: var(--bg);
   }
   
+
+  /* Hide scrollbars globally (still allows scrolling) */
+html, body {
+  -ms-overflow-style: none;   /* IE/Edge (legacy) */
+  scrollbar-width: none;      /* Firefox */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;                  /* WebKit */
+}
+
+/* Also hide on any scrollable containers */
+* {
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE/Edge legacy */
+}
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;                  /* WebKit */
+}
   /* ///////////////////////
   /    Language switcher   /
   //////////////////////// */
