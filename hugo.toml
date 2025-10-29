@@ -50,7 +50,7 @@ params_sameas_other = [
     title = "Nikola Stoyanov"
     weight = "1"
     [languages.en.params]
-      Description = "Nikola Stoyanov is a visual artist and machine philosopher hailing from Varna, Bulgaria. His work aims to traverse the boundary between research-based and speculative practices. Area of interest include the intersection of infrastructure, technological apparatus, art, and everyday life."
+      Description = "Nikola Stoyanov is a visual artist and machine philosopher hailing from Varna, Bulgaria. His work aims to traverse the boundary between research-based and speculative practices."
       name = "Nikola Stoyanov"
       alternateName = "Nikola Vladislavov Stoyanov"
       jobTitle = "Artist and philosopher"
