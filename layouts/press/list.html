@@ -18,43 +18,55 @@
 {{ $older  := append (where $all "year" "") (where $all "year" nil) }}
 
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "url": "{{ .Permalink }}",
-  "name": {{ printf "%q" (i18n "press" | default "Press") }},
-  "inLanguage": "{{ .Site.Language.Lang }}",
-  "about": {
-    "@type": "Person",
-    "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
-    {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
-    "image": "{{ . | absURL }}",
-    {{- end -}}
-    "url": "{{ .Site.BaseURL }}"
-  },
-  "mainEntity": {
-    "@type": "ItemList",
-    "itemListElement": [
-      {{- range $i, $it := $all -}}
-        {{- if gt $i 0 }},{{ end -}}
-        {
-          "@type": "ListItem",
-          "position": {{ add $i 1 }},
-          "item": {
-            "@type": "Article",
-            "headline": {{ printf "%q" (cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg)) }},
-            "url": {{ printf "%q" $it.url }}
-            {{- with (cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg)) -}},
-            "description": {{ printf "%q" . }}{{- end -}}
-            {{- with $it.year -}}
-            "datePublished": "{{ . }}"{{- end -}}
-          }
-        }
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "url": "{{ .Permalink }}",
+    "name": {{ printf "%q" (i18n "press" | default "Press") }},
+    "inLanguage": "{{ .Site.Language.Lang }}",
+    "about": {
+      "@type": "Person",
+      "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
+      {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
+      "image": "{{ . | absURL }}",
       {{- end -}}
-    ]
+      "url": "{{ .Site.BaseURL }}"
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {{- $isBG := eq .Site.Language.Lang "bg" -}}
+        {{- $all := site.Data.press | default (slice) -}}
+        {{- $all = where $all "dontshowbio" "ne" true -}}
+        {{- $all = where $all "dontshowbio" "ne" "true" -}}
+        {{- range $i, $it := $all -}}
+          {{- if gt $i 0 }},{{ end -}}
+          {
+            "@type": "ListItem",
+            "position": {{ add $i 1 }},
+            "item": {
+              "@type": "Article",
+              {{/* headline (trim any trailing ") */}}
+              {{- $hl := cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg) -}}
+              {{- $hl = replaceRE "\"+$" "" $hl -}}
+              "headline": {{ printf "%q" $hl }},
+  
+              "url": {{ printf "%q" $it.url }}
+              {{/* description (optional, also trimmed) */}}
+              {{- $desc := cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg) -}}
+              {{- with $desc -}}
+                {{- $clean := replaceRE "\"+$" "" . -}},
+              "description": {{ printf "%q" $clean }}{{- end -}}
+              {{- with $it.year -}},
+              "datePublished": "{{ . }}"{{- end -}}
+            }
+          }
+        {{- end -}}
+      ]
+    }
   }
-}
-</script>
+  </script>
+  
 
 <div class="biolist biolist--press">
   <h1 class="page-heading">{{ i18n "press" }}</h1>
