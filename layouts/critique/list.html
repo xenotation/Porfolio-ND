@@ -39,7 +39,7 @@
 | jsonify }}</script>
 
 <div class="biolist">
-  <h2 class="page-heading">{{ .Title }}</h2>
+  <h1 class="page-heading">{{ .Title }}</h1>
 
   <div class="about-wrap container--writing">
     <section class="about-body">
@@ -57,9 +57,9 @@
           {{ $auth  := cond $isBG (or .authorbg .authoren) (or .authoren .authorbg) }}
 
           <li class="press-item">
-            <h3 class="press-titleline">
+            <h2 class="press-titleline">
               <a class="press-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
-            </h3>
+            </h2>
             {{ with $auth }}<div class="press-author">{{ . }}</div>{{ end }}
             {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
           </li>
@@ -73,9 +73,9 @@
             {{ $auth  := cond $isBG (or .authorbg .authoren) (or .authoren .authorbg) }}
 
             <li class="press-item">
-              <h3 class="press-titleline">
+              <h2 class="press-titleline">
                 <a class="press-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
-              </h3>
+              </h2>
               {{ with $auth }}<div class="press-author">{{ . }}</div>{{ end }}
               {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
             </li>

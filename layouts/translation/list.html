@@ -59,9 +59,9 @@
           {{ $inTxt := cond $isBG (or .inbg .inen) (or .inen .inbg) }}
 
           <li class="press-item">
-            <h3 class="press-titleline">
+            <h2 class="press-titleline">
               <a class="press-link" href="{{ or .link .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
-            </h3>
+            </h2>
             {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
             {{ with $inTxt }}<div class="press-desc">{{ . }}</div>{{ end }}
           </li>
@@ -75,9 +75,9 @@
             {{ $inTxt := cond $isBG (or .inbg .inen) (or .inen .inbg) }}
 
             <li class="press-item">
-              <h3 class="press-titleline">
+              <h2 class="press-titleline">
                 <a class="press-link" href="{{ or .link .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
-              </h3>
+              </h2>
               {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
               {{ with $inTxt }}<div class="press-desc">{{ . }}</div>{{ end }}
             </li>

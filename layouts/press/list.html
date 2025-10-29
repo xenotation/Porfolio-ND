@@ -91,7 +91,7 @@
 
 
 <div class="biolist biolist--press">
-  <h2 class="page-heading">{{ .Title }}</h2>
+  <h1 class="page-heading">{{ .Title }}</h1>
 
   <div class="about-wrap container--press">
     <section class="about-body">
@@ -105,9 +105,9 @@
           {{ $label := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
           {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
           <li class="press-item">
-            <h3 class="press-titleline">
+            <h2 class="press-titleline">
               <a class="press-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ $label }}</a>
-            </h3>
+            </h2>
             {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
           </li>
         {{ end }}
@@ -118,9 +118,9 @@
             {{ $label := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
             {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
             <li class="press-item">
-              <h3 class="press-titleline">
+              <h2 class="press-titleline">
                 <a class="press-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ $label }}</a>
-              </h3>
+              </h2>
               {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
             </li>
           {{ end }}

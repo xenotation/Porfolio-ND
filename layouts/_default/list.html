@@ -44,7 +44,7 @@
 </script>
 
 <div class="gallery">
-  <h2 class="gallery-heading">selected exhibitions</h2>
+  <h1 class="gallery-heading">selected exhibitions</h1>
 
   {{ range $pages }}
   <article class="exhibit">
@@ -60,7 +60,7 @@
 
     <!-- MIDDLE: title / venue / address / dates -->
     <div class="exhibit-meta">
-      <h3 class="exhibit-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+      <h2 class="exhibit-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
 
       <div class="exhibit-address">
         {{ with .Params.place }}{{ . }}<br>{{ end }}

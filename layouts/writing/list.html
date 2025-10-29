@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="/css/bio-pages.css">
 
-{{/* language */}}
+{{/* language toggle for item-level fields (data-driven) */}}
 {{ $isBG := eq .Site.Language.Lang "bg" }}
 
 {{/* load + filter writing items from data/publist.* */}}
@@ -35,13 +35,13 @@
 {{ dict
   "@context" "https://schema.org"
   "@type" "ItemList"
-  "name" (cond $isBG "Писане" "Writing")
+  "name" (i18n "writing")
   "itemListElement" $elems
 | jsonify }}
 </script>
 
 <div class="biolist">
-  <h2 class="page-heading">{{ if $isBG }}Писане{{ else }}Writing{{ end }}</h2>
+  <h1 class="page-heading">{{ i18n "writing" }}</h1>
 
   <div class="about-wrap container--writing">
     <section class="about-body">
@@ -59,25 +59,25 @@
           {{ $inTxt := cond $isBG (or .inbg .inen) (or .inen .inbg) }}
 
           <li class="press-item">
-            <h3 class="press-titleline">
+            <h2 class="press-titleline">
               <a class="press-link" href="{{ or .link .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
-            </h3>
+            </h2>
             {{ with $inTxt }}<div class="press-in">{{ . }}</div>{{ end }}
             {{ with $desc  }}<div class="press-desc">{{ . }}</div>{{ end }}
           </li>
         {{ end }}
 
         {{ if gt (len $older) 0 }}
-          <li class="press-year press-year-older">{{ if $isBG }}По-рано{{ else }}Earlier{{ end }}</li>
+          <li class="press-year press-year-older">{{ i18n "earlier" }}</li>
           {{ range $older }}
             {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
             {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
             {{ $inTxt := cond $isBG (or .inbg .inen) (or .inen .inbg) }}
 
             <li class="press-item">
-              <h3 class="press-titleline">
+              <h2 class="press-titleline">
                 <a class="press-link" href="{{ or .link .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
-              </h3>
+              </h2>
               {{ with $inTxt }}<div class="press-in">{{ . }}</div>{{ end }}
               {{ with $desc  }}<div class="press-desc">{{ . }}</div>{{ end }}
             </li>
