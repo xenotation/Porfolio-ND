@@ -18,64 +18,64 @@
 
 <!-- JSON-LD: WebPage + Event + Person + Images + Breadcrumbs -->
 <!-- EXHIBITION JSON-LD (minimal but complete) -->
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "{{ .Site.BaseURL }}#website",
-        "url": "{{ .Site.BaseURL }}",
-        "name": "{{ .Site.Title }}",
-        "inLanguage": "{{ .Site.Language.Lang }}"
-      },
-      {
-        "@type": "WebPage",
-        "@id": "{{ .Permalink }}#webpage",
-        "url": "{{ .Permalink }}",
-        "name": "{{ .Title }}",
-        "isPartOf": { "@id": "{{ .Site.BaseURL }}#website" }{{ with .Resources.GetMatch "hero.*" }},
-        "primaryImageOfPage": {
-          "@type": "ImageObject",
-          "@id": "{{ .Permalink }}#primary",
-          "url": "{{ .Permalink }}"
-        }{{ end }},
-        "inLanguage": "{{ $.Site.Language.Lang }}"
-      },
-      {
-        "@type": "Person",
-        "@id": "{{ .Site.BaseURL }}#person",
-        "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
-        {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
-        "image": "{{ . | absURL }}",
-        {{- end -}}
-        "url": "{{ .Site.BaseURL }}"
-      }
-      {{- with .Params.datestart -}}
-      ,{
-        "@type": "ExhibitionEvent",
-        "@id": "{{ $.Permalink }}#event",
-        "name": "{{ $.Title }}",
-        "url": "{{ $.Permalink }}",
-        "startDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ with $.Params.dateend }},
-        "endDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ end }},
-        "eventStatus": "https://schema.org/EventScheduled",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "organizer": { "@id": "{{ $.Site.BaseURL }}#person" }{{ with $.Params.place }},
-        "location": {
-          "@type": "Place",
-          "name": "{{ . }}"{{ with $.Params.location }},
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "{{ . }}",
-            "addressCountry": "Bulgaria"
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "{{ .Site.BaseURL }}#website",
+          "url": "{{ .Site.BaseURL }}",
+          "name": "{{ .Site.Title }}",
+          "inLanguage": "{{ .Site.Language.Lang }}"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "{{ .Permalink }}#webpage",
+          "url": "{{ .Permalink }}",
+          "name": "{{ .Title }}",
+          "isPartOf": { "@id": "{{ .Site.BaseURL }}#website" }{{ with .Resources.GetMatch "hero.*" }},
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "@id": "{{ .Permalink }}#primary",
+            "url": "{{ .Permalink }}"
+          }{{ end }},
+          "inLanguage": "{{ $.Site.Language.Lang }}"
+        },
+        {
+          "@type": "Person",
+          "@id": "{{ .Site.BaseURL }}#person",
+          "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
+          {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
+          "image": "{{ . | absURL }}",
+          {{- end -}}
+          "url": "{{ .Site.BaseURL }}"
+        }
+        {{- with .Params.datestart -}}
+        ,{
+          "@type": "ExhibitionEvent",
+          "@id": "{{ $.Permalink }}#event",
+          "name": "{{ $.Title }}",
+          "url": "{{ $.Permalink }}",
+          "startDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ with $.Params.dateend }},
+          "endDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ end }},
+          "eventStatus": "https://schema.org/EventScheduled",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "organizer": { "@id": "{{ $.Site.BaseURL }}#person" }{{ with $.Params.place }},
+          "location": {
+            "@type": "Place",
+            "name": "{{ . }}"{{ with $.Params.location }},
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "{{ . }}",
+              "addressCountry": "Bulgaria"
+            }{{ end }}
           }{{ end }}
-        }{{ end }}
-      }
-      {{- end }}
-    ]
-  }
-  </script>
+        }
+        {{- end }}
+      ]
+    }
+    </script>
   
   
 
