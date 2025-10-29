@@ -19,148 +19,54 @@
 <!-- JSON-LD: WebPage + Event + Person + Images + Breadcrumbs -->
 <!-- EXHIBITION JSON-LD (minimal but complete) -->
 <script type="application/ld+json">
-  {{- /* ===============================
-       Build JSON-LD safely with Hugo
-       =============================== */ -}}
-  
-  {{- /* Person / sameAs */ -}}
-  {{- $personName   := or .Site.Language.Params.name .Site.Params.name -}}
-  {{- $altName      := or .Site.Language.Params.alternateName .Site.Params.alternateName -}}
-  {{- $jobTitle     := or .Site.Language.Params.jobTitle .Site.Params.jobTitle -}}
-  {{- $profileImage := or .Site.Language.Params.profileImage .Site.Params.profileImage -}}
-  {{- if $profileImage }}{{ $profileImage = $profileImage | absURL }}{{ end -}}
-  
-  {{- $sameAs := slice -}}
-  {{- with .Site.Params.social.instagram }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-  {{- with .Site.Params.social.facebook  }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-  {{- with .Site.Params.social.youtube   }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-  {{- with .Site.Params.params_sameas_other -}}{{ range . }}{{ $sameAs = $sameAs | append . }}{{ end }}{{ end -}}
-  {{- with .Params.sameAs -}}{{ range . }}{{ $sameAs = $sameAs | append . }}{{ end }}{{ end -}}
-  
-  {{- /* Hero */ -}}
-  {{- $hero := .Resources.GetMatch "hero.*" -}}
-  {{- $heroID := "" -}}
-  {{- if $hero }}{{ $heroID = print $hero.Permalink "#primary" }}{{ end -}}
-  
-  {{- /* Mediums / keywords */ -}}
+  {{- /* Build a simple ExhibitionEvent with images + works */ -}}
   {{- $mediums := .Params.medium | default (slice) -}}
   {{- $keywords := cond (gt (len $mediums) 0) (delimit $mediums ", ") "" -}}
   
-  {{- /* Core nodes */ -}}
-  {{- $website := dict
-    "@type" "WebSite"
-    "@id"   (print .Site.BaseURL "#website")
-    "url"   .Site.BaseURL
-    "name"  .Site.Title
-    "inLanguage" .Site.Language.Lang
-  -}}
-  
-  {{- $webpage := dict
-    "@type" "WebPage"
-    "@id"   (print .Permalink "#webpage")
-    "url"   .Permalink
-    "name"  .Title
-    "isPartOf" (dict "@id" (print .Site.BaseURL "#website"))
-    "inLanguage" .Site.Language.Lang
-    "description" (.Params.description | default .Summary)
-  -}}
-  {{- if $heroID }}{{ $webpage = merge $webpage (dict "primaryImageOfPage" (dict "@type" "ImageObject" "@id" $heroID "url" $hero.Permalink)) }}{{ end -}}
-  
-  {{- $person := dict
-    "@type" "Person"
-    "@id"   (print .Site.BaseURL "#person")
-    "name"  $personName
-    "alternateName" $altName
-    "jobTitle" $jobTitle
-    "url"   .Site.BaseURL
-    "nationality" "Bulgarian"
-    "knowsLanguage" (slice "bg-BG" "en")
-  -}}
-  {{- if $profileImage }}{{ $person = merge $person (dict "image" $profileImage) }}{{ end -}}
-  {{- if gt (len $sameAs) 0 }}{{ $person = merge $person (dict "sameAs" $sameAs) }}{{ end -}}
-  
-  {{- /* Start graph with the three core nodes */ -}}
-  {{- $graph := slice $website $webpage $person -}}
-  
-  {{- /* Event (optional) */ -}}
-  {{- $event := dict
-    "@type" "ExhibitionEvent"
-    "@id"   (print .Permalink "#event")
-    "name"  .Title
-    "url"   .Permalink
-    "eventStatus" "https://schema.org/EventScheduled"
-    "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
-    "organizer" (dict "@id" (print .Site.BaseURL "#person"))
-    "keywords" $keywords
-  -}}
-  {{- with .Params.datestart }}{{ $event = merge $event (dict "startDate" (time . | time.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
-  {{- with .Params.dateend   }}{{ $event = merge $event (dict "endDate"   (time . | time.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
-  {{- with .Params.place -}}
-    {{- $loc := dict "@type" "Place" "name" . -}}
-    {{- with $.Params.location -}}
-      {{- $loc = merge $loc (dict "address" (dict "@type" "PostalAddress" "addressLocality" . "addressCountry" "Bulgaria")) -}}
+  {{- /* Collect image URLs: hero + all non-hero gallery images (1600px) */ -}}
+  {{- $imgURLs := slice -}}
+  {{- with .Resources.GetMatch "hero.*" }}{{ $imgURLs = $imgURLs | append .Permalink }}{{ end -}}
+  {{- range $i, $res := .Resources.Match "*.*" -}}
+    {{- if and (in $res.MediaType.Type "image") (not (hasPrefix $res.Name "hero.")) -}}
+      {{- $large := $res.Resize "1600x" -}}
+      {{- $imgURLs = $imgURLs | append $large.Permalink -}}
     {{- end -}}
-    {{- $event = merge $event (dict "location" $loc) -}}
   {{- end -}}
-  {{- if $heroID }}{{ $event = merge $event (dict "image" (slice $heroID)) }}{{ end -}}
-  {{- if .Params.datestart }}{{ $graph = $graph | append $event }}{{ end -}}
   
-  {{- /* Artworks & images (skip hero) */ -}}
-  {{- $artIDs := slice -}}
+  {{- /* Build VisualArtwork list from non-hero images using imgNames/imgDescrps */ -}}
+  {{- $works := slice -}}
   {{- range $i, $res := .Resources.Match "*.*" -}}
     {{- if and (in $res.MediaType.Type "image") (not (hasPrefix $res.Name "hero.")) -}}
       {{- $title := index $.Params.imgNames   $i | default "" -}}
       {{- $desc  := index $.Params.imgDescrps $i | default "" -}}
       {{- $large := $res.Resize "1600x" -}}
-      {{- $imgID := print $large.Permalink "#img" -}}
-      {{- $artID := print $large.Permalink "#artwork" -}}
-  
-      {{- $imgNode := dict
-          "@type" "ImageObject"
-          "@id"   $imgID
-          "url"   $large.Permalink
-          "contentUrl" $large.Permalink
-          "encodingFormat" $res.MediaType.String
-          "name"  $title
-          "caption" $desc
-        -}}
-  
-      {{- $artNode := dict
+      {{- $work := dict
           "@type" "VisualArtwork"
-          "@id"   $artID
           "name"  $title
           "description" $desc
-          "creator" (dict "@id" (print $.Site.BaseURL "#person"))
-          "image"  (dict "@id" $imgID)
+          "image" $large.Permalink
         -}}
-      {{- if gt (len $mediums) 0 }}{{ $artNode = merge $artNode (dict "artMedium" $mediums) }}{{ end -}}
-  
-      {{- $graph = $graph | append $imgNode | append $artNode -}}
-      {{- $artIDs = $artIDs | append $artID -}}
+      {{- if gt (len $mediums) 0 }}{{ $work = merge $work (dict "artMedium" $mediums) }}{{ end -}}
+      {{- $works = $works | append $work -}}
     {{- end -}}
   {{- end -}}
   
-  {{- /* Link artworks on the event (if it exists) */ -}}
-  {{- if and .Params.datestart (gt (len $artIDs) 0) -}}
-    {{- /* Rebuild event with workFeatured */ -}}
-    {{- $event = merge $event (dict "workFeatured" $artIDs) -}}
-    {{- /* Replace last graph node if needed – but simpler: append a fresh event and rely on parsers to pick last? Better: rebuild graph cleanly: */ -}}
-    {{- $graph = (slice $website $webpage $person $event) | append (where $graph "@" "in" (slice)) -}}
-  {{- end -}}
+  {{- /* Location (simple) */ -}}
+  {{- $location := dict "@type" "Place" "name" (.Params.place | default "") -}}
   
-  {{- /* Breadcrumbs (simple) */ -}}
-  {{- $breadcrumbs := dict
-    "@type" "BreadcrumbList"
-    "@id"   (print .Permalink "#breadcrumbs")
-    "itemListElement" (slice
-      (dict "@type" "ListItem" "position" 1 "name" "Home"        "item" .Site.BaseURL)
-      (dict "@type" "ListItem" "position" 2 "name" "Exhibitions" "item" (absURL "work/"))
-      (dict "@type" "ListItem" "position" 3 "name" .Title        "item" .Permalink)
-    )
-  -}}
-  {{- $graph = $graph | append $breadcrumbs -}}
-  
-  {{- dict "@context" "https://schema.org" "@graph" $graph | jsonify -}}
+  {{- dict
+    "@context" "https://schema.org"
+    "@type"    "ExhibitionEvent"
+    "name"     .Title
+    "url"      (.Params.canonical | default .Permalink)
+    "description" (.Params.description | default .Summary)
+    "startDate" (with .Params.datestart (time . | time.Format "2006-01-02T15:04:05Z07:00"))
+    "endDate"   (with .Params.dateend   (time . | time.Format "2006-01-02T15:04:05Z07:00"))
+    "location"  $location
+    "keywords"  $keywords
+    "image"     $imgURLs
+    "workFeatured" $works
+  | jsonify }}
   </script>
   
   
