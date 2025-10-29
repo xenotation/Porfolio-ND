@@ -19,71 +19,63 @@
 <!-- JSON-LD: WebPage + Event + Person + Images + Breadcrumbs -->
 <!-- EXHIBITION JSON-LD (minimal but complete) -->
 <script type="application/ld+json">
-  {{- /* ===== Simple ExhibitionEvent JSON-LD (no @graph/@id) ===== */ -}}
-  
-  {{- /* Mediums / keywords */ -}}
-  {{- $mediums := .Params.medium | default (slice) -}}
-  {{- $keywords := "" -}}
-  {{- if gt (len $mediums) 0 }}{{ $keywords = delimit $mediums ", " }}{{ end -}}
-  
-  {{- /* Collect image URLs: hero + gallery (1600px) */ -}}
-  {{- $imgURLs := slice -}}
-  {{- with .Resources.GetMatch "hero.*" }}{{ $imgURLs = $imgURLs | append .Permalink }}{{ end -}}
-  {{- range $i, $res := .Resources.Match "*.*" -}}
-    {{- if and (in $res.MediaType.Type "image") (not (hasPrefix $res.Name "hero.")) -}}
-      {{- $large := $res.Resize "1600x" -}}
-      {{- $imgURLs = $imgURLs | append $large.Permalink -}}
-    {{- end -}}
-  {{- end -}}
-  
-  {{- /* Build VisualArtwork list from non-hero images using imgNames/imgDescrps */ -}}
-  {{- $works := slice -}}
-  {{- range $i, $res := .Resources.Match "*.*" -}}
-    {{- if and (in $res.MediaType.Type "image") (not (hasPrefix $res.Name "hero.")) -}}
-      {{- $title := index $.Params.imgNames   $i | default "" -}}
-      {{- $desc  := index $.Params.imgDescrps $i | default "" -}}
-      {{- $large := $res.Resize "1600x" -}}
-      {{- $work := dict
-          "@type" "VisualArtwork"
-          "name"  $title
-          "description" $desc
-          "image" $large.Permalink
-        -}}
-      {{- if gt (len $mediums) 0 }}{{ $work = merge $work (dict "artMedium" $mediums) }}{{ end -}}
-      {{- $works = $works | append $work -}}
-    {{- end -}}
-  {{- end -}}
-  
-  {{- /* Base event dict */ -}}
-  {{- $event := dict
-    "@context"   "https://schema.org"
-    "@type"      "ExhibitionEvent"
-    "name"       .Title
-    "url"        (.Params.canonical | default .Permalink)
-    "description" (.Params.description | default .Summary)
-    "keywords"   $keywords
-    "image"      $imgURLs
-    "workFeatured" $works
-  -}}
-  
-  {{- /* Optional dates */ -}}
-  {{- with .Params.datestart -}}
-    {{- $event = merge $event (dict "startDate" (time . | time.Format "2006-01-02T15:04:05Z07:00")) -}}
-  {{- end -}}
-  {{- with .Params.dateend -}}
-    {{- $event = merge $event (dict "endDate" (time . | time.Format "2006-01-02T15:04:05Z07:00")) -}}
-  {{- end -}}
-  
-  {{- /* Optional location (simple) */ -}}
-  {{- with .Params.place -}}
-    {{- $loc := dict "@type" "Place" "name" . -}}
-    {{- $event = merge $event (dict "location" $loc) -}}
-  {{- end -}}
-  
-  {{- $event | jsonify -}}
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "{{ .Site.BaseURL }}#website",
+        "url": "{{ .Site.BaseURL }}",
+        "name": "{{ .Site.Title }}",
+        "inLanguage": "{{ .Site.Language.Lang }}"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "{{ .Permalink }}#webpage",
+        "url": "{{ .Permalink }}",
+        "name": "{{ .Title }}",
+        "isPartOf": { "@id": "{{ .Site.BaseURL }}#website" }{{ with .Resources.GetMatch "hero.*" }},
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "@id": "{{ .Permalink }}#primary",
+          "url": "{{ .Permalink }}"
+        }{{ end }},
+        "inLanguage": "{{ $.Site.Language.Lang }}"
+      },
+      {
+        "@type": "Person",
+        "@id": "{{ .Site.BaseURL }}#person",
+        "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
+        {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
+        "image": "{{ . | absURL }}",
+        {{- end -}}
+        "url": "{{ .Site.BaseURL }}"
+      }
+      {{- with .Params.datestart -}}
+      ,{
+        "@type": "ExhibitionEvent",
+        "@id": "{{ $.Permalink }}#event",
+        "name": "{{ $.Title }}",
+        "url": "{{ $.Permalink }}",
+        "startDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ with $.Params.dateend }},
+        "endDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ end }},
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "organizer": { "@id": "{{ $.Site.BaseURL }}#person" }{{ with $.Params.place }},
+        "location": {
+          "@type": "Place",
+          "name": "{{ . }}"{{ with $.Params.location }},
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "{{ . }}",
+            "addressCountry": "Bulgaria"
+          }{{ end }}
+        }{{ end }}
+      }
+      {{- end }}
+    ]
+  }
   </script>
-  
-  
   
   
 
