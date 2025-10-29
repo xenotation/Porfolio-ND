@@ -6,7 +6,42 @@
 {{- $pages := where $all "Params.noshow" "ne" true -}}
 
 <!-- Lightweight ItemList JSON-LD ... (unchanged) -->
-
+<script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "mainEntity":{
+      "@type":"ItemList",
+      "name":"Exhibition Gallery",
+      "itemListElement":[
+        {{- range $i, $p := $pages -}}{{ if gt $i 0 }},{{ end }}
+        {
+          "@type":"Event",
+          "url":"{{ $p.Permalink }}",
+          "name":{{ printf "%q" $p.Title }},
+          {{ with $p.Params.description }}"description":{{ printf "%q" . }},{{ end }}
+          {{ with $p.Params.datestart }}"startDate":"{{ (time .) | time.Format "2006-01-02T15:04:05Z" }}",{{ end }}
+          {{ with $p.Params.dateend }}"endDate":"{{ (time .) | time.Format "2006-01-02T15:04:05Z" }}",{{ end }}
+          "image":{{ with $p.Resources.GetMatch "hero.*" -}}
+                    {{ printf "%q" .RelPermalink }}
+                  {{- else -}}
+                    {{ printf "%q" (print $.Site.BaseURL "images/default-hero.jpg") }}
+                  {{- end }},
+          "location":{
+            "@type":"Place",
+            "name":{{ printf "%q" (or $p.Params.place "") }},
+            "address":{
+              "@type":"PostalAddress",
+              "addressLocality":{{ printf "%q" (or $p.Params.addressLocality $p.Params.location "") }},
+              "addressCountry":{{ printf "%q" (or $p.Params.addressCountry "Bulgaria") }}
+            }
+          }
+        }
+        {{- end -}}
+      ]
+    }
+  }
+  </script>
 <div class="gallery">
   <h1 class="gallery-heading">selected exhibitions</h1>
 

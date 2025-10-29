@@ -18,7 +18,6 @@
 
 <!-- JSON-LD: WebPage + Event + Person + Images + Breadcrumbs -->
 <!-- EXHIBITION JSON-LD (minimal but complete) -->
-<!-- EXHIBITION JSON-LD: WebSite + WebPage + Person + ExhibitionEvent + Artworks + Breadcrumbs -->
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -35,129 +34,48 @@
         "@id": "{{ .Permalink }}#webpage",
         "url": "{{ .Permalink }}",
         "name": "{{ .Title }}",
-        "isPartOf": { "@id": "{{ .Site.BaseURL }}#website" },
-        {{- with .Resources.GetMatch "hero.*" }}
+        "isPartOf": { "@id": "{{ .Site.BaseURL }}#website" }{{ with .Resources.GetMatch "hero.*" }},
         "primaryImageOfPage": {
           "@type": "ImageObject",
           "@id": "{{ .Permalink }}#primary",
-          "url": "{{ .Permalink }}",
-          "contentUrl": "{{ .Permalink }}",
-          "encodingFormat": "{{ .MediaType.String }}"
-        },
-        {{- end }}
+          "url": "{{ .Permalink }}"
+        }{{ end }},
         "inLanguage": "{{ $.Site.Language.Lang }}"
       },
       {
         "@type": "Person",
         "@id": "{{ .Site.BaseURL }}#person",
         "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
-        "alternateName": "{{ or .Site.Language.Params.alternateName .Site.Params.alternateName }}",
-        "jobTitle": "{{ or .Site.Language.Params.jobTitle .Site.Params.jobTitle }}",
-        "url": "{{ .Site.BaseURL }}",
-        "nationality": "Bulgarian",
-        "knowsLanguage": ["bg-BG","en"]
-        {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}},
-        "image": "{{ . | absURL }}"
+        {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
+        "image": "{{ . | absURL }}",
         {{- end -}}
-        {{- $sameAs := slice -}}
-        {{- with .Site.Params.social.instagram }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-        {{- with .Site.Params.social.facebook  }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-        {{- with .Site.Params.social.youtube   }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-        {{- with .Site.Params.params_sameas_other -}}
-          {{- range . }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-        {{- end -}}
-        {{- if gt (len $sameAs) 0 -}},
-        "sameAs": {{ $sameAs | jsonify }}
-        {{- end }}
+        "url": "{{ .Site.BaseURL }}"
       }
-      {{- /* Build artworks (from non-hero images) */ -}}
-      {{- $artIDs := slice -}}
-      {{- $artNodes := slice -}}
-      {{- $imgNodes := slice -}}
-      {{- $keywords := "" -}}
-      {{- with .Params.medium }}{{ $keywords = delimit . ", " }}{{ end -}}
-      {{- range $i, $res := .Resources.Match "*.*" -}}
-        {{- if and (in $res.MediaType.Type "image") (ne $res.Name "hero.webp") -}}
-          {{- $title := index $.Params.imgNames   $i | default "" -}}
-          {{- $desc  := index $.Params.imgDescrps $i | default "" -}}
-          {{- $large := $res.Resize "1600x" -}}
-          {{- $imgId := print $large.Permalink "#img" -}}
-          {{- $artId := print $large.Permalink "#artwork" -}}
-          {{- $img := dict
-                "@type" "ImageObject"
-                "@id"   $imgId
-                "url"   $large.Permalink
-                "contentUrl" $large.Permalink
-                "encodingFormat" $res.MediaType.String
-                "name"  $title
-                "caption" $desc
-              -}}
-          {{- $art := dict
-                "@type" "VisualArtwork"
-                "@id"   $artId
-                "name"  $title
-                "description" $desc
-                "creator" (dict "@id" (print $.Site.BaseURL "#person"))
-                "image" (dict "@id" $imgId)
-              -}}
-          {{- if $keywords }}{{ $art = merge $art (dict "artMedium" $keywords) }}{{ end -}}
-          {{- $imgNodes = $imgNodes | append $img -}}
-          {{- $artNodes = $artNodes | append $art -}}
-          {{- $artIDs   = $artIDs   | append $artId -}}
-        {{- end -}}
-      {{- end -}}
-      ,
-      {
+      {{- with .Params.datestart -}}
+      ,{
         "@type": "ExhibitionEvent",
-        "@id": "{{ .Permalink }}#event",
-        "name": "{{ .Title }}",
-        "url": "{{ .Permalink }}",
-        {{- with .Params.datestart }}
-        "startDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}",
-        {{- end -}}
-        {{- with .Params.dateend }}
-        "endDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}",
-        {{- end -}}
+        "@id": "{{ $.Permalink }}#event",
+        "name": "{{ $.Title }}",
+        "url": "{{ $.Permalink }}",
+        "startDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ with $.Params.dateend }},
+        "endDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ end }},
         "eventStatus": "https://schema.org/EventScheduled",
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "organizer": { "@id": "{{ .Site.BaseURL }}#person" },
-        {{- with .Params.place }}
+        "organizer": { "@id": "{{ $.Site.BaseURL }}#person" }{{ with $.Params.place }},
         "location": {
           "@type": "Place",
-          "name": "{{ . }}"
-          {{- with $.Params.location }},
+          "name": "{{ . }}"{{ with $.Params.location }},
           "address": {
             "@type": "PostalAddress",
             "addressLocality": "{{ . }}",
             "addressCountry": "Bulgaria"
-          }
-          {{- end }}
-        },
-        {{- end }}
-        {{- with .Resources.GetMatch "hero.*" }}
-        "image": ["{{ .Permalink }}#primary"],
-        {{- end }}
-        {{- if gt (len $artIDs) 0 }}
-        "workFeatured": {{ $artIDs | jsonify }},
-        {{- end }}
-        "keywords": "{{ $keywords }}"
+          }{{ end }}
+        }{{ end }}
       }
-      {{- /* Splice artworks + images + breadcrumbs into graph */ -}}
-      {{- if gt (len $imgNodes) 0 -}},{{ $imgNodes | jsonify | trimPrefix "[" | trimSuffix "]" }}{{- end -}}
-      {{- if gt (len $artNodes) 0 -}},{{ $artNodes | jsonify | trimPrefix "[" | trimSuffix "]" }}{{- end -}}
-      ,{
-        "@type": "BreadcrumbList",
-        "@id": "{{ .Permalink }}#breadcrumbs",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ .Site.BaseURL }}" },
-          { "@type": "ListItem", "position": 2, "name": "Exhibitions", "item": "{{ absURL "work/" }}" },
-          { "@type": "ListItem", "position": 3, "name": "{{ .Title }}", "item": "{{ .Permalink }}" }
-        ]
-      }
+      {{- end }}
     ]
   }
   </script>
-  
   
   
 
