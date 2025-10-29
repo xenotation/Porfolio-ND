@@ -92,7 +92,6 @@
     content: "-";
     position: absolute;
     left: 0;
-    top: 0.23rem;
   }
   
   /*   //////////////
@@ -102,7 +101,7 @@
   .top a{
     color: var(--text);
     text-decoration: none;
-    font-size: var(--size-0);
+    font-size: var(--size-10);
   }
   .top a:hover{
     text-decoration: underline;

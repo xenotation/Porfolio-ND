@@ -8,6 +8,7 @@
   --outer-m: 1rem;
 
   /* type scale (from your old setup) */
+  --size-10: 1.15rem;   /* base paragraph size */
   --size-0: 1.20rem;   /* base paragraph size */
   --size-1: 1.248rem;  /* h3 */
   --size-2: 1.296rem;  /* spare step */
