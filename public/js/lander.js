@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     var videoFiles = [
       'https://pub-bf907ed99bd1421abc1452015e98ae3b.r2.dev/Multiscale%20Turing%20Pattern_01.mp4',
+      'https://pub-bf907ed99bd1421abc1452015e98ae3b.r2.dev/Multiscale%20Turing%20Pattern_02.mp4',
       'https://pub-bf907ed99bd1421abc1452015e98ae3b.r2.dev/Multiscale%20Turing%20Pattern_03.mp4',
       'https://pub-bf907ed99bd1421abc1452015e98ae3b.r2.dev/Multiscale%20Turing%20Pattern_04.mp4',
       'https://pub-bf907ed99bd1421abc1452015e98ae3b.r2.dev/Multiscale%20Turing%20Pattern_05.mp4',
