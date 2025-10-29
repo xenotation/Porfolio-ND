@@ -3,7 +3,7 @@
 <!-- Lang -->
     <meta name="language" content="{{ .Site.Language.Lang | default "en" }}">
 <!-- Tittle -->
-    <title itemprop="name">{{ if .IsHome }}Artist Portfolio | {{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+    <title itemprop="name">{{ if .IsHome }}{{ .Site.Title }} | Artist Portfolio{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
     <meta property="og:title" content="{{ if .IsHome }}Portfolio | {{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}" />
     <meta name="twitter:title" content="{{ if .IsHome }}Portfolio | {{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}" />
 
@@ -22,7 +22,6 @@
     <meta name="twitter:description" content="{{ .Site.Params.description }}" />
   {{ end }}
 
-  <meta content="{{ delimit .Keywords ", " }}" name="keywords">
 
 <!-- Alternative Links for lang and self refrenccing? -->
     {{ if .IsTranslated }}

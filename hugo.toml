@@ -15,6 +15,15 @@ bg = "/cv-bg.pdf"
     facebook  = "https://www.facebook.com/av0id.nd/"
     youtube   = "https://www.youtube.com/@newdegeneration"
 
+params_sameas_other = [
+        "https://twitter.com/new_degen",
+        "https://www.youtube.com/@newdegeneration",
+        "https://www.wikidata.org/wiki/Q124417026",
+        "https://www.goodreads.com/author/show/48653203",
+        "https://www.imdb.com/name/nm16814810",
+        "https://sussex.academia.edu/NikolaStoyanov"
+]
+
 [sitemap]
   filename = "sitemap.xml"
   enableRobotsTXT = true
@@ -46,31 +55,7 @@ bg = "/cv-bg.pdf"
       alternateName = "Nikola Vladislavov Stoyanov"
       jobTitle = "Artist and philosopher"
       profileImage = "images/profile.jpg"
-      sameAs = [
-        "https://www.facebook.com/av0id.nd/",
-        "https://www.instagram.com/avoid.nd/",
-        "https://www.linkedin.com/in/nstoyanov23/",
-        "https://twitter.com/new_degen",
-        "https://www.youtube.com/@newdegeneration",
-        "https://www.wikidata.org/wiki/Q124417026",
-        "https://www.goodreads.com/author/show/48653203",
-        "https://www.imdb.com/name/nm16814810",
-        "https://sussex.academia.edu/NikolaStoyanov"
-      ]
       organizerUrl = "https://newdegeneration.xyz/bio/"
-      performerUrl = "https://newdegeneration.xyz/bio/"
-    [[languages.en.menu.main]]
-      url = "/work/"
-      name = "work"
-      weight = 1
-    [[languages.en.menu.main]]
-      url = "/bio/"
-      name = "bio"
-      weight = 2
-    [[languages.en.menu.main]]
-      url = "https://blog.newdegeneration.xyz/"
-      name = "blog"
-      weight = 3
 
   [languages.bg]
     languageName = "Български"
@@ -81,29 +66,7 @@ bg = "/cv-bg.pdf"
       Description = "Никола Стоянов е визуален артист и машинен философ от Варна, България, който се занимава с пресичането между изследователските и спекулативните практики. Работата му обхваща теми като хаос, киберготика и акселерационистка философия, като се фокусира върху пресичането на инфраструктурата, технологичния апарат, изкуството и ежедневието."
       name = "Никола Стоянов"
       alternateName = "Никола Владиславов Стоянов"
-      jobTitle = "Визуален артист и философ"
+      jobTitle = "Aртист и философ"
       profileImage = "images/profile.jpg"
-      sameAs = [
-        "https://www.facebook.com/av0id.nd/",
-        "https://www.instagram.com/avoid.nd/",
-        "https://www.linkedin.com/in/nstoyanov23/",
-        "https://twitter.com/new_degen",
-        "https://www.youtube.com/@newdegeneration",
-        "https://www.wikidata.org/wiki/Q124417026",
-        "https://www.imdb.com/name/nm16814810",
-        "https://sussex.academia.edu/NikolaStoyanov"
-      ]
       organizerUrl = "https://newdegeneration.xyz/bio/"
-      performerUrl = "https://newdegeneration.xyz/bio/"
-    [[languages.bg.menu.main]]
-      url = "/bg/work/"
-      name = "труд"
-      weight = 1
-    [[languages.bg.menu.main]]
-      url = "/bg/bio/"
-      name = "био"
-      weight = 2
-    [[languages.bg.menu.main]]
-      url = "https://blog.newdegeneration.xyz/"
-      name = "блог"
-      weight = 3
+

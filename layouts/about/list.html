@@ -3,51 +3,80 @@
 <link rel="stylesheet" href="/css/bio-pages.css">
 <script src="{{ "/js/spinner.js" | relURL }}" defer></script>
 
-<div class="biolist">
-  <h2 class="page-heading">{{ .Title }}</h2>
+{{/* ---------------------------
+     Minimal data (simple & explicit)
+---------------------------- */}}
+{{ $personName   := or .Params.name .Site.Params.name }}
+{{ $descr        := or .Params.description .Site.Params.description }}
+{{ $jobTitle     := or .Params.jobTitle .Site.Params.jobTitle }}
+{{ $profileImage := or .Params.profile_image .Site.Params.profileImage }}
+{{ if $profileImage }}{{ $profileImage = $profileImage | absURL }}{{ end }}
 
-  <!-- Eye block -->
+{{/* SAMEAS: use ONLY params_sameas_other (array of absolute URLs) */}}
+{{ $sameAs := .Site.Params.params_sameas_other | default (slice) }}
+
+<script type="application/ld+json">
+{{ dict
+  "@context" "https://schema.org"
+  "@type" "ProfilePage"
+  "mainEntity" (dict
+    "@type" "Person"
+    "name" $personName
+    "url" .Permalink
+    "description" $descr
+    "image" (cond (ne $profileImage "") $profileImage nil)
+    "jobTitle" $jobTitle
+    "sameAs" $sameAs
+    "knowsLanguage" (slice "en" "bg")
+  )
+ | jsonify | safeHTML }}
+</script>
+
+<div class="biolist">
+  <h1 class="page-heading">{{ .Title }}</h1>
+
+  <!-- Eye block (decorative only) -->
   <div class="eye" aria-hidden="true">
     <img class="eye-base"  src="/images/i_see_you_O.png" alt="">
     <img class="eye-pupil" src="/images/i_see_you_I.png" alt="">
   </div>
 
-  <!-- Two-column links (uses press grid + type) -->
+  <!-- Two-column links (press grid styles) -->
   <section class="about-meta container--press">
     <ul class="press-list" role="list">
       {{ with .Site.Params.social.instagram }}
         <li class="press-item">
-          <h3 class="press-titleline"><a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="noopener">Instagram</a></h3>
+          <h3 class="press-titleline">
+            <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="me noopener">Instagram</a>
+          </h3>
         </li>
       {{ end }}
+
       {{ with .Site.Params.social.email }}
         <li class="press-item">
-          <h3 class="press-titleline"><a class="press-link" href="{{ . | safeURL }}">Email</a></h3>
+          <h3 class="press-titleline">
+            <a class="press-link" href="mailto:{{ . }}">Email</a>
+          </h3>
         </li>
       {{ end }}
 
       {{ with .Site.Params.social.facebook }}
         <li class="press-item">
-          <h3 class="press-titleline"><a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="noopener">Facebook</a></h3>
+          <h3 class="press-titleline">
+            <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="me noopener">Facebook</a>
+          </h3>
         </li>
       {{ end }}
 
-      {{/* =========================================================
-           CV (fixed label; language-specific link)
-           Supports:
-             [params.documents.cv_pdf] en="/cv-en.pdf" bg="/cv-bg.pdf"
-             or fallback keys cv_pdf_en / cv_pdf_bg
-         ========================================================= */}}
-      {{ $lang  := .Site.Language.Lang }}
-      {{ $cv    := "" }}
+      {{ with .Site.Params.social.youtube }}
+        <li class="press-item">
+          <h3 class="press-titleline">
+            <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="noopener">YouTube</a>
+          </h3>
+        </li>
+      {{ end }}
 
-      {{ with .Site.Params.documents.cv_pdf }}
-        {{ $cv = (index . $lang) | default (index . "en") | default (index . "default") | default "" }}
-      {{ end }}
-      {{ if not $cv }}
-        {{ $cv = (index .Site.Params.documents (printf "cv_pdf_%s" $lang)) | default (index .Site.Params.documents "cv_pdf_en") | default "" }}
-      {{ end }}
-      {{ with $cv }}
+      {{ with .Params.cv_pdf }}
         <li class="press-item">
           <h3 class="press-titleline">
             <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="noopener">CV (PDF)</a>
@@ -55,36 +84,16 @@
         </li>
       {{ end }}
 
-      {{ with .Site.Params.social.youtube }}
-        <li class="press-item">
-          <h3 class="press-titleline"><a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="noopener">YouTube</a></h3>
-        </li>
-      {{ end }}
-
-      {{/* =========================================================
-           Portfolio (i18n label; language-specific link)
-           Supports:
-             [params.documents.portfolio_pdf] en="/portfolio-en.pdf" bg="/portfolio-bg.pdf"
-             or fallback keys portfolio_pdf_en / portfolio_pdf_bg
-         ========================================================= */}}
-      {{ $pf := "" }}
-      {{ with .Site.Params.documents.portfolio_pdf }}
-        {{ $pf = (index . $lang) | default (index . "en") | default (index . "default") | default "" }}
-      {{ end }}
-      {{ if not $pf }}
-        {{ $pf = (index .Site.Params.documents (printf "portfolio_pdf_%s" $lang)) | default (index .Site.Params.documents "portfolio_pdf_en") | default "" }}
-      {{ end }}
-      {{ with $pf }}
+      {{ with .Params.portfolio_pdf }}
         <li class="press-item">
           <h3 class="press-titleline">
-            <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="noopener">{{ T "portfolio" }}</a>
+            <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="noopener">{{ T "portfolio" | default "Portfolio" }}</a>
           </h3>
         </li>
       {{ end }}
     </ul>
   </section>
 
-  <!-- Bio body -->
   <div class="about-body">
     <div class="about-text">{{ .Content }}</div>
   </div>

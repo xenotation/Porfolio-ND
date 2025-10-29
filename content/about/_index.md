@@ -1,25 +1,13 @@
 +++
 title = "about"
-description = "Biography, CV, portfolio and contact for bulgaria artist and theorist Nikola Stoyanov."
+description = "Nikola Stoyanov is a contemporary multidisciplinary artist and philosopher based in Varna, Bulgaria. He is the author of numerous exhibitions, specializing in photography and digital art exploring the intersections of technology, philosophy, and aesthetics."
 aliases = ["about/"]
 hero_alt = "Nikola Stoyanov portrait / studio detail"
 cv_pdf = "/files/nikola-stoyanov-cv.pdf"
 portfolio_pdf = "/files/nikola-stoyanov-portfolio.pdf"
-
-[[social]]
-label = "Instagram"
-url   = "https://instagram.com/nikola_stoyanov"
-
-[[social]]
-label = "Email"
-url   = "mailto:studio@example.com"
-
-[[social]]
-label = "LinkedIn"
-url   = "https://www.linkedin.com/in/nikolastoyanov"
 +++
 
-Nikola Stoyanov is a contemporary visual artist and machine philosopher based in Varna, Bulgaria. He is the author of numerous exhibitions, specializing in photography and digital art exploring the intersections of technology, philosophy, and aesthetics.
+Nikola Stoyanov is a contemporary multidisciplinary artist and philosopher based in Varna, Bulgaria. He is the author of numerous exhibitions, specializing in photography and digital art exploring the intersections of technology, philosophy, and aesthetics.
 
 His work engages with theory-fiction, post-humanist research, and experimental artistic methodologies, pushing the boundaries of contemporary visual art.
 

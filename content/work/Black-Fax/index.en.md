@@ -1,7 +1,7 @@
 +++
 title = 'Black Fax off the Hook'
 date = 2024-05-28T23:30:59+02:00
-description = "Black Fax off the Hook is an installation where a hacked fax machine continuously prints 35 meters of AI-generated gothic erotic fan-fiction, recasting notorious Bulgarian political figures. The work stages media saturation as a weaponized spectacle. DOZA Gallery, Sofia (SPORNO, 2024)."
+description = "An insurrectionary installation at DOZA: a hacked fax machine endlessly prints AI-made gothic fan-fiction, skewering media overload and Bulgarian populism."
 canonical = "https://newdegeneration.xyz/work/black-fax/"
 
 medium = ["hacked fax machine", "intallation", "ai generated gothic fiction"]
