@@ -46,10 +46,8 @@
             "url": {{ printf "%q" $it.url }}
             {{- with (cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg)) -}},
             "description": {{ printf "%q" . }}{{- end -}}
-            {{- with $it.year -}},
+            {{- with $it.year -}}
             "datePublished": "{{ . }}"{{- end -}}
-            {{- with $it.exhibition -}},
-            "isPartOf": { "@type": "CreativeWork", "name": {{ printf "%q" . }} }{{- end -}}
           }
         }
       {{- end -}}

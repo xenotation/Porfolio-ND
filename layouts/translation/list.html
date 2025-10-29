@@ -19,11 +19,11 @@
 {{ $sorted := sort $withYear "year" "desc" }}
 {{ $older  := append (where $translations "year" "") (where $translations "year" nil) }}
 
-{{/* small Person bits for JSON-LD */}}
+{{/* Person bits for JSON-LD */}}
 {{ $personName := or .Site.Language.Params.name .Site.Params.name }}
 {{ $personImg  := or .Site.Language.Params.profileImage .Site.Params.profileImage }}
 
-<!-- JSON-LD: minimal WebPage + ItemList of translations (Nikola as translator) -->
+<!-- JSON-LD: WebPage + ItemList of CreativeWorks (Nikola as translator) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -34,7 +34,9 @@
   "about": {
     "@type": "Person",
     "name": {{ printf "%q" $personName }},
-    {{- with $personImg }}"image": "{{ . | absURL }}",{{ end -}}
+    {{- with $personImg -}}
+    "image": "{{ . | absURL }}",
+    {{- end -}}
     "url": "{{ .Site.BaseURL }}"
   },
   "mainEntity": {
@@ -52,15 +54,12 @@
             "translator": {
               "@type": "Person",
               "name": {{ printf "%q" $personName }},
-              "url": "{{ .Site.BaseURL }}"
-              {{- with $personImg }}, "image": "{{ . | absURL }}"{{ end -}}
-            }
-            {{- with (cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg)) -}},
-            "description": {{ printf "%q" . }}{{- end -}}
-            {{- with $it.year -}},
-            "datePublished": "{{ . }}"{{- end -}}
-            {{- with (cond $isBG (or $it.inbg $it.inen) (or $it.inen $it.inbg)) -}},
-            "isPartOf": { "@type": "CreativeWork", "name": {{ printf "%q" . }} }{{- end -}}
+              "url": "{{ .Site.BaseURL }}"{{ with $personImg }},
+              "image": "{{ . | absURL }}"{{ end }}
+            }{{ with (cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg)) }},
+            "description": {{ printf "%q" . }}{{ end }}{{ with $it.year }},
+            "datePublished": "{{ . }}"{{ end }}{{ with (cond $isBG (or $it.inbg $it.inen) (or $it.inen $it.inbg)) }},
+            "isPartOf": { "@type": "CreativeWork", "name": {{ printf "%q" . }} }{{ end }}
           }
         }
       {{- end -}}

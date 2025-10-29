@@ -1,33 +1,24 @@
 {{ define "main" }}
 
 <link rel="stylesheet" href="/css/bio-pages.css">
-<link rel="stylesheet" href="/css/press.css">      {{/* press visuals: sticky h2, type, spacing */}}
-<link rel="stylesheet" href="/css/writing.css">    {{/* one-column overrides (same used for Critique) */}}
+<link rel="stylesheet" href="/css/press.css">      {{/* press visuals: sticky h2, spacing */}}
+<link rel="stylesheet" href="/css/writing.css">    {{/* one-column overrides, same as Critique */}}
 
-{{/* language only for item-level BG/EN fallbacks */}}
+{{/* language for item-level BG/EN fallbacks */}}
 {{ $isBG := eq .Site.Language.Lang "bg" }}
 
-{{/* load + filter source: data/publist.* */}}
+{{/* source: data/publist.* → only lectures/talks; hide noshow */}}
 {{ $src := site.Data.publist | default (slice) }}
-
-{{/* keep only lectures/talks */}}
 {{ $lectures := where $src "tag" "in" (slice "lecture" "talk") }}
-
-{{/* hide items with noshow true/"true" */}}
 {{ $lectures = where $lectures "noshow" "ne" true }}
 {{ $lectures = where $lectures "noshow" "ne" "true" }}
 
-{{/* split + sort like Press */}}
+{{/* split + sort for display (like Press) */}}
 {{ $withYear := where $lectures "year" "!=" "" | default (slice) }}
 {{ $withYear = where $withYear "year" "ne" nil }}
 {{ $sorted := sort $withYear "year" "desc" }}
 {{ $older  := append (where $lectures "year" "") (where $lectures "year" nil) }}
 
-{{/* Person bits for JSON-LD */}}
-{{ $personName := or .Site.Language.Params.name .Site.Params.name }}
-{{ $personImg  := or .Site.Language.Params.profileImage .Site.Params.profileImage }}
-
-<!-- JSON-LD: Minimal WebPage + ItemList of Events (Nikola as speaker) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -37,8 +28,10 @@
   "inLanguage": "{{ .Site.Language.Lang }}",
   "about": {
     "@type": "Person",
-    "name": {{ printf "%q" $personName }},
-    {{- with $personImg }}"image": "{{ . | absURL }}",{{ end -}}
+    "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
+    {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
+    "image": "{{ . | absURL }}",
+    {{- end -}}
     "url": "{{ .Site.BaseURL }}"
   },
   "mainEntity": {
@@ -52,19 +45,19 @@
           "item": {
             "@type": "Event",
             "name": {{ printf "%q" (cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg)) }},
-            "url": {{ printf "%q" (or $it.link $it.url) }},
-            "speaker": {
-              "@type": "Person",
-              "name": {{ printf "%q" $personName }},
-              "url": "{{ .Site.BaseURL }}"
-              {{- with $personImg }}, "image": "{{ . | absURL }}"{{ end -}}
-            }
+            "url": {{ printf "%q" (or $it.link $it.url) }}
             {{- with (cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg)) -}},
             "description": {{ printf "%q" . }}{{- end -}}
-            {{- with $it.year -}},
-            "startDate": "{{ . }}"{{- end -}}
-            {{- with (cond $isBG (or $it.inbg $it.inen) (or $it.inen $it.inbg)) -}},
-            ,"location": { "@type": "Place", "name": {{ printf "%q" . }} }{{- end -}}
+            {{- with $it.date -}},
+            "startDate": "{{ . }}"{{- else -}}{{ with $it.year }},
+            "startDate": "{{ . }}-01-01"{{- end -}}{{- end -}},
+            "performer": {
+              "@type": "Person",
+              "name": "{{ or $.Site.Language.Params.name $.Site.Params.name }}",
+              "url": "{{ $.Site.BaseURL }}"{{ with (or $.Site.Language.Params.profileImage $.Site.Params.profileImage) }},
+              "image": "{{ . | absURL }}"{{ end }}
+            }{{ with (cond $isBG (or $it.inbg $it.inen) (or $it.inen $it.inbg)) }},
+            "location": { "@type": "Place", "name": {{ printf "%q" . }} }{{ end }}
           }
         }
       {{- end -}}
@@ -79,7 +72,7 @@
   <div class="about-wrap container--writing">
     <section class="about-body">
       <ul class="writing-list" role="list">
-        {{/* Year-grouped items (single column, press look) */}}
+        {{/* Year-grouped items (single column) */}}
         {{ $current := 0 }}
         {{ range $sorted }}
           {{ if ne $current .year }}
@@ -89,15 +82,12 @@
 
           {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
           {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
-          {{ $auth  := cond $isBG (or .authorbg .authoren) (or .authoren .authorbg) }}
           {{ $inTxt := cond $isBG (or .inbg .inen) (or .inen .inbg) }}
 
           <li class="press-item">
             <h2 class="press-titleline">
               <a class="press-link" href="{{ or .link .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
             </h2>
-
-            {{ with $auth }}<div class="press-author">{{ . }}</div>{{ end }}
             {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
             {{ with $inTxt }}<div class="press-desc">{{ . }}</div>{{ end }}
           </li>
@@ -108,15 +98,12 @@
           {{ range $older }}
             {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
             {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
-            {{ $auth  := cond $isBG (or .authorbg .authoren) (or .authoren .authorbg) }}
             {{ $inTxt := cond $isBG (or .inbg .inen) (or .inen .inbg) }}
 
             <li class="press-item">
               <h2 class="press-titleline">
                 <a class="press-link" href="{{ or .link .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
               </h2>
-
-              {{ with $auth }}<div class="press-author">{{ . }}</div>{{ end }}
               {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
               {{ with $inTxt }}<div class="press-desc">{{ . }}</div>{{ end }}
             </li>
