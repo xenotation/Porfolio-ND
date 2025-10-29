@@ -13,31 +13,32 @@
 {{/* SAMEAS from global params (no mailto) */}}
 {{ $sameAs := .Site.Params.params_sameas_other | default (slice) }}
 
-<script type="application/ld+json">
-{{ dict
-  "@context" "https://schema.org"
-  "@type" "AboutPage"
-  "url" .Permalink
-  "name" (printf "About — %s" .Site.Title)
+{{/* Build Person object */}}
+{{ $person := dict
+  "@type"        "Person"
+  "name"         $personName
+  "alternateName" .Site.Language.Params.alternateName
+  "jobTitle"     $jobTitle
+  "nationality"  "Bulgarian"
+  "url"          .Permalink
+  "knowsLanguage" (slice "bg" "en")
+}}
+{{ if $profileImage }}{{ $person = merge $person (dict "image" $profileImage) }}{{ end }}
+{{ if gt (len $sameAs) 0 }}{{ $person = merge $person (dict "sameAs" $sameAs) }}{{ end }}
+
+{{/* Build AboutPage object (no graph, no extras) */}}
+{{ $about := dict
+  "@context"   "https://schema.org"
+  "@type"      "AboutPage"
+  "url"        .Permalink
+  "name"       .Title
   "description" $descr
-  "inLanguage" .Site.Language.Lang
-  "isPartOf" (dict
-    "@type" "WebSite"
-    "name" .Site.Title
-    "url"  .Site.BaseURL
-  )
-  "mainEntity" (dict
-    "@type" "Person"
-    "name" $personName
-    "alternateName" .Site.Language.Params.alternateName
-    "url"  .Site.BaseURL
-    "jobTitle" $jobTitle
-    "nationality" "Bulgarian"
-    "image" (cond (ne $profileImage "") $profileImage nil)
-    "knowsLanguage" (slice "bg-BG" "en")
-    "sameAs" (cond (gt (len $sameAs) 0) $sameAs nil)
-  )
-| jsonify | safeHTML }}
+  "inLanguage"  .Site.Language.Lang
+  "mainEntity"  $person
+}}
+
+<script type="application/ld+json">
+{{ $about | jsonify | safeHTML }}
 </script>
 
 <div class="biolist">
