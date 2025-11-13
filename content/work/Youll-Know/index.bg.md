@@ -43,18 +43,6 @@ imgDescrps = [
   "Изкуство, отразяващо временност и градска ентропия."
 ]
 
-press = [
-  { name = "Българска национална телевизия", url = "https://bnt.bg/news/vtoro-izdanie-na-festivala-za-savremenno-vizualno-izkustvo-buna-vav-varna-v362667-326670news.html" },
-  { name = "Българско национално радио", url = "https://bnr.bg/varna/post/101975750/buna-2-da-razbunim-duhovete-s-izkustvo" },
-  { name = "Българска телеграфна агенция", url = "https://www.bta.bg/bg/news/bulgaria/regional-news/oblast-varna/669944-vtoroto-izdanie-na-foruma-za-savremenno-izkustvo-buna-vav-varna-shte-bade-ot-2" },
-  { name = "24 Часа", url = "https://www.24chasa.bg/bulgaria/article/18004134" },
-  { name = "Варна Утре", url = "https://varnautre.bg/2024/05/24/629748-unikalen_festival_zapochva_dnes_vuv_varna" },
-  { name = "Културни новини", url = "https://kulturni-novini.info/sections/11/news/39169-vtoroto-izdanie-na-foruma-za-savremenno-izkustvo-buna-shte-se-sluchi-ot-24-may-do-2-yuni-vav-varna" },
-  { name = "Дневник", url = "https://www.dnevnik.bg/burzi-novini/2024/05/20/4627213_burzi_novini_20_mai/#4628150" },
-  { name = "Виж", url = "https://vijmag.bg/bg/article/vtora-buna" },
-  { name = "БНТ", url = "https://bnt.bg/news/kakvo-da-ochakvame-na-festivala-buna-vav-varna-v368087-329168news.html" }
-]
-
 +++
 
 Като част от фестивала [_Buna 2_ (2024)](https://bunavarna.com/en/programme/#urbaninterventions), _Ще разбереш, когато му дойде времето_ се превърна в градска интервенция и инсталация, която изследва границите на изкуството, ремонта и разрухата и се движи в мрачната територия между спонтанния градски кръпка и конспиративната параноя. _Ще разбереш, когато му дойде времето_ незаконно разрушително разрастване в сърцето на град, който винаги се застроява и никога не приютява жителите си. Изградена изцяло от изхвърлени, изоставени и леснодостъпни строителни материали - метални скоби, крепежни елементи и изхвърлени отломки - творбата въплъщава дълбоко вкоренената българска култура на ремонти „направи си сам“. Тази култура, вкоренена в импровизационния етос на късния социализъм, отразява непрекъснатото договаряне с недостига, стратегия за оцеляване, която превръща остатъците от функционалността във временни решения.

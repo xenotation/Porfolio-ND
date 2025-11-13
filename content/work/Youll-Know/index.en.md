@@ -41,19 +41,6 @@ imgDescrps = [
   "Urban space transformed into an ever-changing sculpture.",
   "Art reflecting impermanence and urban entropy."
 ]
-
-press = [
-  { name = "Bulgarian National Television", url = "https://bnt.bg/news/vtoro-izdanie-na-festivala-za-savremenno-vizualno-izkustvo-buna-vav-varna-v362667-326670news.html" },
-  { name = "Bulgarian National Radio", url = "https://bnr.bg/varna/post/101975750/buna-2-da-razbunim-duhovete-s-izkustvo" },
-  { name = "Bulgarian Telegraph Agency", url = "https://www.bta.bg/bg/news/bulgaria/regional-news/oblast-varna/669944-vtoroto-izdanie-na-foruma-za-savremenno-izkustvo-buna-vav-varna-shte-bade-ot-2" },
-  { name = "24 Hours", url = "https://www.24chasa.bg/bulgaria/article/18004134" },
-  { name = "Varna Tommorow", url = "https://varnautre.bg/2024/05/24/629748-unikalen_festival_zapochva_dnes_vuv_varna" },
-  { name = "Cultural News", url = "https://kulturni-novini.info/sections/11/news/39169-vtoroto-izdanie-na-foruma-za-savremenno-izkustvo-buna-shte-se-sluchi-ot-24-may-do-2-yuni-vav-varna" },
-  { name = "Dnevnik", url = "https://www.dnevnik.bg/burzi-novini/2024/05/20/4627213_burzi_novini_20_mai/#4628150" },
-  { name = "Vij", url = "https://vijmag.bg/bg/article/vtora-buna" },
-  { name = "BNT", url = "https://bnt.bg/news/kakvo-da-ochakvame-na-festivala-buna-vav-varna-v368087-329168news.html" }
-]
-
 +++
 
 As part of the [_Buna 2 (2024)_](https://bunavarna.com/en/programme/#urbaninterventions) visual arts festival, _You’ll Understand when the Time Comes_ emerged as an urban intervention and installation, interrogating the boundaries of art, repair, and decay it navigated the murky territory between spontaneous urban repair and conspiratorial paranoia. _You’ll Understand when the Time Comes_ an illegal destructive growth in the hearth of a city, that is always being built up and never accommodates its inhabitants. Constructed entirely from discarded, abandoned and readily available construction materials—metal brackets, fasteners, and discarded fragments—the piece embodied Bulgaria’s deeply ingrained DIY repair culture. This culture, rooted in the improvisational ethos of late socialism, reflects an ongoing negotiation with scarcity, a “make-do” survival strategy that transforms remnants of functionality into provisional solutions.
