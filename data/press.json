@@ -1,5 +1,68 @@
 [
     {
+      "exhibition": "xx-63",
+      "namebg": "Капитал",
+      "nameen": "Capital",
+      "descriptionbg": "Интервю с Неда Ружева за спектакъла „Xx-63“ и Trevoga.",
+      "descriptionen": "Interview with Neda Ruzheva on “Xx-63” and Trevoga.",
+      "year": "2025",
+      "url": "https://www.capital.bg/moiat_capital/lica/2025/05/29/4783861_horeografut_neda_rujeva_trevogata_e_akt_na_sila/"
+    },
+    {
+      "exhibition": "xx-63",
+      "namebg": "Българска национална телевизия",
+      "nameen": "Bulgarian National Television",
+      "descriptionbg": "Репортаж в „Култура.БГ“ за спектакъла Trevoga – „Xx-63“.",
+      "descriptionen": "TV segment in “Kultura.BG” on Trevoga – “Xx-63”.",
+      "year": "2025",
+      "url": "https://bnt.bg/news/tancov-spektakal-trevoga-xx-63-na-neda-ruzheva-na-one-dance-festival-v392187-339748news.html"
+    },
+    {
+      "exhibition": "xx-63",
+      "namebg": "Българска телеграфна агенция",
+      "nameen": "Bulgarian Telegraph Agency",
+      "descriptionbg": "Новина за „Xx-63“ и подкрепата на фестивала Julidans.",
+      "descriptionen": "News item on “Xx-63” and its support from Julidans.",
+      "year": "2025",
+      "url": "https://www.bta.bg/bg/bta-academy/bulletin/all/925995-balgarski-tantsov-spektakal-hh-63-shte-bade-predstaven-na-festival-v-amsterdam"
+    },
+    {
+      "exhibition": "xx-63",
+      "namebg": "Subbacultcha",
+      "nameen": "Subbacultcha",
+      "descriptionbg": "Анонс за премиерата на „Xx-63“ на фестивала Julidans.",
+      "descriptionen": "Announcement for the premiere of “Xx-63” at Julidans.",
+      "year": "2025",
+      "url": "https://subbacultcha.nl/event/trevoga-collective-xx-63-premiere/"
+    },
+    {
+      "exhibition": "xx-63",
+      "namebg": "Телеграф",
+      "nameen": "Telegraph",
+      "descriptionbg": "Профил за Неда Ружева и международния успех на „Xx-63“.",
+      "descriptionen": "Profile on Neda Ruzheva and the international success of “Xx-63”.",
+      "year": "2025",
+      "url": "https://telegraph.bg/svetski/novini/neda-ruzheva-bezkrajna-mashina-za-fantazii-s-neveroiatno-postizhenie-v-amsterdam-za-pyrvi-pyt-bylgarski-artist-poluchava-podkrepa-kato-koproducent-na-edin-ot-naj-vliiatelnite-festivali-za-tanci-v-evropa-455938"
+    },
+    {
+      "exhibition": "xx-63",
+      "namebg": "Het Parool",
+      "nameen": "Het Parool",
+      "descriptionbg": "Уикенд гид за Амстердам с препоръка за спектакъла „Xx-63“.",
+      "descriptionen": "Amsterdam weekend guide recommending “Xx-63”.",
+      "year": "2025",
+      "url": "https://www.parool.nl/ps/van-rommelmarkt-op-de-spaklerweg-tot-picknick-concert-in-het-oosterpark-deze-dingen-kun-je-dit-weekend-doen-in-amsterdam~b0b2fe8b/"
+    },
+    {
+      "exhibition": "xx-63",
+      "namebg": "Theaterkrant",
+      "nameen": "Theaterkrant",
+      "descriptionbg": "Рецензия, която споменава „Xx-63“ в контекста на Julidans.",
+      "descriptionen": "Review referencing “Xx-63” in the context of Julidans.",
+      "year": "2025",
+      "url": "https://www.theaterkrant.nl/recensie/atsumori/catarina-miranda/"
+    },
+    {
       "exhibition": "even-trolls-sleep",
       "namebg": "Панорама",
       "nameen": "Panorama",
@@ -8,6 +71,154 @@
       "year": "2025",
       "url": "https://www.youtube.com/watch?v=-Gz9LoY6YBE&list=PLGCzxbT2dltwrc8utLSD-7JTI4TkGfXZV"
     },
+    {
+      "exhibition": "even-trolls-sleep",
+      "namebg": "ДЕНЯТ с В. Дремджиев",
+      "nameen": "The Day with V. Dremdzhiev",
+      "descriptionbg": "Интервю със София Грънчарова за изложбата „Нейните отровни двойници: Watch Your Feed!“.",
+      "descriptionen": "Interview with Sofia Grancharova about the exhibition “Her Poisonous Doubles: Watch Your Feed!”.",
+      "year": "2025",
+      "url": "https://www.youtube.com/watch?v=nYb11JPp9PA"
+    },
+    {
+      "exhibition": "even-trolls-sleep",
+      "namebg": "Жасмин",
+      "nameen": "Jasmin",
+      "descriptionbg": "Статия за „Нейните отровни двойници: Watch Your Feed!“ и хибридната война.",
+      "descriptionen": "Article on “Her Poisonous Doubles: Watch Your Feed!” as a response to hybrid war.",
+      "year": "2025",
+      "url": "https://jasmin.bg/2025/palitra/nejnite-otrovni-dvojnitsi-watch-your-feed-hudozhestvena-reaktsiya-spryamo-mehanizmite-na-hibridnata-vojna-grupova-izlozhba/"
+    },
+    {
+      "exhibition": "even-trolls-sleep",
+      "namebg": "Армия медия",
+      "nameen": "Army Media",
+      "descriptionbg": "Текст „Как да разпознаем истината от нейните отровни двойници“ за изложбата в Гьоте-институт.",
+      "descriptionen": "Article “How to recognise truth from its poisonous doubles” about the Goethe-Institut show.",
+      "year": "2025",
+      "url": "https://armymedia.bg/2025/03/23/%D0%BA%D0%B0%D0%BA-%D0%B4%D0%B0-%D1%80%D0%B0%D0%B7%D0%BF%D0%BE%D0%B7%D0%BD%D0%B0%D0%B5%D0%BC-%D0%B8%D1%81%D1%82%D0%B8%D0%BD%D0%B0%D1%82%D0%B0-%D0%BE%D1%82-%D0%BD%D0%B5%D0%B9%D0%BD%D0%B8%D1%82%D0%B5/"
+    },
+    {
+      "exhibition": "even-trolls-sleep",
+      "namebg": "Българско национално радио",
+      "nameen": "Bulgarian National Radio",
+      "descriptionbg": "Радиоразговор „Съвременното изкуство за отровните двойници“ за изложбата.",
+      "descriptionen": "Radio feature “Contemporary art on poisonous doubles” about the exhibition.",
+      "year": "2025",
+      "url": "https://old-news.bnr.bg/hristobotev/post/102141293/savremennoto-izkustvo-za-otrovnite-dvoinici"
+    },
+    {
+      "exhibition": "even-trolls-sleep",
+      "namebg": "Капитал",
+      "nameen": "Capital",
+      "descriptionbg": "Културен календар с включена изложбата „Нейните отровни двойници: Watch Your Feed!“.",
+      "descriptionen": "Culture calendar listing of “Her Poisonous Doubles: Watch Your Feed!”.",
+      "year": "2025",
+      "url": "https://www.capital.bg/moiat_capital/svobodno_vreme/2025/04/03/4763429_kalendar_antichen_festival_diva_simfoniia_ot_dan_braun/"
+    },
+    {
+      "exhibition": "even-trolls-sleep",
+      "namebg": "Българска национална телевизия",
+      "nameen": "Bulgarian National Television",
+      "descriptionbg": "Новина за изложбата „Нейните отровни двойници: Watch Your Feed!“ в Гьоте-институт.",
+      "descriptionen": "News piece on the exhibition “Her Poisonous Doubles: Watch Your Feed!” at Goethe-Institut.",
+      "year": "2025",
+      "url": "https://bnt.bg/news/izlozhbata-neinite-otrovni-dvoinici-watch-your-feed-v387613-337999news.html"
+    },
+    {
+      "exhibition": "even-trolls-sleep",
+      "namebg": "Програмата",
+      "nameen": "Programata",
+      "descriptionbg": "Листинг за „Нейните отровни двойници: Watch Your Feed!“ в Гьоте-институт.",
+      "descriptionen": "Listing for “Her Poisonous Doubles: Watch Your Feed!” at Goethe-Institut.",
+      "year": "2025",
+      "url": "https://programata.bg/izlozhbi/izlozhba/nejnite-otrovni-dvojniczi-watch-your-feed-izlozhba-v-gote-institut-balgariya/",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "even-trolls-sleep",
+      "namebg": "Телеграф",
+      "nameen": "Telegraph",
+      "descriptionbg": "Материал за откриването на „Нейните отровни двойници: Watch Your Feed!“ и участниците.",
+      "descriptionen": "Article about the opening of “Her Poisonous Doubles: Watch Your Feed!” and its artists.",
+      "year": "2025",
+      "url": "https://telegraph.bg/svetski/novini/osem-hudozhnici-pokazvat-nejnite-otrovni-dvojnici-watch-your-feed.-izlozhbata-shte-byde-otkrita-v-sofiia-kuratori-sa-sofiia-gryncharova-i-filip-stoilov-450212"
+    },
+    {
+      "exhibition": "even-trolls-sleep",
+      "namebg": "СЕГА",
+      "nameen": "Sega",
+      "descriptionbg": "Статия за „Нейните отровни двойници: Watch Your Feed!“ и темата за пропагандата.",
+      "descriptionen": "Article on “Her Poisonous Doubles: Watch Your Feed!” and its focus on propaganda.",
+      "year": "2025",
+      "url": "https://www.segabg.com/category-culture/otrovnite-dvoynici-na-propagandata-posochvat-8-mladi-tvorci"
+    },
+    {
+      "exhibition": "even-trolls-sleep",
+      "namebg": "Българско национално радио",
+      "nameen": "Bulgarian National Radio",
+      "descriptionbg": "Радио репортаж за изложбата „Нейните отровни двойници: Watch Your Feed!“.",
+      "descriptionen": "Radio feature on the exhibition “Her Poisonous Doubles: Watch Your Feed!”.",
+      "year": "2025",
+      "url": "https://bnr.bg/post/102141293/savremennoto-izkustvo-za-otrovnite-dvoinici"
+    },
+    {
+      "exhibition": "even-trolls-sleep",
+      "namebg": "Портал Култура",
+      "nameen": "Portal Kultura",
+      "descriptionbg": "Есе, в което изложбата е пример за ангажирано изкуство.",
+      "descriptionen": "Essay citing the exhibition as an example of engaged art.",
+      "year": "2025",
+      "url": "https://kultura.bg/web/%D0%B7%D0%B0-%D1%82%D0%B8%D1%85%D0%BE%D1%82%D0%BE-%D0%B8%D0%B7%D0%BA%D1%83%D1%81%D1%82%D0%B2%D0%BE-%D0%B2-%D0%B1%D1%83%D1%80%D0%BD%D0%B8-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B0/"
+    },
+    {
+      "exhibition": "even-trolls-sleep",
+      "namebg": "Списание Boyscout",
+      "nameen": "Boyscout Magazine",
+      "descriptionbg": "Месечен гид с препоръка за изложбата в Гьоте-институт.",
+      "descriptionen": "Monthly guide recommending the exhibition at Goethe-Institut.",
+      "year": "2025",
+      "url": "https://boyscoutmag.com/2025/04/kakvo-da-pravim-v-sofia-prez-april-3/"
+    },    
+    {
+      "exhibition": "petro-drift",
+      "namebg": "Cafe Arte",
+      "nameen": "Cafe Arte",
+      "descriptionbg": "Текст за втората част на изложбата „RUN and PLAY“ в HOST Gallery с участие на Никола Стоянов.",
+      "descriptionen": "Article on the second part of the exhibition “RUN and PLAY” at HOST Gallery featuring Nikola Stoyanov.",
+      "year": "2025",
+      "url": "https://cafearte.bg/runand-play-hostgallery/"
+    },    
+    {
+      "exhibition": "petro-drift",
+      "namebg": "Българска национална телевизия",
+      "nameen": "Bulgarian National Television",
+      "descriptionbg": "Репортаж в „Рецепта за култура“ за дебютния кураторски проект RUN & PLAY на Никола Цветанов в HOSTGALLERY с участие на Никола Стоянов.",
+      "descriptionen": "Segment in BNT2’s “Recipe for Culture” on Nikola Tsvetanov’s debut curatorial project RUN & PLAY at HOSTGALLERY, featuring Nikola Stoyanov as one of the artists.",
+      "year": "2025",
+      "url": "https://bnt.bg/news/debyuten-kuratorski-proekt-na-nikola-cvetanov-v389748-338774news.html",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "petro-drift",
+      "namebg": "Списание Boyscout",
+      "nameen": "Boyscout Magazine",
+      "descriptionbg": "Гид селекция за Run & Play в HOSTGALLERY – втората част на кураторския проект на Никола Цветанов с 13 артисти, сред които и Никола Стоянов.",
+      "descriptionen": "Guide feature on Run & Play at HOSTGALLERY – the second part of Nikola Tsvetanov’s curatorial project with 13 artists, including Nikola Stoyanov.",
+      "year": "2025",
+      "url": "https://boyscoutmag.com/2025/05/kakvo-da-pravim-v-sofia-prez-mai-4/",
+      "dontshowbio": "true"
+    },
+    {
+      "exhibition": "petro-drift",
+      "namebg": "Френски институт в България",
+      "nameen": "French Institute in Bulgaria",
+      "descriptionbg": "Официална програма на Европейската нощ на музеите – София 2024, с нощни изложби и събития в над 50 музея и галерии.",
+      "descriptionen": "Official programme for European Night of Museums – Sofia 2024, listing night-time exhibitions and events across more than 50 venues.",
+      "year": "2024",
+      "url": "https://institutfrancais.bg/evropejska-noshh-na-muzeite-sofiya-2024/",
+      "dontshowbio": "true"
+    },    
     {
       "exhibition": "latent-space",
       "namebg": "Програмата",

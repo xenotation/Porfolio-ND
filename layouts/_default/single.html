@@ -130,19 +130,39 @@
 
   <div class="exhb-people">
     <div class="people">
-      <div class="collaborators">
-        {{ with .Params.collaborators }}
-          <p>{{ i18n "Collaborators" }}<br>{{ range . }}{{ . }}<br>{{ end }}</p>
-        {{ end }}
-      </div>
+
       {{ with .Params.curator }}
-        <p>{{ i18n "Curator" }}<br>{{ range . }}{{ . }}<br>{{ end }}</p>
+        <div class="peope-types">{{ i18n "Curator" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }} 
+
+      {{ with .Params.collaborators }}
+        <div class="peope-types">{{ i18n "collaborators" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.exhbwith }}
+        <div class="peope-types">{{ i18n "exhbwith" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.choreography }}
+        <div class="peope-types">{{ i18n "choreography" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.dramaturgy }}
+        <div class="peope-types">{{ i18n "dramaturgy" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.performers }}
+        <div class="peope-types">{{ i18n "performers" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}  {{ with .Params.setdesign }}
+       <div class="peope-types">{{ i18n "setdesign" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
       {{ end }}
       {{ with .Params.sound }}
-        <p>{{ i18n "Sound" }}<br>{{ range . }}{{ . }}<br>{{ end }}</p>
+        <div class="peope-types">{{ i18n "Sound" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.lightdesign }}
+        <div class="peope-types">{{ i18n "lightdesign" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.styling }}
+        <div class="peope-types">{{ i18n "styling" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
       {{ end }}
       {{ with .Params.photo }}
-        <p>{{ i18n "Photo" }}<br>{{ range . }}{{ . }}<br>{{ end }}</p>
+        <div class="peope-types">{{ i18n "Photo" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
       {{ end }}
     </div>
   </div>

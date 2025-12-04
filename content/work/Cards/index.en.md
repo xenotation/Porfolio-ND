@@ -15,32 +15,11 @@ curator = ["Hristo Kaloyanov"]
 collaborators = ["Aaron Roth"]
 categories = ["collab"]
 
-
 imgNames = ["Embargo Dystopia (2023)", "Embargo Dystopia (2023)", "Embargo Dystopia (2023)", "Embargo Dystopia (2023)", "Untitled (2023)", "Untitled (2023)", "Untitled (2023)", "Untitled (2023)", "Untitled (2023)", "Space Frame by Aron Roth (2023)", "Chivas Royal Salute by Aron Roth (2023)", "Postcards and Contraband book"]
 imgDescrps = ["Two 120x90cm cardboard conspiracy walls, projection mapping, declassified documents, newspaper clippings, maps, assassination photography", "Two 120x90cm cardboard conspiracy walls, projection mapping, declassified documents, newspaper clippings, maps, assassination photography", "Exhibition guest reading declassified DEA document on Bulgarian state drug trafficking", "Captagon pill (top-left), logo of State Secret Services during Communism (center), logo for international customs cooperation (top-right)", "Dual-channel CRT installation, featuring found documents and photography (voice over Emilia Toncheva), 23 minutes, on the photo: exhibition view with an ex-head of Varna’s Sea Port Customs", "Found personal and operational archive of Directorate for Combating Drug Trafficking agent", "more documents and photographs of drug and currency trafficking", "material from Bulgarian Customs Agency archive", "Post-cards found  in personal archive of agent", "Oil on canvas and metal frame 130x100cm (metal structure found on almost all boarder check points in the world)", "Oil on canvas 50x50cm (item comanly traded for favors at boarder checks during communist times)", "Inside view of the accompaning book"]
 
 Sound = ["Yan Lechev"]
 Photo = ["Boris Vasilev"]
-keywords = [
-  "exhibition",
-  "postcards",
-  "contraband",
-  "Bulgarian Customs Agency",
-  "hidden transit",
-  "archive",
-  "archaeography",
-  "drug trafficking",
-  "socialist smuggling",
-  "exhibition"
-]
-
-press = [
-  { name = "Bulgarian Telegraph Agency", url = "https://www.bta.bg/bg/news/lik/519175-kontrabandata-prez-sotsializma-izsledva-ekspozitsiya-podredena-vav-varnenskiya-" },
-  { name = "Bulgarian National Radio", url = "https://bnr.bg/varna/post/101874963/izlobn-razkriva-tainite-na-kontrabandata-ot-vremeto-na-socializma" },
-  { name = "Culture News", url = "https://kulturni-novini.info/sections/2/news/37584-kartichki-i-kontrabanda-izlozhba-na-aaron-rot-i-nikola-stoyanov" },
-  { name = "Parallel43", url = "https://parallel43.bg/patyat-na-skritiya-tranzit-v-izlozhbata-kartichki-i-kontrabanda" },
-  { name = "News Paper Utro", url = "https://utroruse.com/article/970557/" }
-]
 
 sameAs = ["https://zahari.xyz/postcards/"]
 

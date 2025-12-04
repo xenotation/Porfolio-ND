@@ -52,6 +52,16 @@
   text-align: left;
 }
 
+.peope-list {
+  margin-bottom: 1.2rem;
+  line-height: 1.23;
+}
+
+.peope-types {
+  margin-bottom: 0.42rem;
+}
+
+
 /* People Section */
 .exhb-people {
   grid-area: exhb-people;

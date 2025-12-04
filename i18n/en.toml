@@ -12,6 +12,20 @@
     other = 'sound design ↓'
 [Photo]
     other = 'photography ↓'
+[choreography]
+    other = 'choreography ↓'
+[dramaturgy]
+    other = 'dramaturgy ↓'
+[performers]
+    other = 'performers ↓'
+[setdesign]
+    other = 'set design ↓'
+[lightdesign]
+    other = 'light design ↓'
+[styling]
+    other = 'styling ↓'
+[exhbwith]
+    other = "other perticipants ↓"
 [404]          
     other = "go home"
 [press]        

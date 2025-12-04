@@ -12,6 +12,20 @@
   other = 'звуков дизайн ↓'
 [Photo]
   other = 'фотография ↓'
+[choreography]
+    other = 'хореография ↓'
+[dramaturgy]
+    other = 'драматургия ↓'
+[performers]
+    other = 'артисти ↓'
+[setdesign]
+    other = 'сценография ↓'
+[lightdesign]
+    other = 'светлинен дизайн ↓'
+[styling]
+    other = 'стилист ↓'
+[exhbwith]
+    other = "съучастници ↓"
 [404] 
   other = "прибери се у дома"
 [press]

@@ -12,7 +12,7 @@ datestart = "2024-04-11T00:00:00+03:00"
 dateend = "2024-05-12T00:00:00+03:00"
 
 curator = ["Alexander Valchev"]
-collaborators = ["Stoyan Dechev", "Lachezar Boyadzhiev", "Sofia Dimova", "Simeon Simeonov", "Elena Chergilanova", "Yv-Kristian Angelov", "Iliana Grigorova", "Bogomil Ivanov"]
+exhbwith = ["Stoyan Dechev", "Lachezar Boyadzhiev", "Sofia Dimova", "Simeon Simeonov", "Elena Chergilanova", "Yv-Kristian Angelov", "Iliana Grigorova", "Bogomil Ivanov"]
 categories = ["collab"]
 
 imgNames = [

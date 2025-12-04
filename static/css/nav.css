@@ -187,23 +187,17 @@ body::-webkit-scrollbar {
   /*   /////////////////////////
         //   Active highlight   //
        /////////////////////////   */
-  
-  .is-active{
-    background-image: linear-gradient(transparent, var(--primary-color), transparent);
-    background-repeat: no-repeat;
-    background-size: 100% 1.15em;
-    background-position: 0 75%;
-  }
-  .top a.is-active,
-  .work a.is-active{
-    /* draw a per-line marker using inset box-shadow */
-    box-shadow: inset 0 calc(var(--marker-h, 1.15em) * -1 + var(--marker-offset, 75%)) 0 var(--primary-color);
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-  
-    display: inline;                  /* stay inline for natural wrapping */
-    padding: 0 .02em;                 /* tiny pad so the clone has width on line breaks */
-  }
+/* Active highlight using a vertical gradient over the full element box */
+.top a.is-active,
+.work a.is-active {
+  background-image: linear-gradient(transparent, var(--primary-color), transparent);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;  
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0 .02em;        
+}
+
   
   /*   /////////////////////////////////////////////////
         //   Scrollbars (hide, keep scroll) on nav els  //

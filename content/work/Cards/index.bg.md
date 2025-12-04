@@ -32,14 +32,6 @@ keywords = [
   "изложба"
 ]
 
-press = [
-  { name = "Българска Телеграфна Агенция", url = "https://www.bta.bg/bg/news/lik/519175-kontrabandata-prez-sotsializma-izsledva-ekspozitsiya-podredena-vav-varnenskiya-" },
-  { name = "Българско Национално Радио", url = "https://bnr.bg/varna/post/101874963/izlobn-razkriva-tainite-na-kontrabandata-ot-vremeto-na-socializma" },
-  { name = "Културни Новини", url = "https://kulturni-novini.info/sections/2/news/37584-kartichki-i-kontrabanda-izlozhba-na-aaron-rot-i-nikola-stoyanov" },
-  { name = "Паралел 43", url = "https://parallel43.bg/patyat-na-skritiya-tranzit-v-izlozhbata-kartichki-i-kontrabanda" },
-  { name = "Утро Русе", url = "https://utroruse.com/article/970557/" }
-]
-
 sameAs = ["https://zahari.xyz/postcards/"]
 
 +++

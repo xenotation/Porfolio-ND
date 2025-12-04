@@ -13,4 +13,4 @@ His work engages with theory-fiction, post-humanist research, and experimental a
 
 Stoyanov’s artistic practice integrates infrastructure, technological apparatus, and everyday life, merging the humanities with scientific approaches. His practice aims at traversing the boundary between research-based and speculative practices.
 
-In 2025 Nikola Stoyanov co-founded the publishing house ["Temporary Publishing"](https://www.facebook.com/temp.publishing)  along with Hristo Kaloyanov and Filip Stoilov.
+In 2025 Nikola Stoyanov co-founded the publishing house ["Temporary Publishing"](https://www.facebook.com/temp.publishing) along with Hristo Kaloyanov and Philip Stoilov.
