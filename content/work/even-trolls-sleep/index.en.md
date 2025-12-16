@@ -9,7 +9,7 @@ medium = ["installation", "realtime chat"]
 place = "Goethe-Institut"
 location = "Sofia, Bulgaria"
 
-datestart = "2025-03-05T00:00:00+03:00"
+datestart = "2025-03-25T00:00:00+03:00"
 dateend = "2025-04-30T00:00:00+03:00"
 
 curator = ["Philip Stoilov", "Sofia Grancharova"]

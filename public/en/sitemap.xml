@@ -144,6 +144,64 @@
                 href="http://192.168.0.101:1313/work/xx-63/"
                 />
 
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/XX-63_01.jpg</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/XX-63_02.jpg</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/XX-63_03.jpg</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/XX-63_04.jpg</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/XX-63_06.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/XX-63_07.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/XX-63_08.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/XX-63_09.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/XX-63_10.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/XX-63_12.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/XX-63_13.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/XX-63_14.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/XX-63_15.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.0.101:1313/work/xx-63/hero.webp</image:loc>
+        </image:image>
+      
+    
   </url><url>
     <loc>http://192.168.0.101:1313/work/even-trolls-sleep/</loc>
     <lastmod>2025-03-25T00:00:00+00:00</lastmod>

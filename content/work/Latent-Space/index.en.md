@@ -2,10 +2,10 @@
 title = 'Latent Space'
 date = 2022-09-09T23:15:59+02:00
 draft = false
-description = "A is where the gaze of artificial intelligence itself draws a picturesque horizon, delving into the hidden rooms of secret research facilities, investigative organizations, classified databases."
+description = "Latent Space is where the gaze of artificial intelligence itself draws a picturesque horizon, delving into the hidden rooms of secret research facilities, investigative organizations, classified databases."
 imgDescrps = ["Acrylic on canvas print, 90x62 cm", "Acrylic on canvas print, 90x62 cm, private collection", "Acrylic on canvas print, 100x6 cm, private collection", "Acrylic on canvas print, 90x62 cm", "Acrylic on canvas print, 90x62 cm, private collection", "Acrylic on canvas print, 90x62 cm, private collection"]
 imgNames = ["Latent Space #1 (2022)", "Latent Space #2 (2022)", "Latent Space #3 (2022)", "Latent Space #4 (2022)", "Latent Space #5 (2022)"]
-medium = ["AI-generated images", "fake acrylic paintings", "theory-fiction dossier", "video installations"]
+medium = ["AI-generated images", "fake paintings, acrylic print on canvas", "theory-fiction dossier", "video installations"]
 place = "Doza Gallery, Sofia"
 
 datestart = "2022-09-08T00:00:00+03:00"
