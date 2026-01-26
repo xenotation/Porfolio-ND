@@ -16,8 +16,6 @@
   grid-area: exhb-hero;
   overflow: hidden;
   width: 100%;
-  max-height: 50vh;   
-  aspect-ratio: 16 / 9;
 }
 .hero-content { 
   max-height: 50vh;   

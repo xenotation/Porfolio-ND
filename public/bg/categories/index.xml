@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Никола Стоянов</title>
-    <link>http://192.168.0.101:1313/bg/categories/</link>
+    <link>http://192.168.1.42:1313/bg/categories/</link>
     <description>Recent content in Categories on Никола Стоянов</description>
     <generator>Hugo</generator>
     <language>bg</language>
     <lastBuildDate>Sat, 03 May 2025 23:30:59 +0200</lastBuildDate>
-    <atom:link href="http://192.168.0.101:1313/bg/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://192.168.1.42:1313/bg/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Collab</title>
-      <link>http://192.168.0.101:1313/bg/categories/collab/</link>
+      <link>http://192.168.1.42:1313/bg/categories/collab/</link>
       <pubDate>Sat, 03 May 2025 23:30:59 +0200</pubDate>
-      <guid>http://192.168.0.101:1313/bg/categories/collab/</guid>
+      <guid>http://192.168.1.42:1313/bg/categories/collab/</guid>
       <description></description>
     </item>
     <item>
       <title>Solo</title>
-      <link>http://192.168.0.101:1313/bg/categories/solo/</link>
+      <link>http://192.168.1.42:1313/bg/categories/solo/</link>
       <pubDate>Tue, 12 Mar 2024 23:30:59 +0200</pubDate>
-      <guid>http://192.168.0.101:1313/bg/categories/solo/</guid>
+      <guid>http://192.168.1.42:1313/bg/categories/solo/</guid>
       <description></description>
     </item>
   </channel>

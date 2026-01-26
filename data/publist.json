@@ -1,5 +1,16 @@
   [  
     {
+      "nameen": "Complicity in death: the necro-genre in the fourth part of 2666",
+      "namebg": "Съучастие в смъртта: некрожанрът в четвъртата част на 2666",
+      "link": "https://litvestnik.com/wp-content/uploads/2026/01/LV_3_web.pdf#page=11",
+      "descriptionen": "Critical essay on Roberto Bolaño’s 2666, focusing on the concept of necro-genre in the novel’s fourth part.",
+      "descriptionbg": "Критически текст за „2666“ на Роберто Боланьо, публикуван в „Литературен вестник“ (ISSN 1310-9561), посветен на некрожанра в четвъртата част на романа.",
+      "inen": "in issue 3 (2026) of “Literature Newspaper” (ISSN 1310-9561)",
+      "inbg": "в брой 3 (2026) на „Литературен вестник“ (ISSN 1310-9561)",
+      "year": "2026",
+      "tag": "writing"
+    },    
+    {
     "nameen": "Theoretical Fictions and Hyperstition: a rough introduction",
     "namebg": "Теоретични фикции и хиперверия: грубо въведение",
     "link": "https://studialiteraria.eu/bg/archive/year-2025/issue-9/teoretichni-fikcii-i-khiperveriya-grubo-vvedenie",
@@ -8,6 +19,15 @@
     "year": "2025",
     "tag": "writing"
   },
+  {
+    "nameen": "Networks and Webs: Hypertextual Strategies and Infrastructure in Writing",
+    "namebg": "Мрежи и паяжини: хипертекстуални стратегии и инфраструктура в писането",
+    "link": "https://www.youtube.com/watch?v=cFfzlOSxwP8",
+    "descriptionen": "Lecture by Nikola Stoyanov at a conference of the Bulgarian Academy of Sciences (Nov 6, 2025), outlining a shift from indexed note systems to networked and algorithmic writing infrastructures, from Zettelkasten to contemporary attention-driven feeds.",
+    "descriptionbg": "Лекция на Никола Стоянов на конференция на Българската академия на науките (6 ноември 2025), която проследява прехода от индексални системи за писане към мрежови и алгоритмични инфраструктури — от Zettelkasten до съвременните фийдове.",
+    "year": "2025",
+    "tag": "lecture"
+  },  
   {
     "nameen": "Referential autogenesis in the genre of theory-fiction",
     "namebg": "Референциален автогенезис в жанра на теоретичната фикция",
