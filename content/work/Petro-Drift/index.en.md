@@ -20,7 +20,6 @@ exhbwith = [
   "Vikenti Komitski",
   "Neno Belchev",
   "Nikodim Chernev",
-  "Nikola Stoyanov",
   "Simona Racheva",
   "Stefani Nedelcheva & Bojana Slavkova",
   "Georgi Pavlov and Diana Bunkin"
