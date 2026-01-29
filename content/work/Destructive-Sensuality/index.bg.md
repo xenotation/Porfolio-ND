@@ -1,6 +1,6 @@
 +++
 title = 'Хуморът е учтивостта на отчаянието'
-date = 2022-12-17
+date = 2022-12-17T23:30:59+02:00
 description = "Видеоколаж в стил core-core, който изследва особеностите на влошаването на комерсиалните видеокодеци и битовата памет в контекст интернет."
 place = " “ARTWAVE”, Варна (2022), като част от изложбата “Destructive Sensuality”"
 canonical = "https://newdegeneration.xyz/bg/work/destructive-sensuality/"

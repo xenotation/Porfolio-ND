@@ -1,6 +1,6 @@
 +++
 title = 'Humor is the politeness of despair'
-date = 2022-12-17
+date = 2022-12-17T23:30:59+02:00
 description = "A core-core style video collage investigating the specifics of commercial video codec degradation as well as that of memmory."
 canonical = "https://newdegeneration.xyz/work/destructive-sensuality/"
 

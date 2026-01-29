@@ -1,6 +1,6 @@
 +++
 title = 'You’ll understand when the time comes'
-date = 2024-02-21
+date = 2024-02-21T23:30:59+02:00
 draft = false
 description = "A double of a constant corpse correction in motion. From the impromptu line of conspiratorial paranoia to everyday self-relience, of patches, repairs of repairs, endless beginnings and dead-end continuations."
 
