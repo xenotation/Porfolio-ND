@@ -9,7 +9,7 @@ place = "ReBonkers, Варна"
 
 datestart = "2023-09-07T00:00:00+03:00"
 dateend = "2023-09-21T00:00:00+03:00"
-
+youtube = "https://youtu.be/w1mwyDYF-xU"
 
 curator = ["Христо Калоянов"]
 collaborators = ["Арон Рот"]
