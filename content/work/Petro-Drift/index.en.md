@@ -1,7 +1,7 @@
 +++
 title = 'Petro-Drift'
 date = 2025-05-03T23:30:59+02:00
-description = ""
+description = "Single-channel video installation about the pollution of the Black Sea after the oil spill in the Kerch Strait."
 canonical = "https://newdegeneration.xyz/work/petrodrift/"
 
 type = "artwork"
