@@ -3,6 +3,8 @@ title = 'Petro-Drift'
 date = 2025-05-03T23:30:59+02:00
 description = "Single-channel video installation about the pollution of the Black Sea after the oil spill in the Kerch Strait."
 canonical = "https://newdegeneration.xyz/work/petrodrift/"
+youtube = "https://youtu.be/Q70VPEM6p34"
+
 
 type = "artwork"
 medium = ["single-channel video installation 70х50см", "08:45 minutes"]

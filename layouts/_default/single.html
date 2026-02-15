@@ -17,84 +17,77 @@
 {{ $resources := .Resources.Match "*.*" }}
 
 <!-- JSON-LD: WebPage + Event + Person + Images + Breadcrumbs -->
-  <script type="application/ld+json">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "@id": "{{ .Site.BaseURL }}#website",
-          "url": "{{ .Site.BaseURL }}",
-          "name": "{{ .Site.Title }}",
-          "inLanguage": "{{ .Site.Language.Lang }}"
-        },
-        {
-          "@type": "WebPage",
-          "@id": "{{ .Permalink }}#webpage",
-          "url": "{{ .Permalink }}",
-          "name": "{{ .Title }}",
-          "isPartOf": { "@id": "{{ .Site.BaseURL }}#website" }{{ with .Resources.GetMatch "hero.*" }},
-          "primaryImageOfPage": {
-            "@type": "ImageObject",
-            "@id": "{{ .Permalink }}#primary",
-            "url": "{{ .Permalink }}"
-          }{{ end }},
-          "inLanguage": "{{ $.Site.Language.Lang }}"
-        },
-        {
-          "@type": "Person",
-          "@id": "{{ .Site.BaseURL }}#person",
-          "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
-          {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
-          "image": "{{ . | absURL }}",
-          {{- end -}}
-          "url": "{{ .Site.BaseURL }}"
-        }
-        {{- with .Params.datestart -}}
-        ,{
-          "@type": "ExhibitionEvent",
-          "@id": "{{ $.Permalink }}#event",
-          "name": "{{ $.Title }}",
-          "url": "{{ $.Permalink }}",
-          "startDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ with $.Params.dateend }},
-          "endDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ end }},
-          "eventStatus": "https://schema.org/EventScheduled",
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "organizer": { "@id": "{{ $.Site.BaseURL }}#person" }{{ with $.Params.place }},
-          "location": {
-            "@type": "Place",
-            "name": "{{ . }}"{{ with $.Params.location }},
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "{{ . }}",
-              "addressCountry": "Bulgaria"
-            }{{ end }}
-          }{{ end }}
-        }
-        {{- end }}
-      ]
+      "@type": "WebSite",
+      "@id": "{{ .Site.BaseURL }}#website",
+      "url": "{{ .Site.BaseURL }}",
+      "name": "{{ .Site.Title }}",
+      "inLanguage": "{{ .Site.Language.Lang }}"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{{ .Permalink }}#webpage",
+      "url": "{{ .Permalink }}",
+      "name": "{{ .Title }}",
+      "isPartOf": { "@id": "{{ .Site.BaseURL }}#website" }{{ with .Resources.GetMatch "hero.*" }},
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "@id": "{{ .Permalink }}#primary",
+        "url": "{{ .Permalink }}"
+      }{{ end }},
+      "inLanguage": "{{ $.Site.Language.Lang }}"
+    },
+    {
+      "@type": "Person",
+      "@id": "{{ .Site.BaseURL }}#person",
+      "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
+      {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
+      "image": "{{ . | absURL }}",
+      {{- end -}}
+      "url": "{{ .Site.BaseURL }}"
     }
-    </script>
-  
-  
+    {{- with .Params.datestart -}}
+    ,{
+      "@type": "ExhibitionEvent",
+      "@id": "{{ $.Permalink }}#event",
+      "name": "{{ $.Title }}",
+      "url": "{{ $.Permalink }}",
+      "startDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ with $.Params.dateend }},
+      "endDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ end }},
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "organizer": { "@id": "{{ $.Site.BaseURL }}#person" }{{ with $.Params.place }},
+      "location": {
+        "@type": "Place",
+        "name": "{{ . }}"{{ with $.Params.location }},
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "{{ . }}",
+          "addressCountry": "Bulgaria"
+        }{{ end }}
+      }{{ end }}
+    }
+    {{- end }}
+  ]
+}
+</script>
 
 <div class="container">
+
 {{/* ---- HERO (video if available, else image) ---- */}}
 {{ $heroVideo := .Resources.GetMatch "hero.webm" }}
 {{ $heroImg   := or (.Resources.GetMatch "hero.webp") (.Resources.GetMatch "hero.jpg") (.Resources.GetMatch "hero.jpeg") (.Resources.GetMatch "hero.png") }}
 
 <div class="exhb-hero">
   {{ if $heroVideo }}
-    <video
-      class="featured-video"
-      autoplay
-      muted
-      loop
-      playsinline
+    <video class="featured-video" autoplay muted loop playsinline
       {{ with $heroImg }}poster="{{ .RelPermalink }}"{{ end }}>
       <source src="{{ $heroVideo.RelPermalink }}" type="video/webm">
     </video>
-    {{/* noscript + fallback image */}}
     {{ with $heroImg }}
     <noscript>
       <img class="featured-image" src="{{ .RelPermalink }}" alt="{{ $.Title }} hero" fetchpriority="high">
@@ -102,138 +95,242 @@
     {{ end }}
   {{ else if $heroImg }}
     <img class="featured-image" src="{{ $heroImg.RelPermalink }}" alt="{{ .Title }} hero">
-  {{ else }}
-    {{/* optional: nothing found */}}
   {{ end }}
 </div>
 
-
-  <div class="exhb-title">
-    <h1>{{ .Title }}</h1>
-    <div class="placedate">
-      {{- $place := .Params.place -}}
-      {{- $location := .Params.location -}}
-      {{- if and $place $location -}}<p>{{ $place }}, {{ $location }}</p>
-      {{- else if $place -}}<p>{{ $place }}</p>
-      {{- else if $location -}}<p>{{ $location }}</p>{{- end -}}
-      {{ $startDate := .Params.datestart | default "1970-01-01T00:00:00+00:00" | time.AsTime }}
-      {{ $endDate   := .Params.dateend   | default "1970-01-01T00:00:00+00:00" | time.AsTime }}
-      {{ printf "%s-%s" ($startDate | time.Format "02.01") ($endDate | time.Format "02.01.2006") }}
-    </div>
+<div class="exhb-title">
+  <h1>{{ .Title }}</h1>
+  <div class="placedate">
+    {{- $place := .Params.place -}}
+    {{- $location := .Params.location -}}
+    {{- if and $place $location -}}<p>{{ $place }}, {{ $location }}</p>
+    {{- else if $place -}}<p>{{ $place }}</p>
+    {{- else if $location -}}<p>{{ $location }}</p>{{- end -}}
+    {{ $startDate := .Params.datestart | default "1970-01-01T00:00:00+00:00" | time.AsTime }}
+    {{ $endDate   := .Params.dateend   | default "1970-01-01T00:00:00+00:00" | time.AsTime }}
+    {{ printf "%s-%s" ($startDate | time.Format "02.01") ($endDate | time.Format "02.01.2006") }}
   </div>
+</div>
 
-  <div class="exhb-medium">
-    {{ with .Params.medium }}
-      <p class="medium-text">{{ range . }}{{ . }}<br>{{ end }}</p>
-    {{ end }}
-  </div>
+<div class="exhb-medium">
+  {{ with .Params.medium }}
+    <p class="medium-text">{{ range . }}{{ . }}<br>{{ end }}</p>
+  {{ end }}
+</div>
 
-  <div class="exhb-people">
-    <div class="people">
+<div class="exhb-people">
+  <div class="people">
 
-      {{ with .Params.curator }}
-        <div class="peope-types">{{ i18n "Curator" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-      {{ end }} 
-
-      {{ with .Params.collaborators }}
-        <div class="peope-types">{{ i18n "collaborators" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-      {{ end }}
-      {{ with .Params.exhbwith }}
-        <div class="peope-types">{{ i18n "exhbwith" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-      {{ end }}
-      {{ with .Params.choreography }}
-        <div class="peope-types">{{ i18n "choreography" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-      {{ end }}
-      {{ with .Params.dramaturgy }}
-        <div class="peope-types">{{ i18n "dramaturgy" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-      {{ end }}
-      {{ with .Params.performers }}
-        <div class="peope-types">{{ i18n "performers" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-      {{ end }}  {{ with .Params.setdesign }}
-       <div class="peope-types">{{ i18n "setdesign" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-      {{ end }}
-      {{ with .Params.sound }}
-        <div class="peope-types">{{ i18n "Sound" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-      {{ end }}
-      {{ with .Params.lightdesign }}
-        <div class="peope-types">{{ i18n "lightdesign" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-      {{ end }}
-      {{ with .Params.styling }}
-        <div class="peope-types">{{ i18n "styling" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-      {{ end }}
-      {{ with .Params.photo }}
-        <div class="peope-types">{{ i18n "Photo" }}</div><div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-      {{ end }}
-    </div>
-  </div>
-
-  <div class="exhb-body">
-    <div class="exhb-text">{{ .Content }}</div>
-
-    {{ if gt (len $critFor) 0 }}
-    <section>
-      <h2>{{ T "critique" | default (cond $isBG "Критика" "Critique") }}</h2>
-      {{ range $c := $critFor }}
-        {{ $title := cond $isBG (or $c.namebg $c.nameen) (or $c.nameen $c.namebg) }}
-        {{ $desc  := cond $isBG (or $c.descriptionbg $c.descriptionen) (or $c.descriptionen $c.descriptionbg) }}
-        {{ $auth  := cond $isBG (or $c.authorbg $c.authoren) (or $c.authoren $c.authorbg) }}
-        <a href="{{ $c.url }}" target="_blank" rel="noopener">{{ $title }}</a>{{ with $auth }} - {{ . }}{{ end }}
-        {{ with $desc }}<div>{{ . }}</div>{{ end }}
-      {{ end }}
-    </section>
+    {{ with .Params.curator }}
+      <div class="peope-types">{{ i18n "Curator" }}</div>
+      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
     {{ end }}
 
-    {{ if gt (len $pressFor) 0 }}
-    <section>
-      <h2>{{ T "press" | default (cond $isBG "Медийно покритие" "Press") }}</h2>
-      <p>
-        {{ $links := slice }}
-        {{ range $p := $pressFor }}
-          {{ $label := cond $isBG (or $p.namebg $p.nameen) (or $p.nameen $p.namebg) }}
-          {{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">%s</a>` $p.url $label) }}
+    {{ with .Params.collaborators }}
+      <div class="peope-types">{{ i18n "collaborators" }}</div>
+      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+    {{ end }}
+
+    {{ with .Params.exhbwith }}
+      <div class="peope-types">{{ i18n "exhbwith" }}</div>
+      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+    {{ end }}
+
+    {{ with .Params.choreography }}
+      <div class="peope-types">{{ i18n "choreography" }}</div>
+      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+    {{ end }}
+
+    {{ with .Params.dramaturgy }}
+      <div class="peope-types">{{ i18n "dramaturgy" }}</div>
+      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+    {{ end }}
+
+    {{ with .Params.performers }}
+      <div class="peope-types">{{ i18n "performers" }}</div>
+      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+    {{ end }}
+
+    {{ with .Params.setdesign }}
+      <div class="peope-types">{{ i18n "setdesign" }}</div>
+      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+    {{ end }}
+
+    {{ with .Params.sound }}
+      <div class="peope-types">{{ i18n "Sound" }}</div>
+      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+    {{ end }}
+
+    {{ with .Params.lightdesign }}
+      <div class="peope-types">{{ i18n "lightdesign" }}</div>
+      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+    {{ end }}
+
+    {{ with .Params.styling }}
+      <div class="peope-types">{{ i18n "styling" }}</div>
+      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+    {{ end }}
+
+    {{ with .Params.photo }}
+      <div class="peope-types">{{ i18n "Photo" }}</div>
+      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+    {{ end }}
+
+  </div>
+</div>
+
+<div class="exhb-body">
+  <div class="exhb-text">{{ .Content }}</div>
+
+  {{ if gt (len $critFor) 0 }}
+  <section>
+    <h2>{{ T "critique" | default (cond $isBG "Критика" "Critique") }}</h2>
+    {{ range $c := $critFor }}
+      {{ $title := cond $isBG (or $c.namebg $c.nameen) (or $c.nameen $c.namebg) }}
+      {{ $desc  := cond $isBG (or $c.descriptionbg $c.descriptionen) (or $c.descriptionen $c.descriptionbg) }}
+      {{ $auth  := cond $isBG (or $c.authorbg $c.authoren) (or $c.authoren $c.authorbg) }}
+      <a href="{{ $c.url }}" target="_blank" rel="noopener">{{ $title }}</a>{{ with $auth }} - {{ . }}{{ end }}
+      {{ with $desc }}<div>{{ . }}</div>{{ end }}
+    {{ end }}
+  </section>
+  {{ end }}
+
+  {{ if gt (len $pressFor) 0 }}
+  <section>
+    <h2>{{ T "press" | default (cond $isBG "Медийно покритие" "Press") }}</h2>
+    <p>
+      {{ $links := slice }}
+      {{ range $p := $pressFor }}
+        {{ $label := cond $isBG (or $p.namebg $p.nameen) (or $p.nameen $p.namebg) }}
+        {{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">%s</a>` $p.url $label) }}
+      {{ end }}
+      {{ delimit $links ", " | safeHTML }}
+    </p>
+  </section>
+  {{ end }}
+
+  <div id="my-gallery" class="masonry-grid">
+
+    {{/* -------- IMAGES -------- */}}
+    {{ range $index, $resource := $resources }}
+      {{ $title := index $.Params.imgNames $index | default "" }}
+      {{ $description := index $.Params.imgDescrps $index | default "" }}
+
+      {{ if and (in $resource.MediaType.Type "image") (not (in $resource.Name "hero.")) }}
+        {{ $thumb := $resource.Resize "420x" }}
+        {{ $large := $resource.Resize "1600x" }}
+
+        <a class="spotlight"
+           href="{{ $large.RelPermalink }}"
+           data-pswp-width="{{ $large.Width }}"
+           data-pswp-height="{{ $large.Height }}"
+           data-pswp-title="{{ $title }}"
+           data-pswp-desc="{{ $description }}">
+          <img src="{{ $thumb.RelPermalink }}"
+               alt="{{ $title }}"
+               class="gallery-image"
+               loading="lazy" />
+        </a>
+      {{ end }}
+    {{ end }}
+
+    {{/* -------- YOUTUBE (front matter param) -------- */}}
+    {{ with .Params.youtube }}
+      {{ $ytList := . }}
+      {{ if not (reflect.IsSlice $ytList) }}
+        {{ $ytList = slice . }}
+      {{ end }}
+
+      {{ range $yt := $ytList }}
+        {{ $id := "" }}
+        {{ if in $yt "youtu.be/" }}
+          {{ $id = index (split (index (split $yt "youtu.be/") 1) "?") 0 }}
+        {{ else if in $yt "watch?v=" }}
+          {{ $id = index (split (index (split $yt "watch?v=") 1) "&") 0 }}
         {{ end }}
-        {{ delimit $links ", " | safeHTML }}
-      </p>
-    </section>
-    {{ end }}
 
-    <div id="my-gallery" class="masonry-grid">
-      {{ range $index, $resource := $resources }}
-        {{ $title := index $.Params.imgNames $index | default "" }}
-        {{ $description := index $.Params.imgDescrps $index | default "" }}
-        {{ if and (in $resource.MediaType.Type "image") (ne $resource.Name "hero.webp") }}
-          {{ $thumb := $resource.Resize "420x" }}
-          {{ $large := $resource.Resize "1600x" }}
+        {{ if ne $id "" }}
           <a class="spotlight"
-             href="{{ $large.RelPermalink }}"
-             data-pswp-width="{{ $large.Width }}"
-             data-pswp-height="{{ $large.Height }}"
-             data-pswp-title="{{ $title }}"
-             data-pswp-desc="{{ $description }}"
-             aria-label="{{ $title }}">
-            <img src="{{ $thumb.RelPermalink }}"
-                 alt="{{ $title }}"
-                 title="{{ $description }}"
+             href="https://www.youtube-nocookie.com/embed/{{ $id }}?rel=0"
+             data-pswp-type="youtube"
+             data-pswp-width="1280"
+             data-pswp-height="720">
+            <img src="https://img.youtube.com/vi/{{ $id }}/hqdefault.jpg"
+                 alt="YouTube Video"
                  class="gallery-image"
                  loading="lazy" />
           </a>
         {{ end }}
       {{ end }}
-    </div>
+    {{ end }}
+
   </div>
+</div>
+
 </div>
 
 <script type="module">
   import PhotoSwipeLightbox from "/js/photoswipe-lightbox.esm.js";
+
   const lightbox = new PhotoSwipeLightbox({
     gallery: "#my-gallery",
     children: "a.spotlight",
     pswpModule: () => import("/js/photoswipe.esm.js"),
-    wheelToZoom: true, pinchToClose: true, closeOnVerticalDrag: true, allowPanToNext: true,
-    imageClickAction: 'zoom-or-close', doubleTapAction: 'zoom', tapAction: 'toggle-controls', bgClickAction: 'close',
-    initialZoomLevel: 'fit', secondaryZoomLevel: 1.5, maxZoomLevel: 3,
-    paddingFn: (vp) => { const pad = vp.x < 860 ? 12 : 24; return { top: pad, right: pad, bottom: pad, left: pad }; }
+    wheelToZoom: true,
+    pinchToClose: true,
+    closeOnVerticalDrag: true,
+    allowPanToNext: true,
+    imageClickAction: 'zoom-or-close',
+    doubleTapAction: 'zoom',
+    tapAction: 'toggle-controls',
+    bgClickAction: 'close',
+    initialZoomLevel: 'fit',
+    secondaryZoomLevel: 1.5,
+    maxZoomLevel: 3,
+    paddingFn: (vp) => {
+      const pad = vp.x < 860 ? 12 : 24;
+      return { top: pad, right: pad, bottom: pad, left: pad };
+    }
   });
+
+  // YouTube support (no local video support)
+  lightbox.addFilter('itemData', (itemData) => {
+    if (itemData.element.dataset.pswpType === 'youtube') {
+      const embedURL = itemData.src;
+      itemData.html = `
+        <div style="width:100%;max-width:1200px;margin:auto;">
+          <div style="position:relative;padding-bottom:56.25%;height:0;">
+            <iframe
+              src="${embedURL}"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      `;
+    }
+    return itemData;
+  });
+
+  // Stop playback when changing slides / closing
+  lightbox.on('change', () => {
+    const iframes = document.querySelectorAll('.pswp iframe');
+    iframes.forEach((f) => {
+      const src = f.getAttribute('src');
+      f.setAttribute('src', src);
+    });
+  });
+
+  lightbox.on('close', () => {
+    const iframes = document.querySelectorAll('.pswp iframe');
+    iframes.forEach((f) => {
+      const src = f.getAttribute('src');
+      f.setAttribute('src', src);
+    });
+  });
+
   lightbox.init();
 </script>
 

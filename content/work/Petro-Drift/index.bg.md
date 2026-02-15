@@ -3,6 +3,7 @@ title = "Петро-дрифт"
 date = 2025-05-03T23:30:59+02:00
 description = "Едноканална видеоинсталация за замърсяването на Черно море след нефтения разлив в Керченския проток."
 canonical = "https://newdegeneration.xyz/work/petrodrift/"
+youtube = "https://youtu.be/Q70VPEM6p34"
 
 type = "artwork"
 medium = ["едноканална видеоинсталация", "70×50 см, 08:45 мин"]
