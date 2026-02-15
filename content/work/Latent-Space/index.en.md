@@ -14,6 +14,8 @@ dateend = "2022-09-21T00:00:00+03:00"
 curator = ["Hristo Kaloyanov"]
 categories = ["solo"]
 canonical = "https://newdegeneration.xyz/work/latent-space/"
+youtube = ["https://youtu.be/URnPNgeQgAc", "https://youtu.be/l52ILhl935I"]
+
 Sound = ["Yan Lechev", "Anton Shishkov"]
 +++
 
