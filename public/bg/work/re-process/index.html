@@ -663,13 +663,19 @@
         <a class="spotlight"
            href="/work/re-process/re-process-A_huffe1a5aa1a996a2a87e74e951fbc58c4_768994_1600x0_resize_q75_h2_box_2.webp"
            data-pswp-width="1600"
-           data-pswp-height="1600"
-           data-pswp-title="Черна Волга (2022)"
-           data-pswp-desc="фото-принт 120х120см, частна колекция">
+           data-pswp-height="1600">
+
           <img src="/work/re-process/re-process-A_huffe1a5aa1a996a2a87e74e951fbc58c4_768994_420x0_resize_q75_h2_box_2.webp"
                alt="Черна Волга (2022)"
                class="gallery-image"
                loading="lazy" />
+
+          <span class="hidden-caption-content">
+            <strong>Черна Волга (2022)</strong>
+            <br>
+            фото-принт 120х120см, частна колекция
+          </span>
+
         </a>
       
     
@@ -683,13 +689,19 @@
         <a class="spotlight"
            href="/work/re-process/re-process-B_huca6422f7268c53a448ca67b1abfc6d69_713866_1600x0_resize_q75_h2_box_2.webp"
            data-pswp-width="1600"
-           data-pswp-height="1600"
-           data-pswp-title="Наименувана (2022)"
-           data-pswp-desc="фото-принт 120х120см, частна колекция">
+           data-pswp-height="1600">
+
           <img src="/work/re-process/re-process-B_huca6422f7268c53a448ca67b1abfc6d69_713866_420x0_resize_q75_h2_box_2.webp"
                alt="Наименувана (2022)"
                class="gallery-image"
                loading="lazy" />
+
+          <span class="hidden-caption-content">
+            <strong>Наименувана (2022)</strong>
+            <br>
+            фото-принт 120х120см, частна колекция
+          </span>
+
         </a>
       
     
@@ -703,13 +715,19 @@
         <a class="spotlight"
            href="/work/re-process/re-process-C_hu21a286d4d6c99652909817a429aef326_779086_1600x0_resize_q75_h2_box_2.webp"
            data-pswp-width="1600"
-           data-pswp-height="2262"
-           data-pswp-title="Нощна Карта (2022)"
-           data-pswp-desc="фиктивна сгъваема туристическа карта 15x10cm (сгъната), оригинална карта от 1923 г. от общинския архив на град Варна, модифицирана с помощта на изкуствен интелект">
+           data-pswp-height="2262">
+
           <img src="/work/re-process/re-process-C_hu21a286d4d6c99652909817a429aef326_779086_420x0_resize_q75_h2_box_2.webp"
                alt="Нощна Карта (2022)"
                class="gallery-image"
                loading="lazy" />
+
+          <span class="hidden-caption-content">
+            <strong>Нощна Карта (2022)</strong>
+            <br>
+            фиктивна сгъваема туристическа карта 15x10cm (сгъната), оригинална карта от 1923 г. от общинския архив на град Варна, модифицирана с помощта на изкуствен интелект
+          </span>
+
         </a>
       
     
@@ -723,13 +741,19 @@
         <a class="spotlight"
            href="/work/re-process/re-process-D_hud5222f2122e77b4260a009c63ff8369f_780042_1600x0_resize_q75_h2_box_2.webp"
            data-pswp-width="1600"
-           data-pswp-height="1600"
-           data-pswp-title="Наименувана (2022)"
-           data-pswp-desc="фото-принт 25х25см">
+           data-pswp-height="1600">
+
           <img src="/work/re-process/re-process-D_hud5222f2122e77b4260a009c63ff8369f_780042_420x0_resize_q75_h2_box_2.webp"
                alt="Наименувана (2022)"
                class="gallery-image"
                loading="lazy" />
+
+          <span class="hidden-caption-content">
+            <strong>Наименувана (2022)</strong>
+            <br>
+            фото-принт 25х25см
+          </span>
+
         </a>
       
     
@@ -743,13 +767,19 @@
         <a class="spotlight"
            href="/work/re-process/re-process-F_hu20d160240a2d4b0506b84cdc5e2e9775_1005198_1600x0_resize_q75_h2_box_2.webp"
            data-pswp-width="1600"
-           data-pswp-height="2241"
-           data-pswp-title="Наименувана (2022)"
-           data-pswp-desc="фото-принт 60х40см, частна колекция">
+           data-pswp-height="2241">
+
           <img src="/work/re-process/re-process-F_hu20d160240a2d4b0506b84cdc5e2e9775_1005198_420x0_resize_q75_h2_box_2.webp"
                alt="Наименувана (2022)"
                class="gallery-image"
                loading="lazy" />
+
+          <span class="hidden-caption-content">
+            <strong>Наименувана (2022)</strong>
+            <br>
+            фото-принт 60х40см, частна колекция
+          </span>
+
         </a>
       
     
@@ -789,6 +819,35 @@
       const pad = vp.x < 860 ? 12 : 24;
       return { top: pad, right: pad, bottom: pad, left: pad };
     }
+  });
+
+  
+  lightbox.on('uiRegister', function() {
+    lightbox.pswp.ui.registerElement({
+      name: 'custom-caption',
+      order: 9,
+      isButton: false,
+      appendTo: 'root',
+      html: '',
+      onInit: (el, pswp) => {
+        pswp.on('change', () => {
+          const curr = pswp.currSlide?.data?.element;
+          let captionHTML = '';
+
+          if (curr) {
+            const hidden = curr.querySelector('.hidden-caption-content');
+            if (hidden) {
+              captionHTML = hidden.innerHTML;
+            } else {
+              const img = curr.querySelector('img');
+              captionHTML = img?.getAttribute('alt') || '';
+            }
+          }
+
+          el.innerHTML = captionHTML || '';
+        });
+      }
+    });
   });
 
   

@@ -704,6 +704,35 @@
   });
 
   
+  lightbox.on('uiRegister', function() {
+    lightbox.pswp.ui.registerElement({
+      name: 'custom-caption',
+      order: 9,
+      isButton: false,
+      appendTo: 'root',
+      html: '',
+      onInit: (el, pswp) => {
+        pswp.on('change', () => {
+          const curr = pswp.currSlide?.data?.element;
+          let captionHTML = '';
+
+          if (curr) {
+            const hidden = curr.querySelector('.hidden-caption-content');
+            if (hidden) {
+              captionHTML = hidden.innerHTML;
+            } else {
+              const img = curr.querySelector('img');
+              captionHTML = img?.getAttribute('alt') || '';
+            }
+          }
+
+          el.innerHTML = captionHTML || '';
+        });
+      }
+    });
+  });
+
+  
   lightbox.addFilter('itemData', (itemData) => {
     if (itemData.element.dataset.pswpType === 'youtube') {
       const embedURL = itemData.src;

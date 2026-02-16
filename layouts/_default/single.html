@@ -223,13 +223,19 @@
         <a class="spotlight"
            href="{{ $large.RelPermalink }}"
            data-pswp-width="{{ $large.Width }}"
-           data-pswp-height="{{ $large.Height }}"
-           data-pswp-title="{{ $title }}"
-           data-pswp-desc="{{ $description }}">
+           data-pswp-height="{{ $large.Height }}">
+
           <img src="{{ $thumb.RelPermalink }}"
                alt="{{ $title }}"
                class="gallery-image"
                loading="lazy" />
+
+          <span class="hidden-caption-content">
+            {{ if $title }}<strong>{{ $title }}</strong>{{ end }}
+            {{ if and $title $description }}<br>{{ end }}
+            {{ $description }}
+          </span>
+
         </a>
       {{ end }}
     {{ end }}
@@ -255,10 +261,16 @@
              data-pswp-type="youtube"
              data-pswp-width="1280"
              data-pswp-height="720">
+
             <img src="https://img.youtube.com/vi/{{ $id }}/hqdefault.jpg"
                  alt="YouTube Video"
                  class="gallery-image"
                  loading="lazy" />
+
+            <span class="hidden-caption-content">
+              {{ with $.Params.youtubeTitle }}{{ . }}{{ else }}YouTube{{ end }}
+            </span>
+
           </a>
         {{ end }}
       {{ end }}
@@ -291,6 +303,35 @@
       const pad = vp.x < 860 ? 12 : 24;
       return { top: pad, right: pad, bottom: pad, left: pad };
     }
+  });
+
+  // Caption UI (official v5 method)
+  lightbox.on('uiRegister', function() {
+    lightbox.pswp.ui.registerElement({
+      name: 'custom-caption',
+      order: 9,
+      isButton: false,
+      appendTo: 'root',
+      html: '',
+      onInit: (el, pswp) => {
+        pswp.on('change', () => {
+          const curr = pswp.currSlide?.data?.element;
+          let captionHTML = '';
+
+          if (curr) {
+            const hidden = curr.querySelector('.hidden-caption-content');
+            if (hidden) {
+              captionHTML = hidden.innerHTML;
+            } else {
+              const img = curr.querySelector('img');
+              captionHTML = img?.getAttribute('alt') || '';
+            }
+          }
+
+          el.innerHTML = captionHTML || '';
+        });
+      }
+    });
   });
 
   // YouTube support (no local video support)
