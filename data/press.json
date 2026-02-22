@@ -182,15 +182,6 @@
     },
     {
       "exhibition": "even-trolls-sleep",
-      "namebg": "Портал Култура",
-      "nameen": "Portal Kultura",
-      "descriptionbg": "Есе, в което изложбата е пример за ангажирано изкуство.",
-      "descriptionen": "Essay citing the exhibition as an example of engaged art.",
-      "year": "2025",
-      "url": "https://kultura.bg/web/%D0%B7%D0%B0-%D1%82%D0%B8%D1%85%D0%BE%D1%82%D0%BE-%D0%B8%D0%B7%D0%BA%D1%83%D1%81%D1%82%D0%B2%D0%BE-%D0%B2-%D0%B1%D1%83%D1%80%D0%BD%D0%B8-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B0/"
-    },
-    {
-      "exhibition": "even-trolls-sleep",
       "namebg": "Списание Boyscout",
       "nameen": "Boyscout Magazine",
       "descriptionbg": "Месечен гид с препоръка за изложбата в Гьоте-институт.",
@@ -318,12 +309,12 @@
       "url": "https://bnt.bg/news/kakvo-da-ochakvame-na-festivala-buna-vav-varna-v368087-329168news.html",
       "dontshowbio": "true"
     },
-  
+
     {
       "exhibition": "the-first-ten",
       "namebg": "Art Viewer",
       "nameen": "Art Viewer",
-      "descriptionen": "Feature on Roth & Stoyanov at Posta/Charta; reconstructs the story behind “Cards and Contraband.”",
+      "descriptionen": "“Aaron Roth and Nikola Stoyanov at POSTA SPACE and Charta Gallery”",
       "descriptionbg": "Материал за Рот и Стоянов в Posta/Charta; реконструира разказа зад „Картички и контрабанда“.",
       "year": "2024",
       "url": "https://artviewer.org/aaron-roth-and-nikola-stoyanov-at-posta-space-and-charta-gallery/"
@@ -341,17 +332,17 @@
       "exhibition": "the-first-ten",
       "namebg": "EuroNews TV",
       "nameen": "EuroNews TV",
-      "descriptionen": "News piece presenting the Customs archives and context of the project.",
-      "descriptionbg": "Новинарско отразяване с представяне на архивите на „Митници“ и контекста на проекта.",
+      "descriptionen": "„Postcards and Contraband: Exhibition presents archives from the Customs Agency “",
+      "descriptionbg": "„Картички и контрабанда“: Изложба представя архиви от Агенция „Митници“",
       "year": "2024",
-      "url": "https://euronewsbulgaria.com/news/26635/kartichki-i-kontrabanda-izlozhba-predstavya-arhivi-ot-agentsiya-mitnitsi"
+      "url": "https://www.youtube.com/watch?v=BMeLc_e1uMQ"
     },
     {
       "exhibition": "the-first-ten",
       "namebg": "Българско национално радио",
       "nameen": "Bulgarian National Radio",
-      "descriptionen": "Radio discussion on concept, the archive and public memory behind the show.",
-      "descriptionbg": "Радио разговор за концепцията, архива и публичната памет зад изложбата.",
+      "descriptionen": "„Postcards and Contraband – exhibition based on archives from the Customs Agency“",
+      "descriptionbg": "„Картички и контрабанда – изложба по архиви от Агенция Митници“",
       "year": "2024",
       "url": "https://bnr.bg/hristobotev/post/101982948/kaloanov"
     },
@@ -376,10 +367,10 @@
       "exhibition": "the-first-ten",
       "namebg": "Радиопрограма Хоризонт",
       "nameen": "Radio Program Horizont",
-      "descriptionen": "On-air call highlighting the archival base and social reading.",
-      "descriptionbg": "Ефирно включване с акцент върху архивната база и социалния прочит.",
+      "descriptionen": "„Postcards and Contraband - an exhibition of documents and photographs from a randomly discovered archive of the Customs Agency“",
+      "descriptionbg": "„Картички и контрабанда - изложба на документи и снимки от случайно намерен архив на Агенция Митници“",
       "year": "2024",
-      "url": "https://bnr.bg/horizont/post/101976077"
+      "url": "https://bnrnews.bg/horizont/post/308773/kartichki-i-kontrabanda---izlozhba-na-dokumenti-i-snimki-ot-sluchayno-nameren-arhiv-na-agentsiya-mitnitsi"
     },
   
     {
@@ -389,7 +380,7 @@
       "descriptionen": "Feature on “Re-Process”: street photography blending traditional and abstract.",
       "descriptionbg": "Материал за „Re-Process“: улична фотография между традиционното и абстрактното.",
       "year": "2022",
-      "url": "https://bnr.bg/varna/post/101649068/izlojbata-reproces-preplita-tradicionnoto-i-abstraktnoto-v-nevijdani-ulichni-fotografii"
+      "url": "https://old-news.bnr.bg/varna/post/101649068/izlojbata-reproces-preplita-tradicionnoto-i-abstraktnoto-v-nevijdani-ulichni-fotografii"
     },
   
     {
@@ -406,9 +397,9 @@
       "namebg": "Българско национално радио",
       "nameen": "Bulgarian National Radio",
       "descriptionen": "Interview on ecology, industrial memory and visual ethics in “Nature Morte.”",
-      "descriptionbg": "Интервю за екологията, индустриалната памет и визуалната етика в „Nature Morte“.",
+      "descriptionbg": "„NATURE MORTE - творчески поглед към въгледобивната индустрия“",
       "year": "2023",
-      "url": "https://bnr.bg/horizont/post/101854514/nature-morte-tvorcheski-pogled-kam-vagledobivnata-industria"
+      "url": "https://old-news.bnr.bg/horizont/post/101854514/nature-morte-tvorcheski-pogled-kam-vagledobivnata-industria"
     },
     {
       "exhibition": "nature-morte",
@@ -421,8 +412,8 @@
       "exhibition": "nature-morte",
       "namebg": "Дарик Радио",
       "nameen": "Darik Radio",
-      "descriptionen": "Article offering a different gaze at the Maritsa East power complex.",
-      "descriptionbg": "Текст с различен поглед към комплекса „Марица-изток“.",
+      "descriptionen": "„Nature Morte: a different perspective on the Maritsa East Thermal Power Plant“",
+      "descriptionbg": "„Nature Morte: един по-различен поглед към ТЕЦ Марица Изток““.",
       "year": "2023",
       "url": "https://darik.bg/nature-morte-edin-po-razlichen-pogled-kam-tec-marica-iztok"
     },
@@ -430,8 +421,8 @@
       "exhibition": "nature-morte",
       "namebg": "Българска телеграфна агенция",
       "nameen": "Bulgarian Telegraph Agency",
-      "descriptionen": "Announcement for the “Coal Tropics” discussion linked to the project.",
-      "descriptionbg": "Анонс за дискусията „Въглищна тропика“, свързана с проекта.",
+      "descriptionen": "„A discussion on the topic of Coal Tropics examines ore mining and how it inspires the visual arts.“",
+      "descriptionbg": "„Дискусия на тема „Въглищна тропика“ разглежда добива на руда и как вдъхновява визуалните изкуства“",
       "year": "2023",
       "url": "https://www.bta.bg/bg/news/lik/491946-diskusiya-na-tema-vaglishtna-tropika-razglezhda-dobiva-na-ruda-i-kak-vdahnovya"
     },
@@ -447,8 +438,8 @@
       "exhibition": "nature-morte",
       "namebg": "Списание Boyscout",
       "nameen": "Boy Scout Magazine",
-      "descriptionen": "Guide pick — documentary eye on industrial transformation.",
-      "descriptionbg": "Гид селекция — документален поглед към индустриалната трансформация.",
+      "descriptionen": "„What to do in Sofia in July“",
+      "descriptionbg": "„Какво да правим в София през юли“",
       "year": "2023",
       "url": "https://boyscoutmag.com/2023/07/kakvo-da-pravim-v-sofia-prez-july-2/"
     },
@@ -475,8 +466,8 @@
       "exhibition": "in-process",
       "namebg": "Списание BoyScout",
       "nameen": "Boyscout Magazine",
-      "descriptionen": "Short review of “In Process” at KO-OP — stylized urban detritus on black; curated by Hristo Kaloyanov.",
-      "descriptionbg": "Кратко ревю за „В процес“ в КО-ОП — стилизирани градски остатъци на черен фон; куратор Христо Калоянов.",
+      "descriptionen": "Short review of “In Process” at KO-OP — Stylized urban detritus on black; curated by Hristo Kaloyanov.",
+      "descriptionbg": "Никола Стоянов стилизира околната градска свинщина.",
       "year": "2021",
       "url": "https://boyscoutmag.com/2021/01/izlojba-nikola-stoyanov-stilizira-gradskata-svinshtina-koqto-ni-zaobikalq/"
     },
@@ -530,8 +521,8 @@
       "exhibition": "cards",
       "namebg": "Българска Телеграфна Агенция",
       "nameen": "Bulgarian Telegraph Agency",
-      "descriptionen": "Announcement for ReBonkers show tracing socialist-era smuggling.",
-      "descriptionbg": "Анонс за изложба в ReBonkers, проследяваща контрабандата през социализма.",
+      "descriptionen": "„Smuggling during socialism is explored in an exhibition at the ReBоnkers center in Varna“",
+      "descriptionbg": "„Контрабандата през социализма изследва експозиция, подредена във варненския център „РеБонкърс““",
       "year": "2023",
       "url": "https://www.bta.bg/bg/news/lik/519175-kontrabandata-prez-sotsializma-izsledva-ekspozitsiya-podredena-vav-varnenskiya-"
     },
@@ -539,10 +530,10 @@
       "exhibition": "cards",
       "namebg": "Българско Национално Радио",
       "nameen": "Bulgarian National Radio",
-      "descriptionbg": "Радио отразяване на „Картички и контрабанда“ във Варна — изложба, която разгръща документалните пластове на нелегалните потоци.",
-      "descriptionen": "Radio coverage of “Cards and Contraband” in Varna — an exhibition unfolding documentary layers of illicit flows.",
+      "descriptionbg": "„Изложба разкрива тайните на контрабандата от времето на социализма“",
+      "descriptionen": "„Exhibition reveals the secrets of smuggling during the socialist era“",
       "year": "2023",
-      "url": "https://bnr.bg/varna/post/101874963/izlobn-razkriva-tainite-na-kontrabandata-ot-vremeto-na-socializma"
+      "url": "https://bnrnews.bg/varna/post/112778/izlobn-razkriva-tainite-na-kontrabandata-ot-vremeto-na-socializma"
     },
     {
       "exhibition": "cards",
@@ -590,8 +581,8 @@
       "exhibition": "black-fax",
       "namebg": "Proud BG",
       "nameen": "Proud BG",
-      "descriptionen": "Announcement of SPORNO’s first edition at WÆ ÆTHER Sofia — art & pornography, queer emancipatory lens.",
-      "descriptionbg": "Анонс за първото издание на SPORNO в WÆ ÆTHER Sofia — изкуство и порнография, куиър еманципаторен фокус.",
+      "descriptionen": "„WÆ ÆTHER SOFIA announces the first edition of the SPORNO festival“",
+      "descriptionbg": "„WÆ ÆTHER SOFIA обявява първо издание на фестивала SPORNO“",
       "year": "2024",
       "url": "https://proud.bg/wae-aether-sofia-obyavyava-parvo-izdanie-na-festivala-sporno/"
     },
@@ -599,8 +590,8 @@
       "exhibition": "black-fax",
       "namebg": "Списание BoyScout",
       "nameen": "Boyscout Magazine",
-      "descriptionen": "Guide feature: Sofia gives ground to SPORNO — what the festival sets out to do.",
-      "descriptionbg": "Гид материал: София дава терен за SPORNO — какво цели фестивалът.",
+      "descriptionen": "„Sofia gives ground to SPORNO (the S is silent)“",
+      "descriptionbg": "„София дава терен за SPORNO (S-ът е ням)“",
       "year": "2024",
       "url": "https://boyscoutmag.com/2024/06/sporno-festival-sofia/"
     }

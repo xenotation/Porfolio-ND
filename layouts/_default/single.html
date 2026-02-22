@@ -1,8 +1,9 @@
 {{ define "main" }}
 
-<link rel="stylesheet" href="/css/project-page.css">
+
 <link rel="stylesheet" href="/css/photoswipe.css">
-<link rel="stylesheet" href="/css/pswp-caption.css">
+<link rel="stylesheet" href="/css/photoswipe-dynamic-caption-plugin.css">
+<link rel="stylesheet" href="/css/project-page.css">
 
 {{/* ---------- shared vars used later ---------- */}}
 {{ $exhKey := ( .Params.exhibition_key | default (path.Base .File.Dir) ) | urlize }}
@@ -16,7 +17,7 @@
 
 {{ $resources := .Resources.Match "*.*" }}
 
-<!-- JSON-LD: WebPage + Event + Person + Images + Breadcrumbs -->
+<!-- JSON-LD: WebPage + Event + Person -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,225 +79,215 @@
 
 <div class="container">
 
-{{/* ---- HERO (video if available, else image) ---- */}}
-{{ $heroVideo := .Resources.GetMatch "hero.webm" }}
-{{ $heroImg   := or (.Resources.GetMatch "hero.webp") (.Resources.GetMatch "hero.jpg") (.Resources.GetMatch "hero.jpeg") (.Resources.GetMatch "hero.png") }}
+  {{/* ---- HERO (video if available, else image) ---- */}}
+  {{ $heroVideo := .Resources.GetMatch "hero.webm" }}
+  {{ $heroImg   := or (.Resources.GetMatch "hero.webp") (.Resources.GetMatch "hero.jpg") (.Resources.GetMatch "hero.jpeg") (.Resources.GetMatch "hero.png") }}
 
-<div class="exhb-hero">
-  {{ if $heroVideo }}
-    <video class="featured-video" autoplay muted loop playsinline
-      {{ with $heroImg }}poster="{{ .RelPermalink }}"{{ end }}>
-      <source src="{{ $heroVideo.RelPermalink }}" type="video/webm">
-    </video>
-    {{ with $heroImg }}
-    <noscript>
-      <img class="featured-image" src="{{ .RelPermalink }}" alt="{{ $.Title }} hero" fetchpriority="high">
-    </noscript>
+  <div class="exhb-hero">
+    {{ if $heroVideo }}
+      <video class="featured-video" autoplay muted loop playsinline {{ with $heroImg }}poster="{{ .RelPermalink }}"{{ end }}>
+        <source src="{{ $heroVideo.RelPermalink }}" type="video/webm">
+      </video>
+      {{ with $heroImg }}
+      <noscript>
+        <img class="featured-image" src="{{ .RelPermalink }}" alt="{{ $.Title }} hero" fetchpriority="high">
+      </noscript>
+      {{ end }}
+    {{ else if $heroImg }}
+      <img class="featured-image" src="{{ $heroImg.RelPermalink }}" alt="{{ .Title }} hero">
     {{ end }}
-  {{ else if $heroImg }}
-    <img class="featured-image" src="{{ $heroImg.RelPermalink }}" alt="{{ .Title }} hero">
-  {{ end }}
-</div>
-
-<div class="exhb-title">
-  <h1>{{ .Title }}</h1>
-  <div class="placedate">
-    {{- $place := .Params.place -}}
-    {{- $location := .Params.location -}}
-    {{- if and $place $location -}}<p>{{ $place }}, {{ $location }}</p>
-    {{- else if $place -}}<p>{{ $place }}</p>
-    {{- else if $location -}}<p>{{ $location }}</p>{{- end -}}
-    {{ $startDate := .Params.datestart | default "1970-01-01T00:00:00+00:00" | time.AsTime }}
-    {{ $endDate   := .Params.dateend   | default "1970-01-01T00:00:00+00:00" | time.AsTime }}
-    {{ printf "%s-%s" ($startDate | time.Format "02.01") ($endDate | time.Format "02.01.2006") }}
   </div>
-</div>
 
-<div class="exhb-medium">
-  {{ with .Params.medium }}
-    <p class="medium-text">{{ range . }}{{ . }}<br>{{ end }}</p>
-  {{ end }}
-</div>
-
-<div class="exhb-people">
-  <div class="people">
-
-    {{ with .Params.curator }}
-      <div class="peope-types">{{ i18n "Curator" }}</div>
-      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-    {{ end }}
-
-    {{ with .Params.collaborators }}
-      <div class="peope-types">{{ i18n "collaborators" }}</div>
-      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-    {{ end }}
-
-    {{ with .Params.exhbwith }}
-      <div class="peope-types">{{ i18n "exhbwith" }}</div>
-      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-    {{ end }}
-
-    {{ with .Params.choreography }}
-      <div class="peope-types">{{ i18n "choreography" }}</div>
-      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-    {{ end }}
-
-    {{ with .Params.dramaturgy }}
-      <div class="peope-types">{{ i18n "dramaturgy" }}</div>
-      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-    {{ end }}
-
-    {{ with .Params.performers }}
-      <div class="peope-types">{{ i18n "performers" }}</div>
-      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-    {{ end }}
-
-    {{ with .Params.setdesign }}
-      <div class="peope-types">{{ i18n "setdesign" }}</div>
-      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-    {{ end }}
-
-    {{ with .Params.sound }}
-      <div class="peope-types">{{ i18n "Sound" }}</div>
-      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-    {{ end }}
-
-    {{ with .Params.lightdesign }}
-      <div class="peope-types">{{ i18n "lightdesign" }}</div>
-      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-    {{ end }}
-
-    {{ with .Params.styling }}
-      <div class="peope-types">{{ i18n "styling" }}</div>
-      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-    {{ end }}
-
-    {{ with .Params.photo }}
-      <div class="peope-types">{{ i18n "Photo" }}</div>
-      <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-    {{ end }}
-
+  <div class="exhb-title">
+    <h1>{{ .Title }}</h1>
+    <div class="placedate">
+      {{- $place := .Params.place -}}
+      {{- $location := .Params.location -}}
+      {{- if and $place $location -}}<p>{{ $place }}, {{ $location }}</p>
+      {{- else if $place -}}<p>{{ $place }}</p>
+      {{- else if $location -}}<p>{{ $location }}</p>{{- end -}}
+      {{ $startDate := .Params.datestart | default "1970-01-01T00:00:00+00:00" | time.AsTime }}
+      {{ $endDate   := .Params.dateend   | default "1970-01-01T00:00:00+00:00" | time.AsTime }}
+      {{ printf "%s-%s" ($startDate | time.Format "02.01") ($endDate | time.Format "02.01.2006") }}
+    </div>
   </div>
-</div>
 
-<div class="exhb-body">
-  <div class="exhb-text">{{ .Content }}</div>
-
-  {{ if gt (len $critFor) 0 }}
-  <section>
-    <h2>{{ T "critique" | default (cond $isBG "Критика" "Critique") }}</h2>
-    {{ range $c := $critFor }}
-      {{ $title := cond $isBG (or $c.namebg $c.nameen) (or $c.nameen $c.namebg) }}
-      {{ $desc  := cond $isBG (or $c.descriptionbg $c.descriptionen) (or $c.descriptionen $c.descriptionbg) }}
-      {{ $auth  := cond $isBG (or $c.authorbg $c.authoren) (or $c.authoren $c.authorbg) }}
-      <a href="{{ $c.url }}" target="_blank" rel="noopener">{{ $title }}</a>{{ with $auth }} - {{ . }}{{ end }}
-      {{ with $desc }}<div>{{ . }}</div>{{ end }}
+  <div class="exhb-medium">
+    {{ with .Params.medium }}
+      <p class="medium-text">{{ range . }}{{ . }}<br>{{ end }}</p>
     {{ end }}
-  </section>
-  {{ end }}
+  </div>
 
-  {{ if gt (len $pressFor) 0 }}
-  <section>
-    <h2>{{ T "press" | default (cond $isBG "Медийно покритие" "Press") }}</h2>
-    <p>
-      {{ $links := slice }}
-      {{ range $p := $pressFor }}
-        {{ $label := cond $isBG (or $p.namebg $p.nameen) (or $p.nameen $p.namebg) }}
-        {{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">%s</a>` $p.url $label) }}
+  <div class="exhb-people">
+    <div class="people">
+      {{ with .Params.curator }}
+        <div class="peope-types">{{ i18n "Curator" }}</div>
+        <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
       {{ end }}
-      {{ delimit $links ", " | safeHTML }}
-    </p>
-  </section>
-  {{ end }}
-
-  <div id="my-gallery" class="masonry-grid">
-
-    {{/* -------- IMAGES -------- */}}
-    {{ range $index, $resource := $resources }}
-      {{ $title := index $.Params.imgNames $index | default "" }}
-      {{ $description := index $.Params.imgDescrps $index | default "" }}
-
-      {{ if and (in $resource.MediaType.Type "image") (not (in $resource.Name "hero.")) }}
-        {{ $thumb := $resource.Resize "420x" }}
-        {{ $large := $resource.Resize "1600x" }}
-
-        <a class="spotlight"
-           href="{{ $large.RelPermalink }}"
-           data-pswp-width="{{ $large.Width }}"
-           data-pswp-height="{{ $large.Height }}">
-
-          <img src="{{ $thumb.RelPermalink }}"
-               alt="{{ $title }}"
-               class="gallery-image"
-               loading="lazy" />
-
-          <span class="hidden-caption-content">
-            {{ if $title }}<strong>{{ $title }}</strong>{{ end }}
-            {{ if and $title $description }}<br>{{ end }}
-            {{ $description }}
-          </span>
-
-        </a>
+      {{ with .Params.collaborators }}
+        <div class="peope-types">{{ i18n "collaborators" }}</div>
+        <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
       {{ end }}
+      {{ with .Params.exhbwith }}
+        <div class="peope-types">{{ i18n "exhbwith" }}</div>
+        <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.choreography }}
+        <div class="peope-types">{{ i18n "choreography" }}</div>
+        <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.dramaturgy }}
+        <div class="peope-types">{{ i18n "dramaturgy" }}</div>
+        <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.performers }}
+        <div class="peope-types">{{ i18n "performers" }}</div>
+        <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.setdesign }}
+        <div class="peope-types">{{ i18n "setdesign" }}</div>
+        <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.sound }}
+        <div class="peope-types">{{ i18n "Sound" }}</div>
+        <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.lightdesign }}
+        <div class="peope-types">{{ i18n "lightdesign" }}</div>
+        <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.styling }}
+        <div class="peope-types">{{ i18n "styling" }}</div>
+        <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+      {{ with .Params.photo }}
+        <div class="peope-types">{{ i18n "Photo" }}</div>
+        <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
+      {{ end }}
+    </div>
+  </div>
+
+  <div class="exhb-body">
+    <div class="exhb-text">{{ .Content }}</div>
+
+    {{ if gt (len $critFor) 0 }}
+    <section>
+      <h2>{{ T "critique" | default (cond $isBG "Критика" "Critique") }}</h2>
+      {{ range $c := $critFor }}
+        {{ $title := cond $isBG (or $c.namebg $c.nameen) (or $c.nameen $c.namebg) }}
+        {{ $desc  := cond $isBG (or $c.descriptionbg $c.descriptionen) (or $c.descriptionen $c.descriptionbg) }}
+        {{ $auth  := cond $isBG (or $c.authorbg $c.authoren) (or $c.authoren $c.authorbg) }}
+        <a href="{{ $c.url }}" target="_blank" rel="noopener">{{ $title }}</a>{{ with $auth }} - {{ . }}{{ end }}
+        {{ with $desc }}<div>{{ . }}</div>{{ end }}
+      {{ end }}
+    </section>
     {{ end }}
 
-    {{/* -------- YOUTUBE (front matter param) -------- */}}
-    {{ with .Params.youtube }}
-      {{ $ytList := . }}
-      {{ if not (reflect.IsSlice $ytList) }}
-        {{ $ytList = slice . }}
-      {{ end }}
-
-      {{ range $yt := $ytList }}
-        {{ $id := "" }}
-        {{ if in $yt "youtu.be/" }}
-          {{ $id = index (split (index (split $yt "youtu.be/") 1) "?") 0 }}
-        {{ else if in $yt "watch?v=" }}
-          {{ $id = index (split (index (split $yt "watch?v=") 1) "&") 0 }}
+    {{ if gt (len $pressFor) 0 }}
+    <section>
+      <h2>{{ T "press" | default (cond $isBG "Медийно покритие" "Press") }}</h2>
+      <p>
+        {{ $links := slice }}
+        {{ range $p := $pressFor }}
+          {{ $label := cond $isBG (or $p.namebg $p.nameen) (or $p.nameen $p.namebg) }}
+          {{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">%s</a>` $p.url $label) }}
         {{ end }}
+        {{ delimit $links ", " | safeHTML }}
+      </p>
+    </section>
+    {{ end }}
 
-        {{ if ne $id "" }}
+    <div id="my-gallery" class="masonry-grid">
+{{/* -------- YOUTUBE (front matter param) -------- */}}
+{{ with .Params.youtube }}
+  {{ $ytList := . }}
+  {{ if not (reflect.IsSlice $ytList) }}{{ $ytList = slice . }}{{ end }}
+
+  {{ range $i, $yt := $ytList }}
+    {{ $id := "" }}
+    {{ if in $yt "youtu.be/" }}
+      {{ $id = index (split (index (split $yt "youtu.be/") 1) "?") 0 }}
+    {{ else if in $yt "watch?v=" }}
+      {{ $id = index (split (index (split $yt "watch?v=") 1) "&") 0 }}
+    {{ end }}
+
+    {{ if ne $id "" }}
+      {{ $ytTitle := index $.Params.youtubeNames $i | default "YouTube" }}
+      {{ $ytDesc  := index $.Params.youtubeDescrps $i | default "" }}
+
+      <a class="spotlight"
+         href="https://www.youtube-nocookie.com/embed/{{ $id }}?rel=0"
+         data-pswp-type="youtube"
+         data-pswp-width="1280"
+         data-pswp-height="720">
+
+        <img src="https://img.youtube.com/vi/{{ $id }}/hqdefault.jpg"
+             alt="{{ $ytTitle }}"
+             class="gallery-image"
+             loading="lazy" />
+
+        <span class="pswp-caption-content">
+          {{ if $ytTitle }}<strong>{{ $ytTitle }}</strong>{{ end }}
+          {{ if and $ytTitle $ytDesc }}<br>{{ end }}
+          {{ $ytDesc }}
+        </span>
+
+      </a>
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+      {{/* -------- IMAGES -------- */}}
+      {{ range $index, $resource := $resources }}
+        {{ $title := index $.Params.imgNames $index | default "" }}
+        {{ $description := index $.Params.imgDescrps $index | default "" }}
+
+        {{ if and (in $resource.MediaType.Type "image") (not (in $resource.Name "hero.")) }}
+          {{ $thumb := $resource.Resize "420x" }}
+          {{ $large := $resource.Resize "1600x" }}
+
           <a class="spotlight"
-             href="https://www.youtube-nocookie.com/embed/{{ $id }}?rel=0"
-             data-pswp-type="youtube"
-             data-pswp-width="1280"
-             data-pswp-height="720">
+             href="{{ $large.RelPermalink }}"
+             data-pswp-width="{{ $large.Width }}"
+             data-pswp-height="{{ $large.Height }}">
 
-            <img src="https://img.youtube.com/vi/{{ $id }}/hqdefault.jpg"
-                 alt="YouTube Video"
+            <img src="{{ $thumb.RelPermalink }}"
+                 alt="{{ $title }}"
                  class="gallery-image"
                  loading="lazy" />
 
-            <span class="hidden-caption-content">
-              {{ with $.Params.youtubeTitle }}{{ . }}{{ else }}YouTube{{ end }}
+            <span class="pswp-caption-content">
+              {{ if $title }}<strong>{{ $title }}</strong>{{ end }}
+              {{ if and $title $description }}<br>{{ end }}
+              {{ $description | safeHTML }}
             </span>
 
           </a>
         {{ end }}
       {{ end }}
-    {{ end }}
 
+
+    </div>
   </div>
-</div>
 
 </div>
 
 <script type="module">
-  import PhotoSwipeLightbox from "/js/photoswipe-lightbox.esm.js";
+  import PhotoSwipeLightbox from '{{ "js/photoswipe-lightbox.esm.min.js" | relURL }}';
 
   const lightbox = new PhotoSwipeLightbox({
     gallery: "#my-gallery",
     children: "a.spotlight",
-    pswpModule: () => import("/js/photoswipe.esm.js"),
+    pswpModule: () => import('{{ "js/photoswipe.esm.js" | relURL }}'),
     wheelToZoom: true,
     pinchToClose: true,
     closeOnVerticalDrag: true,
     allowPanToNext: true,
-    imageClickAction: 'zoom-or-close',
-    doubleTapAction: 'zoom',
-    tapAction: 'toggle-controls',
-    bgClickAction: 'close',
-    initialZoomLevel: 'fit',
+    imageClickAction: "zoom-or-close",
+    doubleTapAction: "zoom",
+    tapAction: "toggle-controls",
+    bgClickAction: "close",
+    initialZoomLevel: "fit",
     secondaryZoomLevel: 1.5,
     maxZoomLevel: 3,
     paddingFn: (vp) => {
@@ -305,38 +296,9 @@
     }
   });
 
-  // Caption UI (official v5 method)
-  lightbox.on('uiRegister', function() {
-    lightbox.pswp.ui.registerElement({
-      name: 'custom-caption',
-      order: 9,
-      isButton: false,
-      appendTo: 'root',
-      html: '',
-      onInit: (el, pswp) => {
-        pswp.on('change', () => {
-          const curr = pswp.currSlide?.data?.element;
-          let captionHTML = '';
-
-          if (curr) {
-            const hidden = curr.querySelector('.hidden-caption-content');
-            if (hidden) {
-              captionHTML = hidden.innerHTML;
-            } else {
-              const img = curr.querySelector('img');
-              captionHTML = img?.getAttribute('alt') || '';
-            }
-          }
-
-          el.innerHTML = captionHTML || '';
-        });
-      }
-    });
-  });
-
-  // YouTube support (no local video support)
-  lightbox.addFilter('itemData', (itemData) => {
-    if (itemData.element.dataset.pswpType === 'youtube') {
+  // YouTube slides
+  lightbox.addFilter("itemData", (itemData) => {
+    if (itemData.element?.dataset?.pswpType === "youtube") {
       const embedURL = itemData.src;
       itemData.html = `
         <div style="width:100%;max-width:1200px;margin:auto;">
@@ -355,24 +317,30 @@
     return itemData;
   });
 
-  // Stop playback when changing slides / closing
-  lightbox.on('change', () => {
-    const iframes = document.querySelectorAll('.pswp iframe');
-    iframes.forEach((f) => {
-      const src = f.getAttribute('src');
-      f.setAttribute('src', src);
+  const resetIframes = () => {
+    document.querySelectorAll(".pswp iframe").forEach((f) => {
+      const src = f.getAttribute("src");
+      f.setAttribute("src", src);
     });
-  });
+  };
+  lightbox.on("change", resetIframes);
+  lightbox.on("close", resetIframes);
 
-  lightbox.on('close', () => {
-    const iframes = document.querySelectorAll('.pswp iframe');
-    iframes.forEach((f) => {
-      const src = f.getAttribute('src');
-      f.setAttribute('src', src);
+  // Load dynamic caption plugin *only if the file is valid*
+  try {
+    const mod = await import('{{ "js/photoswipe-dynamic-caption-plugin.esm.js" | relURL }}');
+    const PhotoSwipeDynamicCaption = mod.default;
+
+    new PhotoSwipeDynamicCaption(lightbox, {
+      type: "auto",
+      captionContent: ".pswp-caption-content"
     });
-  });
+  } catch (e) {
+    console.warn("Caption plugin failed to load (path/404). Lightbox will run without it.", e);
+  }
 
   lightbox.init();
 </script>
+
 
 {{ end }}

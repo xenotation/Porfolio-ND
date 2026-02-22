@@ -17,6 +17,8 @@ curator = ["Hristo Kaloyanov"]
 collaborators = ["Aaron Roth"]
 categories = ["solo"]
 
+youtube = "https://youtu.be/w1mwyDYF-xU"
+
 imgNames = [
     "The First Ten (2024) - Nikola Stoyanov", 
     "The First Ten (2024) - Nikola Stoyanov", 

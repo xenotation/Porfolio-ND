@@ -122,29 +122,7 @@
   margin-bottom: .4rem;
 }
 
-/* LIGHTBOX */
-.pswp__custom-caption {
-  background: rgba(75, 150, 75, 0.75);
-  font-size: 16px;
-  color: #fff;
-  width: calc(100% - 32px);
-  max-width: 400px;
-  padding: 2px 8px;
-  border-radius: 4px;
-  position: absolute;
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%);
-}
-.pswp__custom-caption a {
-  color: #fff;
-  text-decoration: underline;
-}
-.hidden-caption-content {
-  display: none;
-}
-
-
+  
 /* =======================
    Mobile (≤ 860px)
    ======================= */
@@ -219,60 +197,75 @@
   .placedate p{ margin: 0; }
 }
 
-/* ============================================================
-   PhotoSwipe caption card (centered rectangle, black/white)
-   uses your tokens: --outer-m, --size-*, --font-ui, --font-body
-   ============================================================ */
-.pswp__ndg-caption{
+/* =========================================
+   PhotoSwipe Dynamic Caption — DEMO STYLE
+   (replace ALL previous caption CSS)
+   ========================================= */
+
+/* Hide caption content inside masonry grid */
+.pswp-caption-content {
+  display: none;
+}
+
+/* Main caption container */
+.pswp__dynamic-caption {
+  color: #fff;
   position: absolute;
-  left: 50%;
-  bottom: var(--outer-m);
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;                 /* allow PS UI clicks */
+  width: 100%;
+  left: 0;
+  top: 0;
+
+  transition: opacity 120ms linear !important;
+}
+
+/* Ensure text is white */
+.pswp__dynamic-caption,
+.pswp__dynamic-caption * {
+  color: #fff !important;
+}
+
+/* Links */
+.pswp__dynamic-caption a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Fade state */
+.pswp__dynamic-caption--faded {
+  opacity: 0 !important;
+}
+
+/* Aside layout (right side panel style) */
+.pswp__dynamic-caption--aside {
   width: auto;
-  max-width: min(92vw, 72ch);
-  z-index: 2;
+  max-width: 300px;
+  padding: 20px 15px 20px 20px;
+  margin-top: 70px;
 }
 
-.pswp__ndg-caption__inner{
-  background: #000;                     /* black bg */
-  color: #fff;                          /* white text */
-  padding: var(--outer-m);
-  border-radius: 0;
-  pointer-events: auto;
-  text-align: left;            
+/* Below layout */
+.pswp__dynamic-caption--below {
+  width: auto;
+  max-width: 700px;
+  padding: 15px 0 0;
 }
 
-.pswp__ndg-caption__title{
-  font-family: var(--font-ui);
-  font-weight: 700;
-  font-size: var(--size-5);
-  line-height: 1.25;
-  margin: 0 0 calc(var(--outer-m) * 0.25) 0;
-  color: #fff;
+/* Horizontal edge */
+.pswp__dynamic-caption--on-hor-edge {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-.pswp__ndg-caption__desc{
-  font-family: var(--font-body);
-  font-size: var(--size-5);
-  line-height: 1.35;
-  margin: 0;
-  color: #fff;
-}
+/* Mobile layout */
+.pswp__dynamic-caption--mobile {
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  padding: 10px 15px;
 
-@media (max-width: 53.75rem){
-  .pswp__ndg-caption{
-    bottom: calc(var(--outer-m) * 0.8);
-    max-width: 94vw;
-  }
-  .pswp__ndg-caption__inner{
-    padding: calc(var(--outer-m) * 0.9) calc(var(--outer-m) * 1.2);
-  }
-  .pswp__ndg-caption__title{
-    font-size: var(--size-0);
-    margin-bottom: calc(var(--outer-m) * 0.2);
-  }
+  right: 0;
+  bottom: 0;
+
+  /* override JS positioning */
+  top: auto !important;
+  left: 0 !important;
 }

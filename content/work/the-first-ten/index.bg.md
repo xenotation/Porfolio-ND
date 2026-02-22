@@ -17,6 +17,9 @@ curator = ["Христо Калоянов"]
 collaborators = ["Аaрон Рот"]
 categories = ["solo"]
 
+youtube = "https://youtu.be/w1mwyDYF-xU"
+
+
 imgNames = [
     "Първите десет (2024) - Никола Стоянов", 
     "Първите десет (2024) - Никола Стоянов", 
