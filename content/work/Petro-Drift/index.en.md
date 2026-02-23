@@ -6,12 +6,10 @@ canonical = "https://newdegeneration.xyz/work/petrodrift/"
 youtube = "https://youtu.be/Q70VPEM6p34"
 youtubeNames = [
   "Video title 1",
-  "Video title 2"
 ]
 
 youtubeDescrps = [
   "Video description 1",
-  "Video description 2"
 ]
 
 

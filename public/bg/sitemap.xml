@@ -130,6 +130,59 @@
                 />
 
   </url><url>
+    <loc>http://192.168.1.5:1313/bg/work/even-trolls-sleep/</loc>
+    <lastmod>2025-03-25T23:30:59+02:00</lastmod>
+    <changefreq>daily</changefreq>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://192.168.1.5:1313/work/even-trolls-sleep/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="bg"
+                href="http://192.168.1.5:1313/bg/work/even-trolls-sleep/"
+                />
+
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/even-trolls-sleep/Trolls_01.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/even-trolls-sleep/Trolls_02.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/even-trolls-sleep/Trolls_03.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/even-trolls-sleep/Trolls_04.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/even-trolls-sleep/Trolls_05.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/even-trolls-sleep/Trolls_06.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/even-trolls-sleep/Trolls_07.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/even-trolls-sleep/Trolls_08.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/even-trolls-sleep/hero.webp</image:loc>
+        </image:image>
+      
+    
+  </url><url>
     <loc>http://192.168.1.5:1313/bg/work/black-fax/</loc>
     <lastmod>2024-05-28T23:30:59+02:00</lastmod>
     <changefreq>daily</changefreq>
@@ -436,6 +489,10 @@
         </image:image>
       
         <image:image>
+          <image:loc>http://192.168.1.5:1313/work/fever-dream/09__Fever__Dream.webp</image:loc>
+        </image:image>
+      
+        <image:image>
           <image:loc>http://192.168.1.5:1313/work/fever-dream/hero.webp</image:loc>
         </image:image>
       
@@ -676,27 +733,87 @@
 
       
         <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-1.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-10.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-11.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-12.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-13.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-14.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-15.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-16.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-17.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-18.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-19.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-2.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-20.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-3.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-4.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-5.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-6.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-7.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-8.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/latent-space/Latent-Space-9.webp</image:loc>
+        </image:image>
+      
+        <image:image>
           <image:loc>http://192.168.1.5:1313/work/latent-space/hero.webp</image:loc>
-        </image:image>
-      
-        <image:image>
-          <image:loc>http://192.168.1.5:1313/work/latent-space/latent-0.webp</image:loc>
-        </image:image>
-      
-        <image:image>
-          <image:loc>http://192.168.1.5:1313/work/latent-space/latent-1.webp</image:loc>
-        </image:image>
-      
-        <image:image>
-          <image:loc>http://192.168.1.5:1313/work/latent-space/latent-2.webp</image:loc>
-        </image:image>
-      
-        <image:image>
-          <image:loc>http://192.168.1.5:1313/work/latent-space/latent-3.webp</image:loc>
-        </image:image>
-      
-        <image:image>
-          <image:loc>http://192.168.1.5:1313/work/latent-space/latent-4.webp</image:loc>
         </image:image>
       
     
@@ -783,6 +900,10 @@
       
         <image:image>
           <image:loc>http://192.168.1.5:1313/work/grey-zone/grey-zone-g.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/grey-zone/grey-zone-h.webp</image:loc>
         </image:image>
       
         <image:image>
@@ -884,6 +1005,22 @@
         </image:image>
       
         <image:image>
+          <image:loc>http://192.168.1.5:1313/work/in-process/inproc-01.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/in-process/inproc-02.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/in-process/inproc-03.webp</image:loc>
+        </image:image>
+      
+        <image:image>
+          <image:loc>http://192.168.1.5:1313/work/in-process/inproc-04.webp</image:loc>
+        </image:image>
+      
+        <image:image>
           <image:loc>http://192.168.1.5:1313/work/in-process/inproc-A.webp</image:loc>
         </image:image>
       
@@ -973,10 +1110,6 @@
         </image:image>
       
     
-  </url><url>
-    <loc>http://192.168.1.5:1313/bg/work/even-trolls-sleep/</loc>
-    <changefreq>daily</changefreq>
-
   </url><url>
     <loc>http://192.168.1.5:1313/bg/about/</loc>
     <changefreq>daily</changefreq>

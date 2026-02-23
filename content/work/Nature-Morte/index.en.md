@@ -15,14 +15,6 @@ place = "Goethe-Institut, Sofia"
 
 datestart = "2023-06-22T00:00:00+02:00"
 dateend = "2023-07-30T00:00:00+02:00"
-keywords = [
-  "exhibition",
-  "Nature Morte",
-  "open-pit mining",
-  "geophilosophy",
-  "video installation",
-  "digital topography"
-]
 
 curator = ["Hristo Kaloyanov"]
 categories = ["solo"]

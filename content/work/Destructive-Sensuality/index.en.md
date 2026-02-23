@@ -8,15 +8,7 @@ place = "“ARTWAVE”, Varna (2022) as part of the exhibition “Destructive Se
 
 datestart = "2019-06-08T00:00:00+03:00"
 dateend = "2019-07-09T00:00:00+03:00"
-keywords = [
-  "exhibition",
-  "video collage",
-  "Core-Core aesthetics",
-  "Destructive Sensuality",
-  "Bulgarian internet culture",
-  "digital memory",
-  "dark humor"
-]
+
 
 medium = ["Core-Core Audio-Video Installation", "Cozy Post-Soviet Interior to watch TV in", "invitations to demonic channel switching compulsions"]
 categories = ["collab"]

@@ -5,7 +5,7 @@ draft = false
 description = "Gray Zone Dispositive is a massive photogrammetry recreatingthe urban space of Varna."
 canonical = "https://newdegeneration.xyz/work/grey-zone/"
 
-medium = ["video game", "3D kit-bashed photogrammetry"]
+medium = ["one channel video installation 04:15 min.", "3D kit-bashed photogrammetry", "video game"]
 place = "The Matrix, Sofia"
 
 datestart = "2022-04-28T00:00:00+03:00"
@@ -22,10 +22,10 @@ keywordsEng = [
 
 youtube = "https://youtu.be/H08w7eng9ew"
 youtubeNames = [
-  "Video title 1",
+  "Grey Zone / Dispositif, 2022 | Nikola Stoyanov",
 ]
 youtubeDescrps = [
-  "Watch full documentation at <a href='https://vimeo.com/xxxxx' target='_blank' rel='noopener'>Vimeo</a>."
+  "Grey Zone / Dispositive is a massive photogrammetry recreatingthe urban space of Varna, Bulgaria. Covering a real world area of about 3 square kilometers it is based on satellite images of the city, it presents its double."
 ]
 
 
@@ -40,6 +40,6 @@ The city - transfigured into a gray zone emptied of people, of lights, immersed 
 
 The project presents a virtual city-scape assembled out of distorted models of our familiar urban environment, rearanged into a non-euclidian vista. A photogrammetric landscape attained through the View of microsecond tics of satellites, scanning the earths surface porpouslfully and aimlessly, a virtual dérive of Varna’s unconscious, in the form of an intereactive dream.
 
-Grey Zone / Dispositive is a massive photogrammetry recreatingthe urban space of Varna. Based on satellite images of the city, it presents its double. The videogame installation also relies on acuttingedge AI-denoiser, a technology whose artifacts contribute to distort the visual field intoa dreamlike watercolor drawing. An initial version of Grey Zone / Dispositive, in the form of a videoinstallation, was presented as partof the exhibition Temporary Crisis, part of the [Sofia Underground Festival](https://sofiaunderground.com/%d0%b0%d1%80%d1%85%d0%b8%d0%b2/su-x0xx/) (2022). Later, the developed video game was part of the exhibition [„RE:Process“](https://newdegeneration.xyz/work/re-process/) in the city of Varna (continuation of the exhi-bition [„In Process“](https://newdegeneration.xyz/work/in-process/), 2021).
+Grey Zone / Dispositive is a massive photogrammetry recreatingthe urban space of Varna, Bulgaria. Covering a real world area of about 3 square kilometers it is based on satellite images of the city, it presents its double. The videogame installation also relies on acuttingedge AI-denoiser, a technology whose artifacts contribute to distort the visual field intoa dreamlike watercolor drawing. An initial version of Grey Zone / Dispositive, in the form of a videoinstallation, was presented as partof the exhibition Temporary Crisis, part of the [Sofia Underground Festival](https://sofiaunderground.com/%d0%b0%d1%80%d1%85%d0%b8%d0%b2/su-x0xx/) (2022). Later, the developed video game was part of the exhibition [„RE:Process“](https://newdegeneration.xyz/work/re-process/) in the city of Varna (continuation of the exhibition [„In Process“](https://newdegeneration.xyz/work/in-process/), 2021).
 
 [Catalouge](https://openartfiles.bg/bg/files/download/2766/221207-115215_TEMPORARY%20CRISIS%20PROGRAM.pdf)

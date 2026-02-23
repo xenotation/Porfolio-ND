@@ -190,7 +190,7 @@ body::-webkit-scrollbar {
 /* Active highlight using a vertical gradient over the full element box */
 .top a.is-active,
 .work a.is-active {
-  background-image: linear-gradient(transparent, var(--primary-color), transparent);
+  background-image:   background-image: linear-gradient(transparent, #d7d0ff, transparent);
   background-repeat: no-repeat;
   background-size: 100% 100%;  
   -webkit-box-decoration-break: clone;

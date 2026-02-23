@@ -80,6 +80,10 @@
 }
 
 
+.pswp__counter {
+  font-size: 28px;!
+}
+
 /* responsive: stack columns on small screens */
 @media (max-width: 860px){
   .mobile-nav{
