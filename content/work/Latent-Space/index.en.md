@@ -27,6 +27,8 @@ More than a hallucination and less than reality. In the latent space, nothing is
 
 “[The World After / Post-apocalyptic Notes](www.nenobel.net/neno-art-works.htm)” 05.05.2023 | Sineu, Mallorca, SPAIN, curated by [Neno Belchev](http://www.nenobel.net/neno-za.htm)
 
+## Accompanying events
+
 Discussion on the exhibition "Latent Space", 20.09.2022 | Doza Gallery, Sofia
 
 Discussion on the exhibition "Latent Space", 16.09.2022 | ReBonkers, Varna

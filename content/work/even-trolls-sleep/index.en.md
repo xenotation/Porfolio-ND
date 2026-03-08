@@ -64,4 +64,4 @@ From state troll farms on Savushkin Street to student chat groups, in his own ey
 As part of „Her poisonous doubles: Watch Your Feed!“ at Goethe-Institut
 
 ## Accompanying events
-Discussion „[The Truth and Its Poisonous Doubles](https://www.goethe.de/ins/bg/bg/ver.cfm?event_id=26552394)“ 14.04.2025 | Goethe-Institut Bulgaria
+Discussion „[The Truth and Its Poisonous Doubles](https://www.youtube.com/watch?v=nKpucIA3H0Q)“ 14.04.2025 | Goethe-Institut Bulgaria
