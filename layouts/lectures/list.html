@@ -1,8 +1,8 @@
 {{ define "main" }}
 
 <link rel="stylesheet" href="/css/bio-pages.css">
-<link rel="stylesheet" href="/css/press.css">      {{/* press visuals: sticky h2, spacing */}}
-<link rel="stylesheet" href="/css/writing.css">    {{/* one-column overrides, same as Critique */}}
+<link rel="stylesheet" href="/css/press.css">
+<link rel="stylesheet" href="/css/writing.css">
 
 {{/* language for item-level BG/EN fallbacks */}}
 {{ $isBG := eq .Site.Language.Lang "bg" }}
@@ -13,58 +13,84 @@
 {{ $lectures = where $lectures "noshow" "ne" true }}
 {{ $lectures = where $lectures "noshow" "ne" "true" }}
 
-{{/* split + sort for display (like Press) */}}
+{{/* split + sort for display */}}
 {{ $withYear := where $lectures "year" "!=" "" | default (slice) }}
 {{ $withYear = where $withYear "year" "ne" nil }}
 {{ $sorted := sort $withYear "year" "desc" }}
-{{ $older  := append (where $lectures "year" "") (where $lectures "year" nil) }}
+{{ $older := append (where $lectures "year" "") (where $lectures "year" nil) }}
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "url": "{{ .Permalink }}",
-  "name": {{ printf "%q" (i18n "talks" | default "Talks & Lectures") }},
-  "inLanguage": "{{ .Site.Language.Lang }}",
-  "about": {
-    "@type": "Person",
-    "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
-    {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
-    "image": "{{ . | absURL }}",
-    {{- end -}}
-    "url": "{{ .Site.BaseURL }}"
-  },
-  "mainEntity": {
-    "@type": "ItemList",
-    "itemListElement": [
-      {{- range $i, $it := $lectures -}}
-        {{- if gt $i 0 }},{{ end -}}
-        {
-          "@type": "ListItem",
-          "position": {{ add $i 1 }},
-          "item": {
-            "@type": "Event",
-            "name": {{ printf "%q" (cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg)) }},
-            "url": {{ printf "%q" (or $it.link $it.url) }}
-            {{- with (cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg)) -}},
-            "description": {{ printf "%q" . }}{{- end -}}
-            {{- with $it.date -}},
-            "startDate": "{{ . }}"{{- else -}}{{ with $it.year }},
-            "startDate": "{{ . }}-01-01"{{- end -}}{{- end -}},
-            "performer": {
-              "@type": "Person",
-              "name": "{{ or $.Site.Language.Params.name $.Site.Params.name }}",
-              "url": "{{ $.Site.BaseURL }}"{{ with (or $.Site.Language.Params.profileImage $.Site.Params.profileImage) }},
-              "image": "{{ . | absURL }}"{{ end }}
-            }{{ with (cond $isBG (or $it.inbg $it.inen) (or $it.inen $it.inbg)) }},
-            "location": { "@type": "Place", "name": {{ printf "%q" . }} }{{ end }}
-          }
-        }
-      {{- end -}}
-    ]
-  }
-}
-</script>
+{{/* shared profile data for JSON-LD */}}
+{{ $profileName := or .Site.Language.Params.name .Site.Params.name }}
+{{ $profileURL := .Site.BaseURL }}
+{{ $profileImage := or .Site.Language.Params.profileImage .Site.Params.profileImage }}
+
+{{ $about := dict
+  "@type" "Person"
+  "name" $profileName
+  "url" $profileURL
+}}
+{{ with $profileImage }}
+  {{ $about = merge $about (dict "image" (. | absURL)) }}
+{{ end }}
+
+{{/* build ItemList safely with jsonify */}}
+{{ $items := slice }}
+{{ range $i, $it := $lectures }}
+  {{ $title := cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg) }}
+  {{ $desc := cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg) }}
+  {{ $loc := cond $isBG (or $it.locationbg $it.locationen $it.inbg $it.inen) (or $it.locationen $it.locationbg $it.inen $it.inbg) }}
+
+  {{ $event := dict
+    "@type" "Event"
+    "name" $title
+    "url" (or $it.link $it.url)
+    "performer" $about
+  }}
+
+  {{ with $desc }}
+    {{ $event = merge $event (dict "description" .) }}
+  {{ end }}
+
+  {{ with $it.date }}
+    {{ $event = merge $event (dict "startDate" .) }}
+  {{ else }}
+    {{ with $it.year }}
+      {{ $event = merge $event (dict "startDate" (printf "%s-01-01" .)) }}
+    {{ end }}
+  {{ end }}
+
+  {{ with $loc }}
+    {{ $event = merge $event (dict
+      "location" (dict
+        "@type" "Place"
+        "name" .
+      )
+    ) }}
+  {{ end }}
+
+  {{ $listItem := dict
+    "@type" "ListItem"
+    "position" (add $i 1)
+    "item" $event
+  }}
+
+  {{ $items = $items | append $listItem }}
+{{ end }}
+
+{{ $jsonld := dict
+  "@context" "https://schema.org"
+  "@type" "WebPage"
+  "url" .Permalink
+  "name" (i18n "talks" | default "Talks & Lectures")
+  "inLanguage" .Site.Language.Lang
+  "about" $about
+  "mainEntity" (dict
+    "@type" "ItemList"
+    "itemListElement" $items
+  )
+}}
+
+<script type="application/ld+json">{{ $jsonld | jsonify | safeJS }}</script>
 
 <div class="biolist">
   <h1 class="page-heading">{{ i18n "talks" }}</h1>
@@ -81,15 +107,15 @@
           {{ end }}
 
           {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
-          {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
-          {{ $inTxt := cond $isBG (or .inbg .inen) (or .inen .inbg) }}
+          {{ $desc := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
+          {{ $locTxt := cond $isBG (or .locationbg .locationen .inbg .inen) (or .locationen .locationbg .inen .inbg) }}
 
           <li class="press-item">
             <h2 class="press-titleline">
               <a class="press-link" href="{{ or .link .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
             </h2>
             {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
-            {{ with $inTxt }}<div class="press-desc">{{ . }}</div>{{ end }}
+            {{ with $locTxt }}<div class="press-desc">{{ . }}</div>{{ end }}
           </li>
         {{ end }}
 
@@ -97,15 +123,15 @@
           <li class="press-year press-year-older">{{ i18n "earlier" }}</li>
           {{ range $older }}
             {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
-            {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
-            {{ $inTxt := cond $isBG (or .inbg .inen) (or .inen .inbg) }}
+            {{ $desc := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
+            {{ $locTxt := cond $isBG (or .locationbg .locationen .inbg .inen) (or .locationen .locationbg .inen .inbg) }}
 
             <li class="press-item">
               <h2 class="press-titleline">
                 <a class="press-link" href="{{ or .link .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
               </h2>
               {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
-              {{ with $inTxt }}<div class="press-desc">{{ . }}</div>{{ end }}
+              {{ with $locTxt }}<div class="press-desc">{{ . }}</div>{{ end }}
             </li>
           {{ end }}
         {{ end }}
