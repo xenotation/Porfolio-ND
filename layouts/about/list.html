@@ -4,55 +4,100 @@
 <script src="{{ "/js/spinner.js" | relURL }}" defer></script>
 
 {{/* Pull data from the current language */}}
-{{ $personName   := or .Params.name .Site.Language.Params.name }}
-{{ $descr        := or .Params.description .Site.Language.Params.Description }}
-{{ $jobTitle     := or .Params.jobTitle .Site.Language.Params.jobTitle }}
-{{ $profileImage := or .Params.profile_image .Site.Language.Params.profileImage }}
-{{ if $profileImage }}{{ $profileImage = $profileImage | absURL }}{{ end }}
+{{- $personName := .Params.name | default .Site.Language.Params.name | default .Site.Title -}}
+{{- $descr := .Params.description | default .Site.Language.Params.description | default .Site.Language.Params.Description | default .Site.Params.description | default "" -}}
+{{- $jobTitle := .Params.jobTitle | default .Site.Language.Params.jobTitle | default "Artist and Theorist" -}}
+{{- $alternateName := .Site.Language.Params.alternateName | default .Site.Params.alternateName -}}
+{{- $profileImage := .Params.profile_image | default .Site.Language.Params.profileImage | default .Site.Params.profileImage -}}
 
-{{/* Build sameAs from socials + params_sameas_other (no mailto) */}}
+{{/* Build sameAs from socials + params_sameas_other, excluding mailto */}}
 {{- $sameAs := slice -}}
-{{- with .Site.Params.social.instagram }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-{{- with .Site.Params.social.facebook  }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-{{- with .Site.Params.social.youtube   }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+
+{{- with .Site.Params.social.instagram -}}
+  {{- if not (hasPrefix . "mailto:") -}}
+    {{- $sameAs = $sameAs | append . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with .Site.Params.social.facebook -}}
+  {{- if not (hasPrefix . "mailto:") -}}
+    {{- $sameAs = $sameAs | append . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with .Site.Params.social.youtube -}}
+  {{- if not (hasPrefix . "mailto:") -}}
+    {{- $sameAs = $sameAs | append . -}}
+  {{- end -}}
+{{- end -}}
+
 {{- with .Site.Params.params_sameas_other -}}
-  {{- range . }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+  {{- range . -}}
+    {{- if not (hasPrefix . "mailto:") -}}
+      {{- $sameAs = $sameAs | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Person entity */}}
+{{- $person := dict
+  "@type" "Person"
+  "@id" (printf "%s#person" .Permalink)
+  "name" $personName
+  "jobTitle" $jobTitle
+  "nationality" "Bulgarian"
+  "url" .Permalink
+  "knowsLanguage" (slice "bg-BG" "en")
+-}}
+
+{{- with $alternateName -}}
+  {{- $person = merge $person (dict "alternateName" .) -}}
+{{- end -}}
+
+{{- with $profileImage -}}
+  {{- $person = merge $person (dict "image" (. | absURL)) -}}
+{{- end -}}
+
+{{- if gt (len $sameAs) 0 -}}
+  {{- $person = merge $person (dict "sameAs" $sameAs) -}}
+{{- end -}}
+
+{{/* ProfilePage entity */}}
+{{- $schema := dict
+  "@context" "https://schema.org"
+  "@type" "ProfilePage"
+  "@id" (printf "%s#profilepage" .Permalink)
+  "url" .Permalink
+  "name" .Title
+  "description" $descr
+  "inLanguage" (.Site.Language.Lang | default "en")
+  "mainEntity" $person
+-}}
+
+{{- with .Date -}}
+  {{- $schema = merge $schema (dict "dateCreated" (.Format "2006-01-02")) -}}
+{{- end -}}
+
+{{- with .Lastmod -}}
+  {{- $schema = merge $schema (dict "dateModified" (.Format "2006-01-02")) -}}
+{{- end -}}
+
+{{- with $profileImage -}}
+  {{- $schema = merge $schema (dict "primaryImageOfPage" (dict "@type" "ImageObject" "url" (. | absURL))) -}}
 {{- end -}}
 
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AboutPage",
-  "url": "{{ .Permalink }}",
-  "name": "{{ .Title }}",
-  "description": "{{ $descr }}",
-  "inLanguage": "{{ .Site.Language.Lang }}",
-  "mainEntity": {
-    "@type": "Person",
-    "name": "{{ $personName }}",
-    "alternateName": "{{ .Site.Language.Params.alternateName }}",
-    "jobTitle": "{{ $jobTitle }}",
-    "nationality": "Bulgarian",
-    "url": "{{ .Permalink }}",
-    {{ with $profileImage }}"image": "{{ . }}",{{ end }}
-    {{ if gt (len $sameAs) 0 }}
-    "sameAs": {{ $sameAs | jsonify }},
-    {{ end }}
-    "knowsLanguage": ["bg","en"]
-  }
-}
+{{ $schema | jsonify | safeJS }}
 </script>
 
 <div class="biolist">
   <h1 class="page-heading">{{ .Title }}</h1>
 
-  <!-- Eye block (decorative only) -->
   <div class="eye" aria-hidden="true">
-    <img class="eye-base"  src="/images/i_see_you_O.png" alt="">
+    <img class="eye-base" src="/images/i_see_you_O.png" alt="">
     <img class="eye-pupil" src="/images/i_see_you_I.png" alt="">
   </div>
 
-  <!-- Links -->
   <section class="about-meta container--press">
     <ul class="press-list" role="list">
       {{ with .Site.Params.social.instagram }}
@@ -81,7 +126,7 @@
 
       {{ with (index .Site.Params.documents.cv_pdf .Site.Language.Lang) }}
         <li class="press-item"><h3 class="press-titleline">
-          <a class="press-link" href="{{ . | absURL | safeURL }}" target="_blank" rel="noopener nofollow">CV (PDF)</a>
+          <a class="press-link" href="{{ . | absURL | safeURL }}" target="_blank" rel="noopener nofollow">curriculum vitae</a>
         </h3></li>
       {{ end }}
 

@@ -25,7 +25,7 @@
 [styling]
     other = 'styling ↓'
 [exhbwith]
-    other = "other perticipants ↓"
+    other = "collaboration with ↓"
 [404]          
     other = "go home"
 [press]        
@@ -49,7 +49,7 @@
 [legend_work]  
     other = "solo (s) / collab (c)"
 [portfolio]
-    other = "portfolio (PDF)"
+    other = "portfolio"
 [earlier]
     other = "Earlier"
 [artistPortfolio]

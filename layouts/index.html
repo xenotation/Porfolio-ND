@@ -2,48 +2,87 @@
 
 {{/* Build sameAs once from global params (no mailto) */}}
 {{- $sameAs := slice -}}
-{{- with .Site.Params.social.instagram }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-{{- with .Site.Params.social.facebook  }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-{{- with .Site.Params.social.youtube   }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+
+{{- with .Site.Params.social.instagram -}}
+  {{- $sameAs = $sameAs | append . -}}
+{{- end -}}
+
+{{- with .Site.Params.social.facebook -}}
+  {{- $sameAs = $sameAs | append . -}}
+{{- end -}}
+
+{{- with .Site.Params.social.youtube -}}
+  {{- $sameAs = $sameAs | append . -}}
+{{- end -}}
+
 {{- with .Site.Params.params_sameas_other -}}
-  {{- range . }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+  {{- range . -}}
+    {{- $sameAs = $sameAs | append . -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Language-aware values */}}
+{{- $lang := .Site.Language.Lang | default "en" -}}
+{{- $siteTitle := .Site.Title -}}
+{{- $description := .Site.Language.Params.description | default .Site.Language.Params.Description | default .Site.Params.description | default "" -}}
+{{- $personName := .Site.Language.Params.name | default .Site.Params.name | default .Site.Title -}}
+{{- $alternateName := .Site.Language.Params.alternateName | default .Site.Params.alternateName -}}
+{{- $jobTitle := .Site.Language.Params.jobTitle | default .Site.Params.jobTitle | default "Artist and Theorist" -}}
+{{- $profileImage := .Site.Language.Params.profileImage | default .Site.Params.profileImage -}}
+
+{{/* Person entity */}}
+{{- $person := dict
+  "@type" "Person"
+  "name" $personName
+  "jobTitle" $jobTitle
+  "nationality" "Bulgarian"
+  "url" ("/" | absLangURL)
+-}}
+
+{{- with $alternateName -}}
+  {{- $person = merge $person (dict "alternateName" .) -}}
+{{- end -}}
+
+{{- with $profileImage -}}
+  {{- $person = merge $person (dict "image" (. | absURL)) -}}
+{{- end -}}
+
+{{- if gt (len $sameAs) 0 -}}
+  {{- $person = merge $person (dict "sameAs" $sameAs) -}}
+{{- end -}}
+
+{{/* WebSite entity */}}
+{{- $website := dict
+  "@type" "WebSite"
+  "@id" (printf "%s#website" ("/" | absLangURL))
+  "name" $siteTitle
+  "url" ("/" | absLangURL)
+  "publisher" $person
+-}}
+
+{{/* Landing page entity */}}
+{{- $page := dict
+  "@context" "https://schema.org"
+  "@type" "WebPage"
+  "@id" (printf "%s#webpage" .Permalink)
+  "url" .Permalink
+  "name" (printf "%s — Artist & Theorist" $siteTitle)
+  "description" $description
+  "inLanguage" $lang
+  "isPartOf" $website
+  "about" $person
+  "mainEntity" $person
+-}}
+
+{{- with $profileImage -}}
+  {{- $page = merge $page (dict "primaryImageOfPage" (dict "@type" "ImageObject" "url" (. | absURL))) -}}
 {{- end -}}
 
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  "url": "{{ .Permalink }}",
-  "name": "{{ .Site.Title }} — Artist & Theorist",
-  "description": "{{ .Site.Language.Params.Description }}",
-  "inLanguage": "{{ .Site.Language.Lang }}",
-  {{ with .Site.Language.Params.profileImage -}}
-  "primaryImageOfPage": { "@type": "ImageObject", "url": "{{ . | absURL }}" },
-  {{- end }}
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "{{ .Site.Title }}",
-    "url": "{{ .Site.BaseURL }}",
-    "publisher": {
-      "@type": "Person",
-      "name": "{{ .Site.Language.Params.name }}"
-    }
-  },
-  "about": {
-    "@type": "Person",
-    "name": "{{ .Site.Language.Params.name }}",
-    "alternateName": "{{ .Site.Language.Params.alternateName }}",
-    "jobTitle": "{{ .Site.Language.Params.jobTitle }}",
-    "nationality": "Bulgarian",
-    "url": "{{ .Site.BaseURL }}",
-    {{ with .Site.Language.Params.profileImage }}"image": "{{ . | absURL }}",{{ end }}
-    {{ if gt (len $sameAs) 0 }}
-    "sameAs": {{ $sameAs | jsonify }}
-    {{ end }}
-  }
-}
+{{ $page | jsonify | safeJS }}
 </script>
 
 <div class="video-container"></div>
 <script src="{{ "/js/lander.js" | relURL }}"></script>
+
 {{ end }}
