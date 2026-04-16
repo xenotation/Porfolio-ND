@@ -26,7 +26,9 @@
     "descriptionen": "Lecture by Nikola Stoyanov at a conference of the Bulgarian Academy of Sciences (Nov 6, 2025), outlining a shift from indexed note systems to networked and algorithmic writing infrastructures, from Zettelkasten to contemporary attention-driven feeds.",
     "descriptionbg": "Лекция на Никола Стоянов на конференция на Българската академия на науките (6 ноември 2025), която проследява прехода от индексални системи за писане към мрежови и алгоритмични инфраструктури — от Zettelkasten до съвременните фийдове.",
     "year": "2025",
-    "tag": "lecture"
+    "tag": "lecture",
+    "locationen": "Bulgarian Academy of Sciences, Sofia",
+    "locationbg": "Българска академия на науките, София"
   },  
   {
     "nameen": "Referential autogenesis in the genre of theory-fiction",
@@ -35,7 +37,9 @@
     "descriptionen": "Talk at the conference “Autotextuality and Citation,” Institute for Literature at the Bulgarian Academy of Sciences (Sofia), session on Feb 28, 2025 (11:00–11:20).",
     "descriptionbg": "Доклад на конференцията „Автотекстуалност и цитат“, Институт за литература при БАН (София), панел на 28 февруари 2025 (11:00–11:20).",
     "year": "2025",
-    "tag": "lecture"
+    "tag": "lecture",
+    "locationen": "Institute for Literature, Bulgarian Academy of Sciences, Sofia",
+    "locationbg": "Институт за литература, Българска академия на науките, София"
   },
   {
     "nameen": "A procession of models",
@@ -77,8 +81,9 @@
     "descriptionen": "Discussion accompanying the exhibition Postcards and Contraband, Charta Gallery 21 April 2024 with the participation of Raina Markova and Hristo Kaloyanov",
     "descriptionbg": "Дискусия към изложбата „Картички и контрабанда“, Галерия „Харта“ 21 Април 2024 с участието на Райна Маркова и Христо Калоянов",
     "year": "2024",
-    "tag": "lecture"
-    
+    "tag": "lecture",
+    "locationen": "Charta Gallery, Sofia",
+    "locationbg": "Галерия „Харта“, София"
   },
   {
     "nameen": "On the border of life",
@@ -95,7 +100,9 @@
     "descriptionen": "Talk given at \"The Evident\" conference, hosted by Culture Center \"St. Kliment Ohridski\" University",
     "descriptionbg": "Лекция, представена на конференцията \"Очевидното\", организирана от Културен Център \"Св. Климент Охридски\" Университет",
     "year": "2023",
-    "tag": "lecture"
+    "tag": "lecture",
+    "locationen": "Cultural Center of Sofia University “St. Kliment Ohridski”, Sofia",
+    "locationbg": "Културен център на Софийски университет „Св. Климент Охридски“, София"
   },
   {
     "nameen": "Theoretical fictions and para-literature",
@@ -104,7 +111,9 @@
     "descriptionen": "Talk given at \"Genres in Paraliterature\" conference, hosted by Literature Theory departments of \"St. Kliment Ohridski\" University and Bulgarian Science Association",
     "descriptionbg": "Лекция, представена на конференцията \"Жанровете в Паралитературата\", организирана от катедрите по Литературна Теория на Университета \"Св. Климент Охридски\" и Българската Асоциация за Наука",
     "year": "2023",
-    "tag": "lecture"
+    "tag": "lecture",
+    "locationen": "New Conference Hall, Sofia University “St. Kliment Ohridski”, Sofia",
+    "locationbg": "Нова конферентна зала, Софийски университет „Св. Климент Охридски“, София"
   },
   {
     "nameen": "Places of ecological history",
@@ -113,7 +122,9 @@
     "descriptionen": "In \"Journal for Social Vision\", Sofia",
     "descriptionbg": "В списание \"Journal for Social Vision\", София",
     "year": "2023",
-    "tag": "lecture"
+    "tag": "lecture",
+    "locationen": "Swimming Pool, Sofia",
+    "locationbg": "Swimming Pool, София"
   },
   {
     "nameen": "Tropic of coal",
@@ -133,7 +144,9 @@
     "descriptionen": "A concise introduction to Deleuze & Guattari’s assemblage (agencement): heterogeneous couplings of people, objects, and signs; machine vs. enunciative assemblages; coding, stratification, and (re/de)territorialization, with examples from literature, bureaucracy, and schooling.",
     "descriptionbg": "Кратко въведение в сглобката (agencement) при Дельоз и Гатари: хетерогенни свързвания между хора, предмети и знаци; машинна срещу изказна сглобка; кодиране, стратификация и (де)ретериториализация с примери от литературата, бюрокрацията и училището.",
     "year": "2023",
-    "tag": "lecture"
+    "tag": "lecture",
+    "locationen": "Art Salon and Concert Studio of Radio Varna, Varna",
+    "locationbg": "Арт салон и концертно студио на Радио Варна, Варна"
   },
   {
     "nameen": "The ontological status of generative art",
@@ -162,7 +175,9 @@
     "descriptionen": "Talk given at book presentation for Mark Fisher's \"Capitalist Realism\" hosted by \"KOI\" books publishing",
     "descriptionbg": "Лекция, представена на представянето на книгата на Марк Фишър \"Капиталистическият Реализъм\", организирано от издателство \"KOI\"",
     "year": "2021",
-    "tag": "lecture"
+    "tag": "lecture",
+    "locationen": "National Student House, Sofia",
+    "locationbg": "Национален студентски дом, София"
   },
   {
     "nameen": "Knots",
