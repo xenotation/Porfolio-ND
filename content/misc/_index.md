@@ -9,6 +9,20 @@ This website is a meditation on technique and simplicity, and an exercise in tas
 
 This site is tuned for speed and simplicity. It runs on the static site generator _[Hugo](https://gohugo.io/)_ and ships as static files from _[Netlify](https://www.netlify.com/)_. It uses Stix Two for its heading and Comfortaa for its body. The site aims to use as little as posivible JavaScript and no frameworks. All fonts and images are stored as is. No analytics and trackers.
 
+## Friends
+
+Most of my friends you can find at [Под Нет](https://low-loop.xyz/)
+
+<a href="https://liternet.bg" target="_blank" title="Списание и издателство">Електронно публикуване с LiterNet</a>
+
+<a href="https://zakultura.info" target="_blank" title="Каталог за култура">Каталог за култура, изкуство и литература</a>
+
+<a href="https://kulturni-novini.info" target="_blank" title="Новини за изкуство и литература">Новини за изкуство и литература</a>
+
+<a href="https://knigosviat.net" target="_blank" title="Книги от онлайн книжарница">Книжарница Книгосвят</a>
+
+<a href="https://knizhen-pazar.net" target="_blank" title="Стари книги. Антикварни книги">Книжарница за стари книги</a>
+
 ### Other sites I run
 
 _[Plankton](https://plankton.bg/)_ (designer & webmaster) — Film streaming and critical essay platform.
