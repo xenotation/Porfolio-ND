@@ -25,6 +25,20 @@ type: "misc"
 
 <a href="https://knizhen-pazar.net" target="_blank" title="Стари книги. Антикварни книги">Книжарница за стари книги</a>
 
+<div>
+    <a href="https://webring.xxiivv.com/#your-id-here" target="_blank" rel="noopener" >
+        <img src="https://webring.xxiivv.com/icon.black.svg" alt="XXIIVV webring" style="width: 50px; height: 50px; border: none;"> 
+    XXIIVV</a>
+
+<a href="https://weirdwidewebring.net/random.html">Weird Wide Webring
+    </a>
+
+<a href="https://linklane.net" target="_blank">Listed at LinkLane.Net</a>
+
+<a href="http://geekring.net/" target="_blank">Geekring
+    </a>
+</div>
+
 ### Други сайтове, които поддържам
 
 _[Plankton](https://plankton.bg/)_ — дизайнер и уебмастър. Платформа за филмов стрийминг и критически есета.
