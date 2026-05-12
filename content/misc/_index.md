@@ -13,6 +13,8 @@ This site is tuned for speed and simplicity. It runs on the static site generato
 
 Most of my friends you can find at [Под Нет](https://low-loop.xyz/)
 
+For everything else:
+
 <a href="https://liternet.bg" target="_blank" title="Списание и издателство">Електронно публикуване с LiterNet</a>
 
 <a href="https://zakultura.info" target="_blank" title="Каталог за култура">Каталог за култура, изкуство и литература</a>

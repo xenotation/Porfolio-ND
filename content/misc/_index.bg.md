@@ -1,42 +1,44 @@
 ---
-title: "всико останало"
+title: "всичко останало"
 type: "misc"
 ---
 
-
 ## Колофон
 
-Този сайт е създаден на ръка от нулата, използва [Hugo](https://gohugo.io/) като HTML генератор и се хоства от [Netlify](https://www.netlify.com/).</br>
+Този уебсайт е медитация върху техниката и простотата, и упражнение по вкус.
 
-Сайта използва следните шрифтове:
-- [Stix Two](https://github.com/stipub/stixfonts)</br>
-by MicroPress Type Foundry
-- [Comfortaa](https://www.ctan.org/tex-archive/fonts/comfortaa)</br>
-by [Johan Aakerlund](http://luc.devroye.org/fonts-50227.html)
+Сайтът е настроен за скорост и простота. Работи със статичния генератор _[Hugo](https://gohugo.io/)_ и се доставя като статични файлове от _[Netlify](https://www.netlify.com/)_. Използва Stix Two за заглавията и Comfortaa за основния текст. Целта е да използва възможно най-малко JavaScript и никакви frameworks. Всички шрифтове и изображения се съхраняват локално. Без analytics и trackers.
 
-и двата с лиценз [SIL Open Font Licence](https://openfontlicense.org/).
+## Приятели
 
-Заглавната страница представя много-мащабни тюрингови шарки, базирани на [статията на Джонатън Маккабе](http://www.jonathanmccabe.com/Cyclic_Symmetric_Multi-Scale_Turing_Patterns.pdf)
+Повечето ми приятели можеш да намериш в [Под Нет](https://low-loop.xyz/)
 
-Всичкия труд на този уебсайт ако не е казано изрично пада под </br>
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1) © Никола Стоянов, 2024
+За всичко останало:
 
-## Уеб обрач
+<a href="https://liternet.bg" target="_blank" title="Списание и издателство">Електронно публикуване с LiterNet</a>
 
-Също оправлявам собствен уеб-кръг, главно фокусиращ,, но не ограничен до, български артисти, писатели, блогъра и тн.: [low-loop.xyz](https://low-loop.xyz/)
+<a href="https://zakultura.info" target="_blank" title="Каталог за култура">Каталог за култура, изкуство и литература</a>
 
-Този сайт участва в следните уеб-кръгове:
+<a href="https://kulturni-novini.info" target="_blank" title="Новини за изкуство и литература">Новини за изкуство и литература</a>
 
-<div>
-    <a href="https://webring.xxiivv.com/#your-id-here" target="_blank" rel="noopener" >
-        <img src="https://webring.xxiivv.com/icon.black.svg" alt="XXIIVV webring" style="width: 50px; height: 50px; border: none;"> 
-    XXIIVV</a>
+<a href="https://knigosviat.net" target="_blank" title="Книги от онлайн книжарница">Книжарница Книгосвят</a>
 
-<a href="https://weirdwidewebring.net/random.html">Weird Wide Webring
-    </a>
+<a href="https://knizhen-pazar.net" target="_blank" title="Стари книги. Антикварни книги">Книжарница за стари книги</a>
 
-<a href="https://linklane.net" target="_blank">Listed at LinkLane.Net</a>
+### Други сайтове, които поддържам
 
-<a href="http://geekring.net/" target="_blank">Geekring
-    </a>
-</div>
+_[Plankton](https://plankton.bg/)_ — дизайнер и уебмастър. Платформа за филмов стрийминг и критически есета.
+
+_[Галерия Лира](https://gurko45.org/)_ — уеб дизайнер и уебмастър. Сайт на софийската Галерия Лира.
+
+_[New Degeneration](https://blog.newdegeneration.xyz/)_ — дизайнер и уебмастър. Блог за theory-fiction и преводи.
+
+Също така проектирах и поддържам малък уеб-кръг за изследователи, артисти и други любопитни хора: [Под Нет](https://low-loop.xyz/)
+
+### Разни
+
+Началната страница използва _[много-мащабни тюрингови шарки](https://en.wikipedia.org/wiki/Turing_pattern)_, вдъхновени от [статията на Джонатан Маккейб](http://www.jonathanmccabe.com/Cyclic_Symmetric_Multi-Scale_Turing_Patterns.pdf).
+
+Много-мащабните тюрингови шарки са компютърно генерирани текстури, произведени чрез правила за _[реакционно-дифузионни системи](https://en.wikipedia.org/wiki/Reaction%E2%80%93diffusion_system)_. Вариантът на Маккейб изпълнява дифузията едновременно при няколко размера на съседство, след което циклично редува влиянието им. Изображенията са генерирани като фон за лекция със заглавие _„Assemblages and Agency“_, изнесена на _Emmergence Festival_ през 2023 г.
+
+Всички произведения, освен ако не е посочено друго, са лицензирани под [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1) _© Никола Стоянов, 2026_.
