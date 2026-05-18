@@ -52,7 +52,7 @@ params_sameas_other = [
     [languages.en.params]
       Description = "Nikola Stoyanov is a visual artist and machine philosopher hailing from Varna, Bulgaria. His work aims to traverse the boundary between research-based and speculative practices."
       name = "Nikola Stoyanov"
-      alternateName = "Nikola Vladislavov Stoyanov"
+      alternateNames = ["Никола Стоянов", "Nikola Vladislavov Stoyanov", "Никола Владиславов Стоянов"]
       jobTitle = "Artist and philosopher"
       profileImage = "images/profile.jpg"
       organizerUrl = "https://newdegeneration.xyz/bio/"
@@ -65,7 +65,7 @@ params_sameas_other = [
     [languages.bg.params]
       Description = "Никола Стоянов е визуален артист и машинен философ от Варна, България, който се занимава с пресичането между изследователските и спекулативните практики. Работата му обхваща теми като хаос, киберготика и акселерационистка философия."
       name = "Никола Стоянов"
-      alternateName = "Никола Владиславов Стоянов"
+      alternateNames = ["Nikola Stoyanov", "Nikola Vladislavov Stoyanov", "Никола Владиславов Стоянов"]
       jobTitle = "Aртист и философ"
       profileImage = "images/profile.jpg"
       organizerUrl = "https://newdegeneration.xyz/bio/"

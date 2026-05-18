@@ -7,7 +7,7 @@ cv_pdf = "/files/nikola-stoyanov-cv.pdf"
 portfolio_pdf = "/files/nikola-stoyanov-portfolio.pdf"
 +++
 
-Nikola Stoyanov is a contemporary multidisciplinary artist and philosopher based in Varna, Bulgaria. He is the author of numerous exhibitions, specializing in photography and digital art exploring the intersections of technology, philosophy, and aesthetics.
+Nikola Stoyanov is a contemporary multidisciplinary artist, philosopher and translator based in Sofia, Bulgaria. He is the author of numerous exhibitions, specializing in photography and digital art exploring the intersections of technology, philosophy, and aesthetics.
 
 His work engages with theory-fiction, post-humanist research, and experimental artistic methodologies, pushing the boundaries of contemporary visual art.
 
