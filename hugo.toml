@@ -50,7 +50,7 @@ params_sameas_other = [
     title = "Nikola Stoyanov"
     weight = "1"
     [languages.en.params]
-      Description = "Nikola Stoyanov is a visual artist and machine philosopher hailing from Varna, Bulgaria. His work aims to traverse the boundary between research-based and speculative practices."
+      Description = "Nikola Stoyanov is an artist and machine philosopher and translator based in Sofia, Bulgaria. His work aims to traverse the boundary between research-based and speculative practices."
       name = "Nikola Stoyanov"
       alternateNames = ["Никола Стоянов", "Nikola Vladislavov Stoyanov", "Никола Владиславов Стоянов"]
       jobTitle = "Artist and philosopher"
@@ -63,7 +63,7 @@ params_sameas_other = [
     weight = "2"
     title = "Никола Стоянов"
     [languages.bg.params]
-      Description = "Никола Стоянов е визуален артист и машинен философ от Варна, България, който се занимава с пресичането между изследователските и спекулативните практики. Работата му обхваща теми като хаос, киберготика и акселерационистка философия."
+      Description = "Никола Стоянов е артист, машинен философ и преводач базиран в София, България, който се занимава с пресичането между изследователските и спекулативните практики. Работата му обхваща теми като хаос, киберготика и акселерационистка философия."
       name = "Никола Стоянов"
       alternateNames = ["Nikola Stoyanov", "Nikola Vladislavov Stoyanov", "Никола Владиславов Стоянов"]
       jobTitle = "Aртист и философ"
