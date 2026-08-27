@@ -177,6 +177,12 @@ body::-webkit-scrollbar {
     width: fit-content;
     hyphens: manual;
   }
+  .work .m {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-left: 0.23rem;
+  }
+  
   @supports not (width: fit-content){
     .work li a{
       display: inline-block;

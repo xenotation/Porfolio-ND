@@ -56,22 +56,44 @@
             <div class="legend">{{ T "legend_work" }}</div>
             {{ $works := where site.RegularPages "Section" "work" }}
             {{ $works = $works.ByDate.Reverse }}
+            {{ $cutoffYear := sub now.Year 5 }}
+            {{ $oldest := index $works.ByDate 0 }}
+            {{ $oldestYear := $oldest.Date.Year }}
+            {{ $olderLinkAdded := false }}
+            
             {{ range ($works.GroupByDate "2006") }}
-              <div class="year">
-                <span class="year-label">{{ .Key }}</span>
-                <ul class="work">
-                  {{ range .Pages }}
-                    {{ $cats := .Params.categories | default (slice) }}
-                    {{ $catstr := lower (delimit $cats " ") }}
-                    {{ $m := "(s)" }}{{ if in $catstr "collab" }}{{ $m = "(c)" }}{{ end }}
-                    <li>
-                      <span class="m">{{ $m }}</span>
-                      <a class="{{ if eq .Permalink $cur.Permalink }}is-active{{ end }}"
-                         href="{{ .RelPermalink }}">{{ .Title }}</a>
-                    </li>
-                  {{ end }}
-                </ul>
-              </div>
+              {{ $year := int .Key }}
+            
+              {{ if le $year $cutoffYear }}
+                {{ if not $olderLinkAdded }}
+                  <div class="year">
+                    <a class="year-label"
+                       href="{{ printf "%s#older-exhibitions" ("/work/" | relLangURL) }}">
+                      {{ $year }} — {{ $oldestYear }}
+                    </a>
+                  </div>
+                  {{ $olderLinkAdded = true }}
+                {{ end }}
+            
+              {{ else }}
+                <div class="year">
+                  <span class="year-label">{{ .Key }}</span>
+                  <ul class="work">
+                    {{ range .Pages }}
+                      {{ $cats := .Params.categories | default (slice) }}
+                      {{ $catstr := lower (delimit $cats " ") }}
+                      {{ $m := "(s)" }}
+                      {{ if in $catstr "collab" }}{{ $m = "(c)" }}{{ end }}
+            
+                      <li>
+                        <span class="m">{{ $m }}</span>
+                        <a class="{{ if eq .Permalink $cur.Permalink }}is-active{{ end }}"
+                           href="{{ .RelPermalink }}">{{ .Title }}</a>
+                      </li>
+                    {{ end }}
+                  </ul>
+                </div>
+              {{ end }}
             {{ end }}
           {{ end }}
         </li>

@@ -45,8 +45,16 @@
 <div class="gallery">
   <h1 class="gallery-heading">selected exhibitions</h1>
 
+  {{ $cutoffYear := sub now.Year 5 }}
+  {{ $archiveAnchorAdded := false }}
+  
   {{ range $pages }}
-  <article class="exhibit">
+    {{ $isArchived := le .Date.Year $cutoffYear }}
+    <article class="exhibit"{{ if and $isArchived (not $archiveAnchorAdded) }} id="older-exhibitions"{{ end }}>
+    {{ if and $isArchived (not $archiveAnchorAdded) }}
+      {{ $archiveAnchorAdded = true }}
+    {{ end }}
+    
     <div class="exhibit-media">
       <a href="{{ .Permalink }}">
         {{/* title + optional custom hero alt, then suffix */}}
