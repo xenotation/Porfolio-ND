@@ -87,7 +87,7 @@
         {{- $s := .Params.datestart | time.AsTime -}}
         {{- $e := .Params.dateend   | time.AsTime -}}
         {{- if and $s $e -}}
-          {{ time.Format "January 2" $s }} — {{ time.Format "January 2, 2006" $e }}
+          {{ time.Format "02.01" $s }} — {{ time.Format "02.01.2006" $e }}
         {{- else if $s -}}
           {{ time.Format "January 2, 2006" $s }}
         {{- else if .Date -}}

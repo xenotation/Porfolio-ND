@@ -53,9 +53,9 @@ params_sameas_other = [
       Description = "Nikola Stoyanov is an artist and machine philosopher and translator based in Sofia, Bulgaria. His work aims to traverse the boundary between research-based and speculative practices."
       name = "Nikola Stoyanov"
       alternateNames = ["Никола Стоянов", "Nikola Vladislavov Stoyanov", "Никола Владиславов Стоянов"]
-      jobTitle = "Artist and philosopher"
+      jobTitle = ["Artist", "philosopher", "translator"]
       profileImage = "images/profile.jpg"
-      organizerUrl = "https://newdegeneration.xyz/bio/"
+      organizerUrl = "https://newdegeneration.xyz/about/"
 
   [languages.bg]
     languageName = "Български"
@@ -66,7 +66,8 @@ params_sameas_other = [
       Description = "Никола Стоянов е артист, машинен философ и преводач базиран в София, България, който се занимава с пресичането между изследователските и спекулативните практики. Работата му обхваща теми като хаос, киберготика и акселерационистка философия."
       name = "Никола Стоянов"
       alternateNames = ["Nikola Stoyanov", "Nikola Vladislavov Stoyanov", "Никола Владиславов Стоянов"]
-      jobTitle = "Aртист и философ"
+      jobTitle = ["Aртист", "философ", "преводач"]
       profileImage = "images/profile.jpg"
-      organizerUrl = "https://newdegeneration.xyz/bio/"
+      organizerUrl = "https://newdegeneration.xyz/bg/about/"
 
+ 

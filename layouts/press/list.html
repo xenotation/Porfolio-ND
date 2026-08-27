@@ -10,6 +10,8 @@
 {{ $all := site.Data.press | default (slice) }}
 {{ $all = where $all "dontshowbio" "ne" true }}
 {{ $all = where $all "dontshowbio" "ne" "true" }}
+{{ $selected := where $all "selected" true }}
+
 
 {{/* split + sort for display */}}
 {{ $withYear := where $all "year" "!=" "" | default (slice) }}
@@ -74,6 +76,24 @@
   <div class="about-wrap container--press">
     <section class="about-body">
       <ul class="press-list" role="list">
+
+        
+        {{ if gt (len $selected) 0 }}
+        <li class="press-year">{{ cond $isBG "Избрано" "Selected" }}</li>
+      
+        {{ range $selected }}
+          {{ $label := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
+          {{ $desc := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
+      
+          <li class="press-item">
+            <h2 class="press-titleline">
+              <a class="press-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ $label }}</a>
+            </h2>
+            {{ with $desc }}<div class="press-desc">{{ . }}</div>{{ end }}
+          </li>
+        {{ end }}
+      {{ end }}
+
         {{ $current := 0 }}
         {{ range $sorted }}
           {{ if ne $current .year }}

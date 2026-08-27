@@ -1,4 +1,4 @@
 ---
-title: "press and media convrage"
+title: "press and media covarage"
 type: "press"
 ---

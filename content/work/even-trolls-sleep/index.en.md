@@ -1,5 +1,6 @@
 +++
 title = 'Even trolls sleep sometimes'
+exhibition = "Her Poisonous Doubles: Watch Your Feed!"
 date = 2025-05-03T23:30:59+02:00
 draft = false
 description = "“Even trolls sleep sometimes” is an art piece consisting of over 288:05:65 hours of chat archives from the Russian Troll Foundation online community Telegram channel. This period captures a time when personal information from a coordinated attack on the author (doxing)."

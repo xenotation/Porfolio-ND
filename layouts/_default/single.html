@@ -101,6 +101,7 @@
   <div class="exhb-title">
     <h1>{{ .Title }}</h1>
     <div class="placedate">
+      {{ with .Params.exhibition }}<p>part of "{{ . }}"</p>{{ end }}
       {{- $place := .Params.place -}}
       {{- $location := .Params.location -}}
       {{- if and $place $location -}}<p>{{ $place }}, {{ $location }}</p>
@@ -120,12 +121,12 @@
 
   <div class="exhb-people">
     <div class="people">
-      {{ with .Params.curator }}
-        <div class="peope-types">{{ i18n "Curator" }}</div>
+      {{ with .Params.collaborators }}
+        <div class="peope-types">{{ i18n "Collaborators" }}</div>
         <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
       {{ end }}
-      {{ with .Params.collaborators }}
-        <div class="peope-types">{{ i18n "collaborators" }}</div>
+      {{ with .Params.curator }}
+        <div class="peope-types">{{ i18n "Curator" }}</div>
         <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
       {{ end }}
       {{ with .Params.exhbwith }}
