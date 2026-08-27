@@ -89,6 +89,11 @@
   font-family: var(--font-ui);
   font-size: var(--size-1);
 }
+
+ .press-item {
+  max-width: 60ch;
+ }
+
 .container--writing .press-link{
   color: var(--text);
   text-decoration: none;

@@ -2,7 +2,7 @@
 title = "In:Process"
 date = 2021-01-16T23:05:59+02:00
 description = "The drive to capture the city as an affective totality"
-canonical = "https://newdegeneration.xyz/work/in-process/"
+
 
 draft = false
 imgNames = ["", "Untitled (2021)", "Untitled (2021)", "Untitled (2021)", "Untitled (2021)", "Untitled (2021)", "Untitled (2021)", "Untitled (2021)", "Untitled (2021)", "Untitled (2021)", "Untitled (2021)"]

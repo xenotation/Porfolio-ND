@@ -1,57 +1,91 @@
 [
-    {
-      "exhibition": "Cards",
-      "namebg": "Alternative spaces for youth culture vs historical heritage",
-      "nameen": "Алтернативни пространства за младежката култура срещу историческото наследство",
-      "authorbg": "Наталия Николова",
-      "authoren": "Nataliya Nikolova",
-      "year": "2023",
-      "descriptionbg": "Научната статия в журнал „Икономика и информатика“, брой 2, 2023 г., ISSN 2367-7791, Варна, България",
-      "descriptionen": "Research article in the journal Economics and Informatics, Issue 2, 2023, ISSN 2367-7791, Varna, Bulgaria",
-      "url": "https://www.researchgate.net/publication/376893944_Alternative_spaces_for_youth_culture_vs_historical_heritage_Youth_activism_for_common_good"
+  {
+    "namebg": "Почти готово. БАЗА 2026",
+    "nameen": "Almost Ready. BAZA 2026",
+    "authorbg": "Христо Калоянов",
+    "authoren": "Hristo Kaloyanov",
+    "year": "2026",
+    "descriptionbg": "Критически текст в „Портал Култура“ за изложбата на номинираните за Наградата за съвременно изкуство БАЗА 2026, който разглежда „Първите десет“ и „Нещата, които видяхме заедно“ през темите за архива, паметта, режимите на гледане и монтажа.",
+    "descriptionen": "Critical essay in Portal Kultura on the BAZA 2026 nominated artists exhibition, discussing The First Ten and The Things We Saw Together through questions of the archive, memory, regimes of viewing and montage.",
+    "url": "https://kultura.bg/web/%D0%BF%D0%BE%D1%87%D1%82%D0%B8-%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE-%D0%B1%D0%B0%D0%B7%D0%B0-2026/"
+  },
+  {
+    "exhibition": "even-trolls-sleep",
+    "namebg": "Със смесени чувства",
+    "nameen": "With Mixed Feelings",
+    "authorbg": "Диана Попова",
+    "authoren": "Diana Popova",
+    "year": "2025",
+    "descriptionbg": "Критически текст в списание „Култура“ за няколко изложби, разглеждащи паметта, пропагандата и травмите на миналото, в който „Дори троловете понякога спят“ е обсъдена през тролските атаки, манипулацията и хибридната война.",
+    "descriptionen": "Critical essay in Kultura on several exhibitions addressing memory, propaganda and historical trauma, discussing Even Trolls Sleep Sometimes through troll attacks, manipulation and hybrid warfare.",
+    "url": "https://kultura.bg/article/2138-sys-smeseni-chuvstva"
+  },
+  {
+    "namebg": "Breaking Out: Art in Sofia",
+    "nameen": "Breaking Out: Art in Sofia",
+    "authorbg": "Виктория Драганова",
+    "authoren": "Viktoria Draganova",
+    "year": "2025",
+    "descriptionbg": "Есе в международното списание Glean за съвременната художествена сцена в София, което посочва Никола Стоянов сред артистите и изследователите, работещи с теми на постиндустриализацията.",
+    "descriptionen": "Essay in the international art magazine Glean on Sofia's contemporary art scene, identifying Nikola Stoyanov among artists and researchers exploring post-industrialisation.",
+    "url": "https://glean.art/issues/glean-7/breaking-out-art-in-sofia"
+    ,
+    "selected": true
+  },
+  {
+    "exhibition": "Cards",
+    "namebg": "Alternative spaces for youth culture vs historical heritage",
+    "nameen": "Алтернативни пространства за младежката култура срещу историческото наследство",
+    "authorbg": "Наталия Николова",
+    "authoren": "Nataliya Nikolova",
+    "year": "2023",
+    "descriptionbg": "Научната статия в журнал „Икономика и информатика“, брой 2, 2023 г., ISSN 2367-7791, Варна, България",
+    "descriptionen": "Research article in the journal Economics and Informatics, Issue 2, 2023, ISSN 2367-7791, Varna, Bulgaria",
+    "url": "https://www.researchgate.net/publication/376893944_Alternative_spaces_for_youth_culture_vs_historical_heritage_Youth_activism_for_common_good"
     },
     {
-      "namebg": "ПРЕГЛЕД 2025",
-      "nameen": "REVIEW 2025",
-      "authorbg": "Вера Млечевска",
-      "authoren": "Vera Mlechevska",
-      "year": "2025",
-      "descriptionbg": "Отговори на Вера Млечевска в годишната анкета на Journal for Social Vision за най-важните събития и теми в изкуството през 2025 г.",
-      "descriptionen": "Vera Mlechevska’s responses in Journal for Social Vision’s end-of-year survey on the most important events and topics in art in 2025.",
-      "url": "https://www.journalforsocialvision.org/bg/post/pregled2025-veramlechevska"
+    "namebg": "ПРЕГЛЕД 2025",
+    "nameen": "REVIEW 2025",
+    "authorbg": "Вера Млечевска",
+    "authoren": "Vera Mlechevska",
+    "year": "2025",
+    "descriptionbg": "В годишния преглед на Journal for Social Vision Вера Млечевска определя дейността на „Временно издателство“, основано от Христо Калоянов, Филип Стоилов и Никола Стоянов, като един от малкото положителни процеси в художествената критика и издателската дейност през 2025 г.",
+    "descriptionen": "In Journal for Social Vision's annual review, Vera Mlechevska highlights the activity of Temporary Publishing, founded by Hristo Kaloyanov, Philip Stoilov and Nikola Stoyanov, as one of the few positive developments in art criticism and publishing in 2025.",
+    "url": "https://www.journalforsocialvision.org/bg/post/pregled2025-veramlechevska"
     },
     {
-      "exhibition": "even-trolls-sleep",
-      "namebg": "Терора като постмодерна игра",
-      "nameen": "Terror as a Postmodern Game",
-      "authorbg": "Димитър Вацов",
-      "authoren": "Dimitar Vatsov",
-      "year": "2025",
-      "descriptionbg": "Рецензионен текст за руската пропаганда и две изложби в журнала на Център за стратегическа комуникация на НАТО.",
-      "descriptionen": "Review essay on Russian propaganda and two art exhibitions in the NATO Strategic Communications Centre of Excellence Journal.",
-      "url": "https://stratcomcoe.org/publications/defence-strategic-communications-volume-15-spring-2025/322"
+    "exhibition": "even-trolls-sleep",
+    "namebg": "Терора като постмодерна игра",
+    "nameen": "Terror as a Postmodern Game",
+    "authorbg": "Димитър Вацов",
+    "authoren": "Dimitar Vatsov",
+    "year": "2025",
+    "descriptionbg": "Рецензионен текст за руската пропаганда и две изложби в журнала на Център за стратегическа комуникация на НАТО.",
+    "descriptionen": "Review essay on Russian propaganda and two art exhibitions in the NATO Strategic Communications Centre of Excellence Journal.",
+    "url": "https://stratcomcoe.org/publications/defence-strategic-communications-volume-15-spring-2025/322",
+    "selected": true
     },
     {
-      "exhibition": "even-trolls-sleep",
-      "namebg": "За тихото изкуство в бурни времена",
-      "nameen": "On Quiet Art in Turbulent Times",
-      "authorbg": "Гергана Минкова",
-      "authoren": "Gergana Minkova",
-      "year": "2025",
-      "descriptionbg": "Текст в „Портал Култура“, в който изложбата е разгледана сред други съвременни практики.",
-      "descriptionen": "Article in Portal Kultura that discusses the exhibition among other contemporary practices.",
-      "url": "https://kultura.bg/web/%D0%B7%D0%B0-%D1%82%D0%B8%D1%85%D0%BE%D1%82%D0%BE-%D0%B8%D0%B7%D0%BA%D1%83%D1%81%D1%82%D0%B2%D0%BE-%D0%B2-%D0%B1%D1%83%D1%80%D0%BD%D0%B8-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B0/"
+    "exhibition": "even-trolls-sleep",
+    "namebg": "За тихото изкуство в бурни времена",
+    "nameen": "On Quiet Art in Turbulent Times",
+    "authorbg": "Гергана Минкова",
+    "authoren": "Gergana Minkova",
+    "year": "2025",
+    "descriptionbg": "Текст в „Портал Култура“, в който изложбата е разгледана сред други съвременни практики.",
+    "descriptionen": "Article in Portal Kultura that discusses the exhibition among other contemporary practices.",
+    "url": "https://kultura.bg/web/%D0%B7%D0%B0-%D1%82%D0%B8%D1%85%D0%BE%D1%82%D0%BE-%D0%B8%D0%B7%D0%BA%D1%83%D1%81%D1%82%D0%B2%D0%BE-%D0%B2-%D0%B1%D1%83%D1%80%D0%BD%D0%B8-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B0/"
     },  
     {
-      "exhibition": "nature-morte",
-      "namebg": "Към една геософия на катастрофата",
-      "nameen": "Towards a Geosophy of the Catastrophe",
-      "authorbg": "Филип Стоилов",
-      "authoren": "Philip Stoilov",
-      "year": "2023",
-      "descriptionbg": "Критически текст, публикуван от Културен център на СУ „Св. Климент Охридски“.",
-      "descriptionen": "Critical essay published by Sofia University Culture Center.",
-      "url": "https://culturecenter-su.org/philip-stoilov-nature-morte/"
+    "exhibition": "nature-morte",
+    "namebg": "Към една геософия на катастрофата",
+    "nameen": "Towards a Geosophy of the Catastrophe",
+    "authorbg": "Филип Стоилов",
+    "authoren": "Philip Stoilov",
+    "year": "2023",
+    "descriptionbg": "Критически текст, публикуван от Културен център на СУ „Св. Климент Охридски“.",
+    "descriptionen": "Critical essay published by Sofia University Culture Center.",
+    "url": "https://culturecenter-su.org/philip-stoilov-nature-morte/"
     },
     {
       "exhibition": "nature-morte",
@@ -73,7 +107,8 @@
       "year": "2023",
       "descriptionbg": "Доклад за конференцията „Culture, Infrasctructure, Mobility“.",
       "descriptionen": "Conference report for “Culture, Infrasctructure, Mobility”.",
-      "url": "https://culturecenter-su.org/wp-content/uploads/2023/10/programme-2023.pdf"
+      "url": "https://culturecenter-su.org/wp-content/uploads/2023/10/programme-2023.pdf",
+      "selected": true
     },
     {
       "exhibition": "the-first-ten",

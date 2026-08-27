@@ -2,8 +2,18 @@
 <meta property="og:type" content="website" />
 
 <!-- Lang -->
-<meta name="language" content='{{ .Site.Language.Lang | default "en" }}'>
+<meta
+  name="language"
+  content="{{ .Site.Language.LanguageCode | default .Site.Language.Lang }}"
+>
 
+{{- range .AllTranslations }}
+<link
+  rel="alternate"
+  hreflang="{{ .Language.LanguageCode | default .Language.Lang }}"
+  href="{{ .Permalink }}"
+>
+{{- end }}
 <!-- Title -->
 <title itemprop="name">
   {{ if .IsHome }}

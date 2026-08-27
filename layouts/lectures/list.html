@@ -82,7 +82,7 @@
   "@type" "WebPage"
   "url" .Permalink
   "name" (i18n "talks" | default "Talks & Lectures")
-  "inLanguage" .Site.Language.Lang
+  "inLanguage" (.Site.Language.LanguageCode | default .Site.Language.Lang)
   "about" $about
   "mainEntity" (dict
     "@type" "ItemList"

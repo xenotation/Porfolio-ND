@@ -12,11 +12,15 @@
 {{ $all = where $all "noshow" "ne" true }}
 {{ $all = where $all "noshow" "ne" "true" }}
 
+{{/* selected items appear separately */}}
+{{ $selected := sort (where $all "selected" true) "year" "desc" }}
+{{ $regular := where $all "selected" "ne" true }}
+
 {{/* split + sort like Press */}}
-{{ $withYear := where $all "year" "!=" "" | default (slice) }}
+{{ $withYear := where $regular "year" "!=" "" | default (slice) }}
 {{ $withYear = where $withYear "year" "ne" nil }}
 {{ $sorted := sort $withYear "year" "desc" }}
-{{ $older  := append (where $all "year" "") (where $all "year" nil) }}
+{{ $older := append (where $regular "year" "") (where $regular "year" nil) }}
 
 <script type="application/ld+json">
 {
@@ -67,6 +71,35 @@
   <div class="about-wrap container--writing">
     <section class="about-body">
       <ul class="writing-list" role="list">
+
+        {{ if gt (len $selected) 0 }}
+  <li class="press-year">{{ T "selected" }}</li>
+
+  {{ range $selected }}
+    {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
+    {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
+    {{ $auth  := cond $isBG (or .authorbg .authoren) (or .authoren .authorbg) }}
+
+    <li class="press-item">
+      <h2 class="press-titleline">
+        <a
+          class="press-link"
+          href="{{ .url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >{{ $title }}</a>
+      </h2>
+
+      {{ with $auth }}
+        <div class="press-author">{{ . }}</div>
+      {{ end }}
+
+      {{ with $desc }}
+        <div class="press-desc">{{ . }}</div>
+      {{ end }}
+    </li>
+  {{ end }}
+{{ end }}
         {{/* Year-grouped visible items (single column, press look) */}}
         {{ $current := 0 }}
         {{ range $sorted }}

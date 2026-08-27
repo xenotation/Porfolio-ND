@@ -3,7 +3,6 @@ title = 'Music for a New Night Life'
 
 date = 2019-06-05T23:05:59+02:00
 description = "A cymatic matrix of a city in flux, of its dreams and nightmares and finally of its reality filled with nostalgia."
-canonical = "https://newdegeneration.xyz/work/music-for-a-new-nighlife/"
 
 
 draft = false

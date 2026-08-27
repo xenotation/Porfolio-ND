@@ -8,7 +8,8 @@
       "inen": "in issue 3 (2026) of “Literature Newspaper” (ISSN 1310-9561)",
       "inbg": "в брой 3 (2026) на „Литературен вестник“ (ISSN 1310-9561)",
       "year": "2026",
-      "tag": "writing"
+      "tag": "writing",
+      "selected": true
     },    
     {
     "nameen": "Theoretical Fictions and Hyperstition: a rough introduction",
@@ -17,7 +18,7 @@
     "descriptionen": "Article in the BAS journal “Studia Litteraria Serdicensia” on theory-fiction, CCRU, and the concept of hyperstition.",
     "descriptionbg": "Статия в журнала на БАН „Studia Litteraria Serdicensia“ за теоретичната фикция, CCRU и понятието „хиперверие“.",
     "year": "2025",
-    "tag": "writing"
+    "tag": "book"
   },
   {
     "nameen": "Networks and Webs: Hypertextual Strategies and Infrastructure in Writing",
@@ -166,7 +167,8 @@
     "descriptionen": "Bulgarian translation for \"Нова Асоциална Поезия\"",
     "descriptionbg": "Български превод за \"Нова Асоциална Поезия\"",
     "year": "2021",
-    "tag": "translation"
+    "tag": "translation",
+    "selected": true 
   },
   {
     "nameen": "Accelarationism today",

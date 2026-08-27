@@ -5,7 +5,7 @@
     <link>http://192.168.1.4:1313/bg/press/</link>
     <description>Recent content in медийно покритие и преса on Никола Стоянов</description>
     <generator>Hugo</generator>
-    <language>bg</language>
+    <language>bg-BG</language>
     <atom:link href="http://192.168.1.4:1313/bg/press/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

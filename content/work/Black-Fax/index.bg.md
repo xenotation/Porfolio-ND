@@ -2,7 +2,6 @@
 title = "Черен факс от ченге"
 date = 2024-05-28T23:30:59+02:00
 description = "Инсталация с хакнат факс, който непрекъснато печата AI готическа еротика—визуална критика към медийната сатурация и популисткия спектакъл в България."
-canonical = "https://newdegeneration.xyz/bg/work/black-fax/"
 
 medium = ["hacked fax machine", "intallation", "ai generated gothic fiction"]
 place = "галерия Доза, София. Част от фестивала СПортно 'THE DEVIANTS'"

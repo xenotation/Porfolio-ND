@@ -1,7 +1,7 @@
 +++
 title = "about"
 description = "Nikola Stoyanov is a contemporary multidisciplinary artist and philosopher based in Varna, Bulgaria. He is the author of numerous exhibitions, specializing in photography and digital art exploring the intersections of technology, philosophy, and aesthetics."
-aliases = ["about/"]
+
 hero_alt = "Nikola Stoyanov portrait / studio detail"
 cv_pdf = "/files/nikola-stoyanov-cv.pdf"
 portfolio_pdf = "/files/nikola-stoyanov-portfolio.pdf"

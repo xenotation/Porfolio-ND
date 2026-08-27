@@ -54,3 +54,27 @@
     other = "Earlier"
 [artistPortfolio]
     other = "artist portfolio"
+
+[selected]
+    other = "Selected"
+
+[books]
+    other = "Books"
+
+[booksAndTranslations]
+    other = "Books and Translations"
+
+[articlesAndEssays]
+    other = "Articles and Essays"
+
+[essaysAndArticles]
+    other = "Essays and Articles"
+
+[selectedExhibitions]
+    other = "Selected exhibitions"
+
+[exhibitionGallery]
+    other = "Exhibition Gallery"
+
+[cv]
+    other = "Curriculum vitae"

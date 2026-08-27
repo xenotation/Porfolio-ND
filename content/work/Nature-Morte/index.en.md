@@ -1,7 +1,7 @@
 +++
 title = "Nature Morte"
 description = "The exhibition Nature Morte by artist Nikola Stoyanov is a multimedia project dealing with the concept of geotrauma in the context of the Martisa Mining complex."
-canonical = "https://newdegeneration.xyz/work/nature-morte/"
+
 youtube = ["https://youtu.be/L_TfxMmXKPU", "https://youtu.be/5MnMOfrq-v8"]
 
 

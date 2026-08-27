@@ -13,19 +13,19 @@
 [Photo]
   other = 'фотография ↓'
 [choreography]
-    other = 'хореография ↓'
+  other = 'хореография ↓'
 [dramaturgy]
-    other = 'драматургия ↓'
+  other = 'драматургия ↓'
 [performers]
-    other = 'артисти ↓'
+  other = 'артисти ↓'
 [setdesign]
-    other = 'сценография ↓'
+  other = 'сценография ↓'
 [lightdesign]
-    other = 'светлинен дизайн ↓'
+  other = 'светлинен дизайн ↓'
 [styling]
-    other = 'стилист ↓'
+  other = 'стилист ↓'
 [exhbwith]
-    other = "съучастници ↓"
+  other = "съучастници ↓"
 [404] 
   other = "прибери се у дома"
 [press]
@@ -54,3 +54,19 @@
   other = "по-рано"
 [artistPortfolio]
   other = "артистично портфолио"
+[selected]
+  other = "Избрано"
+[books]
+  other = "Книги"
+[booksAndTranslations]
+  other = "Книги и преводи"
+[articlesAndEssays]
+  other = "Статии и есета"
+[essaysAndArticles]
+  other = "Есета и статии"
+[selectedExhibitions]
+  other = "Избрани изложби"
+[exhibitionGallery]
+  other = "Изложби"
+[cv]
+  other = "Автобиография"

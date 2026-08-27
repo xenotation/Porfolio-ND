@@ -3,7 +3,6 @@ title = 'I-Ixa'
 
 date = 2021-10-18T23:00:59+02:00
 description = "The exhibition is nomadic in nature, led by the black sea, which is landlocked and shoreless, far from the clear croak of the sea bird."
-canonical = "https://newdegeneration.xyz/work/i-ixa/"
 
 draft = false
 

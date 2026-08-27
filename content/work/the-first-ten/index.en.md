@@ -2,7 +2,6 @@
 title = 'Postcards and Contraband'
 date = 2024-03-12T23:30:59+02:00
 description = "The exhibition Postcards and Contraband  by artist Nikola Stoyanov is an investigation of a work archive of the Bulgarian Customs Agency, Directorate for Combating Drug Trafficking from 1975-1985."
-canonical = "https://newdegeneration.xyz/work/the-first-ten/"
 
 draft = false
 type = "artwork"

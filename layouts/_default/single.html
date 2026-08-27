@@ -173,7 +173,7 @@
 
     {{ if gt (len $critFor) 0 }}
     <section>
-      <h2>{{ T "critique" | default (cond $isBG "Критика" "Critique") }}</h2>
+      <h2>{{ T "critique" }}</h2>
       {{ range $c := $critFor }}
         {{ $title := cond $isBG (or $c.namebg $c.nameen) (or $c.nameen $c.namebg) }}
         {{ $desc  := cond $isBG (or $c.descriptionbg $c.descriptionen) (or $c.descriptionen $c.descriptionbg) }}
@@ -186,7 +186,7 @@
 
     {{ if gt (len $pressFor) 0 }}
     <section>
-      <h2>{{ T "press" | default (cond $isBG "Медийно покритие" "Press") }}</h2>
+      <h2>{{ T "press" }}</h2>
       <p>
         {{ $links := slice }}
         {{ range $p := $pressFor }}

@@ -79,7 +79,7 @@
 
         
         {{ if gt (len $selected) 0 }}
-        <li class="press-year">{{ cond $isBG "Избрано" "Selected" }}</li>
+        <li class="press-year">{{ T "selected" }}</li>
       
         {{ range $selected }}
           {{ $label := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}

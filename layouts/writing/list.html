@@ -2,59 +2,77 @@
 
 <link rel="stylesheet" href="/css/bio-pages.css">
 
-{{/* language toggle for item-level fields (data-driven) */}}
+{{/* Language toggle */}}
 {{ $isBG := eq .Site.Language.Lang "bg" }}
 
-{{/* load + filter writing items from data/publist.* */}}
+{{/* Load publication data */}}
 {{ $all := site.Data.publist | default (slice) }}
-{{ $writing := where $all "tag" "writing" }}
+{{ $publications := where $all "tag" "in" (slice "writing" "book") }}
 
-{{/* hide items with noshow true/"true" */}}
-{{ $writing = where $writing "noshow" "ne" true }}
-{{ $writing = where $writing "noshow" "ne" "true" }}
+{{/* Hide disabled items */}}
+{{ $publications = where $publications "noshow" "ne" true }}
+{{ $publications = where $publications "noshow" "ne" "true" }}
 
-{{/* split + sort like Press (year headers + Earlier) */}}
-{{ $withYear := where $writing "year" "!=" "" | default (slice) }}
-{{ $withYear = where $withYear "year" "ne" nil }}
-{{ $sorted := sort $withYear "year" "desc" }}
-{{ $older  := append (where $writing "year" "") (where $writing "year" nil) }}
+{{/* Selected publications */}}
+{{ $selected := where $publications "selected" true }}
+
+{{/* Books and translations, excluding selected items */}}
+{{ $books := where $publications "tag" "book" }}
+{{ $books = where $books "selected" "ne" true }}
+{{ $books = where $books "selected" "ne" "true" }}
+
+{{/* Articles and essays, excluding selected items */}}
+{{ $articles := where $publications "tag" "writing" }}
+{{ $articles = where $articles "selected" "ne" true }}
+{{ $articles = where $articles "selected" "ne" "true" }}
+
+{{/* Sort each section by year */}}
+{{ $selected = sort $selected "year" "desc" }}
+{{ $books = sort $books "year" "desc" }}
+{{ $articles = sort $articles "year" "desc" }}
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "url": "{{ .Permalink }}",
-  "name": {{ printf "%q" (i18n "writing" | default "Writing") }},
+  "name": {{ printf "%q" (i18n "writing" | default "Publications") }},
   "inLanguage": "{{ .Site.Language.Lang }}",
   "about": {
     "@type": "Person",
     "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
-    {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
+    {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) }}
     "image": "{{ . | absURL }}",
-    {{- end -}}
+    {{- end }}
     "url": "{{ .Site.BaseURL }}"
   },
   "mainEntity": {
     "@type": "ItemList",
     "itemListElement": [
-      {{- range $i, $it := $writing -}}
-        {{- if gt $i 0 }},{{ end -}}
+      {{- range $i, $it := $publications }}
+        {{- if gt $i 0 }},{{ end }}
         {
           "@type": "ListItem",
           "position": {{ add $i 1 }},
           "item": {
-            "@type": "Article",
+            "@type": "{{ if eq $it.tag "book" }}Book{{ else }}Article{{ end }}",
             "headline": {{ printf "%q" (cond $isBG (or $it.namebg $it.nameen) (or $it.nameen $it.namebg)) }},
             "url": {{ printf "%q" (or $it.link $it.url) }}
-            {{- with (cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg)) -}},
-            "description": {{ printf "%q" . }}{{- end -}}
-            {{- with $it.year -}},
-            "datePublished": "{{ . }}"{{- end -}}
-            {{- with (cond $isBG (or $it.inbg $it.inen) (or $it.inen $it.inbg)) -}},
-            "isPartOf": { "@type": "CreativeWork", "name": {{ printf "%q" . }} }{{- end -}}
+            {{- with (cond $isBG (or $it.descriptionbg $it.descriptionen) (or $it.descriptionen $it.descriptionbg)) }},
+            "description": {{ printf "%q" . }}
+            {{- end }}
+            {{- with $it.year }},
+            "datePublished": "{{ . }}"
+            {{- end }}
+            {{- with (cond $isBG (or $it.inbg $it.inen) (or $it.inen $it.inbg)) }},
+            "isPartOf": {
+              "@type": "CreativeWork",
+              "name": {{ printf "%q" . }}
+            }
+            {{- end }}
           }
         }
-      {{- end -}}
+      {{- end }}
     ]
   }
 }
@@ -66,43 +84,103 @@
   <div class="about-wrap container--writing">
     <section class="about-body">
       <ul class="writing-list" role="list">
-        {{/* Year-grouped items */}}
-        {{ $current := 0 }}
-        {{ range $sorted }}
-          {{ if ne $current .year }}
-            {{ $current = .year }}
-            <li class="press-year">{{ $current }}</li>
-          {{ end }}
 
-          {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
-          {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
-          {{ $inTxt := cond $isBG (or .inbg .inen) (or .inen .inbg) }}
-
-          <li class="press-item">
-            <h2 class="press-titleline">
-              <a class="press-link" href="{{ or .link .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
-            </h2>
-            {{ with $inTxt }}<div class="press-in">{{ . }}</div>{{ end }}
-            {{ with $desc  }}<div class="press-desc">{{ . }}</div>{{ end }}
+        {{/* Selected */}}
+        {{ if gt (len $selected) 0 }}
+          <li class="press-year">
+            {{ T "selected" }}
           </li>
-        {{ end }}
 
-        {{ if gt (len $older) 0 }}
-          <li class="press-year press-year-older">{{ i18n "earlier" }}</li>
-          {{ range $older }}
+          {{ range $selected }}
             {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
-            {{ $desc  := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
+            {{ $desc := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
             {{ $inTxt := cond $isBG (or .inbg .inen) (or .inen .inbg) }}
 
             <li class="press-item">
               <h2 class="press-titleline">
-                <a class="press-link" href="{{ or .link .url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a>
+                <a
+                  class="press-link"
+                  href="{{ or .link .url }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >{{ $title }}</a>{{ with .year }} ({{ . }}){{ end }}
               </h2>
-              {{ with $inTxt }}<div class="press-in">{{ . }}</div>{{ end }}
-              {{ with $desc  }}<div class="press-desc">{{ . }}</div>{{ end }}
+
+              {{ with $inTxt }}
+                <div class="press-in">{{ . }}</div>
+              {{ end }}
+
+              {{ with $desc }}
+                <div class="press-desc">{{ . }}</div>
+              {{ end }}
             </li>
           {{ end }}
         {{ end }}
+
+        {{/* Books and translations */}}
+        {{ if gt (len $books) 0 }}
+          <li class="press-year">
+            {{ T "booksAndTranslations" }}
+          </li>
+
+          {{ range $books }}
+            {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
+            {{ $desc := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
+            {{ $inTxt := cond $isBG (or .inbg .inen) (or .inen .inbg) }}
+
+            <li class="press-item">
+              <h2 class="press-titleline">
+                <a
+                  class="press-link"
+                  href="{{ or .link .url }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >{{ $title }}</a>{{ with .year }} ({{ . }}){{ end }}
+              </h2>
+
+              {{ with $inTxt }}
+                <div class="press-in">{{ . }}</div>
+              {{ end }}
+
+              {{ with $desc }}
+                <div class="press-desc">{{ . }}</div>
+              {{ end }}
+            </li>
+          {{ end }}
+        {{ end }}
+
+        {{/* Articles and essays */}}
+        {{ if gt (len $articles) 0 }}
+          <li class="press-year">
+            {{ T "articlesAndEssays" }}
+          </li>
+
+          {{ range $articles }}
+            {{ $title := cond $isBG (or .namebg .nameen) (or .nameen .namebg) }}
+            {{ $desc := cond $isBG (or .descriptionbg .descriptionen) (or .descriptionen .descriptionbg) }}
+            {{ $inTxt := cond $isBG (or .inbg .inen) (or .inen .inbg) }}
+
+            <li class="press-item">
+              <h2 class="press-titleline">
+                <a
+                  class="press-link"
+                  href="{{ or .link .url }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >{{ $title }}</a>{{ with .year }} ({{ . }}){{ end }}
+              </h2>
+
+              {{ with $inTxt }}
+                <div class="press-in">{{ . }}</div>
+              {{ end }}
+
+              {{ with $desc }}
+                <div class="press-desc">{{ . }}</div>
+              {{ end }}
+            </li>
+          {{ end }}
+        {{ end }}
+
       </ul>
     </section>
   </div>

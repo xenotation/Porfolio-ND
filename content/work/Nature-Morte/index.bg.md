@@ -1,7 +1,7 @@
 +++
 title = "Nature Morte"
 description = "Изложбата Nature Morte от артиста Никола Стоянов е мултимедиен проект, който поставя геофилософския въпрос на терен - върху част от критичната инфраструктура на страната, където достъпът е силно ограничен."
-canonical = "https://newdegeneration.xyz/bg/work/nature-morte/"
+
 youtube = ["https://youtu.be/L_TfxMmXKPU", "https://youtu.be/5MnMOfrq-v8"]
 
 

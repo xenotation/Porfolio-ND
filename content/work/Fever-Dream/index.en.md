@@ -26,7 +26,6 @@ imgDescrps = [
   "Exhibition view with a lamp and stand for reading the riso zine (top right)."
 ]
 
-canonical = "https://newdegeneration.xyz/work/fever-dream/"
 
 sameAs = ["https://www.ko-op.bg/post/perspectives-in-celsius"]
 

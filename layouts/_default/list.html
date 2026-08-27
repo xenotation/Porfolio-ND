@@ -12,7 +12,7 @@
     "@type":"WebPage",
     "mainEntity":{
       "@type":"ItemList",
-      "name":"Exhibition Gallery",
+      "name": {{ printf "%q" (T "exhibitionGallery") }},
       "itemListElement":[
         {{- range $i, $p := $pages -}}{{ if gt $i 0 }},{{ end }}
         {
@@ -43,7 +43,7 @@
   }
   </script>
 <div class="gallery">
-  <h1 class="gallery-heading">selected exhibitions</h1>
+  <h1 class="gallery-heading">{{ T "selectedExhibitions" }}</h1>
 
   {{ $cutoffYear := sub now.Year 5 }}
   {{ $archiveAnchorAdded := false }}

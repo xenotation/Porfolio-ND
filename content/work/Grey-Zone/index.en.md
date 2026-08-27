@@ -3,7 +3,6 @@ title = 'Grey Zone/Dispositive'
 date = 2022-04-28T23:30:59+02:00
 draft = false
 description = "Gray Zone Dispositive is a massive photogrammetry recreatingthe urban space of Varna."
-canonical = "https://newdegeneration.xyz/work/grey-zone/"
 
 medium = ["one channel video installation 04:15 min.", "3D kit-bashed photogrammetry", "video game"]
 place = "The Matrix, Sofia"
