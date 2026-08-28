@@ -2,6 +2,8 @@
 draft = false
 
 title = 'Fever Diary'
+exhibition = "the group exhibition Perspectives in Celsius"
+
 date = 2023-11-05T23:30:59+02:00
 categories = ["collab"]
 

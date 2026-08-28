@@ -1,10 +1,12 @@
 +++
 title = 'Humor is the politeness of despair'
+exhibition = "the exhibition “Destructive Sensuality”"
+
 date = 2022-12-17T23:30:59+02:00
 description = "A core-core style video collage investigating the specifics of commercial video codec degradation as well as that of memmory."
 
 
-place = "“ARTWAVE”, Varna (2022) as part of the exhibition “Destructive Sensuality”"
+place = "“ARTWAVE”, Varna"
 
 datestart = "2019-06-08T00:00:00+03:00"
 dateend = "2019-07-09T00:00:00+03:00"

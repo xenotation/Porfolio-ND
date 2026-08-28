@@ -1,5 +1,7 @@
 +++
 title = 'Black Fax off the Hook'
+exhibition = "SPORNO, 'THE DEVIANTS'"
+
 date = 2024-05-28T23:30:59+02:00
 description = "An insurrectionary installation at Doza: a hacked fax machine endlessly prints AI-made gothic fan-fiction, skewering media overload and Bulgarian populism."
 

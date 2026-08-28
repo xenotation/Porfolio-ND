@@ -2,6 +2,8 @@
 draft = false
 
 title = 'Трескав дневник'
+exhibition = "груповата изложба Перспективи по Целзий"
+
 date = 2023-11-05T23:30:59+02:00
 categories = ["collab"]
 
