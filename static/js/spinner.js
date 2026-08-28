@@ -49,8 +49,8 @@
       requestAnimationFrame(animate);
     }
 
-    measure();
-
+    window.addEventListener('load', measure, { once: true });
+    
     window.addEventListener('resize', measure, { passive: true });
     window.addEventListener('scroll', measure, { passive: true });
 
