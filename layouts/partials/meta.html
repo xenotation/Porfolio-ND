@@ -42,14 +42,6 @@
   <meta name="twitter:description" content="{{ .Site.Params.description }}" />
 {{ end }}
 
-<!-- Alternate links -->
-{{ if .IsTranslated }}
-  {{ range .Translations }}
-    <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
-  {{ end }}
-  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
-{{ end }}
-
 <!-- Region -->
 <meta name="geo.region" content="BG-SOF">
 

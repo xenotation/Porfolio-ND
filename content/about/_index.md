@@ -1,6 +1,6 @@
 +++
 title = "about"
-description = "Nikola Stoyanov is a contemporary multidisciplinary artist and philosopher based in Varna, Bulgaria. He is the author of numerous exhibitions, specializing in photography and digital art exploring the intersections of technology, philosophy, and aesthetics."
+description = "Nikola Stoyanov is a Bulgarian research-based artist, writer and translator based in Sofia. Working across installation, moving image, archives, networked media and technological apparatuses, his practice examines how paranoia, propaganda, extraction and technological mediation shape perception, with a recurring focus on post-socialist and post-Soviet histories and their contemporary afterlives."
 
 hero_alt = "Nikola Stoyanov portrait / studio detail"
 cv_pdf = "/files/nikola-stoyanov-cv.pdf"

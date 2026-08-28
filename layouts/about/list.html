@@ -7,7 +7,7 @@
 {{- $personName := .Params.name | default .Site.Language.Params.name | default .Site.Title -}}
 {{- $descr := .Params.description | default .Site.Language.Params.description | default .Site.Language.Params.Description | default .Site.Params.description | default "" -}}
 {{- $jobTitle := .Params.jobTitle | default .Site.Language.Params.jobTitle | default "Artist and Theorist" -}}
-{{- $alternateName := .Site.Language.Params.alternateName | default .Site.Params.alternateName -}}
+{{- $alternateName := .Site.Language.Params.alternateNames | default .Site.Params.alternateNames -}}
 {{- $profileImage := .Params.profile_image | default .Site.Language.Params.profileImage | default .Site.Params.profileImage -}}
 
 {{/* Build sameAs from socials + params_sameas_other, excluding mailto */}}

@@ -78,3 +78,5 @@
 
 [cv]
     other = "Curriculum vitae"
+[partOf]
+    other = "part of"

@@ -26,7 +26,7 @@
 {{- $siteTitle := .Site.Title -}}
 {{- $description := .Site.Language.Params.description | default .Site.Language.Params.Description | default .Site.Params.description | default "" -}}
 {{- $personName := .Site.Language.Params.name | default .Site.Params.name | default .Site.Title -}}
-{{- $alternateName := .Site.Language.Params.alternateName | default .Site.Params.alternateName -}}
+{{- $alternateName := .Site.Language.Params.alternateNames | default .Site.Params.alternateNames -}}
 {{- $jobTitle := .Site.Language.Params.jobTitle | default .Site.Params.jobTitle | default "Artist and Theorist" -}}
 {{- $profileImage := .Site.Language.Params.profileImage | default .Site.Params.profileImage -}}
 
