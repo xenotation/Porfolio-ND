@@ -25,13 +25,15 @@ sameAs = ["https://etudgallery.com/2021/10/14/i-iksa/"]
 
 The exhibition is nomadic in nature, led by the Black Sea, which is without harbour and without shore, far from the clear squawk of a sea bird. A malevolent curse, brought where it does not belong - in the mountain foothills. This preliminary note outlines the possible geography of pictorial existence, beyond concrete space.
 
+{{< lightbox "iksa-Q.webp" >}}
+
 I-Ixa is an expressionistic turn towards pure abstraction. A move that preserves the artist's technicality while hiding his gesture in the finished paintings. They could bear names such as Dog Fight, Drug Grip, Obsession, which would enclose them in a deliberate interpretation. The choice to leave them untitled is the final element of the homage paid to the essence of abstraction.
 
 Rather than the traditional painting on an easel, the paint is applied horizontally on the plane. Essential in the construction of the paintings is the use of various tools, improvised means and the technique of masking. In this regard, it is important to note the moment of their recycling, giving materiality to the works.
 
+{{< lightbox "iksa-I.webp" >}}
+
 Like traces of a wandering spirit, they anticipate the gaze of the other, their viewer, as a witness to devastation. 
 
 (text Hristo Kaloyanov)
-
-&nbsp;
 

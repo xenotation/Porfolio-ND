@@ -9,7 +9,7 @@ date = 2023-06-22T23:05:59+02:00
 draft = false
 
 imgDescrps = ["", "Digital print, 60x40cm, collage of topografical data, hillshades and elevation maps of region", "Print on photo-paper, wooden frame, corrugated board, antireflective glass 60х40 cm, inside Martisa East open-pit mine", "Print on photo-paper, wooden frame, corrugated board, antireflective glass, 27x20cm 1/3", "Print on photo-paper, wooden frame, corrugated board, antireflective glass, 27x20cm 2/3", "Print on photo-paper, wooden frame, corrugated board, antireflective glass, 27x20cm 3/3", "Detail from book, old excavator", "Detail from book, old excavator", "Print on photo-paper, wooden frame, corrugated board, antireflective glass 70х23cm, private collection", "topographical 3D print-ed map of the mines, with LED backlight", "inside of Nature Morte book", "inside of Nature Morte book", "inside of Nature Morte book", "inside of Nature Morte book", "inside of Nature Morte book"]
-imgNames = ["", "Nature Morte (2023)", "Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)", "Nature Morte (2023)","Nature Mort1"]
+imgNames = ["", "Nature Morte (2023)", "Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)","Nature Morte (2023)", "Nature Morte (2023)","Nature Mort"]
 medium = ["photography", "photogrammetry", "topological 3D print", "multichannel video-Installation", "book"]
 place = "Goethe-Institut, Sofia"
 
@@ -24,7 +24,11 @@ Sound = ["Anton Shishkov"]
 
 Nature Morte is a multimedia project that plants the philosophical question firmly into the ground - on a part of the country's highly restricted critical infrastructure. In an attempt to find different approaches to reach the excavation and its visualization, open data from satellite and geological surveys and measurements were used, through which the digital topography of the mines has been built.
 
+{{< yt-inline "L_TfxMmXKPU" "Nature Morte" >}}
+
 The visuals obtained from satellite images can be called operational, as a continuation of the "operational image" coined by the German director Harun Farocki, denoting "images that do not represent an object, but are part of an operation". And most briefly, the current operation can be described as a philosophy on the ground, tracing the operation of the mining-geological activity and the inevitably accompanying administration, proposing the subsequent uprooting and displacement of the anthropocentric view.
+
+{{< yt-inline "5MnMOfrq-v8" "Nature Morte" >}}
 
 The operational gaze, which has long since left the lens of the kino-eye, gives us precise coordinates of the event, locates the catastrophe, and marks the traces on the visible surface. Although the cosmic time of geoformation - the million-year superimposition of layers that proceeds in relative calm, where separate elements barely interact, there are also short periods of ruptures recorded in the layers. The excavation of rocks, clay, minerals, stones and ash unfolds the earth's bowels, from where traces of long-sunken worlds are made visible. This is where our operational activity on the critical infrastructure of the Maritza-Iztok mines begins. 
 

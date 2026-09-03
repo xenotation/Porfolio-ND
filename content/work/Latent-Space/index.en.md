@@ -21,7 +21,13 @@ Sound = ["Yan Lechev", "Anton Shishkov"]
 
 Latent space is where the gaze of artificial intelligence alone draws the picturesque horizon, delving into the hidden rooms of secret research centers, intelligence organizations, and classified databases. An imagined space that the machine illuminates, exposing the postmodern subject's built-in subversiveness of aesthetic experience in its internal mechanics, referentiality, and element of incompleteness. The so-called noise in communication theory is a recognized information field that does not lend itself to systematization. Instead, the algorithm builds faces, machines, corridors, and cloud spaces in their procedural incompleteness. The recent paranoia of unsubstantiated fact has become the factual divergence from a reference matrix.
 
+{{< yt-inline "URnPNgeQgAc" "Latent Space" >}}
+
 More than a hallucination and less than reality. In the latent space, nothing is new, like for the absolute genius of the past, but only experienced as such in the schizophrenic grip of the clinically imprisoned. Like the traditional painting and the unique work of art, every tick, every deviation in artificial intelligence creates a forged reality - unique and complete in itself. The emerging visual field is hyper-referential without offering an imitation of reality; it cannot be repeated in its creation and final result. The mechanics of this type of painting challenges the basic principle of the technique, where a function can be repeated under the same conditions. Instead, it becomes a virulent artistic gesture, exposing the deceptive charm of tradition in art and its reproduction.
+
+[Link to whole text accompanying the exhibition.](https://blog.newdegeneration.xyz/latent-space)
+
+{{< yt-inline "l52ILhl935I" "Latent Space" >}}
 
 ## Other Showings
 
@@ -32,7 +38,3 @@ More than a hallucination and less than reality. In the latent space, nothing is
 Discussion on the exhibition "Latent Space", 20.09.2022 | Doza Gallery, Sofia
 
 Discussion on the exhibition "Latent Space", 16.09.2022 | ReBonkers, Varna
-
-<br>
-
-[Link to whole text accompanying the exhibition.](https://blog.newdegeneration.xyz/latent-space)

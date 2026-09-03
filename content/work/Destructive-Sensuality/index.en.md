@@ -5,12 +5,10 @@ exhibition = "the exhibition “Destructive Sensuality”"
 date = 2019-06-17T23:30:59+02:00
 description = "A core-core style video collage investigating the specifics of commercial video codec degradation as well as that of memmory."
 
-
 place = "“ARTWAVE”, Varna"
 
 datestart = "2019-06-08T00:00:00+03:00"
 dateend = "2019-07-09T00:00:00+03:00"
-
 
 medium = ["Core-Core Audio-Video Installation", "Cozy Post-Soviet Interior to watch TV in", "invitations to demonic channel switching compulsions"]
 categories = ["collab"]
@@ -24,12 +22,18 @@ youtube = ["https://youtu.be/hJ6enZi8O7w"]
 
 "Humor is the politeness of despair" in a meditaion on how the demonically possed inhrent strange channel switching powers and compulsions. Technically the piece is a video collage investigating the specifics of commercial video codec degradation. Based on key moments in Bulgaria’s visual subconscious, it uses various methods of controlled image destruction and degradation based on structural compression in videos. It is part of the "Destructive Sensuality" an exhibition by Sofia Dimova and Nikola Stoyanov, where the two artists romanticize the destructive dynamics of sensual experiences that imperceptibly become part of our everyday lives. But like everything that comes quickly, it also goes the same way, leaving an apocalyptic trail in its wake. Dimova and Stoyanov tap into the searing sensations in a direct way that reveals both vulnerability and audacity.
 
+{{< lightbox "Destructive-Sensuality_05.webp" >}}
+
 In examining the fragility and neglect of memory in contemporary Bulgaria, 'Humor is the politeness of despair' serves as a commentary on the publicness of memory and its remembrance. In an age where info-blitzes overwhelm, selective memory becomes a societal curator, determining what endures and what fades into obscurity. This project delves into the forgotten corners of Bulgarian internet culture, resurrecting political scandals and legendary humor videos that now exist as cryptids in the digital realm.
+
+{{< lightbox "Destructive-Sensuality_07.webp" >}}
 
 The piece intentionally employs early 2000s editing aesthetics and video degradation techniques. Through techniques like datamoshing and deliberate distortions, it confronts viewers with environments both nostalgic and eerie. These digital collages transport audiences into realms where memory blurs with strangeness, echoing the relentless churn of digital content mill.
 
+{{< yt-inline "hJ6enZi8O7w" "Humor is the politeness of despair" >}}
+
 Symbolically staged as a TV within a mundane home setting, the installation evokes late-night transmissions—a nod to the clandestine dissemination of cultural fragments, often overlooked or intentionally forgotten. The soundtrack further underscores this exploration, juxtaposing a Bulgarian chalga anthem on the topic of drunk driving with music typically used in contemporary TikTok montages, bridging generational divides in media consumption and memory formation.
 
-The video collage weaves together footage ranging from the beating of protestors to political scandals and humorous home videos, capturing pivotal moments in Bulgaria’s visual subconscious. This approach draws inspiration from the early internet's raw aesthetic, coopting the sensibilities of competitive online video game editing to create a pure emotional tapestry, free from the strict codification of traditional cinema or video essays. Its aim is to reveal the indifferent nature of the internet as a vast repository that dictates what is remembered and what is erased. 'Destructive Sensuality' invites reflection on the interplay between digital decay and cultural memory, urging us to navigate a landscape where nostalgia intertwines uncomfortably with fleeting digital artifacts."
+{{< lightbox "Destructive-Sensuality_08.webp" >}}
 
-[LINK to whole video](https://youtu.be/hJ6enZi8O7w)
+The video collage weaves together footage ranging from the beating of protestors to political scandals and humorous home videos, capturing pivotal moments in Bulgaria’s visual subconscious. This approach draws inspiration from the early internet's raw aesthetic, coopting the sensibilities of competitive online video game editing to create a pure emotional tapestry, free from the strict codification of traditional cinema or video essays. Its aim is to reveal the indifferent nature of the internet as a vast repository that dictates what is remembered and what is erased. 'Destructive Sensuality' invites reflection on the interplay between digital decay and cultural memory, urging us to navigate a landscape where nostalgia intertwines uncomfortably with fleeting digital artifacts."

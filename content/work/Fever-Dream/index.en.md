@@ -28,9 +28,6 @@ imgDescrps = [
   "Exhibition view with a lamp and stand for reading the riso zine (top right)."
 ]
 
-
-sameAs = ["https://www.ko-op.bg/post/perspectives-in-celsius"]
-
 +++
 This is a diary of fevers, a cut-up traversing people and time, unfolding across the labyrinthine tapestry of personal histories. Through frenzy, it brings purification; through heat, it elicits moisture.
 

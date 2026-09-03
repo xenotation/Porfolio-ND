@@ -35,7 +35,7 @@
   grid-area: exhb-title;
   justify-self: end;
   text-align: right;
-  max-width: 16vw;
+  max-width: 14vw;
 }
 .exhb-title h1 {
   margin: 0;
@@ -108,7 +108,11 @@
 
 /* Date and Place */
 .placedate p { 
-  margin: 0; 
+  margin: 0;
+  hyphens: none;
+  -webkit-hyphens: none;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .exhb-body section > a{
