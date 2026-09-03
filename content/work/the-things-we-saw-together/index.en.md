@@ -43,3 +43,5 @@ Every camera, used the right way, can become a spy camera trained on a kaleidosc
 The video assembles fragments of globally circulated images—catastrophe, political protest, technological spectacle, animal life and synthetic media. Removed from their original feeds and refracted through the Soviet lens, they form neither an archive nor a history, but a geneology of memory governed by repetition, erasure and shock.
 
 Built from the discarded body of the city, the work views the feed as a post-cinematic contemporary peep-show. A travelling machine spectacle that no longer moves nomadically but follows us, bringing wonders, catastrophes, and the wreckage of an unfinished history.
+
+Created following Nikola Stoyanov’s nomination for the BAZA 2026 Award for Contemporary Art, *The things we saw together* was presented alongside his earlier work *The First Ten* in the exhibition of the nominated artists at Sofia City Art Gallery.
