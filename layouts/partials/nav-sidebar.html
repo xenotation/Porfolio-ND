@@ -53,49 +53,62 @@
           </a>
 
           {{ if $isWork }}
-            <div class="legend">{{ T "legend_work" }}</div>
-            {{ $works := where site.RegularPages "Section" "work" }}
-            {{ $works = $works.ByDate.Reverse }}
-            {{ $cutoffYear := sub now.Year 5 }}
-            {{ $oldest := index $works.ByDate 0 }}
-            {{ $oldestYear := $oldest.Date.Year }}
-            {{ $olderLinkAdded := false }}
-            
-            {{ range ($works.GroupByDate "2006") }}
-              {{ $year := int .Key }}
-            
-              {{ if le $year $cutoffYear }}
-                {{ if not $olderLinkAdded }}
-                  <div class="year">
-                    <a class="year-label"
-                       href="{{ printf "%s#older-exhibitions" ("/work/" | relLangURL) }}">
-                      {{ $year }} — {{ $oldestYear }}
+          <div class="legend">{{ T "legend_work" }}</div>
+        
+          {{ $works := where site.RegularPages "Section" "work" }}
+          {{ $works = where $works "Params.categories" "intersect" (slice "solo" "collab") }}
+          {{ $works = where $works "Params.noshow" "ne" true }}
+          {{ $works = $works.ByDate.Reverse }}
+        
+          {{ $visibleWorks := first 10 $works }}
+          {{ $olderWorks := after 10 $works }}
+        
+          {{ range ($visibleWorks.GroupByDate "2006") }}
+            <div class="year">
+              <span class="year-label">{{ .Key }}</span>
+        
+              <ul class="work">
+                {{ range .Pages }}
+                  {{ $cats := .Params.categories | default (slice) }}
+                  {{ $catstr := lower (delimit $cats " ") }}
+        
+                  {{ $m := "(s)" }}
+                  {{ if in $catstr "collab" }}
+                    {{ $m = "(c)" }}
+                  {{ end }}
+        
+                  <li>
+                    <span class="m">{{ $m }}</span>
+                    <a class="{{ if eq .Permalink $cur.Permalink }}is-active{{ end }}"
+                       href="{{ .RelPermalink }}">
+                      {{ .Title }}
                     </a>
-                  </div>
-                  {{ $olderLinkAdded = true }}
+                  </li>
                 {{ end }}
-            
-              {{ else }}
-                <div class="year">
-                  <span class="year-label">{{ .Key }}</span>
-                  <ul class="work">
-                    {{ range .Pages }}
-                      {{ $cats := .Params.categories | default (slice) }}
-                      {{ $catstr := lower (delimit $cats " ") }}
-                      {{ $m := "(s)" }}
-                      {{ if in $catstr "collab" }}{{ $m = "(c)" }}{{ end }}
-            
-                      <li>
-                        <span class="m">{{ $m }}</span>
-                        <a class="{{ if eq .Permalink $cur.Permalink }}is-active{{ end }}"
-                           href="{{ .RelPermalink }}">{{ .Title }}</a>
-                      </li>
-                    {{ end }}
-                  </ul>
-                </div>
-              {{ end }}
-            {{ end }}
+              </ul>
+            </div>
           {{ end }}
+        
+          {{ if gt (len $olderWorks) 0 }}
+            {{ $newestOlder := index $olderWorks 0 }}
+            {{ $oldestOlder := index $olderWorks (sub (len $olderWorks) 1) }}
+        
+            {{ $newestOlderYear := $newestOlder.Date.Year }}
+            {{ $oldestOlderYear := $oldestOlder.Date.Year }}
+        
+            <div class="year">
+              <a class="year-label"
+                 href="{{ printf "%s#year-%d" ("/work/" | relLangURL) $newestOlderYear }}">
+        
+                {{ if eq $newestOlderYear $oldestOlderYear }}
+                  {{ $newestOlderYear }}
+                {{ else }}
+                  {{ $newestOlderYear }} — {{ $oldestOlderYear }}
+                {{ end }}
+              </a>
+            </div>
+          {{ end }}
+        {{ end }}
         </li>
       {{ end }}
     </ul>

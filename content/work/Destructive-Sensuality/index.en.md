@@ -2,7 +2,7 @@
 title = 'Humor is the politeness of despair'
 exhibition = "the exhibition “Destructive Sensuality”"
 
-date = 2022-12-17T23:30:59+02:00
+date = 2019-06-17T23:30:59+02:00
 description = "A core-core style video collage investigating the specifics of commercial video codec degradation as well as that of memmory."
 
 

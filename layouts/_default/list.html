@@ -4,7 +4,7 @@
 
 {{- $all := where .Pages "Params.categories" "intersect" (slice "solo" "collab") -}}
 {{- $pages := where $all "Params.noshow" "ne" true -}}
-
+{{- $pages = $pages.ByDate.Reverse -}}
 <!-- Lightweight ItemList JSON-LD ... (unchanged) -->
 <script type="application/ld+json">
   {
@@ -48,10 +48,20 @@
   {{ $cutoffYear := sub now.Year 5 }}
   {{ $archiveAnchorAdded := false }}
   
+  {{ $archiveYear := 0 }}
+
+  {{ if gt (len $pages) 10 }}
+    {{ $archiveYear = (index $pages 10).Date.Year }}
+  {{ end }}
+  
+  {{ $archiveAnchorAdded := false }}
+  
   {{ range $pages }}
-    {{ $isArchived := le .Date.Year $cutoffYear }}
-    <article class="exhibit"{{ if and $isArchived (not $archiveAnchorAdded) }} id="older-exhibitions"{{ end }}>
-    {{ if and $isArchived (not $archiveAnchorAdded) }}
+    {{ $isArchiveYear := and (gt $archiveYear 0) (eq .Date.Year $archiveYear) }}
+  
+    <article class="exhibit"{{ if and $isArchiveYear (not $archiveAnchorAdded) }} id="year-{{ $archiveYear }}"{{ end }}>
+  
+    {{ if and $isArchiveYear (not $archiveAnchorAdded) }}
       {{ $archiveAnchorAdded = true }}
     {{ end }}
     

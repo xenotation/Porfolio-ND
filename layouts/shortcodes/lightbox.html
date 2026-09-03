@@ -3,7 +3,7 @@
 {{- $image := $page.Resources.GetMatch $name -}}
 
 {{- with $image -}}
-  {{- $page.Store.SetInMap "inlineImages" .Name true -}}
+
 
   {{- $index := 0 -}}
   {{- range $i, $resource := $page.Resources.Match "*.*" -}}

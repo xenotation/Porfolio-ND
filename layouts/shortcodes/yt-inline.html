@@ -1,0 +1,12 @@
+{{- $id := .Get 0 -}}
+{{- $title := .Get 1 | default .Page.Title -}}
+
+<div class="inline-youtube">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/{{ $id }}?rel=0"
+    title="{{ $title }}"
+    loading="lazy"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
