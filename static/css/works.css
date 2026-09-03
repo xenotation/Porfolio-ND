@@ -4,11 +4,12 @@
 
 .gallery-heading{
   margin: 0 0 3.6em 0;
+  padding-bottom: 0.23rem;
   font-family: var(--font-ui);
   font-size: var(--size-1);
   letter-spacing: .02em;
   position: sticky;
-  top: 0.6rem;
+  top: calc(var(--outer-m) + 0.03rem);
   z-index: 2;
   background: var(--bg, #fff);
 }
