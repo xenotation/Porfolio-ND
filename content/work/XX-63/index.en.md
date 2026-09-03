@@ -1,5 +1,5 @@
 +++
-title = "XX-63"
+title = "Xx-63"
 date = 2026-03-10T00:00:00+02:00
 description = "Xx-63 is a multidisciplinary performance by Trevoga, developed by Neda Ruzheva and Nikola Stoyanov, exploring desire, digital excess and escapism."
 type = "artwork"
@@ -41,13 +41,19 @@ imgDescrps = ["Multidisciplinary performance developed by Neda Ruzheva and Nikol
 
 The work begins from a generational condition rather than a linear story. Movement stutters, repeats and collapses like a corrupted digital file. Choreography appears as reaction, symptom and emotional residue: bodies convulse under the pressure of overstimulation, become trapped in circuits of repetition and search for an exit that never fully arrives. Euphoric movement gradually becomes oppressive, while withdrawal changes from a symptom into a choreography—a tactic of flight from a system buckling under its own excess.
 
+{{< lightbox "XX-63_104.webp" >}}
+
 Club culture is treated not simply as an aesthetic reference but as a social machine for producing desire, identity and temporary forms of belonging. *Xx-63* looks back at spaces once described as underground after they have been absorbed by real-estate development, branding and corporate culture. The recent past returns as a hauntological remix: familiar gestures, fashions and pop-cultural clichés survive as distorted fragments of promises that can no longer be fulfilled.
+
+{{< lightbox "XX-63_114.webp" >}}
 
 Within this environment, the capitalist body is no longer a sacred space but an abandoned shopping mall, filled with the remains of consumer culture, synthetic chemicals and sexually charged images. Fear is not presented as an abstraction but as a physical condition. The performers scratch at the polished surface of urban hyperreality, revealing exhaustion, dependency and the constant pressure to desire more.
 
 The work also draws upon the online logic of refusing optimisation—the decision not to improve, perform or “thrive,” but to allow exhaustion and decay to become visible. Trevoga transforms the stage into a dissection table on which contemporary identity is examined as a symptom of an era addicted to immediate stimulation. Anxiety is not suppressed or represented from a distance; it becomes material, rhythm and bodily force.
 
 The title refers simultaneously to Psalm 63, a cry for transcendent satisfaction, and to “XX”: a synthetic kiss, a digital sign or the name of an unknown drug. Together, these references form an emblem of manufactured desire and digital dependency. Sensation is processed into spectacle, pleasure is continually repackaged, and grief is postponed through algorithmic delay.
+
+{{< lightbox "XX-63_11.webp" >}}
 
 Created with the scenographic duo Alagya and composer Sueuga, the performance constructs an unstable environment between reality, dream and sensory overload. The sculptural set confronts the performers as both architecture and obstacle, while industrial textures, distorted rhythms and traces of Y2K nostalgia produce a sonic space of attraction and unease. The costumes and styling extend this hybrid world, in which bodies appear simultaneously seductive, artificial and close to collapse.
 
@@ -59,7 +65,7 @@ Created with the scenographic duo Alagya and composer Sueuga, the performance co
 
 31.05.2025 — [One Dance Festival](https://onedance-festival.com/bg/2025/program/trevoga-xx-63), Boris Hristov House of Culture, Plovdiv
 
-12–13.07.2025 — [Julidans, Theater Bellevue](https://julidans.nl/en/shows/xx-63/5172732/), Amsterdam — world premiere
+12–13.07.2025 — [Julidans, Theater Bellevue](https://julidans.nl/en/shows/xx-63/5172732/), Amsterdam
 
 30.09.2025 — [Het Nationale Theater](https://www.hnt.nl/en/voorstellingen/9611/trevoga/xx-63), The Hague
 

@@ -165,7 +165,12 @@ body{ animation: pageloadIn .80s cubic-bezier(0.25, 0.1, 0.25, 1); }
 /* ================================
   Effects (incl. your blurAnimation)
 ================================ */
-a:hover{ animation: blurAnimation 2s ease-in-out; }
+a:hover{ 
+  animation-name: blurAnimation;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 2.3s; 
+}
 @keyframes blurAnimation{
   0%{ filter: blur(0) contrast(1); opacity: 100%; }
   36%{ filter: blur(5px) contrast(150); opacity: 13%; }
