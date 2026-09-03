@@ -1,0 +1,57 @@
+{{- $page := .Page -}}
+{{- $name := .Get 0 -}}
+{{- $image := $page.Resources.GetMatch $name -}}
+
+{{- with $image -}}
+  {{- $page.Store.SetInMap "inlineImages" .Name true -}}
+
+  {{- $index := 0 -}}
+  {{- range $i, $resource := $page.Resources.Match "*.*" -}}
+    {{- if eq $resource.Name $image.Name -}}
+      {{- $index = $i -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $title := $page.Title -}}
+  {{- with $page.Params.imgNames -}}
+    {{- if lt $index (len .) -}}
+      {{- $title = index . $index | default $page.Title -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $description := "" -}}
+  {{- with $page.Params.imgDescrps -}}
+    {{- if lt $index (len .) -}}
+      {{- $description = index . $index | default "" -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $descText := $description | plainify -}}
+  {{- $alt := $title | default $descText | default $page.Title -}}
+
+  {{- if and $title $descText (ne $title $descText) -}}
+    {{- $alt = printf "%s — %s" $title $descText -}}
+  {{- end -}}
+
+  {{- $thumb := .Resize "900x" -}}
+  {{- $large := .Resize "1600x" -}}
+
+<div class="inline-lightbox">
+  <a class="spotlight"
+     href="{{ $large.RelPermalink }}"
+     data-pswp-width="{{ $large.Width }}"
+     data-pswp-height="{{ $large.Height }}">
+
+    <img src="{{ $thumb.RelPermalink }}"
+         alt="{{ $alt }}"
+         class="gallery-image"
+         loading="lazy">
+
+    <span class="pswp-caption-content">
+      {{ with $title }}<strong>{{ . }}</strong>{{ end }}
+      {{ if and $title $description }}<br>{{ end }}
+      {{ $description | safeHTML }}
+    </span>
+  </a>
+</div>
+{{- end -}}

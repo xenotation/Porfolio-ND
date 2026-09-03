@@ -329,8 +329,9 @@
   {{ end }}
 {{ end }}
 
-      {{/* -------- IMAGES -------- */}}
-      {{ range $index, $resource := $resources }}
+{{/* -------- IMAGES -------- */}}
+
+{{ range $index, $resource := $resources }}
         {{ $title := index $.Params.imgNames $index | default "" }}
         {{ $description := index $.Params.imgDescrps $index | default "" }}
 
@@ -341,7 +342,7 @@
             {{ $alt = printf "%s — %s" $title $descText }}
           {{ end }}
 
-        {{ if and (in $resource.MediaType.Type "image") (not (in $resource.Name "hero.")) }}
+          {{ if and (in $resource.MediaType.Type "image") (not (in $resource.Name "hero.")) }}
           {{ $thumb := $resource.Resize "420x" }}
           {{ $large := $resource.Resize "1600x" }}
 
@@ -375,7 +376,7 @@
   import PhotoSwipeLightbox from '{{ "js/photoswipe-lightbox.esm.min.js" | relURL }}';
 
   const lightbox = new PhotoSwipeLightbox({
-    gallery: "#my-gallery",
+    gallery: ".exhb-body",
     children: "a.spotlight",
     pswpModule: () => import('{{ "js/photoswipe.esm.js" | relURL }}'),
     wheelToZoom: true,

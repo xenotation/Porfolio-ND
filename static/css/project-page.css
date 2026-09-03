@@ -123,7 +123,13 @@
 .exhb-body section > div{
   margin-bottom: .4rem;
 }
+.inline-lightbox {
+  margin: 0em 1rem;
+}
 
+main a.spotlight {
+  background-image: none;
+}
   
 /* =======================
    Mobile (≤ 860px)

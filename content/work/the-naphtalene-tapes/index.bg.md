@@ -42,7 +42,7 @@ medium = [
 
 curator = ["Камий Велуе"]
 
-collaborators = ["Aaron Roth", "Clarisse Aïn", "Gaia Vincensini", "Slava George & Daniel Uranga"]
+collaborators = ["Аарон Рот", "Кларис Аин", "Гая Винченсини", "Слава Джордж и Даниел Уранга"]
 
 sound = ["Антон Шишков"]
 
