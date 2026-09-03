@@ -39,11 +39,14 @@
   font-family: var(--font-ui);
   font-size: var(--size-1);
   font-weight: 700;
+  
 }
 
 .exhibit-title a{
   color: var(--text);
   text-decoration: none;
+  hyphens: none;
+  -webkit-hyphens: none;
 }
 
 .exhibit-address{

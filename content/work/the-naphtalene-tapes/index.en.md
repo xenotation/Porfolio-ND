@@ -1,6 +1,6 @@
 +++
 title = "The Naphthalene Tapes"
-date = 2026-01-01T00:00:00+02:00
+date = 2026-06-10T00:00:00+03:00
 description = "The Naphthalene Tapes is a post-fictional video installation by Nikola Stoyanov based on a painting attributed to Jackson Pollock found in Bulgaria."
 type = "artwork"
 categories = ["collab"]
