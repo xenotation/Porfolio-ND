@@ -11,7 +11,7 @@ place = "Doza gallery, Sofia. Part of SPorno festival 'THE DEVIANTS'"
 datestart = "2024-05-28T00:00:00+03:00"
 dateend = "2024-06-01T00:00:00+03:00"
 
-exhbwith = ["Alexandar Yuzev", "Patricio Ruiz", "Anton Stoianov", "Mitch Brezounek", "Knives & Pepi", "Biss Nova", "Jeltje Schuurmans", "Soul-pandemic", "Sevda Semer", "Voin de Voin 8 Ivana Nencheva", "Svetli Evgeniev", "Galina Dimitrova", "Sofia Dimitrova", "Corrine Fhima", "Stephanie Telomere", "Hrcprc.studio", "Pezieme", "Georgi Pavlov", "Kyril Buhowski"]
+collaborators = ["Alexandar Yuzev", "Patricio Ruiz", "Anton Stoianov", "Mitch Brezounek", "Knives & Pepi", "Biss Nova", "Jeltje Schuurmans", "Soul-pandemic", "Sevda Semer", "Voin de Voin 8 Ivana Nencheva", "Svetli Evgeniev", "Galina Dimitrova", "Sofia Dimitrova", "Corrine Fhima", "Stephanie Telomere", "Hrcprc.studio", "Pezieme", "Georgi Pavlov", "Kyril Buhowski"]
 
 curator = ["Michaela Lakova", "Voin De Voin"]
 categories = ["collab"]

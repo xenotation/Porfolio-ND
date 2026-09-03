@@ -14,7 +14,7 @@ description = "This zine is an exploration of the human experience with fever dr
 medium = ["2-colour riso zine" , "16 pages", "9x14cm"]
 place = "KO-OP Gallery"
 location = "Sofia, Bulgaria"
-exhbwith = ["Vasil Shterev", "Andrea Karl", "Rosie Eisor", "Dzhingibi", "Ruben Visser", "Tsvetan Tsvetanov"]
+collaborators = ["Vasil Shterev", "Andrea Karl", "Rosie Eisor", "Dzhingibi", "Ruben Visser", "Tsvetan Tsvetanov"]
 imgNames = ["Fever Dream (2023)", "Fever Dream (2023)", "Fever Dream (2023)", "Fever Dream (2023)", "Fever Dream (2023)", "Fever Dream (2023)", "Fever Dream (2023)", "Fever Dream (2023)", "Fever Dream (2023)", ]
 imgDescrps = [
   "This diary of fevers, a cut-up traversing people and time, unfolding across the labyrinthine tapestry of personal histories.",

@@ -37,21 +37,21 @@
   },
   {
     "exhibition": "the-naphtalene-tapes",
+    "namebg": "Френски институт България",
+    "nameen": "French Institute Bulgaria",
+    "descriptionbg": "Официален материал за „Black Market“ в галерия PUNTA, курирана от Камий Велуе, с участието на Никола Стоянов.",
+    "descriptionen": "Official feature on “Black Market” at PUNTA Gallery, curated by Camille Velluet and featuring Nikola Stoyanov.",
+    "year": "2026",
+    "url": "https://institutfrancais.bg/izlozhba-cheren-pazar-10-06-11-07-galeriya-punta/"
+  },
+  {
+    "exhibition": "the-naphtalene-tapes",
     "namebg": "Daily Lazy",
     "nameen": "Daily Lazy",
     "descriptionbg": "Материал за „Black Market“ в PUNTA Gallery с подробно описание на „The Naphtalene Tapes“ и изследването на постсъветската параноя.",
     "descriptionen": "Feature on “Black Market” at PUNTA Gallery with an extended description of The Naphtalene Tapes and its investigation of post-Soviet paranoia.",
     "year": "2026",
     "url": "https://daily-lazy.com/2026/07/black-market-at-punta-gallery-sofia.html"
-  },
-  {
-    "exhibition": "the-naphtalene-tapes",
-    "namebg": "Френски институт в България",
-    "nameen": "French Institute in Bulgaria",
-    "descriptionbg": "Официален материал за „Black Market“ в галерия PUNTA, курирана от Камий Велуе, с участието на Никола Стоянов.",
-    "descriptionen": "Official feature on “Black Market” at PUNTA Gallery, curated by Camille Velluet and featuring Nikola Stoyanov.",
-    "year": "2026",
-    "url": "https://institutfrancais.bg/izlozhba-cheren-pazar-10-06-11-07-galeriya-punta/"
   },
     {
       "exhibition": "xx-63",

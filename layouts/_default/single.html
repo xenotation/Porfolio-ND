@@ -18,64 +18,159 @@
 {{ $resources := .Resources.Match "*.*" }}
 
 <!-- JSON-LD: WebPage + Event + Person -->
+<!-- JSON-LD: WebPage + Event + Person + Images -->
+
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "{{ .Site.BaseURL }}#website",
-      "url": "{{ .Site.BaseURL }}",
-      "name": "{{ .Site.Title }}",
-      "inLanguage": "{{ .Site.Language.Lang }}"
-    },
-    {
-      "@type": "WebPage",
-      "@id": "{{ .Permalink }}#webpage",
-      "url": "{{ .Permalink }}",
-      "name": "{{ .Title }}",
-      "isPartOf": { "@id": "{{ .Site.BaseURL }}#website" }{{ with .Resources.GetMatch "hero.*" }},
-      "primaryImageOfPage": {
-        "@type": "ImageObject",
-        "@id": "{{ .Permalink }}#primary",
-        "url": "{{ .Permalink }}"
-      }{{ end }},
-      "inLanguage": "{{ $.Site.Language.Lang }}"
-    },
-    {
-      "@type": "Person",
-      "@id": "{{ .Site.BaseURL }}#person",
-      "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
-      {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) -}}
-      "image": "{{ . | absURL }}",
-      {{- end -}}
-      "url": "{{ .Site.BaseURL }}"
-    }
-    {{- with .Params.datestart -}}
-    ,{
-      "@type": "ExhibitionEvent",
-      "@id": "{{ $.Permalink }}#event",
-      "name": "{{ $.Title }}",
-      "url": "{{ $.Permalink }}",
-      "startDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ with $.Params.dateend }},
-      "endDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ end }},
-      "eventStatus": "https://schema.org/EventScheduled",
-      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      "organizer": { "@id": "{{ $.Site.BaseURL }}#person" }{{ with $.Params.place }},
-      "location": {
-        "@type": "Place",
-        "name": "{{ . }}"{{ with $.Params.location }},
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "{{ . }}",
-          "addressCountry": "Bulgaria"
+
+  {{/* Build structured data for hero and gallery images */}}
+  {{ $structuredImages := slice }}
+  {{ $structuredImageIndex := 0 }}
+  {{ $imageNames := .Params.imgNames | default (slice) }}
+  {{ $imageDescriptions := .Params.imgDescrps | default (slice) }}
+  
+  {{ range $image := .Resources.Match "*.{webp,jpg,jpeg,png}" }}
+  
+    {{ $isHero := hasPrefix (lower $image.Name) "hero." }}
+    {{ $imageName := $.Params.heroAlt | default $.Title }}
+    {{ $imageDescription := $.Params.description | default "" }}
+  
+    {{ if not $isHero }}
+  
+      {{ if lt $structuredImageIndex (len $imageNames) }}
+        {{ $candidateName := index $imageNames $structuredImageIndex }}
+        {{ $imageName = $candidateName | default $.Title }}
+      {{ end }}
+  
+      {{ if lt $structuredImageIndex (len $imageDescriptions) }}
+        {{ $candidateDescription := index $imageDescriptions $structuredImageIndex }}
+        {{ $imageDescription = $candidateDescription | default "" }}
+      {{ end }}
+  
+      {{ $structuredImageIndex = add $structuredImageIndex 1 }}
+  
+    {{ end }}
+  
+    {{ $imageObject := dict
+      "@type" "ImageObject"
+      "url" $image.Permalink
+      "name" ($imageName | plainify)
+    }}
+  
+    {{ with $imageDescription }}
+      {{ $imageObject = merge $imageObject
+        (dict "description" (. | plainify))
+      }}
+    {{ end }}
+  
+    {{ $structuredImages = $structuredImages | append $imageObject }}
+  
+  {{ end }}
+  
+  {
+    "@context": "https://schema.org",
+  
+    "@graph": [
+      {
+        "@type": "WebSite",
+  
+        "@id": "{{ .Site.BaseURL }}#website",
+  
+        "url": "{{ .Site.BaseURL }}",
+  
+        "name": "{{ .Site.Title }}",
+  
+        "inLanguage": "{{ .Site.Language.Lang }}"
+      },
+  
+      {
+        "@type": "WebPage",
+  
+        "@id": "{{ .Permalink }}#webpage",
+  
+        "url": "{{ .Permalink }}",
+  
+        "name": "{{ .Title }}",
+  
+        {{- if gt (len $structuredImages) 0 }}
+  
+        "image": {{ $structuredImages | jsonify | safeJS }},
+  
+        {{- end }}
+  
+        "isPartOf": {
+          "@id": "{{ .Site.BaseURL }}#website"
+        }{{ with .Resources.GetMatch "hero.*" }},
+  
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+  
+          "@id": "{{ .Permalink }}#primary",
+  
+          "url": "{{ .Permalink }}"
+        }{{ end }},
+  
+        "inLanguage": "{{ $.Site.Language.Lang }}"
+      },
+  
+      {
+        "@type": "Person",
+  
+        "@id": "{{ .Site.BaseURL }}#person",
+  
+        "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
+  
+        {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) }}
+  
+        "image": "{{ . | absURL }}",
+  
+        {{- end }}
+  
+        "url": "{{ .Site.BaseURL }}"
+      }
+  
+      {{- with .Params.datestart }}
+  
+      ,{
+        "@type": "ExhibitionEvent",
+  
+        "@id": "{{ $.Permalink }}#event",
+  
+        "name": "{{ $.Title }}",
+  
+        "url": "{{ $.Permalink }}",
+  
+        "startDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ with $.Params.dateend }},
+  
+        "endDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ end }},
+  
+        "eventStatus": "https://schema.org/EventScheduled",
+  
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  
+        "organizer": {
+          "@id": "{{ $.Site.BaseURL }}#person"
+        }{{ with $.Params.place }},
+  
+        "location": {
+          "@type": "Place",
+  
+          "name": "{{ . }}"{{ with $.Params.location }},
+  
+          "address": {
+            "@type": "PostalAddress",
+  
+            "addressLocality": "{{ . }}",
+  
+            "addressCountry": "Bulgaria"
+          }{{ end }}
         }{{ end }}
-      }{{ end }}
-    }
-    {{- end }}
-  ]
-}
-</script>
+      }
+  
+      {{- end }}
+    ]
+  }
+  
+  </script>
 
 <div class="container">
 
@@ -127,10 +222,6 @@
       {{ end }}
       {{ with .Params.curator }}
         <div class="peope-types">{{ i18n "Curator" }}</div>
-        <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
-      {{ end }}
-      {{ with .Params.exhbwith }}
-        <div class="peope-types">{{ i18n "exhbwith" }}</div>
         <div class="peope-list">{{ range . }}{{ . }}<br>{{ end }}</div>
       {{ end }}
       {{ with .Params.choreography }}
@@ -243,6 +334,13 @@
         {{ $title := index $.Params.imgNames $index | default "" }}
         {{ $description := index $.Params.imgDescrps $index | default "" }}
 
+        {{ $descText := $description | plainify }}
+          {{ $alt := $title | default $descText | default $.Title }}
+
+          {{ if and $title $descText (ne $title $descText) }}
+            {{ $alt = printf "%s — %s" $title $descText }}
+          {{ end }}
+
         {{ if and (in $resource.MediaType.Type "image") (not (in $resource.Name "hero.")) }}
           {{ $thumb := $resource.Resize "420x" }}
           {{ $large := $resource.Resize "1600x" }}
@@ -253,7 +351,7 @@
              data-pswp-height="{{ $large.Height }}">
 
             <img src="{{ $thumb.RelPermalink }}"
-                 alt="{{ $title }}"
+                 alt="{{ $alt }}"
                  class="gallery-image"
                  loading="lazy" />
 

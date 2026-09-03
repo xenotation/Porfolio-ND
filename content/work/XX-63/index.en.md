@@ -3,7 +3,7 @@ title = "XX-63"
 date = 2025-05-03T23:30:59+02:00
 description = ""
 
-draft = "true"
+draft = false
 
 type = "artwork"
 medium = [""]

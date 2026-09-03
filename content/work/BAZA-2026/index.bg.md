@@ -11,7 +11,7 @@ exhibition = "" # Group exhibition title
 
 place = "" # Venue
 location = "" # City or location
-address = "" # Street address
+
 addressLocality = "" # City for schema
 addressCountry = "" # Country for schema
 datestart = "" # Exhibition start
@@ -20,7 +20,7 @@ dateend = "" # Exhibition end
 medium = [] # Materials or formats
 curator = [] # Curators
 collaborators = [] # Collaborators
-exhbwith = [] # Other exhibiting artists
+
 choreography = [] # Choreography
 dramaturgy = [] # Dramaturgy
 performers = [] # Performers

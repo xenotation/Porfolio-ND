@@ -19,7 +19,7 @@ youtubeDescrps = [
 ]
 
 
-exhbwith = ["SABA PRODAKTION", "Peter Chinovsky", "Isabelle Nesheva", "Sofia Dimova", "Sara Postolle", "Martijn De Geele", "Orlin Dvoryanov", "Agathe de Limoges & Victor Delétraz", "Elena Chergilanova"]
+collaborators = ["SABA PRODAKTION", "Peter Chinovsky", "Isabelle Nesheva", "Sofia Dimova", "Sara Postolle", "Martijn De Geele", "Orlin Dvoryanov", "Agathe de Limoges & Victor Delétraz", "Elena Chergilanova"]
 categories = ["collab"]
 imgDescrps = ["View of Varna Municipality", "View of the Black Sea Hotel", "View of the Успение Богородично Church", "View of the city", "dream spawn point", "Non-euclidean variations of Varna streets", "Scene from the ritual world"]
 imgNames=["Gray Zone / Dispositive (2022)", "Gray Zone / Dispositive (2022)", "Gray Zone / Dispositive (2022)", "Gray Zone / Dispositive (2022)", "Gray Zone / Dispositive (2022)", "Gray Zone / Dispositive (2022)", "Gray Zone / Dispositive (2022)"]

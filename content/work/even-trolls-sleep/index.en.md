@@ -19,7 +19,7 @@ datestart = "2025-03-25T00:00:00+03:00"
 dateend = "2025-04-30T00:00:00+03:00"
 
 curator = ["Philip Stoilov", "Sofia Grancharova"]
-exhbwith = ["Lexi Fleur", "Slava George", "Yanitsa Fendulova", "Marina Genova", "Nikola Andreev", "Nikola Tsvetanov", "Kiril Bukhovski"]
+collaborators = ["Lexi Fleur", "Slava George", "Yanitsa Fendulova", "Marina Genova", "Nikola Andreev", "Nikola Tsvetanov", "Kiril Bukhovski"]
 categories = ["collab"]
 
 imgNames = [

@@ -19,7 +19,7 @@ youtubeDescrps = [
   "„Сива зона / Диспозитив“ е масивна фотограметрия, възпроизвеждаща градското пространство на Варна, България. Обхващаща реална площ от около 3 квадратни километра, тя се базира на сателитни изображения на града и представя неговия двойник."
 ]
 
-exhbwith = ["SABA PRODAKTION", "Peter Chinovsky", "Isabelle Nesheva", "Sofia Dimova", "Sara Postolle", "Martijn De Geele", "Orlin Dvoryanov", "Agathe de Limoges & Victor Delétraz", "Elena Chergilanova"]
+collaborators = ["SABA PRODAKTION", "Peter Chinovsky", "Isabelle Nesheva", "Sofia Dimova", "Sara Postolle", "Martijn De Geele", "Orlin Dvoryanov", "Agathe de Limoges & Victor Delétraz", "Elena Chergilanova"]
 imgDescrps = ["Изглед към община Варна", "Изглед към хотел Черно Море", "Изглед към църква Успение Богородично", "Излед към града", "Начална точка на съня", "неевклидови вариации на варненските улици", "сцена от вритуални свят"]
 imgNames = ["Сива Зона / Диспозитив (2022)", "Сива Зона / Диспозитив (2022)", "Сива Зона / Диспозитив (2022)", "Сива Зона / Диспозитив (2022)", "Сива Зона / Диспозитив (2022)", "Сива Зона / Диспозитив (2022)", "Сива Зона / Диспозитив (2022)"]
 categories = ["collab"]
