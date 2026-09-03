@@ -9,15 +9,6 @@ place = "The Matrix, Sofia"
 
 datestart = "2022-04-28T00:00:00+03:00"
 dateend = "2022-04-29T00:00:00+03:00"
-keywordsEng = [
-  "Grey Zone",
-  "photogrammetry",
-  "virtual cityscape",
-  "video game art",
-  "AI denoiser",
-  "Sofia Underground",
-  "Dispositif"
-]
 
 youtube = "https://youtu.be/H08w7eng9ew"
 youtubeNames = [
@@ -32,7 +23,7 @@ exhbwith = ["SABA PRODAKTION", "Peter Chinovsky", "Isabelle Nesheva", "Sofia Dim
 categories = ["collab"]
 imgDescrps = ["View of Varna Municipality", "View of the Black Sea Hotel", "View of the Успение Богородично Church", "View of the city", "dream spawn point", "Non-euclidean variations of Varna streets", "Scene from the ritual world"]
 imgNames=["Gray Zone / Dispositive (2022)", "Gray Zone / Dispositive (2022)", "Gray Zone / Dispositive (2022)", "Gray Zone / Dispositive (2022)", "Gray Zone / Dispositive (2022)", "Gray Zone / Dispositive (2022)", "Gray Zone / Dispositive (2022)"]
-permalink = "https://newdegeneration.xyz/work/grey-zone-dispositive/"
+
 +++
 
 The city - transfigured into a gray zone emptied of people, of lights, immersed under water or discarded in the wild cosmos, folded beyond practicality, it represents a capsule emptied of its nature, emptied of its structures of power, emptied of its social bodies. A dispositive without practice, without knowledge and expertise, withoout our institutions and without time - a pure assemblage. 

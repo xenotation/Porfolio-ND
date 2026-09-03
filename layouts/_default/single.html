@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/css/project-page.css">
 
 {{/* ---------- shared vars used later ---------- */}}
-{{ $exhKey := ( .Params.exhibition_key | default (path.Base .File.Dir) ) | urlize }}
+{{ $exhKey := path.Base .File.Dir | urlize }}
 {{ $lang  := .Site.Language.Lang }}
 {{ $isBG  := eq $lang "bg" }}
 
