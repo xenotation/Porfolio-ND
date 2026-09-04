@@ -52,7 +52,7 @@ The art piece co-opts the competitive sensibilities and velocity of online video
 
 {{< lightbox "the-things-we-saw-together-01.webp" >}}
 
-_The things we saw together_ operates within this same fragmented visual condition. The video assembles fragments of globally circulated images—catastrophe, political protest, technological spectacle, animal life and synthetic media. Removed from their original feeds and refracted through a Soviet lens, both literally and historically, they form neither an archive nor a history, but a genealogy of recent memory.
+_The things we saw together_ operates within this same fragmented visual condition. The video assembles globally circulated images: catastrophe, political protest, technological spectacle, animal life and synthetic media. Removed from their original feeds and refracted through a Soviet lens, both literally and historically, they form neither an archive nor a history, but a genealogy of recent memory.
 
 The contemporary feed can therefore be understood as a perpetual form of algorithmic montage. Every individual unit of content is preceded and followed by a swipe and a proceeding cut. A scrolling session becomes a theoretically never-ending film, stitched together not by a conventional director but by the algorithmic capture of cultural codes, shared trends and patterns of behavior.
 
