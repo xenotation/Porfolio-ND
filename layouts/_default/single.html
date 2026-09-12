@@ -20,175 +20,247 @@
 <!-- JSON-LD: WebPage + Event + Person -->
 <!-- JSON-LD: WebPage + Event + Person + Images -->
 
-<script type="application/ld+json">
+{{/* ---------- image vars used by schema + page ---------- */}}
 
-  {{/* Build structured data for hero and gallery images */}}
-  {{ $structuredImages := slice }}
-  {{ $structuredImageIndex := 0 }}
-  {{ $imageNames := .Params.imgNames | default (slice) }}
-  {{ $imageDescriptions := .Params.imgDescrps | default (slice) }}
-  
-  {{ range $image := .Resources.Match "*.{webp,jpg,jpeg,png}" }}
-  
-    {{ $isHero := hasPrefix (lower $image.Name) "hero." }}
-    {{ $imageName := $.Params.heroAlt | default $.Title }}
-    {{ $imageDescription := $.Params.description | default "" }}
-  
-    {{ if not $isHero }}
-  
-      {{ if lt $structuredImageIndex (len $imageNames) }}
-        {{ $candidateName := index $imageNames $structuredImageIndex }}
-        {{ $imageName = $candidateName | default $.Title }}
-      {{ end }}
-  
-      {{ if lt $structuredImageIndex (len $imageDescriptions) }}
-        {{ $candidateDescription := index $imageDescriptions $structuredImageIndex }}
-        {{ $imageDescription = $candidateDescription | default "" }}
-      {{ end }}
-  
-      {{ $structuredImageIndex = add $structuredImageIndex 1 }}
-  
+{{ $heroImg := or
+  (.Resources.GetMatch "hero.webp")
+  (.Resources.GetMatch "hero.jpg")
+  (.Resources.GetMatch "hero.jpeg")
+  (.Resources.GetMatch "hero.png")
+}}
+
+
+{{/* ---------- JSON-LD ---------- */}}
+
+{{/* Keep existing image-indexing behaviour */}}
+{{ $structuredImages := slice }}
+{{ $eventImages := slice }}
+{{ $structuredImageIndex := 0 }}
+
+{{ $imageNames := .Params.imgNames | default (slice) }}
+{{ $imageDescriptions := .Params.imgDescrps | default (slice) }}
+
+{{ range $image := .Resources.Match "*.{webp,jpg,jpeg,png}" }}
+
+  {{ $isHero := hasPrefix (lower $image.Name) "hero." }}
+
+  {{/* Hero defaults */}}
+  {{ $imageName := $.Params.heroAlt | default $.Title }}
+  {{ $imageDescription := $.Params.description | default "" }}
+
+  {{/* Existing gallery-image indexing logic */}}
+  {{ if not $isHero }}
+
+    {{ if lt $structuredImageIndex (len $imageNames) }}
+      {{ $candidateName := index $imageNames $structuredImageIndex }}
+      {{ $imageName = $candidateName | default $.Title }}
     {{ end }}
-  
-    {{ $imageObject := dict
-      "@type" "ImageObject"
-      "url" $image.Permalink
-      "name" ($imageName | plainify)
+
+    {{ if lt $structuredImageIndex (len $imageDescriptions) }}
+      {{ $candidateDescription := index $imageDescriptions $structuredImageIndex }}
+      {{ $imageDescription = $candidateDescription | default "" }}
+    {{ end }}
+
+    {{ $structuredImageIndex = add $structuredImageIndex 1 }}
+
+  {{ end }}
+
+  {{/* ImageObject */}}
+  {{ $imageObject := dict
+    "@type" "ImageObject"
+    "contentUrl" $image.Permalink
+    "name" ($imageName | plainify)
+  }}
+
+  {{ if $isHero }}
+    {{ $imageObject = merge $imageObject
+      (dict "@id" (printf "%s#primary" $.Permalink))
     }}
-  
-    {{ with $imageDescription }}
-      {{ $imageObject = merge $imageObject
-        (dict "description" (. | plainify))
+  {{ end }}
+
+  {{ with $imageDescription }}
+    {{ $imageObject = merge $imageObject
+      (dict "description" (. | plainify))
+    }}
+  {{ end }}
+
+  {{ $structuredImages = $structuredImages | append $imageObject }}
+  {{ $eventImages = $eventImages | append $image.Permalink }}
+
+{{ end }}
+
+
+{{/* ---------- permanent graph nodes ---------- */}}
+
+{{ $languageCode := .Site.Language.LanguageCode | default .Site.Language.Lang }}
+
+
+{{/* WebSite */}}
+{{ $website := dict
+  "@type" "WebSite"
+  "@id" (printf "%s#website" .Site.BaseURL)
+  "url" .Site.BaseURL
+  "name" .Site.Title
+  "inLanguage" $languageCode
+}}
+
+
+{{/* WebPage */}}
+{{ $webpage := dict
+  "@type" "WebPage"
+  "@id" (printf "%s#webpage" .Permalink)
+  "url" .Permalink
+  "name" .Title
+  "isPartOf" (dict
+    "@id" (printf "%s#website" .Site.BaseURL)
+  )
+  "inLanguage" $languageCode
+}}
+
+{{ if gt (len $structuredImages) 0 }}
+  {{ $webpage = merge $webpage
+    (dict "image" $structuredImages)
+  }}
+{{ end }}
+
+{{ with $heroImg }}
+  {{ $webpage = merge $webpage
+    (dict
+      "primaryImageOfPage"
+      (dict
+        "@type" "ImageObject"
+        "@id" (printf "%s#primary" $.Permalink)
+        "contentUrl" .Permalink
+      )
+    )
+  }}
+{{ end }}
+
+
+{{/* Person */}}
+{{ $person := dict
+  "@type" "Person"
+  "@id" (printf "%s#person" .Site.BaseURL)
+  "name" (or .Site.Language.Params.name .Site.Params.name)
+  "url" .Site.BaseURL
+}}
+
+{{ with (or .Site.Language.Params.profileImage .Site.Params.profileImage) }}
+  {{ $person = merge $person
+    (dict "image" (. | absURL))
+  }}
+{{ end }}
+
+
+{{/* Start graph */}}
+{{ $graph := slice $website $webpage $person }}
+
+
+{{/* ---------- ExhibitionEvent ---------- */}}
+
+{{ with .Params.datestart }}
+
+  {{ $event := dict
+    "@type" "ExhibitionEvent"
+    "@id" (printf "%s#event" $.Permalink)
+    "name" $.Title
+    "url" $.Permalink
+    "startDate" (time . | time.Format "2006-01-02T15:04:05Z07:00")
+    "eventStatus" "https://schema.org/EventScheduled"
+    "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
+    "organizer" (dict
+      "@id" (printf "%s#person" $.Site.BaseURL)
+    )
+  }}
+
+
+  {{/* End date */}}
+  {{ with $.Params.dateend }}
+    {{ $event = merge $event
+      (dict
+        "endDate"
+        (time . | time.Format "2006-01-02T15:04:05Z07:00")
+      )
+    }}
+  {{ end }}
+
+
+  {{/* Hero + gallery images */}}
+  {{ if gt (len $eventImages) 0 }}
+    {{ $event = merge $event
+      (dict "image" $eventImages)
+    }}
+  {{ end }}
+
+
+  {{/* Location */}}
+  {{ $placeName := or $.Params.place $.Params.location }}
+  {{ $locality := or $.Params.addressLocality $.Params.location }}
+  {{ $country := $.Params.addressCountry }}
+
+  {{ if or $placeName $locality $country }}
+
+    {{ $locationObject := dict
+      "@type" "Place"
+    }}
+
+    {{ with $placeName }}
+      {{ $locationObject = merge $locationObject
+        (dict "name" .)
       }}
     {{ end }}
-  
-    {{ $structuredImages = $structuredImages | append $imageObject }}
-  
-  {{ end }}
-  
-  {
-    "@context": "https://schema.org",
-  
-    "@graph": [
-      {
-        "@type": "WebSite",
-  
-        "@id": "{{ .Site.BaseURL }}#website",
-  
-        "url": "{{ .Site.BaseURL }}",
-  
-        "name": "{{ .Site.Title }}",
-  
-        "inLanguage": "{{ .Site.Language.Lang }}"
-      },
-  
-      {
-        "@type": "WebPage",
-  
-        "@id": "{{ .Permalink }}#webpage",
-  
-        "url": "{{ .Permalink }}",
-  
-        "name": "{{ .Title }}",
-  
-        {{- if gt (len $structuredImages) 0 }}
-  
-        "image": {{ $structuredImages | jsonify | safeJS }},
-  
-        {{- end }}
-  
-        "isPartOf": {
-          "@id": "{{ .Site.BaseURL }}#website"
-        }{{ with .Resources.GetMatch "hero.*" }},
-  
-        {{ $heroImg := or
-          (.Resources.GetMatch "hero.webp")
-          (.Resources.GetMatch "hero.jpg")
-          (.Resources.GetMatch "hero.jpeg")
-          (.Resources.GetMatch "hero.png")
-        }}
 
-        {{ with $heroImg }}
-          ,
-          "primaryImageOfPage": {
-            "@type": "ImageObject",
-            "@id": "{{ $.Permalink }}#primary",
-            "url": "{{ .Permalink }}",
-            "contentUrl": "{{ .Permalink }}"
-          }
-          {{ end }}
-  
-        "inLanguage": "{{ $.Site.Language.Lang }}"
-      },
-  
-      {
-        "@type": "Person",
-  
-        "@id": "{{ .Site.BaseURL }}#person",
-  
-        "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
-  
-        {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) }}
-  
-        "image": "{{ . | absURL }}",
-  
-        {{- end }}
-  
-        "url": "{{ .Site.BaseURL }}"
-      }
-  
-      {{- with .Params.datestart }}
-  
-      {{- with .Params.datestart }}
-      ,{
-        "@type": "ExhibitionEvent",
-        "@id": "{{ $.Permalink }}#event",
-        "name": "{{ $.Title }}",
-        "url": "{{ $.Permalink }}",
-      
-        "startDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"
-        {{- with $.Params.dateend }},
-        "endDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"
-        {{- end }},
-      
-        "eventStatus": "https://schema.org/EventScheduled",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      
-        {{- if gt (len $eventImages) 0 }}
-        "image": {{ $eventImages | jsonify | safeJS }},
-        {{- end }}
-      
-        "organizer": {
-          "@id": "{{ $.Site.BaseURL }}#person"
-        }
-      
-        {{- with $.Params.place }},
-        "location": {
-          "@type": "Place",
-          "name": "{{ . }}"
-          {{- with $.Params.location }},
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "{{ . }}",
-            "addressCountry": "Bulgaria"
-          }
-          {{- end }}
-        }
-        {{- end }}
-      }
-      {{- end }}
-  
-      {{- end }}
-    ]
-  }
-  
-  </script>
+    {{ if or $locality $country }}
+
+      {{ $address := dict
+        "@type" "PostalAddress"
+      }}
+
+      {{ with $locality }}
+        {{ $address = merge $address
+          (dict "addressLocality" .)
+        }}
+      {{ end }}
+
+      {{ with $country }}
+        {{ $address = merge $address
+          (dict "addressCountry" .)
+        }}
+      {{ end }}
+
+      {{ $locationObject = merge $locationObject
+        (dict "address" $address)
+      }}
+
+    {{ end }}
+
+    {{ $event = merge $event
+      (dict "location" $locationObject)
+    }}
+
+  {{ end }}
+
+
+  {{ $graph = $graph | append $event }}
+
+{{ end }}
+
+
+{{/* ---------- final JSON-LD ---------- */}}
+
+{{ $schema := dict
+  "@context" "https://schema.org"
+  "@graph" $graph
+}}
+
+<script type="application/ld+json">
+{{ $schema | jsonify | safeJS }}
+</script>
 
 <div class="container">
 
   {{/* ---- HERO (video if available, else image) ---- */}}
   {{ $heroVideo := .Resources.GetMatch "hero.webm" }}
-  {{ $heroImg   := or (.Resources.GetMatch "hero.webp") (.Resources.GetMatch "hero.jpg") (.Resources.GetMatch "hero.jpeg") (.Resources.GetMatch "hero.png") }}
 
   <div class="exhb-hero">
     {{ if $heroVideo }}
