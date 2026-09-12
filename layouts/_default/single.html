@@ -101,13 +101,22 @@
           "@id": "{{ .Site.BaseURL }}#website"
         }{{ with .Resources.GetMatch "hero.*" }},
   
-        "primaryImageOfPage": {
-          "@type": "ImageObject",
-  
-          "@id": "{{ .Permalink }}#primary",
-  
-          "url": "{{ .Permalink }}"
-        }{{ end }},
+        {{ $heroImg := or
+          (.Resources.GetMatch "hero.webp")
+          (.Resources.GetMatch "hero.jpg")
+          (.Resources.GetMatch "hero.jpeg")
+          (.Resources.GetMatch "hero.png")
+        }}
+
+        {{ with $heroImg }}
+          ,
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "@id": "{{ $.Permalink }}#primary",
+            "url": "{{ .Permalink }}",
+            "contentUrl": "{{ .Permalink }}"
+          }
+          {{ end }}
   
         "inLanguage": "{{ $.Site.Language.Lang }}"
       },
@@ -130,41 +139,44 @@
   
       {{- with .Params.datestart }}
   
+      {{- with .Params.datestart }}
       ,{
         "@type": "ExhibitionEvent",
-  
         "@id": "{{ $.Permalink }}#event",
-  
         "name": "{{ $.Title }}",
-  
         "url": "{{ $.Permalink }}",
-  
-        "startDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ with $.Params.dateend }},
-  
-        "endDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"{{ end }},
-  
+      
+        "startDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"
+        {{- with $.Params.dateend }},
+        "endDate": "{{ time . | time.Format "2006-01-02T15:04:05Z07:00" }}"
+        {{- end }},
+      
         "eventStatus": "https://schema.org/EventScheduled",
-  
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-  
+      
+        {{- if gt (len $eventImages) 0 }}
+        "image": {{ $eventImages | jsonify | safeJS }},
+        {{- end }}
+      
         "organizer": {
           "@id": "{{ $.Site.BaseURL }}#person"
-        }{{ with $.Params.place }},
-  
+        }
+      
+        {{- with $.Params.place }},
         "location": {
           "@type": "Place",
-  
-          "name": "{{ . }}"{{ with $.Params.location }},
-  
+          "name": "{{ . }}"
+          {{- with $.Params.location }},
           "address": {
             "@type": "PostalAddress",
-  
             "addressLocality": "{{ . }}",
-  
             "addressCountry": "Bulgaria"
-          }{{ end }}
-        }{{ end }}
+          }
+          {{- end }}
+        }
+        {{- end }}
       }
+      {{- end }}
   
       {{- end }}
     ]
@@ -388,7 +400,7 @@
     tapAction: "toggle-controls",
     bgClickAction: "close",
     initialZoomLevel: "fit",
-    secondaryZoomLevel: 1.5,
+    secondaryZoomLevel: 1.2,
     maxZoomLevel: 3,
     paddingFn: (vp) => {
       const pad = vp.x < 860 ? 12 : 24;
