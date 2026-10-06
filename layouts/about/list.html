@@ -4,63 +4,11 @@
 <script src="{{ "/js/spinner.js" | relURL }}" defer></script>
 
 {{/* Pull data from the current language */}}
-{{- $personName := .Params.name | default .Site.Language.Params.name | default .Site.Title -}}
 {{- $descr := .Params.description | default .Site.Language.Params.description | default .Site.Language.Params.Description | default .Site.Params.description | default "" -}}
-{{- $jobTitle := .Params.jobTitle | default .Site.Language.Params.jobTitle | default "Artist and Theorist" -}}
-{{- $alternateName := .Site.Language.Params.alternateNames | default .Site.Params.alternateNames -}}
 {{- $profileImage := .Params.profile_image | default .Site.Language.Params.profileImage | default .Site.Params.profileImage -}}
 
-{{/* Build sameAs from socials + params_sameas_other, excluding mailto */}}
-{{- $sameAs := slice -}}
-
-{{- with .Site.Params.social.instagram -}}
-  {{- if not (hasPrefix . "mailto:") -}}
-    {{- $sameAs = $sameAs | append . -}}
-  {{- end -}}
-{{- end -}}
-
-{{- with .Site.Params.social.facebook -}}
-  {{- if not (hasPrefix . "mailto:") -}}
-    {{- $sameAs = $sameAs | append . -}}
-  {{- end -}}
-{{- end -}}
-
-{{- with .Site.Params.social.youtube -}}
-  {{- if not (hasPrefix . "mailto:") -}}
-    {{- $sameAs = $sameAs | append . -}}
-  {{- end -}}
-{{- end -}}
-
-{{- with .Site.Params.params_sameas_other -}}
-  {{- range . -}}
-    {{- if not (hasPrefix . "mailto:") -}}
-      {{- $sameAs = $sameAs | append . -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
-
 {{/* Person entity */}}
-{{- $person := dict
-  "@type" "Person"
-  "@id" (printf "%s#person" .Permalink)
-  "name" $personName
-  "jobTitle" $jobTitle
-  "nationality" "Bulgarian"
-  "url" .Permalink
-  "knowsLanguage" (slice "bg-BG" "en")
--}}
-
-{{- with $alternateName -}}
-  {{- $person = merge $person (dict "alternateName" .) -}}
-{{- end -}}
-
-{{- with $profileImage -}}
-  {{- $person = merge $person (dict "image" (. | absURL)) -}}
-{{- end -}}
-
-{{- if gt (len $sameAs) 0 -}}
-  {{- $person = merge $person (dict "sameAs" $sameAs) -}}
-{{- end -}}
+{{- $person := partial "person-schema.html" . -}}
 
 {{/* ProfilePage entity */}}
 {{- $schema := dict

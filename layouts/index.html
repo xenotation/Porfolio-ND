@@ -1,55 +1,13 @@
 {{ define "main" }}
 
-{{/* Build sameAs once from global params (no mailto) */}}
-{{- $sameAs := slice -}}
-
-{{- with .Site.Params.social.instagram -}}
-  {{- $sameAs = $sameAs | append . -}}
-{{- end -}}
-
-{{- with .Site.Params.social.facebook -}}
-  {{- $sameAs = $sameAs | append . -}}
-{{- end -}}
-
-{{- with .Site.Params.social.youtube -}}
-  {{- $sameAs = $sameAs | append . -}}
-{{- end -}}
-
-{{- with .Site.Params.params_sameas_other -}}
-  {{- range . -}}
-    {{- $sameAs = $sameAs | append . -}}
-  {{- end -}}
-{{- end -}}
-
 {{/* Language-aware values */}}
 {{- $lang := .Site.Language.Lang | default "en" -}}
 {{- $siteTitle := .Site.Title -}}
 {{- $description := .Site.Language.Params.description | default .Site.Language.Params.Description | default .Site.Params.description | default "" -}}
-{{- $personName := .Site.Language.Params.name | default .Site.Params.name | default .Site.Title -}}
-{{- $alternateName := .Site.Language.Params.alternateNames | default .Site.Params.alternateNames -}}
-{{- $jobTitle := .Site.Language.Params.jobTitle | default .Site.Params.jobTitle | default "Artist and Theorist" -}}
 {{- $profileImage := .Site.Language.Params.profileImage | default .Site.Params.profileImage -}}
 
 {{/* Person entity */}}
-{{- $person := dict
-  "@type" "Person"
-  "name" $personName
-  "jobTitle" $jobTitle
-  "nationality" "Bulgarian"
-  "url" ("/" | absLangURL)
--}}
-
-{{- with $alternateName -}}
-  {{- $person = merge $person (dict "alternateName" .) -}}
-{{- end -}}
-
-{{- with $profileImage -}}
-  {{- $person = merge $person (dict "image" (. | absURL)) -}}
-{{- end -}}
-
-{{- if gt (len $sameAs) 0 -}}
-  {{- $person = merge $person (dict "sameAs" $sameAs) -}}
-{{- end -}}
+{{- $person := partial "person-schema.html" . -}}
 
 {{/* WebSite entity */}}
 {{- $website := dict
@@ -66,7 +24,7 @@
   "@type" "WebPage"
   "@id" (printf "%s#webpage" .Permalink)
   "url" .Permalink
-  "name" (printf "%s — Artist & Theorist" $siteTitle)
+  "name" (cond (eq $lang "bg") (printf "%s — визуален артист и философ" $siteTitle) (printf "%s — visual artist and philosopher" $siteTitle))
   "description" $description
   "inLanguage" $lang
   "isPartOf" $website

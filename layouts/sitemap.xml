@@ -21,20 +21,35 @@
     {{- end }}
 
     {{- if .IsTranslated }}
+      {{- $xDefault := .Permalink }}
       {{- range .AllTranslations }}
     <xhtml:link
       rel="alternate"
       hreflang="{{ .Language.LanguageCode | default .Language.Lang }}"
       href="{{ .Permalink }}"
     />
+        {{- if eq .Language.Lang "en" }}
+          {{- $xDefault = .Permalink }}
+        {{- end }}
       {{- end }}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ $xDefault }}" />
     {{- end }}
 
+    {{- $hero := or
+      (.Resources.GetMatch "hero.webp")
+      (.Resources.GetMatch "hero.jpg")
+      (.Resources.GetMatch "hero.jpeg")
+      (.Resources.GetMatch "hero.png")
+    }}
     {{- with .Resources.Match "**.{webp,jpg,jpeg,png}" }}
       {{- range . }}
+        {{- $isHero := hasPrefix (lower .Name) "hero." }}
+        {{- $isPrimaryHero := and $isHero $hero (eq .RelPermalink $hero.RelPermalink) }}
+        {{- if or (not $isHero) $isPrimaryHero }}
     <image:image>
       <image:loc>{{ .Permalink }}</image:loc>
     </image:image>
+        {{- end }}
       {{- end }}
     {{- end }}
   </url>

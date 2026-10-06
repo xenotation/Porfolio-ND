@@ -1,13 +1,13 @@
 +++
 title = "about"
-description = "Nikola Stoyanov is a Bulgarian research-based artist, writer and translator based in Sofia. Working across installation, moving image, archives, networked media and technological apparatuses, his practice examines how paranoia, propaganda, extraction and technological mediation shape perception, with a recurring focus on post-socialist and post-Soviet histories and their contemporary afterlives."
+description = "Nikola Stoyanov is a Bulgarian research-based visual artist, writer, philosopher and translator based in Sofia. Working across installation, moving image, archives and networked media, his practice examines paranoia, propaganda and technological mediation."
 
 hero_alt = "Nikola Stoyanov portrait / studio detail"
 cv_pdf = "/files/nikola-stoyanov-cv.pdf"
 portfolio_pdf = "/files/nikola-stoyanov-portfolio.pdf"
 +++
 
-Nikola Stoyanov is a Bulgarian research-based artist, writer and translator based in Sofia. Working across installation, moving image, archives, networked media and technological apparatuses, his practice examines how paranoia, propaganda, extraction and technological mediation shape perception, with a recurring focus on post-socialist and post-Soviet histories and their contemporary afterlives.
+Nikola Stoyanov is a Bulgarian research-based visual artist, writer, philosopher and translator based in Sofia. Working across installation, moving image, archives, networked media and technological apparatuses, his practice examines how paranoia, propaganda, extraction and technological mediation shape perception, with a recurring focus on post-socialist and post-Soviet histories and their contemporary afterlives.
 
 In his work found archives, declassified documents, satellite imagery, online communities, news media and vernacular histories are spliced into visual and spatial systems in which the distinction between document, rumour, speculation and fiction becomes unstable. A recurring concern in Stoyanov’s practice is the infrastructure through which information becomes visible, credible and operative.
 

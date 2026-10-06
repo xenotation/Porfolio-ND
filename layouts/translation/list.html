@@ -44,6 +44,7 @@
   "inLanguage": "{{ .Site.Language.Lang }}",
   "about": {
     "@type": "Person",
+    "@id": "{{ .Site.BaseURL }}#person",
     "name": {{ printf "%q" $personName }},
     {{- with $personImg }}
     "image": "{{ . | absURL }}",
@@ -64,6 +65,7 @@
             "url": {{ printf "%q" (or $it.link $it.url) }},
             "translator": {
               "@type": "Person",
+              "@id": "{{ $.Site.BaseURL }}#person",
               "name": {{ printf "%q" $personName }},
               "url": "{{ .Site.BaseURL }}"
               {{- with $personImg }},

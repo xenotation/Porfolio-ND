@@ -33,6 +33,7 @@
     {{- $alt = printf "%s — %s" $title $descText -}}
   {{- end -}}
 
+  {{- $small := .Resize "420x" -}}
   {{- $thumb := .Resize "900x" -}}
   {{- $large := .Resize "1600x" -}}
 
@@ -43,9 +44,14 @@
      data-pswp-height="{{ $large.Height }}">
 
     <img src="{{ $thumb.RelPermalink }}"
+         srcset="{{ $small.RelPermalink }} {{ $small.Width }}w, {{ $thumb.RelPermalink }} {{ $thumb.Width }}w, {{ $large.RelPermalink }} {{ $large.Width }}w"
+         sizes="(max-width: 900px) 100vw, 900px"
          alt="{{ $alt }}"
+         width="{{ $thumb.Width }}"
+         height="{{ $thumb.Height }}"
          class="gallery-image"
-         loading="lazy">
+         loading="lazy"
+         decoding="async">
 
     <span class="pswp-caption-content">
       {{ with $title }}<strong>{{ . }}</strong>{{ end }}
