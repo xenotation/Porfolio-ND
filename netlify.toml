@@ -9,6 +9,42 @@
   command = "hugo --gc --minify -b https://newdegeneration.xyz"
 
 [[redirects]]
+  from = "/bio/"
+  to = "/about/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/bg/bio/"
+  to = "/bg/about/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/work/the-naphtalene-tapes/"
+  to = "/work/the-naphthalene-tapes/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/work/the-naphtalene-tapes/*"
+  to = "/work/the-naphthalene-tapes/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/bg/work/the-naphtalene-tapes/"
+  to = "/bg/work/the-naphthalene-tapes/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/bg/work/the-naphtalene-tapes/*"
+  to = "/bg/work/the-naphthalene-tapes/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/unsound-hikikomori/"
   to = "https://blog.newdegeneration.xyz/unsound-hikikomori"
   status = 301

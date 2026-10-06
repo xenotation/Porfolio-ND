@@ -1,0 +1,45 @@
+{{- $sameAs := slice -}}
+
+{{- with .Site.Params.social.instagram -}}
+  {{- $sameAs = $sameAs | append . -}}
+{{- end -}}
+{{- with .Site.Params.social.facebook -}}
+  {{- $sameAs = $sameAs | append . -}}
+{{- end -}}
+{{- with .Site.Params.social.youtube -}}
+  {{- $sameAs = $sameAs | append . -}}
+{{- end -}}
+{{- with .Site.Params.params_sameas_other -}}
+  {{- range . -}}
+    {{- if not (hasPrefix . "mailto:") -}}
+      {{- $sameAs = $sameAs | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $person := dict
+  "@type" "Person"
+  "@id" (printf "%s#person" .Site.BaseURL)
+  "name" (.Site.Language.Params.name | default .Site.Title)
+  "url" .Site.BaseURL
+  "nationality" "Bulgarian"
+  "knowsLanguage" (slice "bg-BG" "en")
+-}}
+
+{{- with .Site.Language.Params.Description -}}
+  {{- $person = merge $person (dict "description" .) -}}
+{{- end -}}
+{{- with .Site.Language.Params.alternateNames -}}
+  {{- $person = merge $person (dict "alternateName" .) -}}
+{{- end -}}
+{{- with .Site.Language.Params.jobTitle -}}
+  {{- $person = merge $person (dict "jobTitle" .) -}}
+{{- end -}}
+{{- with .Site.Language.Params.profileImage -}}
+  {{- $person = merge $person (dict "image" (. | absURL)) -}}
+{{- end -}}
+{{- if gt (len $sameAs) 0 -}}
+  {{- $person = merge $person (dict "sameAs" (uniq $sameAs)) -}}
+{{- end -}}
+
+{{- return $person -}}

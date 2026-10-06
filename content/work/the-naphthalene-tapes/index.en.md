@@ -31,9 +31,27 @@ photo = ["Mihail Novakov"]
 
 heroAlt = "The Naphthalene Tapes (2026), video installation by Nikola Stoyanov at PUNTA Gallery, Sofia"
 
-imgNames = ["The Naphthalene Tapes (2026) — Nikola Stoyanov", "The Naphthalene Tapes (2026) — Nikola Stoyanov", "The Naphthalene Tapes (2026) — Nikola Stoyanov", "The Naphthalene Tapes (2026) — Nikola Stoyanov", "The Naphthalene Tapes (2026) — Nikola Stoyanov", "The Naphthalene Tapes (2026) — Nikola Stoyanov", "The Naphthalene Tapes (2026) — Nikola Stoyanov", "The Naphthalene Tapes (2026) — Nikola Stoyanov"]
+imgNames = [
+"Black Market, full gallery view",
+"Black Market, central installation view",
+"The Naphthalene Tapes in Black Market",
+"The Naphthalene Tapes, frontal view",
+"The Naphthalene Tapes, wardrobe interior",
+"The Naphthalene Tapes, CRT video detail",
+"The Naphthalene Tapes, wardrobe detail",
+"The Naphthalene Tapes, painting detail",
+]
 
-imgDescrps = ["Video installation presented in the Black Market exhibition at PUNTA Gallery, Sofia.", "Video installation presented in the Black Market exhibition at PUNTA Gallery, Sofia.", "Video installation presented in the Black Market exhibition at PUNTA Gallery, Sofia.", "Video installation presented in the Black Market exhibition at PUNTA Gallery, Sofia.", "Video installation presented in the Black Market exhibition at PUNTA Gallery, Sofia.", "Video installation presented in the Black Market exhibition at PUNTA Gallery, Sofia.", "Video installation presented in the Black Market exhibition at PUNTA Gallery, Sofia.", "Video installation presented in the Black Market exhibition at PUNTA Gallery, Sofia."]
+imgDescrps = [
+"Installation view at PUNTA Gallery, Sofia, with Gaia Vincensini's metal panel at left, Clarisse Aïn's research works on the wall, Nikola Stoyanov's The Naphthalene Tapes at the rear, and Aaron Roth's floor-mat sculpture at right.",
+"Installation view with Aaron Roth's Peugeot Boxer (1994-2006) floor mat at left, Clarisse Aïn's red-shoe installation at centre, Slava George and Daniel Uranga's tattooed panther in the foreground, and Nikola Stoyanov's work at the rear.",
+"Installation view with Clarisse Aïn's red-shoe work at left, Nikola Stoyanov's The Naphthalene Tapes at centre, and Gaia Vincensini's sculptural cash machines on the right wall.",
+"Frontal view of Nikola Stoyanov's open wardrobe installation with a JVC CRT monitor and a framed reenactment of the painting attributed to Jackson Pollock.",
+"Detail of the wardrobe interior showing the JVC CRT monitor beside the framed reenactment of the painting attributed to Jackson Pollock.",
+"Close view of the JVC CRT monitor displaying bilingual Bulgarian and English report text from Nikola Stoyanov's post-fictional video.",
+"Detail of the illuminated lower shelf and worn wooden interior of the wardrobe installation.",
+"Detail of the framed reenactment of the painting attributed to Jackson Pollock inside the wardrobe.",
+]
 
 youtube = ["https://youtu.be/EYH-DSSZO_8"]
 youtubeNames = ["The Naphthalene Tapes (2026) — Nikola Stoyanov"]
