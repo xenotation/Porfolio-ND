@@ -24,6 +24,7 @@
 
 {{ $about := dict
   "@type" "Person"
+  "@id" (printf "%s#person" .Site.BaseURL)
   "name" $profileName
   "url" $profileURL
 }}

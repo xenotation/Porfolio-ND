@@ -43,6 +43,7 @@
 {{ range $image := .Resources.Match "*.{webp,jpg,jpeg,png}" }}
 
   {{ $isHero := hasPrefix (lower $image.Name) "hero." }}
+  {{ $isPrimaryHero := and $isHero $heroImg (eq $image.RelPermalink $heroImg.RelPermalink) }}
 
   {{/* Hero defaults */}}
   {{ $imageName := $.Params.heroAlt | default $.Title }}
@@ -70,9 +71,11 @@
     "@type" "ImageObject"
     "contentUrl" $image.Permalink
     "name" ($imageName | plainify)
+    "width" $image.Width
+    "height" $image.Height
   }}
 
-  {{ if $isHero }}
+  {{ if $isPrimaryHero }}
     {{ $imageObject = merge $imageObject
       (dict "@id" (printf "%s#primary" $.Permalink))
     }}
@@ -84,8 +87,17 @@
     }}
   {{ end }}
 
-  {{ $structuredImages = $structuredImages | append $imageObject }}
-  {{ $eventImages = $eventImages | append $image.Permalink }}
+  {{ with $.Params.photo }}
+    {{ $imageObject = merge $imageObject
+      (dict "creditText" (delimit . ", "))
+    }}
+  {{ end }}
+
+  {{/* Keep one canonical hero representation when several formats exist. */}}
+  {{ if or (not $isHero) $isPrimaryHero }}
+    {{ $structuredImages = $structuredImages | append $imageObject }}
+    {{ $eventImages = $eventImages | append $image.Permalink }}
+  {{ end }}
 
 {{ end }}
 
@@ -138,18 +150,7 @@
 
 
 {{/* Person */}}
-{{ $person := dict
-  "@type" "Person"
-  "@id" (printf "%s#person" .Site.BaseURL)
-  "name" (or .Site.Language.Params.name .Site.Params.name)
-  "url" .Site.BaseURL
-}}
-
-{{ with (or .Site.Language.Params.profileImage .Site.Params.profileImage) }}
-  {{ $person = merge $person
-    (dict "image" (. | absURL))
-  }}
-{{ end }}
+{{ $person := partial "person-schema.html" . }}
 
 
 {{/* Start graph */}}
@@ -168,10 +169,14 @@
     "startDate" (time . | time.Format "2006-01-02T15:04:05Z07:00")
     "eventStatus" "https://schema.org/EventScheduled"
     "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
-    "organizer" (dict
+    "performer" (dict
       "@id" (printf "%s#person" $.Site.BaseURL)
     )
   }}
+
+  {{ with $.Params.description }}
+    {{ $event = merge $event (dict "description" (. | plainify)) }}
+  {{ end }}
 
 
   {{/* End date */}}
@@ -269,11 +274,21 @@
       </video>
       {{ with $heroImg }}
       <noscript>
-        <img class="featured-image" src="{{ .RelPermalink }}" alt="{{ $.Title }} hero" fetchpriority="high">
+        <img class="featured-image"
+             src="{{ .RelPermalink }}"
+             alt="{{ $.Params.heroAlt | default (printf "%s hero" $.Title) }}"
+             width="{{ .Width }}"
+             height="{{ .Height }}"
+             fetchpriority="high">
       </noscript>
       {{ end }}
     {{ else if $heroImg }}
-      <img class="featured-image" src="{{ $heroImg.RelPermalink }}" alt="{{ .Title }} hero">
+      <img class="featured-image"
+           src="{{ $heroImg.RelPermalink }}"
+           alt="{{ .Params.heroAlt | default (printf "%s hero" .Title) }}"
+           width="{{ $heroImg.Width }}"
+           height="{{ $heroImg.Height }}"
+           fetchpriority="high">
     {{ end }}
   </div>
 
@@ -399,8 +414,11 @@
 
         <img src="https://img.youtube.com/vi/{{ $id }}/hqdefault.jpg"
              alt="{{ $ytTitle }}"
+             width="480"
+             height="360"
              class="gallery-image"
-             loading="lazy" />
+             loading="lazy"
+             decoding="async" />
 
         <span class="pswp-caption-content">
           {{ if $ytTitle }}<strong>{{ $ytTitle }}</strong>{{ end }}
@@ -428,6 +446,7 @@
 
           {{ if and (in $resource.MediaType.Type "image") (not (in $resource.Name "hero.")) }}
           {{ $thumb := $resource.Resize "420x" }}
+          {{ $medium := $resource.Resize "900x" }}
           {{ $large := $resource.Resize "1600x" }}
 
           <a class="spotlight"
@@ -436,9 +455,14 @@
              data-pswp-height="{{ $large.Height }}">
 
             <img src="{{ $thumb.RelPermalink }}"
+                 srcset="{{ $thumb.RelPermalink }} {{ $thumb.Width }}w, {{ $medium.RelPermalink }} {{ $medium.Width }}w, {{ $large.RelPermalink }} {{ $large.Width }}w"
+                 sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 420px"
                  alt="{{ $alt }}"
+                 width="{{ $thumb.Width }}"
+                 height="{{ $thumb.Height }}"
                  class="gallery-image"
-                 loading="lazy" />
+                 loading="lazy"
+                 decoding="async" />
 
             <span class="pswp-caption-content">
               {{ if $title }}<strong>{{ $title }}</strong>{{ end }}

@@ -21,6 +21,33 @@
   force = true
 
 [[redirects]]
+<<<<<<< HEAD
+=======
+  from = "/work/the-naphtalene-tapes/"
+  to = "/work/the-naphthalene-tapes/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/work/the-naphtalene-tapes/*"
+  to = "/work/the-naphthalene-tapes/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/bg/work/the-naphtalene-tapes/"
+  to = "/bg/work/the-naphthalene-tapes/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/bg/work/the-naphtalene-tapes/*"
+  to = "/bg/work/the-naphthalene-tapes/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+>>>>>>> d6ac4f839276ce059b91cfc085a23f5ff5ffe502
   from = "/unsound-hikikomori/"
   to = "https://blog.newdegeneration.xyz/unsound-hikikomori"
   status = 301

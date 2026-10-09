@@ -40,6 +40,7 @@
   "inLanguage": "{{ .Site.Language.Lang }}",
   "about": {
     "@type": "Person",
+    "@id": "{{ .Site.BaseURL }}#person",
     "name": "{{ or .Site.Language.Params.name .Site.Params.name }}",
     {{- with (or .Site.Language.Params.profileImage .Site.Params.profileImage) }}
     "image": "{{ . | absURL }}",
