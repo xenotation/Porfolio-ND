@@ -20,7 +20,7 @@ datestart = "2026-07-28T00:00:00+03:00"
 dateend = "2026-08-30T00:00:00+03:00"
 
 medium = [
-  "single-channel silent video",
+  "single-channel video",
   "municipal scrap metal",
   "peepholes",
   "Soviet FMP-401 cinema lens",
