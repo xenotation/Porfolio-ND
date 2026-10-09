@@ -13,6 +13,13 @@ defaultContentLanguageInSubdir = false
     "https://sussex.academia.edu/NikolaStoyanov"
   ]
 
+
+enableGitInfo = true
+
+[frontmatter]
+  lastmod = [":git", "lastmod", "date", "publishDate"]
+
+
 [params.documents.portfolio_pdf]
 en = "/portfolio-en.pdf"
 bg = "/portfolio-bg.pdf"
@@ -74,3 +81,4 @@ bg = "/cv-bg.pdf"
       jobTitle = ["визуален артист", "писател", "философ", "преводач"]
       profileImage = "images/profile.jpg"
       organizerUrl = "https://newdegeneration.xyz/bg/about/"
+
