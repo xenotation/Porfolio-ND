@@ -39,6 +39,19 @@
 
 {{ $imageNames := .Params.imgNames | default (slice) }}
 {{ $imageDescriptions := .Params.imgDescrps | default (slice) }}
+{{ $artistName := .Site.Language.Params.name | default .Site.Title }}
+{{ $imageCreditNames := .Params.photo | default (slice $artistName) }}
+{{ $imageCreators := slice }}
+
+{{ range $creditName := $imageCreditNames }}
+  {{ $creator := dict "@type" "Person" "name" $creditName }}
+  {{ if eq $creditName $artistName }}
+    {{ $creator = merge $creator
+      (dict "@id" (printf "%s#person" $.Site.BaseURL))
+    }}
+  {{ end }}
+  {{ $imageCreators = $imageCreators | append $creator }}
+{{ end }}
 
 {{ range $image := .Resources.Match "*.{webp,jpg,jpeg,png}" }}
 
@@ -87,9 +100,12 @@
     }}
   {{ end }}
 
-  {{ with $.Params.photo }}
+  {{ if gt (len $imageCreditNames) 0 }}
     {{ $imageObject = merge $imageObject
-      (dict "creditText" (delimit . ", "))
+      (dict
+        "creditText" (delimit $imageCreditNames ", ")
+        "creator" $imageCreators
+      )
     }}
   {{ end }}
 
