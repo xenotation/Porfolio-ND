@@ -50,7 +50,7 @@
     <ul class="press-list" role="list">
       {{ with .Site.Params.social.instagram }}
         <li class="press-item"><h3 class="press-titleline">
-          <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="me noopener nofollow">Instagram</a>
+          <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="me noopener">Instagram</a>
         </h3></li>
       {{ end }}
 
@@ -62,13 +62,13 @@
 
       {{ with .Site.Params.social.facebook }}
         <li class="press-item"><h3 class="press-titleline">
-          <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="me noopener nofollow">Facebook</a>
+          <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="me noopener">Facebook</a>
         </h3></li>
       {{ end }}
 
       {{ with .Site.Params.social.youtube }}
         <li class="press-item"><h3 class="press-titleline">
-          <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="noopener nofollow">YouTube</a>
+          <a class="press-link" href="{{ . | safeURL }}" target="_blank" rel="me noopener">YouTube</a>
         </h3></li>
       {{ end }}
 
