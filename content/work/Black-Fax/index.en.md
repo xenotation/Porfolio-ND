@@ -6,7 +6,7 @@ date = 2024-05-28T23:30:59+02:00
 description = "An insurrectionary installation at Doza: a hacked fax machine endlessly prints AI-made gothic fan-fiction, skewering media overload and Bulgarian populism."
 
 
-medium = ["hacked fax machine", "intallation", "ai generated gothic fiction"]
+medium = ["hacked fax machine", "installation", "ai generated gothic fiction"]
 place = "Doza gallery, Sofia. Part of SPorno festival 'THE DEVIANTS'"
 datestart = "2024-05-28T00:00:00+03:00"
 dateend = "2024-06-01T00:00:00+03:00"

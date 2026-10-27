@@ -1,5 +1,5 @@
 ---
 title: "translations"
 type: "translation"
-description: "Text translatied from and to Bulgaria by translator and theorist Nikola Stoyanov."
+description: "description: "Selected translations into and from Bulgarian by translator, writer and theorist Nikola Stoyanov.""
 ---
